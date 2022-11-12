@@ -1,4 +1,4 @@
-# TP2_AlgoII
+# TP3_AlgoII
 
 COMANDO: g++ *.cpp Especies/*.cpp Archivos_auxiliares/*.cpp -o TP3 -Wall -Werror -Wconversion
 
