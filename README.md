@@ -56,3 +56,8 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 10. Actualizar UML
 
 ## COSAS HECHAS:
+
+
+## UPDATES:
+
+MCH: Modificando menues, funcion de escaparse (No esta listo yet pero en eso). Consultar lo de apretar 4 para el menu anterior (Yo pregunto)
