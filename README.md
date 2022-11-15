@@ -60,4 +60,4 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## UPDATES:
 
-MCH: Modificando menues, funcion de escaparse (No esta listo yet pero en eso). Consultar lo de apretar 4 para el menu anterior (Yo pregunto)
+MCH: Modificando menues, funcion de escaparse (No esta listo yet pero en eso). Consultar lo de apretar 4 para el menu anterior (Yo pregunto). UPDATE: Creo que entendi lo de la opcion 4, es que en el menu de elegir individualmente la opcion 4 te lleve al menu inicial y no al anterior (o sea, en la implementacion tipo TP2 teniamos que volvia al anterior, ahora queremos que vuelva al inicial).
