@@ -68,21 +68,20 @@ void cargar_guarderia(Guarderia* mi_guarderia){
 _______________________________________________________________________________*/ 
 void imprimir_menu(int cantidad_elecciones){ 
 
-    if(cantidad_elecciones == 6){ //Menú principal
+    if(cantidad_elecciones == 7){ //Menú principal
         cout << endl << "*****   MENU   *****" << endl << endl;
         cout << "   1. Listar animales." << endl; 
         cout << "   2. Rescatar un animal." << endl; 
         cout << "   3. Buscar un animal." << endl;
         cout << "   4. Cuidar animales." << endl;
         cout << "   5. Adoptar un animal." << endl;
-        cout << "   6. Guardar y salir." << endl << endl;
+        cout << "   6. Cargar Combustible." << endl;
+        cout << "   7. Guardar y salir." << endl << endl;
 
-    }else if (cantidad_elecciones == 4) { //Menú de cuidar animales
+    }else if (cantidad_elecciones == 2) { //Menú de cuidar animales
         cout << endl << "*****   CUIDAR ANIMALES: MENU   *****" << endl << endl;
         cout << "   1. Elegir Individualmente." << endl; 
-        cout << "   2. Alimentar a todos." << endl; 
-        cout << "   3. Bañar a todos." << endl;
-        cout << "   4. Regresar al Menu Principal." << endl << endl;
+        cout << "   2. Regresar al Menu Principal." << endl << endl;
     }
 
 }

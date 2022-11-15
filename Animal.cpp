@@ -118,13 +118,19 @@ void Animal::dar_hambre(){
             //Caso doble del hambre
             hambre = hambre + 2*PUNTOS_HAMBRE;
         }
-        else
+        else{
             hambre = hambre + PUNTOS_HAMBRE;
+        }
+            
+        //Eliminar a discreción
+        if(hambre > 70){
+            cout << "Parece que " << nombre << " tiene mucha hambre. Quizás es hora de alimentarl@." << endl;
+        }
 
     }
     
     else
-        cout << "Parece que " << nombre << " tiene mucha hambre. Quizás es hora de alimentarl@." << endl;
+        cout << "NOOOOO, " << nombre << " SE ESTÁ ESCAPANDO!!! NO LE DISTE COMIDA A TIEMPO" << endl;
 
 }
 
@@ -139,14 +145,17 @@ void Animal::ensuciar(){
             //Caso se ensucia el doble
             higiene = higiene - 2*PUNTOS_HIGIENTE;
         }
-        else
+        else{
             higiene = higiene - PUNTOS_HIGIENTE;
+        }
 
+        if(higiene < 30){
+            cout << "Parece que " << nombre << " está muy suci@. Quizás es hora de ducharl@." << endl;
+        }
     }
 
     else
-        cout << "Parece que " << nombre << " está muy sucio. Quizás es hora de ducharl@." << endl;
-
+        cout << "NOOOOO, " << nombre << " SE ESTÁ ESCAPANDO!!! NO L@ DUCHASTE A TIEMPO" << endl;
 }
 
 

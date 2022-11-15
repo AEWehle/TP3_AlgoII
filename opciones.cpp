@@ -14,7 +14,14 @@ void afectar_animales(Guarderia* mi_guarderia){
 
     for(int i = 1; i <= mi_guarderia->obtener_cantidad(); i++) {
        mi_guarderia->obtener_animal(i)->ensuciar();
-       mi_guarderia->obtener_animal(i)->dar_hambre(); 
+       mi_guarderia->obtener_animal(i)->dar_hambre();
+
+       /*if(mi_guarderia->obtener_animal(i)->obtener_higiene()==0 || mi_guarderia->obtener_animal(i)->obtener_hambre()==100){
+            mi_guarderia->eliminar_animal(i);
+            //Acá hay que ver si ponemos algo en guarderia que guarde los escapados
+            //pero seria un :
+            //int escapados += 1;
+       }*/ 
     }
 
 }
@@ -315,10 +322,17 @@ void menu_elegir_individualmente(){
     cout << "   1. Alimentar Animal" << endl;
     cout << "   2. Duchar Animal" << endl;
     cout << "   3. Pasar a Animal siguiente" << endl;
-    cout << "   4. Volver a Menu Anterior" << endl;
+    cout << "   4. Volver a Menu Principal" << endl;
 
 }
 
+void volver_menu_ppal(Guarderia* mi_guarderia){
+
+    return;
+
+}
+
+void ejecutar_eleccion_op4(Guarderia* mi_guarderia, int eleccion);
 
 void elegir_animal_a_cuidar(Guarderia* mi_guarderia){
 
@@ -346,6 +360,8 @@ void elegir_animal_a_cuidar(Guarderia* mi_guarderia){
                 ++i;
                 break;
             case VOLVER_MENU_OP4:
+                //volver_menu_ppal(mi_guarderia);
+                ejecutar_eleccion_op4(mi_guarderia, 2);
                 break;
             default:
                 cout << "Opción Inválida!!!" << endl;
@@ -385,18 +401,10 @@ void duchar_a_todos(Guarderia* mi_guarderia){
 }
 
 
-void volver_menu_ppal(Guarderia* mi_guarderia){
-
-    return;
-
-}
-
 
 const Manejo_Guarderia opcion_4[ CANTIDAD_OPCIONES_OP4] = {
 
     elegir_animal_a_cuidar,
-    alimentar_a_todos,
-    duchar_a_todos,
     volver_menu_ppal,
 
 }; 
@@ -587,8 +595,10 @@ void adoptar_animal( Guarderia* mi_guarderia ){
 
 }
 
+/*************************************** FUNCIONES DE LA OPCION 6 ***************************************/
+// Cargar Combustible 
 
-/*************************************** FUNCIONES DE LA OPCION 6 ***************************************/ 
+/*************************************** FUNCIONES DE LA OPCION 7 ***************************************/ 
 // Guardar y Salir
 
 
