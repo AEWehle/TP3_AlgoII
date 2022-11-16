@@ -33,10 +33,7 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS A MODIFICAR/CORREGIR:
 
-1. Diccionario para guardar los animales. 
-   - Arbol B 3 vias
-   - Nombre del animal como clave
-   HECHO
+1. Adaptar guarderia a diccionarios (LUCIANA)
 2. Crear funcion que genere 5 animales random
 3. Cambiar la implementacion de listar animales, buscar animal, ya que ahora no usamos lista sino diccionario de arbol 3 vias.
 4. Agregar opcion del menú principal:
