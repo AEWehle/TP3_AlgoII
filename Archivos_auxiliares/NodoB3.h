@@ -58,8 +58,9 @@ class NodoB3{
         Lista<Elemento<Dato,Clave>>* obtener_lista_elementos();
 
 
-        /*  PRE: Si elije posicion 3 tiene que haber una clave 2
+        /*  PRE: 
             POS: Devuelve el puntero del nodo hijo ( 1 2 o 3)
+            Si se elije 3 y solo hay dos hijos devuelve el hijo 2
             */
         NodoB3<Dato,Clave>* obtener_hijo( int pos );
 
@@ -219,15 +220,6 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: obtener_nodo_padre( ){
 }
 
 
-//Agregar elemento dando Dato y Clave
-template <typename Dato, typename Clave>
-NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: agregar_elemento( Dato* dato_nuevo, Clave clave_nueva ){
-    Elemento<Dato,Clave>* elemento_nuevo = new Elemento<Dato,Clave> ( dato_nuevo, clave_nueva );
-    this -> agregar_elemento_existente( elemento_nuevo );
-    return this ->  nodo_padre;
-}
-
-
 // Ubicar nodo hijo segun las claves
 template <typename Dato, typename Clave>
 void NodoB3<Dato, Clave>                :: ubicar_nodo_hijo( NodoB3<Dato,Clave>* nodo_hijo_entrante ){
@@ -245,37 +237,65 @@ void NodoB3<Dato, Clave>                :: ubicar_nodo_hijo( NodoB3<Dato,Clave>*
 }
 
 
+//Agregar elemento dando Dato y Clave
+template <typename Dato, typename Clave>
+NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: agregar_elemento( Dato* dato_nuevo, Clave clave_nueva ){
+    Elemento<Dato,Clave>* elemento_nuevo = new Elemento<Dato,Clave> ( dato_nuevo, clave_nueva );
+    this -> agregar_elemento_existente( elemento_nuevo );
+    return this ->  nodo_padre;
+}
+
 
 // Agregar elemento dando el tipo Elemento armado
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<Dato, Clave>* elemento_entrante ){
     if ( elemento_entrante -> obtener_clave() < this -> obtener_clave_de(1) ){
         elementos -> alta( elemento_entrante , 1);
+        cout << "tenia una clave";
+        this -> mostrar_nodob3();
     }
     else if( ( elementos -> obtener_cantidad() == 1 )  ||  (elemento_entrante -> obtener_clave() < this -> obtener_clave_de(2) )){
         elementos -> alta( elemento_entrante , 2); // puede que ahora tenga 3 claves
+        cout << "tenia una clave y era mayor. O tenia dos y era menor a segunda";
+        this -> mostrar_nodob3();
     }
     else{
         elementos -> alta( elemento_entrante , 3);
+        cout << "teia una o mayor a ambas";
+        this -> mostrar_nodob3();
     }
+    NodoB3<Dato,Clave>* nodo_hermano_mayor = this;
     if ( elementos->obtener_cantidad() == VIAS ){
      //EL nodo tendria 3 claves y eso es inaceptable, soy un arbol 3 vias
-        NodoB3<Dato,Clave>* nodo_hermano_mayor = new NodoB3<Dato,Clave>( this -> elementos -> consulta(3) -> obtener_dato(),
-                                                                         this -> elementos -> consulta(3) -> obtener_clave() );
+        
         if ( nodo_padre == nullptr ){
-            this -> nodo_padre = new NodoB3<Dato,Clave>( this -> elementos -> consulta(2) -> obtener_dato(),
+            NodoB3<Dato,Clave>* nuevo_nodo_padre = new NodoB3<Dato,Clave>( this -> elementos -> consulta(2) -> obtener_dato(),
                                                          this -> elementos -> consulta(2) -> obtener_clave());
-            this -> nodo_padre -> obtener_lista_elementos() -> consulta(1) -> cambiar_hijo( this );
+            nuevo_nodo_padre -> cambiar_nodo_padre( this -> nodo_padre );
+            this -> nodo_padre = nuevo_nodo_padre;
+            cout << "teia una o mayor a ambas";
+            this -> mostrar_nodob3();
         }
         else{ //ya tengo padre 
-            this -> nodo_padre -> agregar_elemento_existente( this -> elementos -> consulta(2) );
-            this -> nodo_padre -> obtener_lista_elementos() -> consulta(1) -> cambiar_hijo( this );
+            this -> nodo_padre = this -> nodo_padre -> agregar_elemento_existente( this -> elementos -> consulta(2) );
         }
+        nodo_hermano_mayor = new NodoB3<Dato,Clave>( this -> elementos -> consulta(3) -> obtener_dato(),
+                                                     this -> elementos -> consulta(3) -> obtener_clave() );
+        if( !(this -> es_hoja()) ){
+            nodo_hermano_mayor -> ubicar_nodo_hijo( this -> obtener_hijo(1) );
+            // nodo_hermano_mayor -> ubicar_nodo_hijo( this -> obtener_hijo(2) );
+            nodo_hermano_mayor -> ubicar_nodo_hijo( this -> obtener_hijo(3) );
+        }
+        nodo_hermano_mayor -> cambiar_nodo_padre( this -> nodo_padre );
         this -> nodo_padre -> ubicar_nodo_hijo( nodo_hermano_mayor );
+        this -> nodo_padre -> ubicar_nodo_hijo( this );
         this -> elementos -> baja_sin_delete(3); // ahora es hermano mayor
+        if( !(this -> es_hoja()) ){
+            this -> ubicar_nodo_hijo( this -> obtener_hijo(2) );
+        }
         this -> elementos -> baja_sin_delete(2); // ahora es padre
     }
-    return this -> nodo_padre;
+    return nodo_hermano_mayor;
 }
 
 

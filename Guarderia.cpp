@@ -16,17 +16,17 @@ Guarderia::~Guarderia(){
 
 void Guarderia::agregar_animal( Animal* nuevo_animal ){
     
-    lista_de_animales.alta( nuevo_animal, lista_de_animales.obtener_cantidad() + 1 );
+    diccionario_de_animales.agregar_dato( nuevo_animal, nuevo_animal->obtener_nombre() );
 
 }
 
 
 int Guarderia::obtener_posicion( string nombre ){
 
-    int cantidad_de_animales = lista_de_animales.obtener_cantidad();
+    int cantidad_de_animales = diccionario_de_animales.obtener_cantidad();
     int posicion = 1;
 
-    while( (posicion <= cantidad_de_animales) &&  ( string_a_mayuscula( lista_de_animales.consulta( posicion  )->obtener_nombre() ) != string_a_mayuscula( nombre ) )){
+    while( (posicion <= cantidad_de_animales) &&  ( string_a_mayuscula( diccionario_de_animales.consulta( posicion  )->obtener_nombre() ) != string_a_mayuscula( nombre ) )){
         posicion++;
     }
    
@@ -37,32 +37,32 @@ int Guarderia::obtener_posicion( string nombre ){
 
 int Guarderia::obtener_cantidad(){
 
-    return lista_de_animales.obtener_cantidad();
+    return diccionario_de_animales.obtener_cantidad();
 
 }
 
 
 void Guarderia::eliminar_animal(int posicion){
 
-    lista_de_animales.baja(posicion);
+    // diccionario_de_animales.baja(posicion);
 
 }
 
 
 Animal* Guarderia::obtener_animal(int posicion){
 
-    return lista_de_animales.consulta(posicion);
+    return diccionario_de_animales.consulta(posicion);
 
 }
 
 
-void Guarderia::ver_lista_de_animales(){
+void Guarderia::ver_diccionario_de_animales(){
 
-    if(lista_de_animales.obtener_cantidad()){
+    if( this -> diccionario_de_animales.obtener_cantidad()){
 
-        cout << "Hay " << lista_de_animales.obtener_cantidad() << " animales en la reserva." << endl;
-        for( int i = 1 ; i < (lista_de_animales.obtener_cantidad()+1) ; i++){
-            lista_de_animales.consulta(i)->mostrar();
+        cout << "Hay " << diccionario_de_animales.obtener_cantidad() << " animales en la reserva." << endl;
+        for( int i = 1 ; i < (diccionario_de_animales.obtener_cantidad()+1) ; i++){
+            diccionario_de_animales.obtener_dato(i)->mostrar();
         }
         
     }

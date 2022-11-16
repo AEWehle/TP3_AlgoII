@@ -13,7 +13,7 @@ class ArbolB3 {
     private:
         
         NodoB3<Dato,Clave>* nodo_raiz;
-
+        int cantidad;
 
 //metodos
     public:
@@ -28,6 +28,8 @@ class ArbolB3 {
         // POS: construye un nodo raiz de arbol B 3 vias
         ArbolB3( Dato* dato, Clave clave );
 
+
+        int obtener_cantidad();
 
         // PRE: la clave no se puede repetir
         // POS: Inresa el dato en su ubicacion segun la clave
@@ -48,13 +50,26 @@ class ArbolB3 {
         // Me llaman para imprimir en recursion todo el arbol
         // Imprimo el arbol, no los datos
         void mostrar_arbolb3( NodoB3<Dato,Clave>* nodo_actual, int generacion );
+
+
+        NodoB3<Dato,Clave>* obtener_nodo_mas_derecha();
+        NodoB3<Dato,Clave>* obtener_nodo_mas_izquierda();
+
+
+        /* PRE: -
+           POS: Devuelve una lista con los datos ordenado de mayor a menor
+         segun su clave*/
+        Lista<Dato>* datos_mayor_menor();
 };
+
+
 
 
 // Constructor sin parametros
 template <typename Dato, typename Clave>
 ArbolB3<Dato, Clave>                     :: ArbolB3( ){
     this -> nodo_raiz = nullptr;
+    cantidad = 0;
 }
 
 
@@ -62,6 +77,13 @@ ArbolB3<Dato, Clave>                     :: ArbolB3( ){
 template <typename Dato, typename Clave>
 ArbolB3<Dato, Clave>                     :: ArbolB3( Dato* dato, Clave clave){
     this -> nodo_raiz = new NodoB3<Dato, Clave> ( dato , clave );
+    cantidad = 1;
+}
+
+
+template <typename Dato, typename Clave>
+int ArbolB3<Dato, Clave>               :: obtener_cantidad(){
+    return this -> cantidad;
 }
 
 
@@ -83,15 +105,19 @@ void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nod
     else{
         if( nodo_actual->es_hoja() ){
             NodoB3<Dato,Clave>* nodo_aux = nodo_actual->agregar_elemento( dato, clave );
-            if (nodo_aux != nullptr){
-                this -> nodo_raiz = nodo_aux;
+            if ( nodo_aux -> obtener_nodo_padre() != nullptr){
+                while ( nodo_actual -> obtener_nodo_padre() != nullptr ){
+                    nodo_actual = nodo_actual -> obtener_nodo_padre();
+                }
+                this -> nodo_raiz = nodo_actual;
             }
             return;
         }
         else{
             return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
         }
-    }    
+    }
+    this -> cantidad++;
 }
 
 
@@ -123,12 +149,50 @@ void ArbolB3<Dato, Clave>               :: mostrar_arbolb3( NodoB3<Dato,Clave> *
         return;
     }
     cout << endl;
-    mostrar_arbolb3( nodo_raiz -> obtener_hijo(1), generacion+1 ) ;
-    mostrar_arbolb3( nodo_raiz -> obtener_hijo(2), generacion+1 ) ;
-    if ( nodo_raiz-> esta_completo() ) {
-        mostrar_arbolb3(nodo_raiz -> obtener_hijo(3), generacion+1);
+    mostrar_arbolb3( nodo_actual -> obtener_hijo(1), generacion+1 ) ;
+    mostrar_arbolb3( nodo_actual -> obtener_hijo(2), generacion+1 ) ;
+    if ( nodo_actual-> esta_completo() ) {
+        mostrar_arbolb3(nodo_actual -> obtener_hijo(3), generacion+1);
     }
     return;
 }
+
+
+template <typename Dato, typename Clave>
+NodoB3<Dato,Clave> * ArbolB3<Dato, Clave>:: obtener_nodo_mas_derecha( ){
+    NodoB3<Dato,Clave> * nodo_actual = nodo_raiz;
+    while( !( nodo_actual -> es_hoja() ) ){
+        nodo_actual = nodo_actual -> obtener_hijo(3);
+    }
+    return nodo_actual;
+}
+
+
+template <typename Dato, typename Clave>
+NodoB3<Dato,Clave> * ArbolB3<Dato, Clave>:: obtener_nodo_mas_izquierda( ){
+    NodoB3<Dato,Clave> * nodo_actual = nodo_raiz;
+    while( !( nodo_actual -> es_hoja() ) ){
+        nodo_actual = nodo_actual -> obtener_hijo(1);
+    }
+    return nodo_actual;
+}
+
+
+template <typename Dato, typename Clave>
+Lista<Dato>* ArbolB3<Dato, Clave>       :: datos_mayor_menor( ){
+    Lista<Dato> *datos = new Lista<Dato>;
+    NodoB3<Dato,Clave> * nodo_actual = obtener_nodo_mas_derecha( );
+    int i = 1;
+    while( !(datos -> obtener_cantidad() > this -> cantidad)){
+        if ( nodo_actual -> esta_completo() ){
+            datos -> alta( nodo_actual -> obtener_dato( nodo_actual->obtener_clave_de(2) ) , i++);
+        }
+        datos -> alta( nodo_actual -> obtener_dato( nodo_actual->obtener_clave_de(1) ) , i++);
+        nodo_actual = nodo_actual -> obtener_nodo_padre();
+    }
+    return datos;
+}
+    
+
 
 #endif // ARBOL_TEMPLATE
