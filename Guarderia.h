@@ -74,7 +74,7 @@ class Guarderia{
         /* Obtener auto
         PRE:  -
         POST: Develve un puntero al Auto*/  
-            Auto obtener_auto();
+            Auto* obtener_auto();
 
 
 };

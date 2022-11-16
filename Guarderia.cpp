@@ -74,6 +74,6 @@ void Guarderia::ver_lista_de_animales(){
 }
 
 
-Auto Guarderia::obtener_auto(){
-    return automovil;
+Auto* Guarderia::obtener_auto(){
+    return &automovil;
 }

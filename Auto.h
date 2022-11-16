@@ -8,22 +8,22 @@ const int MAX_COMBUSTIBLE = 100;
 
 class Auto{
     //Atributos
-    private:
-        unsigned int combustible;
+    protected:
+        int combustible;
     
     public:
 
-    Auto();
+        Auto();
 
-    ~Auto();
+        ~Auto();
 
-    unsigned int obtener_combustible();
+        int obtener_combustible();
 
-    void cargar_combustible();
+        void cargar_combustible();
 
-    void cargar_combustible(unsigned int cantidad);
+        void cargar_combustible(int cantidad);
 
-    void decrementar_combustible(unsigned int cantidad);
+        void decrementar_combustible(int cantidad);
 };
 
 #endif
