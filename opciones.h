@@ -44,6 +44,13 @@ _______________________________________________________________________________*
 void adoptar_animal( Guarderia* mi_guarderia );
 
 
+ /*________cargar_combustible()______________________________________________________
+ PRE:  -
+ POST: 
+_______________________________________________________________________________*/
+void cargar_combustible(Guarderia* mi_guarderia);
+
+
 /*________guardar_salir()______________________________________________________
  PRE:  La guardería mi_guarderia fue creada correctamente
  POST: Guarda en el archivo llamado RUTA_ARCHIVO la informacion en la base de
@@ -60,6 +67,7 @@ const Manejo_Guarderia funcion_elegida[ CANTIDAD_OPCIONES ] = {
     buscar_animal,
     cuidar_animales,
     adoptar_animal,
+    cargar_combustible,
     guardar_salir,
 };
 

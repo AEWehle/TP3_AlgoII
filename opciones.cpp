@@ -3,6 +3,7 @@
 #include <fstream>
 #include <limits>
 #include "Archivos_auxiliares/funciones_auxiliares.h"
+#include "Auto.h"
 #include "opciones.h"
 using namespace std;
 
@@ -597,6 +598,40 @@ void adoptar_animal( Guarderia* mi_guarderia ){
 
 /*************************************** FUNCIONES DE LA OPCION 6 ***************************************/
 // Cargar Combustible 
+
+unsigned int pedir_cant_combustible(){
+
+    string cant_combustible_string;
+    int cant_combustible;
+
+    cin >> cant_combustible_string;
+
+    if(es_numero(cant_combustible_string)){
+        cant_combustible = stoi(cant_combustible_string);
+    }
+
+    while( !es_numero(cant_combustible_string) || !(cant_combustible >= 0 && cant_combustible <= MAX_COMBUSTIBLE)){
+        cout << "Ingresá un numero entre 0 y " << MAX_COMBUSTIBLE << ":" << endl << " >> ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> cant_combustible_string;
+        if(es_numero(cant_combustible_string))
+            cant_combustible = stoi(cant_combustible_string);
+    }
+    
+    return (unsigned int) cant_combustible;
+}
+
+
+void cargar_combustible(Guarderia* mi_guarderia){
+    cout << "El auto tiene: " << mi_guarderia->obtener_auto().obtener_combustible() << " de combustible." << endl;
+    cout << "¿Cuanto combustible querés agregar? Coloca un numero de 0 a " << MAX_COMBUSTIBLE << "."<< endl;
+
+    unsigned int cant_a_cargar = pedir_cant_combustible();
+
+    mi_guarderia->obtener_auto().cargar_combustible(cant_a_cargar);
+
+}
 
 /*************************************** FUNCIONES DE LA OPCION 7 ***************************************/ 
 // Guardar y Salir
