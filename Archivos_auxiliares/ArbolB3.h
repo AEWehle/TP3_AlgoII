@@ -99,25 +99,32 @@ void ArbolB3<Dato, Clave>               :: agregar_dato( Dato* dato, Clave clave
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
     
+    this -> cantidad++;
+    // cout << "Estoy en agregar dato(), quiero agregar en :"<< endl;
+    // nodo_actual -> mostrar_nodob3();
     if ( nodo_actual == nullptr) {
         nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
     }
     else{
         if( nodo_actual->es_hoja() ){
-            NodoB3<Dato,Clave>* nodo_aux = nodo_actual->agregar_elemento( dato, clave );
-            if ( nodo_aux -> obtener_nodo_padre() != nullptr){
+            NodoB3<Dato,Clave>* nodo_aux = nodo_actual -> agregar_elemento( dato, clave );
+            // nodo_aux -> obtener_nodo_padre();
+            // cout << "nodo padre"<<endl;
+            if ( nodo_aux != nullptr ){
                 while ( nodo_actual -> obtener_nodo_padre() != nullptr ){
                     nodo_actual = nodo_actual -> obtener_nodo_padre();
                 }
                 this -> nodo_raiz = nodo_actual;
+                // cout << "nuevo nodo raiz";
+                // nodo_raiz -> mostrar_nodob3();
             }
             return;
         }
         else{
+            // cout << "ERROR ACA?";
             return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
         }
     }
-    this -> cantidad++;
 }
 
 

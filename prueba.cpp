@@ -22,16 +22,16 @@ int main(){
     // diccionario.mostrar_arbolb3();
     cout << "Agrego b" <<endl;
     diccionario.agregar_dato(&dato2, clave2);
-    // diccionario.mostrar_arbolb3();
+    diccionario.mostrar_arbolb3();
     cout << "Agrego c" <<endl;
     diccionario.agregar_dato(&dato3, clave3);
-    // diccionario.mostrar_arbolb3();
+    diccionario.mostrar_arbolb3();
     cout << "Agrego d " <<endl;
     diccionario.agregar_dato(&dato4, clave4);
-    // diccionario.mostrar_arbolb3();
+    diccionario.mostrar_arbolb3();
     cout << "Agrego e" <<endl;
     diccionario.agregar_dato(&dato5, clave5);
-    // diccionario.mostrar_arbolb3();
+    diccionario.mostrar_arbolb3();
 
     char dato6 = 'f';
     int clave6 = 6;

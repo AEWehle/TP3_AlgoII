@@ -241,30 +241,33 @@ void NodoB3<Dato, Clave>                :: ubicar_nodo_hijo( NodoB3<Dato,Clave>*
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: agregar_elemento( Dato* dato_nuevo, Clave clave_nueva ){
     Elemento<Dato,Clave>* elemento_nuevo = new Elemento<Dato,Clave> ( dato_nuevo, clave_nueva );
-    this -> agregar_elemento_existente( elemento_nuevo );
-    return this ->  nodo_padre;
+    NodoB3<Dato, Clave>* nodo_hermano_mayor = this -> agregar_elemento_existente( elemento_nuevo );
+    return nodo_hermano_mayor;
 }
 
 
 // Agregar elemento dando el tipo Elemento armado
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<Dato, Clave>* elemento_entrante ){
+    NodoB3<Dato,Clave>* nodo_hermano_mayor = nullptr;
     if ( elemento_entrante -> obtener_clave() < this -> obtener_clave_de(1) ){
         elementos -> alta( elemento_entrante , 1);
-        cout << "tenia una clave";
-        this -> mostrar_nodob3();
+        // cout << "tenia una clave..";
+        // this -> mostrar_nodob3();
     }
     else if( ( elementos -> obtener_cantidad() == 1 )  ||  (elemento_entrante -> obtener_clave() < this -> obtener_clave_de(2) )){
         elementos -> alta( elemento_entrante , 2); // puede que ahora tenga 3 claves
-        cout << "tenia una clave y era mayor. O tenia dos y era menor a segunda";
-        this -> mostrar_nodob3();
+        // cout << "tenia una clave y era mayor. O tenia dos y era menor a segunda..";
+        // this -> mostrar_nodob3();
+        // cout << "mostre";
     }
     else{
         elementos -> alta( elemento_entrante , 3);
-        cout << "teia una o mayor a ambas";
-        this -> mostrar_nodob3();
+        // cout << "tenia una o mayor a ambas..";
+        // this -> mostrar_nodob3();
     }
-    NodoB3<Dato,Clave>* nodo_hermano_mayor = this;
+    // cout << "Cantidad";
+    // cout << elementos->obtener_cantidad();
     if ( elementos->obtener_cantidad() == VIAS ){
      //EL nodo tendria 3 claves y eso es inaceptable, soy un arbol 3 vias
         
@@ -273,11 +276,15 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
                                                          this -> elementos -> consulta(2) -> obtener_clave());
             nuevo_nodo_padre -> cambiar_nodo_padre( this -> nodo_padre );
             this -> nodo_padre = nuevo_nodo_padre;
-            cout << "teia una o mayor a ambas";
-            this -> mostrar_nodob3();
+            // cout << "no tenia padre, me creo uno y agrego. padre:";
+            // this -> nodo_padre -> mostrar_nodob3();
         }
         else{ //ya tengo padre 
-            this -> nodo_padre = this -> nodo_padre -> agregar_elemento_existente( this -> elementos -> consulta(2) );
+            // cout << "tenia padre, agrego en este. padre:";
+            NodoB3<Dato,Clave>* nodo_aux = this -> nodo_padre -> agregar_elemento_existente( this -> elementos -> consulta(2) );
+            if (nodo_aux != nullptr){
+                this -> nodo_padre = nodo_aux -> obtener_nodo_padre();
+            }
         }
         nodo_hermano_mayor = new NodoB3<Dato,Clave>( this -> elementos -> consulta(3) -> obtener_dato(),
                                                      this -> elementos -> consulta(3) -> obtener_clave() );
@@ -294,7 +301,12 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
             this -> ubicar_nodo_hijo( this -> obtener_hijo(2) );
         }
         this -> elementos -> baja_sin_delete(2); // ahora es padre
+        // cout << "padre de hermnao mayor";
+        // nodo_hermano_mayor -> obtener_nodo_padre() ->mostrar_nodob3();
     }
+    // if (nodo_hermano_mayor != nullptr){
+    //     cout << "voy a devolver un hermano";
+    // }
     return nodo_hermano_mayor;
 }
 
