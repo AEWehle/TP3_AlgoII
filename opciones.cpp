@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <limits>
+#include <time.h>
 #include "Archivos_auxiliares/funciones_auxiliares.h"
 #include "opciones.h"
 using namespace std;
@@ -244,14 +245,126 @@ bool otro_nombre( Guarderia* mi_guarderia, string & nombre ){
     return otro_nombre;
 
 }
- 
+
+
+char** crear_mapa_vacio(){
+
+    char** mapa = new char*[8];
+    for(int i = 0; i < 8; i++)
+        mapa[i] = new char[8];
+
+    for(int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+            mapa[i][j] = ' ';
+        }
+    }
+
+    return mapa;
+
+}
+
+
+void animales_aleatorios(char** &mapa){ //Reemplaza 5 de los espacios por chars correspondientes a especies
+
+    int creados = 0;
+    int i;
+    int j;
+
+    mapa[0][0] = 'A';
+
+    while(creados < 5){
+
+        srand((unsigned int)time(nullptr));
+        i = rand() % 8;
+        srand((unsigned int)time(nullptr));
+        j = rand() % 8;
+        if(mapa[i][j] == ' '){
+            srand((unsigned int)time(nullptr));
+            mapa[i][j] = ESPECIE_CHAR[rand() % 7];  //Especie random de las programadas
+            creados++;
+        }
+
+    }
+
+}
+
+
+void mostrar_mapa(char** mapa){
+
+    cout    
+    //fila1
+    << ESC << CAMINO << " " << mapa[0][0] << " " << RESET << ESC << PRECIPICIO << " " << mapa[0][1] << " " << RESET
+    << ESC << TIERRA << " " << mapa[0][2] << " " << RESET << ESC << TIERRA << " " << mapa[0][3] << " " << RESET
+    << ESC << TIERRA << " " << mapa[0][4] << " " << RESET << ESC << TIERRA << " " << mapa[0][5] << " " << RESET
+    << ESC << TIERRA << " " << mapa[0][6] << " " << RESET << ESC << TIERRA << " " << mapa[0][7] << " " << RESET << endl;
+    
+    cout
+    //fila2
+    << ESC << CAMINO << " " << mapa[1][0] << " " << RESET << ESC << TIERRA << " " << mapa[1][1] << " " << RESET
+    << ESC << TIERRA << " " << mapa[1][2] << " " << RESET << ESC << TIERRA << " " << mapa[1][3] << " " << RESET
+    << ESC << PRECIPICIO << " " << mapa[1][4] << " " << RESET << ESC << PRECIPICIO << " " << mapa[1][5] << " " << RESET
+    << ESC << PRECIPICIO << " " << mapa[1][6] << " " << RESET << ESC << PRECIPICIO << " " << mapa[1][7] << " " << RESET << endl;
+
+    cout
+    //fila3
+    << ESC << CAMINO << " " << mapa[2][0] << " " << RESET << ESC << CAMINO << " " << mapa[2][1] << " " << RESET
+    << ESC << CAMINO << " " << mapa[2][2] << " " << RESET << ESC << CAMINO << " " << mapa[2][3] << " " << RESET
+    << ESC << CAMINO << " " << mapa[2][4] << " " << RESET << ESC << TIERRA << " " << mapa[2][5] << " " << RESET
+    << ESC << MONTANA << " " << mapa[2][6] << " " << RESET << ESC << MONTANA << " " << mapa[2][7] << " " << RESET << endl;
+
+    cout
+    //fila4
+    << ESC << TIERRA << " " << mapa[3][0] << " " << RESET << ESC << TIERRA << " " << mapa[3][1] << " " << RESET
+    << ESC << TIERRA << " " << mapa[3][2] << " " << RESET << ESC << TIERRA << " " << mapa[3][3] << " " << RESET
+    << ESC << CAMINO << " " << mapa[3][4] << " " << RESET << ESC << TIERRA << " " << mapa[3][5] << " " << RESET
+    << ESC << MONTANA << " " << mapa[3][6] << " " << RESET << ESC << MONTANA << " " << mapa[3][7] << " " << RESET << endl;
+
+    cout
+    //fila5
+    << ESC << MONTANA << " " << mapa[4][0] << " " << RESET << ESC << MONTANA << " " << mapa[4][1] << " " << RESET
+    << ESC << MONTANA << " " << mapa[4][2] << " " << RESET << ESC << TIERRA << " " << mapa[4][3] << " " << RESET
+    << ESC << CAMINO << " " << mapa[4][4] << " " << RESET << ESC << TIERRA << " " << mapa[4][5] << " " << RESET
+    << ESC << MONTANA << " " << mapa[4][6] << " " << RESET << ESC << MONTANA << " " << mapa[4][7] << " " << RESET << endl;
+
+    cout
+    //fila6
+    << ESC << TIERRA << " " << mapa[5][0] << " " << RESET << ESC << TIERRA << " " << mapa[5][1] << " " << RESET
+    << ESC << TIERRA << " " << mapa[5][2] << " " << RESET << ESC << TIERRA << " " << mapa[5][3] << " " << RESET
+    << ESC << CAMINO << " " << mapa[5][4] << " " << RESET << ESC << TIERRA << " " << mapa[5][5] << " " << RESET
+    << ESC << MONTANA << " " << mapa[5][6] << " " << RESET << ESC << MONTANA << " " << mapa[5][7] << " " << RESET << endl;
+
+    cout
+    //fila7
+    << ESC << TIERRA << " " << mapa[6][0] << " " << RESET << ESC << PRECIPICIO << " " << mapa[6][1] << " " << RESET
+    << ESC << PRECIPICIO << " " << mapa[6][2] << " " << RESET << ESC << PRECIPICIO << " " << mapa[6][3] << " " << RESET
+    << ESC << CAMINO << " " << mapa[6][4] << " " << RESET << ESC << TIERRA << " " << mapa[6][5] << " " << RESET
+    << ESC << MONTANA << " " << mapa[6][6] << " " << RESET << ESC << MONTANA << " " << mapa[6][7] << " " << RESET << endl;
+
+    cout
+    //fila8
+    << ESC << TIERRA << " " << mapa[7][0] << " " << RESET << ESC << TIERRA << " " << mapa[7][1] << " " << RESET
+    << ESC << TIERRA << " " << mapa[7][2] << " " << RESET << ESC << TIERRA << " " << mapa[7][3] << " " << RESET
+    << ESC << CAMINO << " " << mapa[7][4] << " " << RESET << ESC << CAMINO << " " << mapa[7][5] << " " << RESET
+    << ESC << CAMINO << " " << mapa[7][6] << " " << RESET << ESC << CAMINO << " " << mapa[7][7] << " " << RESET << endl;  
+
+}
+
 
 void rescatar_animal( Guarderia* mi_guarderia ){
 
     afectar_animales(mi_guarderia);
 
-    cout << endl << "Rescataste un animal?" << endl;
-    cout << endl << "Cómo se llama?" << endl;
+    //char* mapa[8];
+    
+    char** mapa = crear_mapa_vacio();
+
+    animales_aleatorios(mapa);
+
+    mostrar_mapa(mapa);
+
+
+    cout << endl << "Rescataste un animal!" << endl;
+    cout << endl << "Cómo se va a llamar?" << endl;
     cout << " >> ";
     string nombre = pedir_nombre();
 
