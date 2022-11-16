@@ -2,6 +2,7 @@
 #define _GUARDERIA_H
 #include <string>
 #include "Animal.h"
+#include "Auto.h"
 #include "Especies/Perro.h"
 #include "Especies/Gato.h"
 #include "Especies/Caballo.h"
@@ -22,7 +23,7 @@ class Guarderia{
 
     private:
         Lista<Animal> lista_de_animales;
-
+        Auto automovil;
 
     //Metodos
 
@@ -69,6 +70,11 @@ class Guarderia{
         PRE:  La posición recibida del animal a obtener es válida.
         POST: Develve un puntero al Animal en la posicion dada*/
             Animal* obtener_animal(int posicion);
+
+        /* Obtener auto
+        PRE:  -
+        POST: Develve un puntero al Auto*/  
+            Auto* obtener_auto();
 
 
 };

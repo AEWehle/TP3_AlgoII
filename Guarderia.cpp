@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream> 
 #include "Guarderia.h"
+#include "Auto.h"
 #include "Archivos_auxiliares/funciones_auxiliares.h"
 using namespace std; 
 
@@ -70,4 +71,9 @@ void Guarderia::ver_lista_de_animales(){
     else
         cout << "No hay animales en la lista" << endl;
 
+}
+
+
+Auto* Guarderia::obtener_auto(){
+    return &automovil;
 }
