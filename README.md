@@ -62,6 +62,8 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS HECHAS:
 
+CARGAR_COMBUSTIBLE, CLASE AUTO, AFECTAR_COMBUSTIBLE(+5)
+
 
 ## UPDATES:
 
