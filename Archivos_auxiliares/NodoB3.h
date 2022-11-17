@@ -195,18 +195,11 @@ Dato* NodoB3<Dato, Clave>               :: obtener_dato( Clave clave ) {
 template <typename Dato, typename Clave>
 Clave NodoB3<Dato, Clave>               :: obtener_clave_de( int pos ){
     Clave clave_out;
-    if ( pos == 1){
-        this -> elementos -> consulta(1);
-        clave_out = this -> elementos -> consulta(1) -> obtener_clave();
+    if ( pos > elementos -> obtener_cantidad()){
+        clave_out = this -> elementos -> consulta( elementos -> obtener_cantidad() ) -> obtener_clave();
     }
-    if ( pos == 2){
-        if ( this -> elementos -> obtener_cantidad() == 1 ){
-            cout << "ERROR solo tengo una clave en el nodo" << endl;
-            clave_out = 0;
-        }
-        else{
-            clave_out = this -> elementos -> consulta(2) -> obtener_clave();
-        }
+    else {
+        clave_out = this ->  elementos -> consulta(pos) -> obtener_clave();
     }
     return clave_out;
 }

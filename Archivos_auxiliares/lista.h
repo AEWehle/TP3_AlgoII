@@ -30,6 +30,12 @@ class Lista {
         // POS: Agrega d en la posicion POS (la primera es la 1)
         void alta(Dato* dato, int POS);
 
+
+        // PRE: Se usa si se desea agregar al final
+        // POS: Agrega dato al final
+        void alta(Dato* dato);
+
+
         // PRE: 0 < POS <= cantidad
         // POS: devuelve el dato que esta en la posicion POS (empieza en 1)
         Dato* consulta(int POS);
@@ -99,6 +105,15 @@ void Lista<Dato>::alta(Dato* dato, int POS) {
     this -> cantidad++;
 
 }
+
+
+template <typename Dato>
+void Lista<Dato>::alta(Dato* dato) {
+    int POS = cantidad+1;
+    this -> alta( dato, POS);
+}
+
+
 
 template <typename Dato>
 Dato* Lista<Dato>::consulta(int POS) {

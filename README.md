@@ -20,7 +20,7 @@ git push                                     Lo sube a la nube
 
 ponen su nombre de usuario
 
-ponen la siguiente clave --->  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
+ponen la siguiente clave --->  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
 
 git pull                                     Ponerlo para verificar si alguine del grupo pusheó algún cambio
                                                 te asegurás tenes la úlrima versión
