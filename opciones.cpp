@@ -3,6 +3,8 @@
 #include <fstream>
 #include <limits>
 #include "Archivos_auxiliares/funciones_auxiliares.h"
+#include "Auto.h"
+#include "Guarderia.h"
 #include "opciones.h"
 using namespace std;
 
@@ -14,9 +16,20 @@ void afectar_animales(Guarderia* mi_guarderia){
 
     for(int i = 1; i <= mi_guarderia->obtener_cantidad(); i++) {
        mi_guarderia->obtener_animal(i)->ensuciar();
-       mi_guarderia->obtener_animal(i)->dar_hambre(); 
+       mi_guarderia->obtener_animal(i)->dar_hambre();
+
+       /*if(mi_guarderia->obtener_animal(i)->obtener_higiene()==0 || mi_guarderia->obtener_animal(i)->obtener_hambre()==100){
+            mi_guarderia->eliminar_animal(i);
+            //Acá hay que ver si ponemos algo en guarderia que guarde los escapados
+            //pero seria un :
+            //int escapados += 1;
+       }*/ 
     }
 
+}
+
+void afectar_combustible(Guarderia* mi_guarderia){
+    mi_guarderia->obtener_auto()->cargar_combustible();
 }
 
 
@@ -25,7 +38,8 @@ void afectar_animales(Guarderia* mi_guarderia){
 
 void listar_animales( Guarderia* mi_guarderia ){
 
-    afectar_animales(mi_guarderia); 
+    afectar_animales(mi_guarderia);
+    afectar_combustible(mi_guarderia);
     
     mi_guarderia->ver_lista_de_animales();
 
@@ -249,6 +263,7 @@ bool otro_nombre( Guarderia* mi_guarderia, string & nombre ){
 void rescatar_animal( Guarderia* mi_guarderia ){
 
     afectar_animales(mi_guarderia);
+    afectar_combustible(mi_guarderia);
 
     cout << endl << "Rescataste un animal?" << endl;
     cout << endl << "Cómo se llama?" << endl;
@@ -282,6 +297,7 @@ void rescatar_animal( Guarderia* mi_guarderia ){
 void buscar_animal( Guarderia* mi_guarderia ){
 
     afectar_animales(mi_guarderia);
+    afectar_combustible(mi_guarderia);
 
 
     if (mi_guarderia->obtener_cantidad() == 0) {
@@ -315,10 +331,17 @@ void menu_elegir_individualmente(){
     cout << "   1. Alimentar Animal" << endl;
     cout << "   2. Duchar Animal" << endl;
     cout << "   3. Pasar a Animal siguiente" << endl;
-    cout << "   4. Volver a Menu Anterior" << endl;
+    cout << "   4. Volver a Menu Principal" << endl;
 
 }
 
+void volver_menu_ppal(Guarderia* mi_guarderia){
+
+    return;
+
+}
+
+void ejecutar_eleccion_op4(Guarderia* mi_guarderia, int eleccion);
 
 void elegir_animal_a_cuidar(Guarderia* mi_guarderia){
 
@@ -346,6 +369,8 @@ void elegir_animal_a_cuidar(Guarderia* mi_guarderia){
                 ++i;
                 break;
             case VOLVER_MENU_OP4:
+                //volver_menu_ppal(mi_guarderia);
+                ejecutar_eleccion_op4(mi_guarderia, 2);
                 break;
             default:
                 cout << "Opción Inválida!!!" << endl;
@@ -385,18 +410,10 @@ void duchar_a_todos(Guarderia* mi_guarderia){
 }
 
 
-void volver_menu_ppal(Guarderia* mi_guarderia){
-
-    return;
-
-}
-
 
 const Manejo_Guarderia opcion_4[ CANTIDAD_OPCIONES_OP4] = {
 
     elegir_animal_a_cuidar,
-    alimentar_a_todos,
-    duchar_a_todos,
     volver_menu_ppal,
 
 }; 
@@ -410,6 +427,7 @@ void ejecutar_eleccion_op4(Guarderia* mi_guarderia, int eleccion){
 
 
 void cuidar_animales( Guarderia* mi_guarderia ){
+    afectar_combustible(mi_guarderia);
 
     if(mi_guarderia->obtener_cantidad()==0)
         cout << "No tenés ningún animal agregado a la guardería para cuidar" << endl;
@@ -514,6 +532,7 @@ int pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* lista_adoptables ){
 void adoptar_animal( Guarderia* mi_guarderia ){
 
     afectar_animales(mi_guarderia);
+    afectar_combustible(mi_guarderia);
 
     if(mi_guarderia->obtener_cantidad()==0){
         cout << "No hay animales disponibles para adoptar." << endl;
@@ -587,8 +606,47 @@ void adoptar_animal( Guarderia* mi_guarderia ){
 
 }
 
+/*************************************** FUNCIONES DE LA OPCION 6 ***************************************/
+// Cargar Combustible 
 
-/*************************************** FUNCIONES DE LA OPCION 6 ***************************************/ 
+int pedir_cant_combustible(){
+    cout << " >> ";
+    string cant_combustible_string;
+    int cant_combustible;
+
+    cin >> cant_combustible_string;
+
+    if(es_numero(cant_combustible_string)){
+        cant_combustible = stoi(cant_combustible_string);
+    }
+
+    while( !es_numero(cant_combustible_string) || !(cant_combustible >= 0 && cant_combustible <= MAX_COMBUSTIBLE)){
+        cout << "Ingresá un numero entre 0 y " << MAX_COMBUSTIBLE << ":" << endl << " >> ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> cant_combustible_string;
+        if(es_numero(cant_combustible_string))
+            cant_combustible = stoi(cant_combustible_string);
+    }
+    
+    return cant_combustible;
+}
+
+
+void cargar_combustible(Guarderia* mi_guarderia){
+    //int aux =50;
+    //mi_guarderia->obtener_auto()->decrementar_combustible(aux);
+    cout << "El auto tiene: " << mi_guarderia->obtener_auto()->obtener_combustible() << " de combustible." << endl;
+    cout << "¿Cuanto combustible querés agregar? Coloca un numero de 0 a " << MAX_COMBUSTIBLE << "."<< endl;
+
+    int cant_a_cargar = pedir_cant_combustible();
+
+    mi_guarderia->obtener_auto()->cargar_combustible(cant_a_cargar);
+
+    //cout << "El auto tiene: " << mi_guarderia->obtener_auto()->obtener_combustible() << " de combustible." << endl;
+}
+
+/*************************************** FUNCIONES DE LA OPCION 7 ***************************************/ 
 // Guardar y Salir
 
 

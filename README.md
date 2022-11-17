@@ -33,16 +33,18 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS A MODIFICAR/CORREGIR:
 
-1. Diccionario para guardar los animales. 
-   - Arbol B 3 vias
-   - Nombre del animal como clave
+1. Adaptar guarderia a diccionarios (LUCIANA)
 2. Crear funcion que genere 5 animales random
 3. Cambiar la implementacion de listar animales, buscar animal, ya que ahora no usamos lista sino diccionario de arbol 3 vias.
 4. Agregar opcion del menú principal:
         5. Adoptar animal.
-   ---> 6. Cargar combutible. (Muestra cuanto y regunta cuanto agregar)
+        
+   ---> 6. Cargar combutible. (Muestra cuanto y regunta cuanto agregar)*LISTO(M)*
+   
         7. Guardar y salir.
-   El auto se autocarga 5 de combustible cada vez que se selecciona una opcion del menú (max_combustible = 100)
+        
+   El auto se autocarga 5 de combustible cada vez que se selecciona una opcion del menú (max_combustible = 100)*LISTO (M)*
+   
 5. - Mapa: matriz de 8x8
    - Mostramos al inicio el mapa y animales generados random ( propner otra forma si prefiere )
    - Terreno y Costo: montana: 5, camino: 1, precipicio: 40, tierra: 2
@@ -51,13 +53,17 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
           Si no le alcanza se pregunta al usuario otro destino u otra acción          
 6. Diría de agregar un atributo a los animales que sea su ubicacion
    Si tiene 0 higiene o 100 hambre el animal se escapa. Si escapan 3 --> GAME OVER
-7. En cuidar animales el menú ahora es otro. Pero para volver al menú inicial hay que apretar 4 (NO SÉ QUE ONDA jajaj)
+7. En cuidar animales el menú ahora es otro. Pero para volver al menú inicial hay que apretar 4 (NO SÉ QUE ONDA jajaj) *EN ESO (M)*
 8. En adoptar animal hay que mostrar los animales de mayor a menor según edad
 10. Actualizar UML
 
 ## COSAS HECHAS:
 
+CARGAR_COMBUSTIBLE, CLASE AUTO, AFECTAR_COMBUSTIBLE(+5)
+
 
 ## UPDATES:
 
-MCH: Modificando menues, funcion de escaparse (No esta listo yet pero en eso). Consultar lo de apretar 4 para el menu anterior (Yo pregunto)
+MCH: Modificando menues, funcion de escaparse (No esta listo yet pero en eso). Consultar lo de apretar 4 para el menu anterior (Yo pregunto). UPDATE: Creo que entendi lo de la opcion 4, es que en el menu de elegir individualmente la opcion 4 te lleve al menu inicial y no al anterior (o sea, en la implementacion tipo TP2 teniamos que volvia al anterior, ahora queremos que vuelva al inicial). Ahora c/hambre 100 animal se "escapa" (todavia no elimino de la guarderia, solo agregue mensaje) 
+
+MCH: COMPLETO LO DE CARGAR COMBUSTIBLE, FALTA IMPLEMENTARLO CON EL MAPA. Sigo revisando opcion 4.
