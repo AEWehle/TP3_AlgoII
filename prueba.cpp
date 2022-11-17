@@ -28,7 +28,6 @@ int main(){
     //diccionario.mostrar_arbolb3();
     //cout << "Agrego 4 " <<endl;
     diccionario.agregar_dato(&dato4, clave4);
-    // cout  << "Sali de agregar dato" << endl;
     //diccionario.mostrar_arbolb3();
     //cout << "Agrego 5" <<endl;
     diccionario.agregar_dato(&dato5, clave5);
@@ -56,11 +55,23 @@ int main(){
     diccionario.agregar_dato(&dato9, clave9);
     diccionario.mostrar_arbolb3();
 
+    string aux = "";
 
-    Lista<int>* datos = diccionario.ordenar_mayor_menor();
-    for ( int i = 1 ; i <= diccionario.obtener_cantidad() ; i++){
-        cout << *datos -> consulta(i) << ", " ;
+    while( aux != "s"){
+        cout << "ingrese dato a buscar"<< endl<< " >> ";
+        cin >> aux;
+
+        int * dato = ( diccionario.consulta( stoi(aux) ) );
+        if (dato!=nullptr){
+            cout << *dato << endl;
+        }
     }
-    delete datos;
+    // cout << *( diccionario.consulta( 8 ) ) << endl;
+
+    // Lista<int>* datos = diccionario.ordenar_mayor_menor();
+    // for ( int i = 1 ; i <= diccionario.obtener_cantidad() ; i++){
+    //     cout << *datos -> consulta(i) << ", " ;
+    // }
+    // delete datos;
     return 0;
 }

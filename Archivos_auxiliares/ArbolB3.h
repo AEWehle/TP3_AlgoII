@@ -37,6 +37,16 @@ class ArbolB3 {
         void agregar_dato( Dato* dato, Clave clave);
 
 
+        // PRE: 
+        // POS: devuelve el puntero al dato segun la clave
+        Dato* consulta( Clave clave);
+   
+   
+        // PRE: 
+        // POS: devuelve el puntero al dato segun la clave, buscando desde nodo actual
+        Dato* consulta( NodoB3<Dato,Clave> * nodo_actual , Clave clave);
+
+
         // PRE: la clave no se puede repetir
         // POS: Inresa el dato en su ubicacion segun la clave
         // Esta otra forma de la funcion es para aplicar recursividad
@@ -102,7 +112,49 @@ template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: agregar_dato( Dato* dato, Clave clave){
     agregar_dato( nodo_raiz , dato , clave );
     return;    
-    }    
+}    
+
+
+// Obtener Dato segun clave
+template <typename Dato, typename Clave>
+Dato* ArbolB3<Dato, Clave>              :: consulta( Clave clave ){
+    if ( cantidad == 0 ) {
+        cout << "La base de datos esta vacía" << endl;
+        return nullptr;
+    }
+    
+    Dato * dato = consulta( this -> nodo_raiz , clave );
+    
+    if ( dato == nullptr ){ //el dato no se encuentra en el arbol
+        cout << "Clave inexistente" << endl;
+    }
+    return dato;
+}
+
+
+// consulta desde un nodo con la clave
+template <typename Dato, typename Clave>
+Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_actual , Clave clave ){
+    int clave_men_igu_o_may = nodo_actual -> clave_menor_entra_mayor( clave );
+    // La clave entra en el nodo
+    if( clave_men_igu_o_may == 1){
+        // puede estar en este nodo
+        Dato* dato = nodo_actual -> obtener_dato( clave );
+        if( dato == nullptr && nodo_actual -> es_hoja()){
+            return nullptr;
+        }
+        if( dato != nullptr){
+            return dato;
+        }
+    }
+
+    // la clave es menor al nodo
+    else if( nodo_actual -> es_hoja() ){
+        return nullptr;
+    }
+    return consulta( nodo_actual -> obtener_hijo( clave_men_igu_o_may +1 ) , clave );
+}
+
 
 
 // Ingresar dato segun clave
