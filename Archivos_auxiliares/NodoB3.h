@@ -146,7 +146,7 @@ class NodoB3{
 
         /*  PRE: -
             POS: devuelve 0 si es menor a la clave menor del nodo
-                          1 se esta entre la mayor y la menor clave
+                          1 se es == a menor o <= a mayor
                           2 si es mayor a la clave mayor del nodo
             */
         int clave_menor_entra_mayor( Clave clave);
@@ -185,8 +185,12 @@ Dato* NodoB3<Dato, Clave>               :: obtener_dato( Clave clave ) {
     if (elementos -> consulta(1) -> obtener_clave() == clave){
         return elementos -> consulta(1) -> obtener_dato();
     }
-    else{
+    else if ( ( elementos -> obtener_cantidad() == 2 ) && (elementos -> consulta(2) -> obtener_clave() == clave) ){
         return elementos -> consulta(2) -> obtener_dato();
+    }
+    else{
+        // no esta esa clave
+        return nullptr;
     }
 }
 
@@ -305,15 +309,27 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
 
         if ( nodo_padre == nullptr ){ // SI NO TENGO PADRE
             NodoB3<Dato,Clave>* nuevo_nodo_padre = new NodoB3<Dato,Clave>( elemento_a_subir );
-            nuevo_nodo_padre-> cambiar_ultimo_hijo( nodo_hermano_mayor );    
             nuevo_nodo_padre -> cambiar_nodo_padre( this -> nodo_padre );
             nodo_hermano_mayor -> cambiar_nodo_padre( nuevo_nodo_padre );
+            if ( nodo_hermano_mayor -> obtener_clave_de(1) > elemento_a_subir -> obtener_clave() ){
+                nuevo_nodo_padre  -> cambiar_ultimo_hijo( nodo_hermano_mayor ); 
+            }
+            else{
+                nuevo_nodo_padre  -> ubicar_nodo_hijo( nodo_hermano_mayor );
+            }    
             this -> nodo_padre = nuevo_nodo_padre;
         }
         else{ //SI YA TENGO PADRE
-            this -> nodo_padre -> cambiar_ultimo_hijo( nodo_hermano_mayor ); 
             nodo_hermano_mayor -> cambiar_nodo_padre( this -> nodo_padre );
             this -> nodo_padre -> agregar_elemento_existente( elemento_a_subir );// le dice a hermano mayor su nuevo padre
+            
+            if ( nodo_hermano_mayor -> obtener_clave_de(1) > this -> nodo_padre -> obtener_clave_de(2)  ){
+                this -> nodo_padre -> cambiar_ultimo_hijo( nodo_hermano_mayor ); 
+            }
+            else{
+                this -> nodo_padre -> ubicar_nodo_hijo( nodo_hermano_mayor );
+            }
+            nodo_hermano_mayor -> cambiar_nodo_padre( this -> nodo_padre ); // si, esta repetido
         }
         
     }
@@ -396,12 +412,14 @@ bool NodoB3<Dato, Clave>                :: es_hoja( ){
 
 
 template <typename Dato, typename Clave>
-int NodoB3<Dato, Clave>                 :: clave_menor_entra_mayor( Clave clave){
+int NodoB3<Dato, Clave>                 :: clave_menor_entra_mayor( Clave clave ){
     int clave_es = 2;
     if (clave < this -> obtener_clave_de(1)){
         clave_es = 0;}
-    else if (( this -> elementos -> obtener_cantidad() == 2) && ( clave < this -> obtener_clave_de(2) )){
+    else if (  ( clave == this -> obtener_clave_de(1) ) ||
+               (( this -> elementos -> obtener_cantidad() == 2) && ( clave <= this -> obtener_clave_de(2) ))){
         clave_es = 1;  }
+    
     return clave_es;
 }
 
