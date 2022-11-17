@@ -12,7 +12,7 @@ int main(){
     int clave1 = 1;
     char dato2 = 'b';
     int clave2 = 2;
-    char dato3 = 'c';
+    char dato3 = 'c'; 
     int clave3 = 3;
     char dato4 = 'd';
     int clave4 = 4;
@@ -22,27 +22,38 @@ int main(){
     // diccionario.mostrar_arbolb3();
     cout << "Agrego b" <<endl;
     diccionario.agregar_dato(&dato2, clave2);
-    diccionario.mostrar_arbolb3();
+    // diccionario.mostrar_arbolb3();
     cout << "Agrego c" <<endl;
     diccionario.agregar_dato(&dato3, clave3);
-    diccionario.mostrar_arbolb3();
+    // diccionario.mostrar_arbolb3();
     cout << "Agrego d " <<endl;
     diccionario.agregar_dato(&dato4, clave4);
-    diccionario.mostrar_arbolb3();
+    cout  << "Sali de agregar dato" << endl;
+    // diccionario.mostrar_arbolb3();
     cout << "Agrego e" <<endl;
     diccionario.agregar_dato(&dato5, clave5);
-    diccionario.mostrar_arbolb3();
+    // diccionario.mostrar_arbolb3();
 
     char dato6 = 'f';
     int clave6 = 6;
     cout << "Agrego f" <<endl;
     diccionario.agregar_dato(&dato6, clave6);
-    diccionario.mostrar_arbolb3();
+    // diccionario.mostrar_arbolb3();
 
     char dato7 = 'g';
     int clave7 = 7;
     cout << "Agrego g" <<endl;
     diccionario.agregar_dato(&dato7, clave7);
+    // diccionario.mostrar_arbolb3();
+    char dato8 = 'h';
+    int clave8 = -1;
+    cout << "Agrego h" <<endl;
+    diccionario.agregar_dato(&dato8, clave8);
+    // diccionario.mostrar_arbolb3();
+    char dato9 = 'i';
+    int clave9 = 0;
+    cout << "Agrego i" <<endl;
+    diccionario.agregar_dato(&dato9, clave9);
     diccionario.mostrar_arbolb3();
 
     // Lista<char>* datos = diccionario.datos_mayor_menor();

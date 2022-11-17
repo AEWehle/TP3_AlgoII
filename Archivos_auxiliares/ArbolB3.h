@@ -100,28 +100,24 @@ template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
     
     this -> cantidad++;
-    // cout << "Estoy en agregar dato(), quiero agregar en :"<< endl;
-    // nodo_actual -> mostrar_nodob3();
     if ( nodo_actual == nullptr) {
         nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
     }
     else{
-        if( nodo_actual->es_hoja() ){
+        if( nodo_actual -> es_hoja() ){
             NodoB3<Dato,Clave>* nodo_aux = nodo_actual -> agregar_elemento( dato, clave );
-            // nodo_aux -> obtener_nodo_padre();
-            // cout << "nodo padre"<<endl;
-            if ( nodo_aux != nullptr ){
+            if ( nodo_aux != nullptr ){ // Me fijo si tengo que cambiar el nodo raiz
+            //  nodo_aux no será null cuando cree un nuevo hermano mayor, esto sucede cuando un nodo alcanzó 3 clvaes
+                nodo_actual = nodo_aux;
                 while ( nodo_actual -> obtener_nodo_padre() != nullptr ){
                     nodo_actual = nodo_actual -> obtener_nodo_padre();
                 }
                 this -> nodo_raiz = nodo_actual;
-                // cout << "nuevo nodo raiz";
-                // nodo_raiz -> mostrar_nodob3();
             }
+
             return;
         }
-        else{
-            // cout << "ERROR ACA?";
+        else{// Si no es hoja tengo que buscar a que nodo hijo le correpsonde la clave
             return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
         }
     }
@@ -130,10 +126,10 @@ void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nod
 
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: mostrar_arbolb3(){
-    cout << "nodo raiz" << endl;
+    cout << "Nodo raiz:" << endl;
     this-> nodo_raiz -> mostrar_nodob3() ;
     if ( nodo_raiz->es_hoja() ){
-        cout << "es hoja"<< endl << endl;
+        cout << "Es hoja"<< endl << endl;
         return;
     }
     cout << endl;
@@ -152,13 +148,15 @@ void ArbolB3<Dato, Clave>               :: mostrar_arbolb3( NodoB3<Dato,Clave> *
     cout << "Generacion " << generacion << endl;
     nodo_actual -> mostrar_nodob3() ;
     if ( nodo_actual->es_hoja() ){
-        cout << "es hoja generacion " << generacion << endl << endl;
+        cout << "Es hoja generacion " << generacion << endl << endl;
         return;
     }
-    cout << endl;
+    cout << "Hijo 1:" << endl;
     mostrar_arbolb3( nodo_actual -> obtener_hijo(1), generacion+1 ) ;
+    cout << "Hijo 2:" << endl;
     mostrar_arbolb3( nodo_actual -> obtener_hijo(2), generacion+1 ) ;
     if ( nodo_actual-> esta_completo() ) {
+        cout << "Hijo 3:"<< endl;
         mostrar_arbolb3(nodo_actual -> obtener_hijo(3), generacion+1);
     }
     return;
