@@ -231,10 +231,13 @@ void ArbolB3<Dato, Clave>       :: sub_datos_mayor_menor( Lista<Dato>* datos , N
     while( hijos_restantes  != 0 ){
         cout << "guardo el " << *nodo_padre -> obtener_dato( nodo_padre -> obtener_clave_de( hijos_restantes ) ) << endl;
         datos -> alta( nodo_padre -> obtener_dato( nodo_padre -> obtener_clave_de( hijos_restantes ) ) );
+        cout << "guardé el " << *nodo_padre -> obtener_dato( nodo_padre -> obtener_clave_de( hijos_restantes ) ) << endl;
         if(!( nodo_padre -> obtener_hijo( hijos_restantes ) -> es_hoja() )){
+        cout << "entre al if, los hijos no son hoja "<< endl;
             return datos_mayor_menor( datos, nodo_padre -> obtener_hijo( hijos_restantes ) );
         }
         else{
+        cout << "entre al else, los hijos son hoja "<< endl;
             datos -> alta( nodo_padre -> obtener_hijo( hijos_restantes ) -> obtener_dato( nodo_padre -> obtener_hijo( hijos_restantes ) -> obtener_clave_de( hijos_restantes ) ) );
         }
         hijos_restantes --;
