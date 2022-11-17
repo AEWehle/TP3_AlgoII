@@ -10,7 +10,7 @@
 #include "Especies/Conejo.h"
 #include "Especies/Erizo.h"
 #include "Especies/Lagartija.h"
-#include "Archivos_auxiliares/lista.h"
+#include "Archivos_auxiliares/ArbolB3.h"
 using namespace std; 
 
 const int NO_SE_ENCUENTRA = -1;
@@ -43,7 +43,7 @@ class Guarderia{
         /*Ver lista de animales en la guarderia
             PRE:  -
             POST: Imprime en terminal todos los animales de la lista*/
-            void ver_lista_de_animales();
+            void ver_diccionario_de_animales();
 
         /*Agregar
             PRE: Puntero a Animal está creado correctamente
