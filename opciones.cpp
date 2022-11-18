@@ -42,7 +42,7 @@ void listar_animales( Guarderia* mi_guarderia ){
     afectar_animales(mi_guarderia);
     afectar_combustible(mi_guarderia);
     
-    mi_guarderia->ver_lista_de_animales();
+//    mi_guarderia->ver_lista_de_animales();
 
 }
  
@@ -263,12 +263,14 @@ bool otro_nombre( Guarderia* mi_guarderia, string & nombre ){
 
 char** crear_mapa_vacio(){
 
+    cout << "Buscando animales para rescatar..." << endl;
+
     char** mapa = new char*[8];
     for(int i = 0; i < 8; i++)
-        mapa[i] = new char[8];
+        mapa[i] = new char[16];
 
     for(int i = 0; i < 8; i++){
-        for (int j = 0; j < 8; j++){
+        for (int j = 0; j < 16; j++){
             mapa[i][j] = ' ';
         }
     }
@@ -284,7 +286,7 @@ void animales_aleatorios(char** &mapa){ //Reemplaza 5 de los espacios por chars 
     int i;
     int j;
 
-    mapa[0][0] = 'A';
+    mapa[3][5] = 'A';
 
     while(creados < 5){
 
@@ -292,9 +294,9 @@ void animales_aleatorios(char** &mapa){ //Reemplaza 5 de los espacios por chars 
         i = rand() % 8;
         srand((unsigned int)time(nullptr));
         j = rand() % 8;
-        if(mapa[i][j] == ' '){
+        if(mapa[i][(2*j)+1] == ' '){
             srand((unsigned int)time(nullptr));
-            mapa[i][j] = ESPECIE_CHAR[rand() % 7];  //Especie random de las programadas
+            mapa[i][(2*j)+1] = ESPECIE_CHAR[rand() % 7];  //Especie random de las programadas
             creados++;
         }
 
@@ -305,77 +307,233 @@ void animales_aleatorios(char** &mapa){ //Reemplaza 5 de los espacios por chars 
 
 void mostrar_mapa(char** mapa){
 
+    mapa[0][0] = 'x';
+    mapa[1][0] = 'x';
+    mapa[2][0] = 'x';
+    mapa[3][0] = 'x';
+    mapa[3][2] = 'x';
+
+    cout << BORDE << "    a  b  c  d  e  f  g  h    " << RESET << endl;
+
     cout    
     //fila1
-    << ESC << CAMINO << " " << mapa[0][0] << " " << RESET << ESC << PRECIPICIO << " " << mapa[0][1] << " " << RESET
-    << ESC << TIERRA << " " << mapa[0][2] << " " << RESET << ESC << TIERRA << " " << mapa[0][3] << " " << RESET
-    << ESC << TIERRA << " " << mapa[0][4] << " " << RESET << ESC << TIERRA << " " << mapa[0][5] << " " << RESET
-    << ESC << TIERRA << " " << mapa[0][6] << " " << RESET << ESC << TIERRA << " " << mapa[0][7] << " " << RESET << endl;
+    << BORDE << " 1 " << RESET
+    << CAMINO << mapa[0][0] << mapa[0][1] << " " << RESET << PRECIPICIO << mapa[0][2] << mapa[0][3] << " " << RESET
+    << TIERRA << mapa[0][4] << mapa[0][5] << " " << RESET << TIERRA << mapa[0][6] << mapa[0][7] << " " << RESET
+    << TIERRA << mapa[0][8] << mapa[0][9] << " " << RESET << TIERRA << mapa[0][10] << mapa[0][11] << " " << RESET
+    << TIERRA << mapa[0][12] << mapa[0][13] << " " << RESET << TIERRA << mapa[0][14] << mapa[0][15] << " " << RESET
+    << BORDE << " 1 " << RESET << endl;
     
     cout
     //fila2
-    << ESC << CAMINO << " " << mapa[1][0] << " " << RESET << ESC << TIERRA << " " << mapa[1][1] << " " << RESET
-    << ESC << TIERRA << " " << mapa[1][2] << " " << RESET << ESC << TIERRA << " " << mapa[1][3] << " " << RESET
-    << ESC << PRECIPICIO << " " << mapa[1][4] << " " << RESET << ESC << PRECIPICIO << " " << mapa[1][5] << " " << RESET
-    << ESC << PRECIPICIO << " " << mapa[1][6] << " " << RESET << ESC << PRECIPICIO << " " << mapa[1][7] << " " << RESET << endl;
+    << BORDE << " 2 " << RESET
+    << CAMINO << mapa[1][0] << mapa[1][1] << " " << RESET << TIERRA << mapa[1][2] << mapa[1][3] << " " << RESET
+    << TIERRA << mapa[1][4] << mapa[1][5] << " " << RESET << TIERRA << mapa[1][6] << mapa[1][7] << " " << RESET
+    << PRECIPICIO << mapa[1][8] << mapa[1][9] << " " << RESET << PRECIPICIO << mapa[1][10] << mapa[1][11] << " " << RESET
+    << PRECIPICIO << mapa[1][12] << mapa[1][13] << " " << RESET << PRECIPICIO << mapa[1][14] << mapa[1][15] << " " << RESET
+    << BORDE << " 2 " << RESET << endl;
 
     cout
     //fila3
-    << ESC << CAMINO << " " << mapa[2][0] << " " << RESET << ESC << CAMINO << " " << mapa[2][1] << " " << RESET
-    << ESC << CAMINO << " " << mapa[2][2] << " " << RESET << ESC << CAMINO << " " << mapa[2][3] << " " << RESET
-    << ESC << CAMINO << " " << mapa[2][4] << " " << RESET << ESC << TIERRA << " " << mapa[2][5] << " " << RESET
-    << ESC << MONTANA << " " << mapa[2][6] << " " << RESET << ESC << MONTANA << " " << mapa[2][7] << " " << RESET << endl;
+    << BORDE << " 3 " << RESET
+    << CAMINO << mapa[2][0] << mapa[2][1] << " " << RESET << CAMINO << mapa[2][2] << mapa[2][3] << " " << RESET
+    << CAMINO << mapa[2][4] << mapa[2][5] << " " << RESET << CAMINO << mapa[2][6] << mapa[2][7] << " " << RESET
+    << CAMINO << mapa[2][8] << mapa[2][9] << " " << RESET << TIERRA << mapa[2][10] << mapa[2][11] << " " << RESET
+    << MONTANA << mapa[2][12] << mapa[2][13] << " " << RESET << MONTANA << mapa[2][14] << mapa[2][15] << " " << RESET
+    << BORDE << " 3 " << RESET << endl;
 
     cout
     //fila4
-    << ESC << TIERRA << " " << mapa[3][0] << " " << RESET << ESC << TIERRA << " " << mapa[3][1] << " " << RESET
-    << ESC << TIERRA << " " << mapa[3][2] << " " << RESET << ESC << TIERRA << " " << mapa[3][3] << " " << RESET
-    << ESC << CAMINO << " " << mapa[3][4] << " " << RESET << ESC << TIERRA << " " << mapa[3][5] << " " << RESET
-    << ESC << MONTANA << " " << mapa[3][6] << " " << RESET << ESC << MONTANA << " " << mapa[3][7] << " " << RESET << endl;
+    << BORDE << " 4 " << RESET
+    << TIERRA << mapa[3][0] << mapa[3][1] << " " << RESET << TIERRA << mapa[3][2] << mapa[3][3] << " " << RESET
+    << TIERRA << mapa[3][4] << mapa[3][5] << " " << RESET << TIERRA << mapa[3][6] << mapa[3][7] << " " << RESET
+    << CAMINO << mapa[3][8] << mapa[3][9] << " " << RESET << TIERRA << mapa[3][10] << mapa[3][11] << " " << RESET
+    << MONTANA << mapa[3][12] << mapa[3][13] << " " << RESET << MONTANA << mapa[3][14] << mapa[3][15] << " " << RESET
+    << BORDE << " 4 " << RESET << endl;
 
     cout
     //fila5
-    << ESC << MONTANA << " " << mapa[4][0] << " " << RESET << ESC << MONTANA << " " << mapa[4][1] << " " << RESET
-    << ESC << MONTANA << " " << mapa[4][2] << " " << RESET << ESC << TIERRA << " " << mapa[4][3] << " " << RESET
-    << ESC << CAMINO << " " << mapa[4][4] << " " << RESET << ESC << TIERRA << " " << mapa[4][5] << " " << RESET
-    << ESC << MONTANA << " " << mapa[4][6] << " " << RESET << ESC << MONTANA << " " << mapa[4][7] << " " << RESET << endl;
+    << BORDE << " 5 " << RESET
+    << MONTANA << mapa[4][0] << mapa[4][1] << " " << RESET << MONTANA << mapa[4][2] << mapa[4][3] << " " << RESET
+    << MONTANA << mapa[4][4] << mapa[4][5] << " " << RESET << TIERRA << mapa[4][6] << mapa[4][7] << " " << RESET
+    << CAMINO << mapa[4][8] << mapa[4][9] << " " << RESET << TIERRA << mapa[4][10] << mapa[4][11] << " " << RESET
+    << MONTANA << mapa[4][12] << mapa[4][13] << " " << RESET << MONTANA << mapa[4][14] << mapa[4][15] << " " << RESET
+    << BORDE << " 5 " << RESET << endl;
 
     cout
     //fila6
-    << ESC << TIERRA << " " << mapa[5][0] << " " << RESET << ESC << TIERRA << " " << mapa[5][1] << " " << RESET
-    << ESC << TIERRA << " " << mapa[5][2] << " " << RESET << ESC << TIERRA << " " << mapa[5][3] << " " << RESET
-    << ESC << CAMINO << " " << mapa[5][4] << " " << RESET << ESC << TIERRA << " " << mapa[5][5] << " " << RESET
-    << ESC << MONTANA << " " << mapa[5][6] << " " << RESET << ESC << MONTANA << " " << mapa[5][7] << " " << RESET << endl;
+    << BORDE << " 6 " << RESET
+    << TIERRA << mapa[5][0] << mapa[5][1] << " " << RESET << TIERRA << mapa[5][2] << mapa[5][3] << " " << RESET
+    << TIERRA << mapa[5][4] << mapa[5][5] << " " << RESET << TIERRA << mapa[5][6] << mapa[5][7] << " " << RESET
+    << CAMINO << mapa[5][8] << mapa[5][9] << " " << RESET << TIERRA << mapa[5][10] << mapa[5][11] << " " << RESET
+    << MONTANA << mapa[5][12] << mapa[5][13] << " " << RESET << MONTANA << mapa[5][14] << mapa[5][15] << " " << RESET
+    << BORDE << " 6 " << RESET << endl;
 
     cout
     //fila7
-    << ESC << TIERRA << " " << mapa[6][0] << " " << RESET << ESC << PRECIPICIO << " " << mapa[6][1] << " " << RESET
-    << ESC << PRECIPICIO << " " << mapa[6][2] << " " << RESET << ESC << PRECIPICIO << " " << mapa[6][3] << " " << RESET
-    << ESC << CAMINO << " " << mapa[6][4] << " " << RESET << ESC << TIERRA << " " << mapa[6][5] << " " << RESET
-    << ESC << MONTANA << " " << mapa[6][6] << " " << RESET << ESC << MONTANA << " " << mapa[6][7] << " " << RESET << endl;
+    << BORDE << " 7 " << RESET
+    << TIERRA << mapa[6][0] << mapa[6][1] << " " << RESET << PRECIPICIO << mapa[6][2] << mapa[6][3] << " " << RESET
+    << PRECIPICIO << mapa[6][4] << mapa[6][5] << " " << RESET << PRECIPICIO << mapa[6][6] << mapa[6][7] << " " << RESET
+    << CAMINO << mapa[6][8] << mapa[6][9] << " " << RESET << TIERRA << mapa[6][10] << mapa[6][11] << " " << RESET
+    << MONTANA << mapa[6][12] << mapa[6][13] << " " << RESET << MONTANA << mapa[6][14] << mapa[6][15] << " " << RESET
+    << BORDE << " 7 " << RESET << endl;
 
     cout
     //fila8
-    << ESC << TIERRA << " " << mapa[7][0] << " " << RESET << ESC << TIERRA << " " << mapa[7][1] << " " << RESET
-    << ESC << TIERRA << " " << mapa[7][2] << " " << RESET << ESC << TIERRA << " " << mapa[7][3] << " " << RESET
-    << ESC << CAMINO << " " << mapa[7][4] << " " << RESET << ESC << CAMINO << " " << mapa[7][5] << " " << RESET
-    << ESC << CAMINO << " " << mapa[7][6] << " " << RESET << ESC << CAMINO << " " << mapa[7][7] << " " << RESET << endl;  
+    << BORDE << " 8 " << RESET
+    << TIERRA << mapa[7][0] << mapa[7][1] << " " << RESET << TIERRA << mapa[7][2] << mapa[7][3] << " " << RESET
+    << TIERRA << mapa[7][4] << mapa[7][5] << " " << RESET << TIERRA << mapa[7][6] << mapa[7][7] << " " << RESET
+    << CAMINO << mapa[7][8] << mapa[7][9] << " " << RESET << CAMINO << mapa[7][10] << mapa[7][11] << " " << RESET
+    << CAMINO << mapa[7][12] << mapa[7][13] << " " << RESET << CAMINO << mapa[7][14] << mapa[7][15] << " " << RESET
+    << BORDE << " 8 " << RESET << endl;
+
+    cout << BORDE << "    a  b  c  d  e  f  g  h    " << RESET << endl;
+
+}
+
+int verificar_letra(string dato){
+
+    if(dato.length() != 1)
+        return -1;
+    
+    //int letra = (int)dato[0]; // Código ASCII de la letra
+    char letra = dato[0];
+    int salida;
+
+    switch (letra) {
+
+        case 'a': case 'A':
+            salida = 0;
+            break;
+        case 'b': case 'B':
+            salida = 1;
+            break;
+        case 'c': case 'C':
+            salida = 2;
+            break;
+        case 'd': case 'D':
+            salida = 3;
+            break;
+        case 'e': case 'E':
+            salida = 4;
+            break;
+        case 'f': case 'F':
+            salida = 5;
+            break;
+        case 'g': case 'G':
+            salida = 6;
+            break;
+        case 'h': case 'H':
+            salida = 7;
+            break;
+        default:
+            salida = -1;    
+
+    }
+    return salida;
+
+}
+
+
+void pedir_coord_letra(int &coord_letra){
+
+    bool coord_ok = false;
+    string coord_letra_string;
+
+    cout << "Ingresá la letra de la coordenada:" << endl;
+
+    while (!coord_ok){
+    
+        cin >> coord_letra_string;
+
+        coord_letra = verificar_letra(coord_letra_string);
+
+        if(coord_letra == -1)
+            cout << endl << "Ingresá una letra válida!" << endl;
+        else
+            coord_ok = true;
+
+    }
+
+}
+
+
+void pedir_coord_numero(int &coord_numero){
+
+    bool coord_ok = false;
+
+    cout << "Ingresá el número de la coordenada:" << endl;
+
+    while (!coord_ok){
+    
+        cin >> coord_numero;
+
+        if(coord_numero >= 1 && coord_numero <= 8)
+            coord_ok = true;
+        else
+            cout << endl << "Ingresá un número válido!" << endl;
+
+    }
+
+}
+
+
+bool verificar_coordenadas(int coord_letra, int coord_numero, char** mapa){
+
+    bool coords_ok = true;
+    char aux = mapa[coord_numero-1][(2*coord_letra)+1];
+
+    if(aux == ' '){
+        cout << "No hay animales en esas coordenadas!" << endl
+        << "Probá con otras coordenadas" << endl << endl;
+        coords_ok = false;
+    }
+    else if(aux == 'A'){
+        cout << "Esas con tus coordenadas!" << endl
+        << "Probá con otras coordenadas" << endl << endl;
+        coords_ok = false;
+    }
+
+    return coords_ok;
 
 }
 
 
 void rescatar_animal( Guarderia* mi_guarderia ){
 
-    afectar_animales(mi_guarderia);
-    afectar_combustible(mi_guarderia);
+//    afectar_animales(mi_guarderia);
+//    afectar_combustible(mi_guarderia);
 
-    //char* mapa[8];
+    int coord_letra, coord_numero;
+    bool coords_ok = false;
+
+    cout << "Ahora la reserva cuenta con un vehículo para rescatar animales!" << endl
+         << "Podés elegir qué animal rescatar, pero que no se te acabe el combustible!" << endl << endl
+         << "Cada tipo de terreno consume distinta cantidad de combustible:" << endl
+         << CAMINO << "   " << RESET << "El Camino consume 1 de combustible" << endl
+         << TIERRA << "   " << RESET << "La Tierra consume 2 de combustible" << endl
+         << MONTANA << "   " << RESET << "La Montaña consume 5 de combustible" << endl
+         << PRECIPICIO << "   " << RESET << "El Precipicio consume 40 de combustible" << endl << endl;
     
     char** mapa = crear_mapa_vacio();
 
     animales_aleatorios(mapa);
 
     mostrar_mapa(mapa);
+
+    cout << "*Si no podes ver el mapa probá usando otra terminal*" << endl << endl;
+    cout << "Combustible actual:" << "PONER COMBUSTIBLE" << endl
+         << "Podes elegir qué animal rescatar ingresando las coordenadas correspondientes" << endl << endl
+         << "Qué animal te gustaría rescatar?" << endl;
+
+    while (!coords_ok){
+
+        pedir_coord_letra(coord_letra);
+        pedir_coord_numero(coord_numero);
+
+        coords_ok = verificar_coordenadas(coord_letra, coord_numero, mapa);
+
+    }    
 
 
     cout << endl << "Rescataste un animal!" << endl;
@@ -695,7 +853,7 @@ void adoptar_animal( Guarderia* mi_guarderia ){
 
             cout << endl << "Estos son los animales que podés adoptar:" << endl;
 
-            lista_adoptables->ver_lista_de_animales();
+//            lista_adoptables->ver_lista_de_animales();
 
             cout << endl << "Si desea adoptar alguno, ingrese el nombre como se muestra." << endl;
             cout << "Nuestros Erizos y Lagartijas NO SON ADOPTABLES ya que son salvajes, por lo que no aparecerán en la lista" << endl;

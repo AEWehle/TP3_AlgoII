@@ -22,7 +22,7 @@ class Guarderia{
     //Atributos
 
     private:
-        Lista<Animal> lista_de_animales;
+        ArbolB3<Animal, string> diccionario_de_animales;
         Auto automovil;
 
     //Metodos

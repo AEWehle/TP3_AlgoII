@@ -1,12 +1,12 @@
 #include <iostream> 
 #include <string>
 #include <fstream> 
-#include "Archivos_auxiliares/ArbolB3.h" 
+#include "Archivos_auxiliares/ArbolB3.h"
 using namespace std; 
 
 // g++ prueba.cpp -o TP3 -Wall -Werror -Wconversion
 
-
+/*
 int main(){
     int dato1 = 1;
     int clave1 = 1;
@@ -75,3 +75,4 @@ int main(){
     // delete datos;
     return 0;
 }
+*/
