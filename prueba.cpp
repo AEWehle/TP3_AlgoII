@@ -18,61 +18,44 @@ int main(){
     int clave4 = 4;
     int dato5 = 5;
     int clave5 = 5;
-    ArbolB3<int,int> diccionario( &dato1, clave1)  ;
-    //diccionario.mostrar_arbolb3();
-    //cout << "Agrego 2" <<endl;
-    diccionario.agregar_dato(&dato2, clave2);
-    //diccionario.mostrar_arbolb3();
-    //cout << "Agrego 3" <<endl;
-    diccionario.agregar_dato(&dato3, clave3);
-    //diccionario.mostrar_arbolb3();
-    //cout << "Agrego 4 " <<endl;
-    diccionario.agregar_dato(&dato4, clave4);
-    //diccionario.mostrar_arbolb3();
-    //cout << "Agrego 5" <<endl;
-    diccionario.agregar_dato(&dato5, clave5);
-    //diccionario.mostrar_arbolb3();
-
     int dato6 = 6;
     int clave6 = 6;
-    //cout << "Agrego 6" <<endl;
-    diccionario.agregar_dato(&dato6, clave6);
-    //diccionario.mostrar_arbolb3();
-
     int dato7 = 7;
     int clave7 = 7;
-    //cout << "Agrego 7" <<endl;
-    diccionario.agregar_dato(&dato7, clave7);
-    //diccionario.mostrar_arbolb3();
     int dato8 = -1;
     int clave8 = -1;
-    //cout << "Agrego -1" <<endl;
-    diccionario.agregar_dato(&dato8, clave8);
-    //diccionario.mostrar_arbolb3();
+
     int dato9 = 0;
     int clave9 = 0;
-    //cout << "Agrego 0" <<endl;
+    ArbolB3<int,int> diccionario( &dato1, clave1)  ;
+    diccionario.agregar_dato(&dato2, clave2);
+    diccionario.agregar_dato(&dato3, clave3);
+    diccionario.agregar_dato(&dato4, clave4);
+    diccionario.agregar_dato(&dato5, clave5);
+    diccionario.agregar_dato(&dato6, clave6);
+    diccionario.agregar_dato(&dato7, clave7);
+    diccionario.agregar_dato(&dato8, clave8);
     diccionario.agregar_dato(&dato9, clave9);
     diccionario.mostrar_arbolb3();
 
     string aux = "";
 
-    while( aux != "s"){
         cout << "ingrese dato a buscar"<< endl<< " >> ";
         cin >> aux;
+    while( !(aux == "s")){
 
         int * dato = ( diccionario.consulta( stoi(aux) ) );
         if (dato!=nullptr){
             cout << *dato << endl;
         }
+        cout << "ingrese dato a buscar, o 's' para salir"<< endl<< " >> ";
+        cin >> aux;
     }
-    // cout << *( diccionario.consulta( 8 ) ) << endl;
 
-    // Lista<int>* datos = diccionario.ordenar_mayor_menor();
-    // for ( int i = 1 ; i <= diccionario.obtener_cantidad() ; i++){
-    //     cout << *datos -> consulta(i) << ", " ;
-    // }
-    // delete datos;
+    Lista<int>* datos = diccionario.ordenar_mayor_menor();
+    for ( int i = 1 ; i <= datos -> obtener_cantidad() ; i++){
+        cout << *(datos -> consulta(i)) << ", ";
+    }
     return 0;
 }
 */

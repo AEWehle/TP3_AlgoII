@@ -63,6 +63,7 @@ class ArbolB3 {
 
 
         NodoB3<Dato,Clave>* obtener_nodo_mas_derecha();
+        NodoB3<Dato,Clave>* obtener_nodo_mas_derecha_a_partir( NodoB3<Dato,Clave>* nodo_actual );
         NodoB3<Dato,Clave>* obtener_nodo_mas_izquierda();
 
 
@@ -71,15 +72,6 @@ class ArbolB3 {
          segun su clave*/
         Lista<Dato>* ordenar_mayor_menor();
 
-        private:
-        /* PRE: -
-           POS: es utilizado para la recursion de la lista de datos ordenados 
-           de mayor a menor*/
-        void datos_mayor_menor( Lista<Dato>* datos, NodoB3<Dato,Clave>* nodo_actual );
-        /* PRE: -
-           POS: es utilizado para la recursion de la lista de datos ordenados 
-           de mayor a menor*/
-        void sub_datos_mayor_menor( Lista<Dato>* datos, NodoB3<Dato,Clave>* nodo_actual );
 };
 
 
@@ -246,60 +238,20 @@ NodoB3<Dato,Clave> * ArbolB3<Dato, Clave>:: obtener_nodo_mas_izquierda( ){
 
 
 template <typename Dato, typename Clave>
-Lista<Dato>* ArbolB3<Dato, Clave>       :: ordenar_mayor_menor( ){
-    Lista<Dato> *datos = new Lista<Dato>;
-    NodoB3<Dato,Clave> * nodo_actual = obtener_nodo_mas_derecha( );
-    NodoB3<Dato,Clave> * nodo_padre = nodo_actual -> obtener_nodo_padre();
-    nodo_actual -> mostrar_nodob3();
-    nodo_padre -> mostrar_nodob3();
-    datos -> alta( nodo_actual -> obtener_dato( nodo_actual -> obtener_clave_de(2) ) ); // Con 2 refiere al mayor
+NodoB3<Dato,Clave> * ArbolB3<Dato, Clave>:: obtener_nodo_mas_derecha_a_partir( NodoB3<Dato,Clave>* nodo_actual ){
+    while( !( nodo_actual -> es_hoja() ) ){
+        nodo_actual = nodo_actual -> obtener_hijo(3);
+    }
+    return nodo_actual;
+}
 
-    sub_datos_mayor_menor( datos, nodo_padre );
+
+template <typename Dato, typename Clave>
+Lista<Dato>* ArbolB3<Dato, Clave>       :: ordenar_mayor_menor( ){    
+    Lista<Dato>* datos = new Lista<Dato>();
+    this -> nodo_raiz -> ordenar_mayor_menor( datos );
     return datos;
 }
-
-
-template <typename Dato, typename Clave>
-void ArbolB3<Dato, Clave>       :: datos_mayor_menor( Lista<Dato>* datos , NodoB3<Dato,Clave> * nodo_padre ){
-    datos -> alta( nodo_padre -> obtener_hijo(3) -> obtener_dato(  nodo_padre -> obtener_hijo(3) -> obtener_clave_de(2)  ) );
-    
-    return sub_datos_mayor_menor( datos, nodo_padre );
-}
-
-
-template <typename Dato, typename Clave>
-void ArbolB3<Dato, Clave>       :: sub_datos_mayor_menor( Lista<Dato>* datos , NodoB3<Dato,Clave> * nodo_padre ){
-    if ( datos -> obtener_cantidad() >= this -> cantidad ){
-        return;
-    }
-    int hijos_restantes = 1 + (int)nodo_padre -> esta_completo();
-
-    while (  nodo_padre -> obtener_dato( nodo_padre -> obtener_clave_de( hijos_restantes ) )  >  datos -> consulta( datos -> obtener_cantidad() )  ){
-        hijos_restantes--;
-        if ( hijos_restantes == 0){
-            return;
-        }
-    }
-    while( hijos_restantes  != 0 ){
-        cout << "guardo el " << *nodo_padre -> obtener_dato( nodo_padre -> obtener_clave_de( hijos_restantes ) ) << endl;
-        datos -> alta( nodo_padre -> obtener_dato( nodo_padre -> obtener_clave_de( hijos_restantes ) ) );
-        cout << "guardé el " << *nodo_padre -> obtener_dato( nodo_padre -> obtener_clave_de( hijos_restantes ) ) << endl;
-        if(!( nodo_padre -> obtener_hijo( hijos_restantes ) -> es_hoja() )){
-        cout << "entre al if, los hijos no son hoja "<< endl;
-            return datos_mayor_menor( datos, nodo_padre -> obtener_hijo( hijos_restantes ) );
-        }
-        else{
-        cout << "entre al else, los hijos son hoja "<< endl;
-            datos -> alta( nodo_padre -> obtener_hijo( hijos_restantes ) -> obtener_dato( nodo_padre -> obtener_hijo( hijos_restantes ) -> obtener_clave_de( hijos_restantes ) ) );
-        }
-        hijos_restantes --;
-    }
-    if ( nodo_padre -> obtener_nodo_padre() != nullptr ){
-        return sub_datos_mayor_menor( datos , nodo_padre -> obtener_nodo_padre() );
-    }
-    return;
-}
-    
 
 
 #endif // ARBOL_TEMPLATE
