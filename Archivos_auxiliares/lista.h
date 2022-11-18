@@ -26,6 +26,9 @@ class Lista {
         // POS: construye una Lista vacia
         Lista();
 
+        // Devuelve un puntero al primer nodo ( el nodo que se agregó primero )
+        Nodo<Dato>* obtener_primero();
+
         // PRE: 0 < POS <= cantidad + 1
         // POS: Agrega d en la posicion POS (la primera es la 1)
         void alta(Dato* dato, int POS);
@@ -39,6 +42,10 @@ class Lista {
         // PRE: 0 < POS <= cantidad
         // POS: devuelve el dato que esta en la posicion POS (empieza en 1)
         Dato* consulta(int POS);
+
+        // PRE: 
+        // POS: devuelve el dato que se agregó recien
+        Dato* consulta();
 
         // PRE: 0 < POS <= cantidad
         // POS: da de baja el dato que esta en la posicion POS (empieza en 1)
@@ -72,6 +79,13 @@ class Lista {
         // POS: pone el cursor al principio
         void iniciar();
 
+
+        /* Pre: La lista entrante debe tener el mismo Tipo de Dato
+           Post: Appendea al final de la lista this la lista ingresante
+                la lista this queda ->> this lista  +   lista_entrante*/
+        void agregar_lista( Lista<Dato>* lista_entrante );
+
+
     private:
         // PRE: 0 < POS <= cantidad
         // POS: devuelve un ptr al nodo que esta en POS
@@ -86,6 +100,14 @@ Lista<Dato>::Lista() {
     this -> actual = primero;
 
 }
+
+
+template <typename Dato>
+Nodo<Dato>* Lista<Dato>::obtener_primero(){
+    return this -> primero;
+}
+
+
 
 template <typename Dato>
 void Lista<Dato>::alta(Dato* dato, int POS) {
@@ -120,8 +142,16 @@ Dato* Lista<Dato>::consulta(int POS) {
 
     Nodo<Dato>* nodo = obtener_nodo(POS);
     return (nodo->obtener_dato());
-    
 }
+
+
+template <typename Dato>
+Dato* Lista<Dato>::consulta() {
+
+    Nodo<Dato>* nodo = obtener_nodo( this -> cantidad );
+    return (nodo->obtener_dato());
+}
+
 
 template <typename Dato>
 void Lista<Dato>::baja(int POS) {
@@ -216,5 +246,13 @@ void Lista<Dato>::iniciar() {
 
 }
 
+
+template <typename Dato>
+void Lista<Dato> :: agregar_lista( Lista<Dato>* lista_entrante ) {
+    Nodo<Dato>* mas_reciente = this -> primero;
+    for(int i = 1; i <= cantidad ; i++){
+        mas_reciente = mas_reciente -> obtener_siguiente();}
+    mas_reciente -> cambiar_siguiente( lista_entrante -> obtener_primero());
+}
 
 #endif // LISTA_TEMPLATE

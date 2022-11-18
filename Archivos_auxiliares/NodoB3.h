@@ -46,6 +46,10 @@ class NodoB3{
         //Destructor
         ~NodoB3();
 
+
+        /*Devuelve true si el padre es distinto de nullptr*/
+       bool tiene_padre();
+
    
         /*  PRE: -
             POS: Devuelve un puntero al Dato de la clave.
@@ -150,6 +154,10 @@ class NodoB3{
                           2 si es mayor a la clave mayor del nodo
             */
         int clave_menor_entra_mayor( Clave clave);
+
+
+
+        void ordenar_mayor_menor( Lista<Dato>* datos );
 };
 
 
@@ -176,6 +184,12 @@ NodoB3<Dato, Clave>                     :: NodoB3( Elemento<Dato, Clave>* elemen
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>                     :: ~NodoB3(){
     cout << "Chau nodo" << endl;
+}
+
+
+template <typename Dato, typename Clave>
+bool NodoB3<Dato,Clave> :: tiene_padre(){
+    return (this -> obtener_nodo_padre() != nullptr);
 }
 
 
@@ -422,5 +436,20 @@ int NodoB3<Dato, Clave>                 :: clave_menor_entra_mayor( Clave clave 
     
     return clave_es;
 }
+
+
+
+template <typename Dato, typename Clave>
+void NodoB3<Dato, Clave>                 :: ordenar_mayor_menor( Lista<Dato>* datos ){
+    for ( int i = this -> elementos -> obtener_cantidad() ; i >= 0 ; i-- ){
+        if ( !this -> es_hoja() ){
+            this -> obtener_hijo(i+1) -> ordenar_mayor_menor( datos );}
+        
+        if(i != 0){
+            datos -> alta(  this -> obtener_dato( this -> obtener_clave_de(i) ) );}
+    }
+}
+
+
 
 #endif // NODOB3_TEMPLATE
