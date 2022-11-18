@@ -5,6 +5,15 @@
 using namespace std; 
 
 
+//const string ESC = "\u001b[";
+const string RESET = "\u001b[0m";
+const string MONTANA = "\u001b[48;5;52m";
+const string PRECIPICIO = "\u001b[48;5;237m";
+const string CAMINO = "\u001b[48;5;250m";
+const string TIERRA = "\u001b[48;5;179m";
+const string BORDE = "\u001b[48;5;2m";
+
+
 /*________listar_animales()______________________________________________________
  PRE:  La guardería mi_guarderia fue creada.
  POST: Imprime por la terminal la lista de animales contenidos en mi_guarderia.
