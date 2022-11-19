@@ -210,6 +210,14 @@ void Mapa::buscar_mapa(string ruta){
 
 void Mapa::mostrar(){
 
+    //visitados[0][0] = true;
+    visitados[1][0] = true;
+    visitados[2][0] = true;
+    visitados[2][1] = true;
+    visitados[2][2] = true;
+    visitados[3][2] = true;
+    
+
     cout << BORDE << "    a  b  c  d  e  f  g  h    " << RESET << endl;
     
     for(int i = 0; i < 8; i++){
@@ -227,8 +235,9 @@ void Mapa::mostrar(){
 
 void Mapa::imprimir_casilla(int i, int j){
 
-    if(visitados[i][j]){ //Como mostramos que ya pasamos por aca? por ahora se muestra lo mismo
-        switch (terreno[i][j]){
+    char ocupante = ocupantes[i][j];
+
+    switch (terreno[i][j]){
 
             case 'C':
                 cout << CAMINO;
@@ -244,27 +253,16 @@ void Mapa::imprimir_casilla(int i, int j){
                 break;
 
         }
+    
+    if(visitados[i][j]){ //Ya pasé por acá
+        if(ocupante == ' ')
+            cout << "***" << RESET;
+        else
+            cout << "*" << ocupante << "*" << RESET;
     }
 
     else{ //Si no visité la casilla
-        switch (terreno[i][j]){
-
-            case 'C':
-                cout << CAMINO;
-                break;
-            case 'T':
-                cout << TIERRA;
-                break;
-            case 'M':
-                cout << MONTANA;
-                break;
-            case 'P':
-                cout << PRECIPICIO;
-                break;
-
-        }
+        cout << " " << BOLD << ocupante << " " << RESET;
     }
-
-    cout << " " << ocupantes[i][j] << " " << RESET;
 
 }

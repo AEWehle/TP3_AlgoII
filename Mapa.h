@@ -9,6 +9,7 @@ const string PRECIPICIO = "\u001b[48;5;237m";
 const string CAMINO = "\u001b[48;5;250m";
 const string TIERRA = "\u001b[48;5;179m";
 const string BORDE = "\u001b[48;5;2m";
+const string BOLD = "\u001b[1m";
 
 const string RUTA = "mapa.csv";
 
