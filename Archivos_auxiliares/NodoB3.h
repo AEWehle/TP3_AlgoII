@@ -281,7 +281,6 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
 
     if ( elemento_entrante -> obtener_clave() < this -> obtener_clave_de(1) ){
         this -> elementos -> alta( elemento_entrante , 1);
-        // this -> mostrar_nodob3();
     }
     else if( ( this -> elementos -> obtener_cantidad() == 1 )  ||
              (elemento_entrante -> obtener_clave() < this -> obtener_clave_de(2) )){
