@@ -51,6 +51,11 @@ class Lista {
         // POS: da de baja el dato que esta en la posicion POS (empieza en 1)
         void baja(int POS);
 
+        /* elimina el nodo de la lista pero LO DEVUELVE SIN DELETE!!!
+        */
+        Nodo<Dato>* extraer(int POS);
+
+
         // PRE: 0 < POS <= cantidad
         //      Guardarse el puntero del dato previamente.
         // POS: da de baja el dato que esta en la posicion POS,
@@ -131,8 +136,7 @@ void Lista<Dato>::alta(Dato* dato, int POS) {
 
 template <typename Dato>
 void Lista<Dato>::alta(Dato* dato) {
-    int POS = cantidad+1;
-    this -> alta( dato, POS);
+    this -> alta( dato, cantidad+1);
 }
 
 
@@ -168,8 +172,28 @@ void Lista<Dato>::baja(int POS) {
     delete a_borrar->obtener_dato();
     delete a_borrar;
     this -> cantidad--;
-
 }
+
+
+
+template <typename Dato>
+Nodo<Dato>* Lista<Dato>:: extraer(int POS) {
+
+    Nodo<Dato>* a_devolver = this -> primero;
+    if (POS == 1)
+        this -> primero = a_devolver->obtener_siguiente();
+    else {
+        Nodo<Dato>* anterior = obtener_nodo(POS - 1);
+        a_devolver = anterior->obtener_siguiente();
+        anterior->cambiar_siguiente(a_devolver->obtener_siguiente());
+    }
+
+    this -> cantidad--;
+    return a_devolver;
+}
+
+
+
 
 template <typename Dato>
 void Lista<Dato>::baja_sin_delete(int POS) {

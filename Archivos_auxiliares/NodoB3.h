@@ -48,7 +48,7 @@ class NodoB3{
 
 
         /*Devuelve true si el padre es distinto de nullptr*/
-       bool tiene_padre();
+        bool tiene_padre();
 
    
         /*  PRE: -
@@ -102,12 +102,11 @@ class NodoB3{
         NodoB3<Dato, Clave>* agregar_elemento_existente( Elemento<Dato, Clave>* elemento_entrante );
 
 
-        /*  PRE: -
-            POS: Saca del nodo el elemento con esa clave.
-            Devuelve el Elemento que se eliminó, pero su puntero hijo apuntando
-            a nullptr.
-            */
-        Elemento<Dato, Clave>* quitar_elemento( Clave clave_chau );
+
+        /* Cambia el hijo al que se apunta, 1 para el hijo menor, 2 oara el 
+        hijo medio/mayor, 3 para el hijo mayor si hay
+        */
+        void cambiar_hijo( int pos , NodoB3<Dato,Clave>* nuevo_hijo );
 
 
         /*  PRE: -
@@ -133,6 +132,7 @@ class NodoB3{
         No es para mostrar los datos, es para mostrar el nodo */
         void mostrar_nodob3();
         
+
         void mostrar_hijos();
 
 
@@ -183,7 +183,15 @@ NodoB3<Dato, Clave>                     :: NodoB3( Elemento<Dato, Clave>* elemen
 //Destructor
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>                     :: ~NodoB3(){
-    cout << "Chau nodo" << endl;
+    for ( int i = 1 ; i <= elementos -> obtener_cantidad() ; i++ ){
+        delete elementos -> consulta(i) -> obtener_hijo();
+        elementos -> consulta(i) -> cambiar_hijo(nullptr);
+    }
+    delete ultimo_hijo;
+    cout << "Chau nodo" << elementos -> consulta(1) -> obtener_clave() << endl;
+    ultimo_hijo = nullptr;
+    delete elementos;
+    elementos = nullptr;
 }
 
 
@@ -244,6 +252,18 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: obtener_hijo( int pos ){
 
 
 template <typename Dato, typename Clave>
+void NodoB3<Dato, Clave> :: cambiar_hijo( int pos , NodoB3<Dato,Clave>* nuevo_hijo ){
+    if ( pos > elementos -> obtener_cantidad()){
+        this ->  ultimo_hijo = nuevo_hijo;
+    }
+    else {
+        this ->  elementos -> consulta(pos) -> cambiar_hijo( nuevo_hijo ) ;
+    }
+    return;
+}
+
+
+template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: obtener_nodo_padre( ){
     return this ->  nodo_padre;
 }
@@ -293,10 +313,13 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
     // SI AGREGUÉ UNA TERCERA CLAVE:
     if ( elementos->obtener_cantidad() == VIAS ){
         
+
         Elemento<Dato,Clave> * elemento_a_subir = new Elemento<Dato,Clave>( this -> elementos -> consulta(2) -> obtener_dato() , this -> elementos -> consulta(2) -> obtener_clave() );
 
+        this -> elementos -> consulta(2) -> cambiar_dato(nullptr);
         nodo_hermano_mayor = new NodoB3<Dato,Clave>( this -> elementos -> consulta(3) -> obtener_dato(),
                                                      this -> elementos -> consulta(3) -> obtener_clave() );
+        this -> elementos -> consulta(3) -> cambiar_dato(nullptr);
 
         NodoB3<Dato,Clave>* nodo_hijo_2;
 
@@ -349,16 +372,6 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
     return this -> nodo_padre;
 }
 
-
-// Eliminar elemento segun la clave
-template <typename Dato, typename Clave>
-Elemento<Dato, Clave>* NodoB3<Dato, Clave>           :: quitar_elemento( Clave clave_chau ){
-    for ( int i = 1 ; i <= elementos -> obtener_cantidad() ; i++ ){
-        if (clave_chau == elementos -> consulta( i ) -> obtener_clave() ) {
-            elementos -> baja( i );
-        }
-    }
-}
 
 
 // Cambiar puntero hijo de la derecha
@@ -445,7 +458,8 @@ void NodoB3<Dato, Clave>                 :: ordenar_mayor_menor( Lista<Dato>* da
             this -> obtener_hijo(i+1) -> ordenar_mayor_menor( datos );}
         
         if(i != 0){
-            datos -> alta(  this -> obtener_dato( this -> obtener_clave_de(i) ) );}
+            Dato* dato_ordenado = new Dato(   *(this -> obtener_dato( this -> obtener_clave_de(i) ))   );
+            datos -> alta( dato_ordenado );}
     }
 }
 

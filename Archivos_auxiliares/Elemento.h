@@ -27,11 +27,20 @@ class Elemento{
             */
         Elemento( Dato* dato, Clave clave);
 
+        // Destructor
+        ~Elemento();
+
 
         /*  PRE: -
             POS: Devuelve un puntero que apunta a lo mismo que el atributo Dato
             */
         Dato* obtener_dato( );
+
+        /*  PRE: -
+            POS: cambia el puntero a dato
+            */
+        void cambiar_dato(  Dato* dato_nuevo );
+
 
         /*  PRE: -
             POS: Devuelve la clave
@@ -59,11 +68,28 @@ Elemento<Dato, Clave> :: Elemento( Dato* dato, Clave clave ){
     this -> hijo = nullptr;
 }
 
+
+template <typename Dato, typename Clave>
+Elemento<Dato, Clave> :: ~Elemento(){
+    if ( dato != nullptr){
+        delete this -> dato;}
+}
+
+
 // obtener dato
 template <typename Dato, typename Clave>
 Dato* Elemento<Dato, Clave> :: obtener_dato( ) {
     return dato;
 }
+
+
+
+// obtener dato
+template <typename Dato, typename Clave>
+void Elemento<Dato, Clave> :: cambiar_dato( Dato* dato_nuevo) {
+    dato = dato_nuevo;
+}
+
 
 // obtener clave
 template <typename Dato, typename Clave>
