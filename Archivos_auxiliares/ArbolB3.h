@@ -29,6 +29,14 @@ class ArbolB3 {
         ArbolB3( Dato* dato, Clave clave );
 
 
+        // Destructor
+        ~ArbolB3(  );
+
+
+        // Elimina todos los nodos
+        // void baja_a_partir_de( NodoB3<Dato,Clave>* nodo_actual , int numero_de_hijo );
+
+
         int obtener_cantidad();
 
         // PRE: la clave no se puede repetir
@@ -91,6 +99,16 @@ ArbolB3<Dato, Clave>                     :: ArbolB3( Dato* dato, Clave clave){
     this -> nodo_raiz = new NodoB3<Dato, Clave> ( dato , clave );
     cantidad = 1;
 }
+
+
+// Destructor
+template <typename Dato, typename Clave>
+ArbolB3<Dato, Clave>                     :: ~ArbolB3( ){
+        delete nodo_raiz;
+        nodo_raiz = nullptr;
+        cantidad = 0;
+}
+
 
 
 template <typename Dato, typename Clave>
