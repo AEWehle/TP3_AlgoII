@@ -8,7 +8,7 @@ const int MAX_COMBUSTIBLE = 100;
 
 class Auto{
     //Atributos
-    protected:
+    protected: //No debería ser privado? -AVH
         int combustible;
     
     public:
