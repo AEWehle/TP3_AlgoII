@@ -32,9 +32,8 @@ git chechout -b nombre_nueva_brunch          Crear brunch
 git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS A MODIFICAR/CORREGIR:
-
-1. Adaptar guarderia a diccionarios (LUCIANA)
-2. Crear funcion que genere 5 animales random
+1. Camino mínimo (LN)
+2. Crear funcion que genere 5 animales random (LN)
 3. Cambiar la implementacion de listar animales, buscar animal, ya que ahora no usamos lista sino diccionario de arbol 3 vias.
 4. Agregar opcion del menú principal:
         5. Adoptar animal.
