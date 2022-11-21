@@ -9,7 +9,7 @@ using namespace std;
 _______________________________________________________________________________*/ 
 
 
-const string RUTA_ARCHIVO = "animales.csv"; 
+//const string RUTA_ARCHIVO = "animales.csv"; 
 const string CANCELAR = "CANCELAR";
 
 
@@ -78,6 +78,16 @@ int  pedir_eleccion(int cantidad_opciones);
  POST: Ejecuta la funcion correpondiente a la eleccion del usuario. 
 _______________________________________________________________________________*/ 
 void ejecutar_eleccion( Guarderia* mi_Guarderia, int eleccion); 
+
+string ingresar_nombre();
+
+string pedir_nombre();
+
+bool es_cancelar(string nombre);
+
+bool validar_edad(string edad_st, int &edad);
+
+bool tamano_ok(Animal* animal, float espacio);
 
 
 #endif
