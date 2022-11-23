@@ -144,7 +144,7 @@ void Grafo::obtener_camino_minimo(int origen, int destino){
 
 
 Grafo::~Grafo() {
-    // liberarMatrizAdyacencia();
+    //delete matrices probar
     matriz_de_adyacencia = nullptr;
     delete lista_vertices;
     delete algoritmo_camino_minimo;
