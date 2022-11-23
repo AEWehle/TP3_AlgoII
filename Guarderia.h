@@ -41,9 +41,15 @@ class Guarderia{
             Guarderia(const Guarderia &guarderia_aux);
 
         /*Ver lista de animales en la guarderia
-            PRE:  -
-            POST: Imprime en terminal todos los animales de la lista*/
-            void ver_diccionario_de_animales();
+            PRE: 
+            POST: Imprime en terminal todos los animales de la guarderia*/
+            void ver_diccionario_de_animales(  );
+
+            
+        /*ver los animales en la lista
+            PRE:  Necesita una lista con los nombres
+            POST: Imprime en terminal todos los animales de la lista ingresada*/
+            void ver_los_animales( Lista<string>* nombres );
 
         /*Agregar
             PRE: Puntero a Animal está creado correctamente
@@ -54,7 +60,7 @@ class Guarderia{
             PRE:  -
             POST: Devuelve la posicion en la lista del Animal con el nombre dado
             Si no lo encuentra devuelve la cantidad de animales + 1  */
-            int obtener_posicion(string nombre);
+            // int obtener_posicion(string nombre);
 
         /*Obtener cantidad
             PRE: -
@@ -67,9 +73,9 @@ class Guarderia{
             void eliminar_animal(int posicion);
 
         /* Obtener animal
-        PRE:  La posición recibida del animal a obtener es válida.
+        PRE:  el nopmbre ingresado debe ser existente.
         POST: Develve un puntero al Animal en la posicion dada*/
-            Animal* obtener_animal(int posicion);
+            Animal* obtener_animal( string nombre );
 
         /* Obtener auto
         PRE:  -
