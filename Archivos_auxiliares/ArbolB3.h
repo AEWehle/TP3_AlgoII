@@ -33,12 +33,6 @@ class ArbolB3 {
         ~ArbolB3(  );
 
 
-        // Elimina todos los nodos
-        // void baja_a_partir_de( NodoB3<Dato,Clave>* nodo_actual , int numero_de_hijo );
-
-
-        int obtener_cantidad();
-
         // PRE: la clave no se puede repetir
         // POS: Inresa el dato en su ubicacion segun la clave
         // Esta es la funcion que utilizará el usuario
@@ -47,27 +41,12 @@ class ArbolB3 {
 
         // PRE: 
         // POS: devuelve el puntero al dato segun la clave
-        Dato* consulta( Clave clave);
-   
-   
-        // PRE: 
-        // POS: devuelve el puntero al dato segun la clave, buscando desde nodo actual
-        Dato* consulta( NodoB3<Dato,Clave> * nodo_actual , Clave clave);
+        Dato* consulta( Clave clave );
 
 
-        // PRE: la clave no se puede repetir
-        // POS: Inresa el dato en su ubicacion segun la clave
-        // Esta otra forma de la funcion es para aplicar recursividad
-        void agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave);
-
-
-        /* Es para imprimir en terminal el arbol como arbol y no para mostrar
-        los datos en sí*/
-        void mostrar_arbolb3();
-
-        // Me llaman para imprimir en recursion todo el arbol
-        // Imprimo el arbol, no los datos
-        void mostrar_arbolb3( NodoB3<Dato,Clave>* nodo_actual, int generacion );
+        // Elimina todos los nodos
+        // void baja_a_partir_de( NodoB3<Dato,Clave>* nodo_actual , int numero_de_hijo );
+        int obtener_cantidad();
 
 
         NodoB3<Dato,Clave>* obtener_nodo_mas_derecha();
@@ -79,6 +58,29 @@ class ArbolB3 {
            POS: Devuelve una lista con los datos ordenado de mayor a menor
          segun su clave*/
         Lista<Dato>* ordenar_mayor_menor();
+
+
+        /* Es para imprimir en terminal el arbol como arbol y no para mostrar
+        los datos en sí*/
+        void mostrar_arbolb3();
+
+
+        private:
+        
+        // PRE: la clave no se puede repetir
+        // POS: Inresa el dato en su ubicacion segun la clave
+        // Esta otra forma de la funcion es para aplicar recursividad
+        void agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave);
+
+
+        // PRE: 
+        // POS: devuelve el puntero al dato segun la clave, buscando desde nodo actual
+        Dato* consulta( NodoB3<Dato,Clave> * nodo_actual , Clave clave );
+
+
+        // Me llaman para imprimir en recursion todo el arbol
+        // Imprimo el arbol, no los datos
+        void mostrar_arbolb3( NodoB3<Dato,Clave>* nodo_actual, int generacion );
 
 };
 
@@ -125,6 +127,34 @@ void ArbolB3<Dato, Clave>               :: agregar_dato( Dato* dato, Clave clave
 }    
 
 
+
+// Ingresar dato segun clave
+template <typename Dato, typename Clave>
+void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
+    
+    this -> cantidad++;
+    if ( nodo_actual == nullptr) {
+        nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
+    }
+    else{
+        if( nodo_actual -> es_hoja() ){
+            NodoB3<Dato,Clave>* nodo_padre = nodo_actual -> agregar_elemento( dato, clave );
+            if ( nodo_padre != nullptr ){ // Me fijo si tengo que cambiar el nodo raiz
+                nodo_actual = nodo_padre;
+                while ( nodo_actual -> tiene_padre() ){
+                    nodo_actual = nodo_actual -> obtener_nodo_padre();
+                }
+                this -> nodo_raiz = nodo_actual;
+            }
+            return;
+        }
+        else{// Si no es hoja tengo que buscar a que nodo hijo le correpsonde la clave
+            return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
+        }
+    }
+}
+
+
 // Obtener Dato segun clave
 template <typename Dato, typename Clave>
 Dato* ArbolB3<Dato, Clave>              :: consulta( Clave clave ){
@@ -163,36 +193,6 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_ac
         return nullptr;
     }
     return consulta( nodo_actual -> obtener_hijo( clave_men_igu_o_may +1 ) , clave );
-}
-
-
-
-// Ingresar dato segun clave
-template <typename Dato, typename Clave>
-void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
-    
-    this -> cantidad++;
-    if ( nodo_actual == nullptr) {
-        nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
-    }
-    else{
-        if( nodo_actual -> es_hoja() ){
-            NodoB3<Dato,Clave>* nodo_aux = nodo_actual -> agregar_elemento( dato, clave );
-            if ( nodo_aux != nullptr ){ // Me fijo si tengo que cambiar el nodo raiz
-            //  nodo_aux no será null cuando cree un nuevo hermano mayor, esto sucede cuando un nodo alcanzó 3 clvaes
-                nodo_actual = nodo_aux;
-                while ( nodo_actual -> obtener_nodo_padre() != nullptr ){
-                    nodo_actual = nodo_actual -> obtener_nodo_padre();
-                }
-                this -> nodo_raiz = nodo_actual;
-            }
-
-            return;
-        }
-        else{// Si no es hoja tengo que buscar a que nodo hijo le correpsonde la clave
-            return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
-        }
-    }
 }
 
 

@@ -289,15 +289,15 @@ void NodoB3<Dato, Clave>                :: ubicar_nodo_hijo( NodoB3<Dato,Clave>*
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: agregar_elemento( Dato* dato_nuevo, Clave clave_nueva ){
     Elemento<Dato,Clave>* elemento_nuevo = new Elemento<Dato,Clave> ( dato_nuevo, clave_nueva );
-    NodoB3<Dato, Clave>* nodo_herm_mayor = this -> agregar_elemento_existente( elemento_nuevo );
-    return nodo_herm_mayor;
+    NodoB3<Dato, Clave>* nodo_padre = this -> agregar_elemento_existente( elemento_nuevo );
+    return nodo_padre;
 }
 
 
 // Agregar elemento dando el tipo Elemento armado
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<Dato, Clave>* elemento_entrante ){
-    NodoB3<Dato,Clave>* nodo_hermano_mayor = nullptr;
+    // NodoB3<Dato,Clave>* nodo_hermano_mayor = nullptr;
 
     if ( elemento_entrante -> obtener_clave() < this -> obtener_clave_de(1) ){
         this -> elementos -> alta( elemento_entrante , 1);
@@ -317,7 +317,7 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
         Elemento<Dato,Clave> * elemento_a_subir = new Elemento<Dato,Clave>( this -> elementos -> consulta(2) -> obtener_dato() , this -> elementos -> consulta(2) -> obtener_clave() );
 
         this -> elementos -> consulta(2) -> cambiar_dato(nullptr);
-        nodo_hermano_mayor = new NodoB3<Dato,Clave>( this -> elementos -> consulta(3) -> obtener_dato(),
+        NodoB3<Dato,Clave>* nodo_hermano_mayor = new NodoB3<Dato,Clave>( this -> elementos -> consulta(3) -> obtener_dato(),
                                                      this -> elementos -> consulta(3) -> obtener_clave() );
         this -> elementos -> consulta(3) -> cambiar_dato(nullptr);
 
