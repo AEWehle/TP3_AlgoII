@@ -3,6 +3,10 @@
 
 
 void OpcionBuscarAnimal::ejecutar(Guarderia * mi_guarderia){
+    mi_guarderia->afectar_animales();
+    
+    mi_guarderia->obtener_auto()->cargar_combustible();
+
     if (mi_guarderia->obtener_cantidad() == 0) {
         cout << "No hay animales para buscar." << endl;   
     }else{
