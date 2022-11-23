@@ -2,6 +2,8 @@
 
 COMANDO: g++ *.cpp Especies/*.cpp Archivos_auxiliares/*.cpp -o TP3 -Wall -Werror -Wconversion
 
+# Para compilar version meli: g++ Guarderia.cpp Animal.cpp funciones_main.cpp prueba_modular.cpp Especies/*.cpp Archivos_auxiliares/*.cpp Menus/*.cpp Opciones/*.cpp Auto.cpp -o TP3_MOD -Wall -Werror -Wconversion -std=c++11 -v -fsanitize=address -g
+
 Para ejecutar ./TP3
 
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./TP3
