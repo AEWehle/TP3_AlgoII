@@ -41,9 +41,15 @@ class Guarderia{
             Guarderia(const Guarderia &guarderia_aux);
 
         /*Ver lista de animales en la guarderia
+            PRE: 
+            POST: Imprime en terminal todos los animales de la guarderia*/
+            void ver_diccionario_de_animales(  );
+
+            
+        /*ver los animales en la lista
             PRE:  Necesita una lista con los nombres
-            POST: Imprime en terminal todos los animales de la lista*/
-            void ver_diccionario_de_animales( Lista<string>* nombres );
+            POST: Imprime en terminal todos los animales de la lista ingresada*/
+            void ver_los_animales( Lista<string>* nombres );
 
         /*Agregar
             PRE: Puntero a Animal está creado correctamente

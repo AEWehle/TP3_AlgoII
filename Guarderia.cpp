@@ -57,15 +57,34 @@ Animal* Guarderia::obtener_animal ( string nombre ){
 }
 
 
-void Guarderia::ver_diccionario_de_animales( Lista <string>* nombres ){
+void Guarderia::ver_diccionario_de_animales(  ){
 
     if( this -> diccionario_de_animales.obtener_cantidad()){
 
         cout << "Hay " << diccionario_de_animales.obtener_cantidad() << " animales en la reserva." << endl;
+        Lista <Animal>*  ordenados = diccionario_de_animales.ordenar_mayor_menor();
+
+        for( int numero_animal = 1 ; numero_animal <= ordenados -> obtener_cantidad(); numero_animal++){
+           ordenados -> consulta( numero_animal ) -> mostrar();
+        }
+    } 
+
+    else
+        cout << "No hay animales en la lista" << endl;
+
+}
+
+
+void Guarderia::ver_los_animales( Lista <string>* nombres ){
+
+    if( this -> diccionario_de_animales.obtener_cantidad()){
+
+        cout << "Se muestran " << nombres -> obtener_cantidad() << " animales." << endl;
         for( int nombre = 1 ; nombre <= nombres -> obtener_cantidad(); nombre++){
            diccionario_de_animales.consulta( *(nombres -> consulta( nombre ) ) ) -> mostrar();
         }
     } 
+
     else
         cout << "No hay animales en la lista" << endl;
 
@@ -75,3 +94,6 @@ void Guarderia::ver_diccionario_de_animales( Lista <string>* nombres ){
 Auto* Guarderia::obtener_auto(){
     return &automovil;
 }
+
+
+
