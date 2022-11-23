@@ -4,7 +4,7 @@
 #include "NodoB3.h"
 
 //  EL ORDEN DE LOS ELEMENTOS SE EMPIEZA A CONTAR DESDE 1, NO DESDE 0
-
+// AL DESTRUIRSE NO HACE DELETE DE LOS DATOS, POR SI SE DESEAN SEGUIR USANDO
 
 template <typename Dato, typename Clave>
 class ArbolB3 {
@@ -39,30 +39,40 @@ class ArbolB3 {
         void agregar_dato( Dato* dato, Clave clave);
 
 
+        // PRE: La clave debe ser existente
+        // Indica al elemento del nodo que ya no participará en el arbol        
+        void baja( Clave clave );
+
+
         // PRE: 
         // POS: devuelve el puntero al dato segun la clave
         Dato* consulta( Clave clave );
+
+
+        /* Es para imprimir en terminal el arbol como arbol y no para mostrar
+        los datos en sí*/
+        void mostrar_arbolb3();
 
 
         // Elimina todos los nodos
         // void baja_a_partir_de( NodoB3<Dato,Clave>* nodo_actual , int numero_de_hijo );
         int obtener_cantidad();
 
-
+        // Devueleve un puntero al nodo de mas a la derecha
         NodoB3<Dato,Clave>* obtener_nodo_mas_derecha();
-        NodoB3<Dato,Clave>* obtener_nodo_mas_derecha_a_partir( NodoB3<Dato,Clave>* nodo_actual );
+        
+        // Devueleve un puntero al nodo de mas a la izquierda
         NodoB3<Dato,Clave>* obtener_nodo_mas_izquierda();
+
+
+        // Devuelve una lista con las claves almacenadas
+        Lista<Clave>* obtener_lista_de_claves();
 
 
         /* PRE: -
            POS: Devuelve una lista con los datos ordenado de mayor a menor
          segun su clave*/
         Lista<Dato>* ordenar_mayor_menor();
-
-
-        /* Es para imprimir en terminal el arbol como arbol y no para mostrar
-        los datos en sí*/
-        void mostrar_arbolb3();
 
 
         private:
@@ -74,6 +84,11 @@ class ArbolB3 {
 
 
         // PRE: 
+        // pos: Le inidca al elemento de la clave que ya no participa en el arbol
+        // Este metodo se usa para la recursion de baja
+        bool baja(  NodoB3<Dato,Clave>* nodo_actual,  Clave clave );
+
+        // PRE: 
         // POS: devuelve el puntero al dato segun la clave, buscando desde nodo actual
         Dato* consulta( NodoB3<Dato,Clave> * nodo_actual , Clave clave );
 
@@ -81,6 +96,10 @@ class ArbolB3 {
         // Me llaman para imprimir en recursion todo el arbol
         // Imprimo el arbol, no los datos
         void mostrar_arbolb3( NodoB3<Dato,Clave>* nodo_actual, int generacion );
+
+
+        // DEvuelve un puntero al nodo de mas a la derecha desde el nodo actual
+        NodoB3<Dato,Clave>* obtener_nodo_mas_derecha_a_partir( NodoB3<Dato,Clave>* nodo_actual );
 
 };
 
@@ -110,6 +129,45 @@ ArbolB3<Dato, Clave>                     :: ~ArbolB3( ){
         nodo_raiz = nullptr;
         cantidad = 0;
 }
+
+
+template <typename Dato, typename Clave>
+void ArbolB3<Dato, Clave>               :: baja( Clave clave ){
+    if ( cantidad == 0 ) {
+        cout << "La base de datos esta vacía" << endl;
+        return;
+    }
+    bool existia = baja( nodo_raiz, clave );
+    if (!existia) {
+        cout << "Clave inexistente" << endl;
+    }
+    return;
+}
+
+template <typename Dato, typename Clave>
+bool ArbolB3<Dato, Clave>               :: baja(  NodoB3<Dato,Clave>* nodo_actual,  Clave clave ){
+    int clave_men_igu_o_may = nodo_actual -> clave_menor_entra_mayor( clave );
+    if( clave_men_igu_o_may == 1){
+        bool existia = nodo_actual -> baja_dato( clave );
+        if( !existia && nodo_actual -> es_hoja()){
+            return false; // no esta en este nodo
+        }
+        if( existia ){
+            cantidad --;
+            return true; // dado de baja exitosamente
+        }
+    }
+
+    // la clave es menor o mayor al nodo
+    else if( nodo_actual -> es_hoja() ){
+        return false;
+    }
+    return baja( nodo_actual -> obtener_hijo( clave_men_igu_o_may +1 ) , clave) ;
+}
+
+
+
+
 
 
 
@@ -178,7 +236,6 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_ac
     int clave_men_igu_o_may = nodo_actual -> clave_menor_entra_mayor( clave );
     // La clave entra en el nodo
     if( clave_men_igu_o_may == 1){
-        // puede estar en este nodo
         Dato* dato = nodo_actual -> obtener_dato( clave );
         if( dato == nullptr && nodo_actual -> es_hoja()){
             return nullptr;
@@ -188,7 +245,7 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_ac
         }
     }
 
-    // la clave es menor al nodo
+    // la clave es menor o mayor al nodo
     else if( nodo_actual -> es_hoja() ){
         return nullptr;
     }
@@ -269,6 +326,13 @@ Lista<Dato>* ArbolB3<Dato, Clave>       :: ordenar_mayor_menor( ){
     Lista<Dato>* datos = new Lista<Dato>();
     this -> nodo_raiz -> ordenar_mayor_menor( datos );
     return datos;
+}
+
+
+
+template <typename Dato, typename Clave>
+Lista<Clave>* ArbolB3<Dato, Clave>       :: obtener_lista_de_claves(){
+
 }
 
 

@@ -6,6 +6,8 @@
 using namespace std; 
 
 
+// NO HACE DELETE DE LOS ANIMALES, POR SI SE DESEAN SEGUIR USANDO
+
 Guarderia::Guarderia(){
     //se crea una lista vacía
 }
@@ -22,18 +24,20 @@ void Guarderia::agregar_animal( Animal* nuevo_animal ){
 }
 
 
-// int Guarderia::obtener_posicion( string nombre ){
+void Guarderia::afectar_animales(){
+    Lista<string>* claves = diccionario_de_animales.obtener_lista_de_claves();
+    for(int i = 1; i <= this -> obtener_cantidad(); i++) {
+       this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
+       this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
+    }
+}
 
-// //    int cantidad_de_animales = diccionario_de_animales.obtener_cantidad();
-//     int posicion = 1;
 
-// //    while( (posicion <= cantidad_de_animales) &&  ( string_a_mayuscula( diccionario_de_animales.consulta( posicion  )->obtener_nombre() ) != string_a_mayuscula( nombre ) )){
-// //        posicion++;
-// //    }
-   
-//     return posicion;
+void Guarderia::eliminar_animal( string nombre ){
 
-// }
+    diccionario_de_animales.baja( nombre );
+
+}
 
 
 int Guarderia::obtener_cantidad(){
@@ -43,17 +47,15 @@ int Guarderia::obtener_cantidad(){
 }
 
 
-void Guarderia::eliminar_animal(int posicion){
-
-    // diccionario_de_animales.baja(posicion);
-
-}
-
-
 Animal* Guarderia::obtener_animal ( string nombre ){
 
     return diccionario_de_animales.consulta( nombre );
 
+}
+
+
+Auto* Guarderia::obtener_auto(){
+    return &automovil;
 }
 
 
@@ -88,18 +90,4 @@ void Guarderia::ver_los_animales( Lista <string>* nombres ){
     else
         cout << "No hay animales en la lista" << endl;
 
-}
-
-
-Auto* Guarderia::obtener_auto(){
-    return &automovil;
-}
-
-
-void Guarderia::afectar_animales(){
-    for(int i = 1; i <= this->obtener_cantidad(); i++) {
-       this->obtener_animal(i)->ensuciar();
-       this->obtener_animal(i)->dar_hambre();
-
-    }
 }

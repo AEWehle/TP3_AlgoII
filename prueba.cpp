@@ -32,15 +32,18 @@ int main(){
     diccionario.agregar_dato(dato3, clave3);
     diccionario.agregar_dato(dato4, clave4);
     diccionario.agregar_dato(dato5, clave5);
+    diccionario.baja( clave4 );
     diccionario.agregar_dato(dato6, clave6);
     diccionario.agregar_dato(dato7, clave7);
     diccionario.agregar_dato(dato8, clave8);
     diccionario.agregar_dato(dato9, clave9);
     diccionario.mostrar_arbolb3();
 
+    diccionario.baja( clave5 );
+
     string aux = "";
 
-        cout << "ingrese dato a buscar"<< endl<< " >> ";
+        cout << "ingrese clave a buscar"<< endl<< " >> ";
         cin >> aux;
     while( !(aux == "s")){
 
@@ -56,6 +59,7 @@ int main(){
     for ( int i = 1 ; i <= datos -> obtener_cantidad() ; i++){
         cout << *(datos -> consulta(i)) << ", ";
     }
+    datos -> destruir_con_delete();
     delete datos;
     return 0;
 }
