@@ -30,7 +30,7 @@
 *.exe
 *.out
 *.app
-TP2
+TP3
 
 #Drive
 *.ini
@@ -43,3 +43,5 @@ TP2
 *.DS_Store
 Dockerfile
 *.wsd
+
+notas_anshu.txt

@@ -2,11 +2,13 @@
 #include <string>
 #include <fstream>
 #include <limits>
+#include <time.h>
 #include "Archivos_auxiliares/funciones_auxiliares.h"
 #include "Auto.h"
 #include "Guarderia.h"
 #include "funciones_main.h"
 #include "opciones.h"
+#include "Mapa.h"
 using namespace std;
 
 
@@ -20,9 +22,7 @@ void listar_animales( Guarderia* mi_guarderia ){
     mi_guarderia->afectar_animales();
     mi_guarderia->obtener_auto()->cargar_combustible();
     
-    
-    mi_guarderia->ver_lista_de_animales();
-
+   mi_guarderia->ver_diccionario_de_animales();
 }
  
  
@@ -238,15 +238,169 @@ bool otro_nombre( Guarderia* mi_guarderia, string & nombre ){
     return otro_nombre;
 
 }
- 
 
+// esta funcion no estaba en la rama de Meli
+int verificar_letra(string dato){
+
+    if(dato.length() != 1)
+        return -1;
+    
+    //int letra = (int)dato[0]; // Código ASCII de la letra
+    char letra = dato[0];
+    int salida;
+
+    switch (letra) {
+
+        case 'a': case 'A':
+            salida = 0;
+            break;
+        case 'b': case 'B':
+            salida = 1;
+            break;
+        case 'c': case 'C':
+            salida = 2;
+            break;
+        case 'd': case 'D':
+            salida = 3;
+            break;
+        case 'e': case 'E':
+            salida = 4;
+            break;
+        case 'f': case 'F':
+            salida = 5;
+            break;
+        case 'g': case 'G':
+            salida = 6;
+            break;
+        case 'h': case 'H':
+            salida = 7;
+            break;
+        default:
+            salida = -1;    
+
+    }
+    return salida;
+
+}
+
+
+// esta funcion no estaba en la rama de Meli
+void pedir_coord_letra(int &coord_letra){
+
+    bool coord_ok = false;
+    string coord_letra_string;
+
+    cout << "Ingresá la letra de la coordenada:" << endl;
+
+    while (!coord_ok){
+    
+        cin >> coord_letra_string;
+
+        coord_letra = verificar_letra(coord_letra_string);
+
+        if(coord_letra == -1)
+            cout << endl << "Ingresá una letra válida!" << endl;
+        else
+            coord_ok = true;
+
+    }
+
+}
+
+// esta funcion no estaba en la rama de Meli
+void pedir_coord_numero(int &coord_numero){
+
+    bool coord_ok = false;
+
+    cout << "Ingresá el número de la coordenada:" << endl;
+
+    while (!coord_ok){
+    
+        cin >> coord_numero;
+
+        if(coord_numero >= 1 && coord_numero <= 8)
+            coord_ok = true;
+        else
+            cout << endl << "Ingresá un número válido!" << endl;
+
+    }
+
+}
+
+// esta funcion no estaba en la rama de Meli
+bool verificar_coordenadas(int coord_letra, int coord_numero, char** mapa){
+
+    bool coords_ok = true;
+    char aux = mapa[coord_numero-1][(2*coord_letra)+1];
+
+    if(aux == ' '){
+        cout << "No hay animales en esas coordenadas!" << endl
+        << "Probá con otras coordenadas" << endl << endl;
+        coords_ok = false;
+    }
+    else if(aux == 'A'){
+        cout << "Esas con tus coordenadas!" << endl
+        << "Probá con otras coordenadas" << endl << endl;
+        coords_ok = false;
+    }
+
+    return coords_ok;
+
+}
+
+// Todo lo que es sobre el auto no estaba en la rama de Meli, por lo que no se 
+//si esta que va en otro lado o esta bien que este aca
+// Creo que estaria bueoq ue todo lo que tiene algo que ver con el auto se haga
+//en una subfuncion de rescatar_animal
 void rescatar_animal( Guarderia* mi_guarderia ){
 
     mi_guarderia->afectar_animales();
     mi_guarderia->obtener_auto()->cargar_combustible();
 
-    cout << endl << "Rescataste un animal?" << endl;
-    cout << endl << "Cómo se llama?" << endl;
+    string aux;
+    Mapa* mapa;
+
+    cout << "Ahora la reserva cuenta con un vehículo para rescatar animales!" << endl
+         << "Podés elegir qué animal rescatar, pero que no se te acabe el combustible!" << endl << endl;
+
+/*
+         << "Cada tipo de terreno consume distinta cantidad de combustible:" << endl
+         << CAMINO << "   " << RESET << "El Camino consume 1 de combustible" << endl
+         << TIERRA << "   " << RESET << "La Tierra consume 2 de combustible" << endl
+         << MONTANA << "   " << RESET << "La Montaña consume 5 de combustible" << endl
+         << PRECIPICIO << "   " << RESET << "El Precipicio consume 40 de combustible" << endl << endl;
+*/
+
+    cout << "Para usar el mapa por defecto ingresá 1, para usar un mapa personalizado ingresá el nombre del mapa en la forma \"nombre_mapa.csv\":" << endl;
+
+    cin >> aux;
+
+    if(aux == "1")
+        mapa = new Mapa;      //Terreno por defecto
+    else
+        mapa = new Mapa(aux); //Terreno personalizado
+
+    mapa->mostrar();
+
+    /*
+
+    cout << "*Si no podes ver el mapa probá usando otra terminal*" << endl << endl;
+    cout << "Combustible actual:" << "PONER COMBUSTIBLE" << endl
+         << "Podes elegir qué animal rescatar ingresando las coordenadas correspondientes" << endl << endl
+         << "Qué animal te gustaría rescatar?" << endl;
+
+    while (!coords_ok){
+
+        pedir_coord_letra(coord_letra);
+        pedir_coord_numero(coord_numero);
+
+        coords_ok = verificar_coordenadas(coord_letra, coord_numero, mapa);
+
+    }    
+*/
+
+    cout << endl << "Rescataste un animal!" << endl;
+    cout << endl << "Cómo se va a llamar?" << endl;
     cout << " >> ";
     string nombre = pedir_nombre();
 
@@ -519,7 +673,7 @@ void adoptar_animal( Guarderia* mi_guarderia ){
 
             cout << endl << "Estos son los animales que podés adoptar:" << endl;
 
-            lista_adoptables->ver_lista_de_animales();
+//            lista_adoptables->ver_lista_de_animales();
 
             cout << endl << "Si desea adoptar alguno, ingrese el nombre como se muestra." << endl;
             cout << "Nuestros Erizos y Lagartijas NO SON ADOPTABLES ya que son salvajes, por lo que no aparecerán en la lista" << endl;

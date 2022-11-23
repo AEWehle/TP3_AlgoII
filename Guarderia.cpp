@@ -17,57 +17,74 @@ Guarderia::~Guarderia(){
 
 void Guarderia::agregar_animal( Animal* nuevo_animal ){
     
-    lista_de_animales.alta( nuevo_animal, lista_de_animales.obtener_cantidad() + 1 );
+    diccionario_de_animales.agregar_dato( nuevo_animal, nuevo_animal->obtener_nombre() );
 
 }
 
 
-int Guarderia::obtener_posicion( string nombre ){
+// int Guarderia::obtener_posicion( string nombre ){
 
-    int cantidad_de_animales = lista_de_animales.obtener_cantidad();
-    int posicion = 1;
+// //    int cantidad_de_animales = diccionario_de_animales.obtener_cantidad();
+//     int posicion = 1;
 
-    while( (posicion <= cantidad_de_animales) &&  ( string_a_mayuscula( lista_de_animales.consulta( posicion  )->obtener_nombre() ) != string_a_mayuscula( nombre ) )){
-        posicion++;
-    }
+// //    while( (posicion <= cantidad_de_animales) &&  ( string_a_mayuscula( diccionario_de_animales.consulta( posicion  )->obtener_nombre() ) != string_a_mayuscula( nombre ) )){
+// //        posicion++;
+// //    }
    
-    return posicion;
+//     return posicion;
 
-}
+// }
 
 
 int Guarderia::obtener_cantidad(){
 
-    return lista_de_animales.obtener_cantidad();
+    return diccionario_de_animales.obtener_cantidad();
 
 }
 
 
 void Guarderia::eliminar_animal(int posicion){
 
-    lista_de_animales.baja(posicion);
+    // diccionario_de_animales.baja(posicion);
 
 }
 
 
-Animal* Guarderia::obtener_animal(int posicion){
+Animal* Guarderia::obtener_animal ( string nombre ){
 
-    return lista_de_animales.consulta(posicion);
+    return diccionario_de_animales.consulta( nombre );
 
 }
 
 
-void Guarderia::ver_lista_de_animales(){
+void Guarderia::ver_diccionario_de_animales(  ){
 
-    if(lista_de_animales.obtener_cantidad()){
+    if( this -> diccionario_de_animales.obtener_cantidad()){
 
-        cout << "Hay " << lista_de_animales.obtener_cantidad() << " animales en la reserva." << endl;
-        for( int i = 1 ; i < (lista_de_animales.obtener_cantidad()+1) ; i++){
-            lista_de_animales.consulta(i)->mostrar();
+        cout << "Hay " << diccionario_de_animales.obtener_cantidad() << " animales en la reserva." << endl;
+        Lista <Animal>*  ordenados = diccionario_de_animales.ordenar_mayor_menor();
+
+        for( int numero_animal = 1 ; numero_animal <= ordenados -> obtener_cantidad(); numero_animal++){
+           ordenados -> consulta( numero_animal ) -> mostrar();
         }
-        
-    }
-    
+    } 
+
+    else
+        cout << "No hay animales en la lista" << endl;
+
+}
+
+
+void Guarderia::ver_los_animales( Lista <string>* nombres ){
+
+    if( this -> diccionario_de_animales.obtener_cantidad()){
+
+        cout << "Se muestran " << nombres -> obtener_cantidad() << " animales." << endl;
+        for( int nombre = 1 ; nombre <= nombres -> obtener_cantidad(); nombre++){
+           diccionario_de_animales.consulta( *(nombres -> consulta( nombre ) ) ) -> mostrar();
+        }
+    } 
+
     else
         cout << "No hay animales en la lista" << endl;
 
@@ -77,6 +94,7 @@ void Guarderia::ver_lista_de_animales(){
 Auto* Guarderia::obtener_auto(){
     return &automovil;
 }
+
 
 void Guarderia::afectar_animales(){
     for(int i = 1; i <= this->obtener_cantidad(); i++) {
