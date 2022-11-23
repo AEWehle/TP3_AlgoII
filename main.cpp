@@ -3,6 +3,7 @@
 #include "funciones_main.h"
 #include "Guarderia.h"
 #include "opciones.h"
+#include "Archivos_auxiliares/ArbolB3.h"
 using namespace std;
 
 /*_____________________________TP2: LA RESERVA SOÑADA____________________*/

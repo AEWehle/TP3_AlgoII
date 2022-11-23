@@ -2,6 +2,10 @@
 
 COMANDO: g++ *.cpp Especies/*.cpp Archivos_auxiliares/*.cpp -o TP3 -Wall -Werror -Wconversion
 
+# Para compilar version meli: 
+
+$g++ Guarderia.cpp Animal.cpp funciones_main.cpp prueba_modular.cpp Especies/*.cpp Archivos_auxiliares/*.cpp Menus/*.cpp Opciones/*.cpp Auto.cpp -o TP3_MOD -Wall -Werror -Wconversion -std=c++11 -v -fsanitize=address -g$
+
 Para ejecutar ./TP3
 
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./TP3
@@ -20,7 +24,7 @@ git push                                     Lo sube a la nube
 
 ponen su nombre de usuario
 
-ponen la siguiente clave --->  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
+ponen la siguiente clave --->  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
 
 git pull                                     Ponerlo para verificar si alguine del grupo pusheó algún cambio
                                                 te asegurás tenes la úlrima versión
@@ -32,9 +36,8 @@ git chechout -b nombre_nueva_brunch          Crear brunch
 git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS A MODIFICAR/CORREGIR:
-
-1. Adaptar guarderia a diccionarios (LUCIANA)
-2. Crear funcion que genere 5 animales random
+1. Camino mínimo (LN)
+2. Crear funcion que genere 5 animales random (LN)
 3. Cambiar la implementacion de listar animales, buscar animal, ya que ahora no usamos lista sino diccionario de arbol 3 vias.
 4. Agregar opcion del menú principal:
         5. Adoptar animal.
