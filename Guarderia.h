@@ -11,6 +11,8 @@
 #include "Especies/Erizo.h"
 #include "Especies/Lagartija.h"
 #include "Archivos_auxiliares/ArbolB3.h"
+#include "Archivos_auxiliares/lista.h"
+#include "Archivo.h"
 using namespace std; 
 
 const int NO_SE_ENCUENTRA = -1;
@@ -70,7 +72,7 @@ class Guarderia{
         /*Eliminar animal
             PRE:  La posición recibida del animal a borrar es válida.
             POST: Elimina del la lista de animales al animal en la posicion dada.*/
-            void eliminar_animal(int posicion);
+            // void eliminar_animal(int posicion);
 
         /* Obtener animal
         PRE:  el nopmbre ingresado debe ser existente.
@@ -82,6 +84,12 @@ class Guarderia{
         POST: Develve un puntero al Auto*/  
             Auto* obtener_auto();
 
+        /* Afectar animales
+        PRE:  Guardería cargada con animales
+        POST: Disminuye higiene y aumenta hambre a todos los animales 
+              según sus caracteristicas*/  
+            void afectar_animales();
+        
 
 };
 

@@ -9,36 +9,9 @@ using namespace std;
 _______________________________________________________________________________*/ 
 
 
-const string RUTA_ARCHIVO = "animales.csv"; 
+//const string RUTA_ARCHIVO = "animales.csv"; 
 const string CANCELAR = "CANCELAR";
 
-
-enum OpcionMenu {
-    LISTAR_ANIMALES = 1,
-    RESCATAR_ANIMAL,
-    BUSCAR_ANIMAL,
-    CUIDAR_ANIMALES,
-    ADOPTAR_ANIMAL,
-    CARGAR_COMBUSTIBLE,
-    GUARDAR_Y_SALIR,
-    CANTIDAD_OPCIONES = 7
-};
-
-
-enum OpcionMenuOpcion4 {
-    ELEGIR_ANIMAL = 1,
-    VOLVER_MENU_PPAL,
-    CANTIDAD_OPCIONES_OP4 = 2
-};
-
-
-enum OpcionElegirAnimal {
-    ALIMENTAR = 1,
-    DUCHAR,
-    SIGUIENTE,
-    VOLVER_MENU_OP4,
-    CANTIDAD_OPCIONES_EA = 4
-};
 
 
 /*________crear_nuevo_animal()__________________________________________________ 
@@ -78,6 +51,16 @@ int  pedir_eleccion(int cantidad_opciones);
  POST: Ejecuta la funcion correpondiente a la eleccion del usuario. 
 _______________________________________________________________________________*/ 
 void ejecutar_eleccion( Guarderia* mi_Guarderia, int eleccion); 
+
+string ingresar_nombre();
+
+string pedir_nombre();
+
+bool es_cancelar(string nombre);
+
+bool validar_edad(string edad_st, int &edad);
+
+bool tamano_ok(Animal* animal, float espacio);
 
 
 #endif

@@ -6,33 +6,12 @@
 #include "Archivos_auxiliares/funciones_auxiliares.h"
 #include "Auto.h"
 #include "Guarderia.h"
+#include "funciones_main.h"
 #include "opciones.h"
 #include "Mapa.h"
 using namespace std;
 
-/* afectar_animal()
-Esta función disminuye la higiene y aumenta el hambre de todos los 
-animales de la lista */
 
-void afectar_animales(Guarderia* mi_guarderia){
-
-    for(int i = 1; i <= mi_guarderia->obtener_cantidad(); i++) {
-       mi_guarderia->obtener_animal(i)->ensuciar();
-       mi_guarderia->obtener_animal(i)->dar_hambre();
-
-       /*if(mi_guarderia->obtener_animal(i)->obtener_higiene()==0 || mi_guarderia->obtener_animal(i)->obtener_hambre()==100){
-            mi_guarderia->eliminar_animal(i);
-            //Acá hay que ver si ponemos algo en guarderia que guarde los escapados
-            //pero seria un :
-            //int escapados += 1;
-       }*/ 
-    }
-
-}
-
-void afectar_combustible(Guarderia* mi_guarderia){
-    mi_guarderia->obtener_auto()->cargar_combustible();
-}
 
 
 /*************************************** FUNCIONES DE LA OPCION 1 ***************************************/ 
@@ -40,11 +19,10 @@ void afectar_combustible(Guarderia* mi_guarderia){
 
 void listar_animales( Guarderia* mi_guarderia ){
 
-    afectar_animales(mi_guarderia);
-    afectar_combustible(mi_guarderia);
+    mi_guarderia->afectar_animales();
+    mi_guarderia->obtener_auto()->cargar_combustible();
     
-//    mi_guarderia->ver_lista_de_animales();
-
+   mi_guarderia->ver_diccionario_de_animales();
 }
  
  
@@ -261,7 +239,7 @@ bool otro_nombre( Guarderia* mi_guarderia, string & nombre ){
 
 }
 
-
+// esta funcion no estaba en la rama de Meli
 int verificar_letra(string dato){
 
     if(dato.length() != 1)
@@ -306,6 +284,7 @@ int verificar_letra(string dato){
 }
 
 
+// esta funcion no estaba en la rama de Meli
 void pedir_coord_letra(int &coord_letra){
 
     bool coord_ok = false;
@@ -328,7 +307,7 @@ void pedir_coord_letra(int &coord_letra){
 
 }
 
-
+// esta funcion no estaba en la rama de Meli
 void pedir_coord_numero(int &coord_numero){
 
     bool coord_ok = false;
@@ -348,7 +327,7 @@ void pedir_coord_numero(int &coord_numero){
 
 }
 
-
+// esta funcion no estaba en la rama de Meli
 bool verificar_coordenadas(int coord_letra, int coord_numero, char** mapa){
 
     bool coords_ok = true;
@@ -369,11 +348,14 @@ bool verificar_coordenadas(int coord_letra, int coord_numero, char** mapa){
 
 }
 
-
+// Todo lo que es sobre el auto no estaba en la rama de Meli, por lo que no se 
+//si esta que va en otro lado o esta bien que este aca
+// Creo que estaria bueoq ue todo lo que tiene algo que ver con el auto se haga
+//en una subfuncion de rescatar_animal
 void rescatar_animal( Guarderia* mi_guarderia ){
 
-//    afectar_animales(mi_guarderia);
-//    afectar_combustible(mi_guarderia);
+    mi_guarderia->afectar_animales();
+    mi_guarderia->obtener_auto()->cargar_combustible();
 
     string aux;
     Mapa* mapa;
@@ -448,8 +430,8 @@ void rescatar_animal( Guarderia* mi_guarderia ){
 
 void buscar_animal( Guarderia* mi_guarderia ){
 
-    afectar_animales(mi_guarderia);
-    afectar_combustible(mi_guarderia);
+    mi_guarderia->afectar_animales();
+    mi_guarderia->obtener_auto()->cargar_combustible();
 
 
     if (mi_guarderia->obtener_cantidad() == 0) {
@@ -510,56 +492,30 @@ void elegir_animal_a_cuidar(Guarderia* mi_guarderia){
         menu_elegir_individualmente();
         eleccion = pedir_eleccion(CANTIDAD_OPCIONES_EA);
 
-        switch (eleccion) {
-            case ALIMENTAR:
-                mi_guarderia->obtener_animal(i)->alimentar();
-                break;
-            case DUCHAR:
-                mi_guarderia->obtener_animal(i)->duchar();
-                break;
-            case SIGUIENTE:
-                ++i;
-                break;
-            case VOLVER_MENU_OP4:
-                //volver_menu_ppal(mi_guarderia);
-                ejecutar_eleccion_op4(mi_guarderia, 2);
-                break;
-            default:
-                cout << "Opción Inválida!!!" << endl;
+        while(eleccion !=VOLVER_MENU_OP4){
+            switch (eleccion) {
+                case ALIMENTAR:
+                    mi_guarderia->obtener_animal(i)->alimentar();
+                    break;
+                case DUCHAR:
+                    mi_guarderia->obtener_animal(i)->duchar();
+                    break;
+                case SIGUIENTE:
+                    ++i;
+                    break;
+                default:
+                    cout << "Opción Inválida!!!" << endl;
+            }
+        }
+
+        if(i == (mi_guarderia->obtener_cantidad()+1)){
+            cout << "No hay más animales en la lista, volviendo atrás..." << endl;
         }
 
     }
 
-    if(i == (mi_guarderia->obtener_cantidad()+1))
-        cout << "No hay más animales en la lista, volviendo atrás..." << endl;
+}
     
-}
-
-
-void alimentar_a_todos(Guarderia* mi_guarderia){
-
-    cout << "Vamos a alimentar a todos los animales" << endl;
-
-    for(int i = 1; i <= (mi_guarderia->obtener_cantidad());i++){
-        mi_guarderia->obtener_animal(i)->alimentar();
-    }
-
-    cout << "Alimentaste a todos los animales! Ellos te lo agradecen!!" << endl;
-
-}
-
-
-void duchar_a_todos(Guarderia* mi_guarderia){
-
-    cout << "Vamos a duchar a todos los animales" << endl;
-
-    for(int i = 1; i <= (mi_guarderia->obtener_cantidad()); i++){
-        mi_guarderia->obtener_animal(i)->duchar();
-    }
-
-    cout << "Duchaste a todos los animales! Ellos te lo agradecen!!" << endl;
-
-}
 
 
 
@@ -579,7 +535,7 @@ void ejecutar_eleccion_op4(Guarderia* mi_guarderia, int eleccion){
 
 
 void cuidar_animales( Guarderia* mi_guarderia ){
-    afectar_combustible(mi_guarderia);
+    mi_guarderia->obtener_auto()->cargar_combustible();
 
     if(mi_guarderia->obtener_cantidad()==0)
         cout << "No tenés ningún animal agregado a la guardería para cuidar" << endl;
@@ -592,7 +548,7 @@ void cuidar_animales( Guarderia* mi_guarderia ){
             eleccion = pedir_eleccion(CANTIDAD_OPCIONES_OP4);
             ejecutar_eleccion_op4(mi_guarderia, eleccion);
         }
-        while (eleccion != VOLVER_MENU_PPAL);  
+        while ((eleccion != VOLVER_MENU_PPAL));  
 
     }  
 
@@ -683,8 +639,8 @@ int pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* lista_adoptables ){
 
 void adoptar_animal( Guarderia* mi_guarderia ){
 
-    afectar_animales(mi_guarderia);
-    afectar_combustible(mi_guarderia);
+    mi_guarderia->afectar_animales();
+    mi_guarderia->obtener_auto()->cargar_combustible();
 
     if(mi_guarderia->obtener_cantidad()==0){
         cout << "No hay animales disponibles para adoptar." << endl;
@@ -710,23 +666,6 @@ void adoptar_animal( Guarderia* mi_guarderia ){
                 espacio = stof(espacio_string);
         }
 
-
-/*
-        string espacio_string;
-        float espacio;
-
-        cin >> espacio_string;
-        espacio = stof(espacio_string);
-
-        while(espacio <= 0){
-
-            cout << "Ingrese un espacio válido:" << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');    //Por si el usuario ingresa caracteres que no sean números, sean la cantidad que sean
-            cin >> espacio_string;
-            espacio = stof(espacio_string);
-
-        }*/
 
         Guarderia* lista_adoptables = crear_lista_adoptables( mi_guarderia, espacio);
 
@@ -759,7 +698,7 @@ void adoptar_animal( Guarderia* mi_guarderia ){
 }
 
 /*************************************** FUNCIONES DE LA OPCION 6 ***************************************/
-// Cargar Combustible 
+// Cargar Combustible --> Listo
 
 int pedir_cant_combustible(){
     cout << " >> ";
@@ -799,7 +738,7 @@ void cargar_combustible(Guarderia* mi_guarderia){
 }
 
 /*************************************** FUNCIONES DE LA OPCION 7 ***************************************/ 
-// Guardar y Salir
+// Guardar y Salir -> Listo
 
 
 void guardar_salir( Guarderia* mi_guarderia ){ 

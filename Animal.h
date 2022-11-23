@@ -49,6 +49,7 @@ class Animal{
         Animal( string nombre, int edad, string tamano, string personalidad );
 
 
+       
     /*________destructor Animal_____________________________________________________
      PRE: -
      POST: Destruye animal
