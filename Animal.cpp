@@ -20,6 +20,8 @@ Animal::Animal( string nombre, int edad, string tamano, string personalidad ){
 }
 
 
+
+
 Animal::~Animal(){
 }
 

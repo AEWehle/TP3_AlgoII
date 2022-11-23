@@ -96,4 +96,10 @@ Auto* Guarderia::obtener_auto(){
 }
 
 
+void Guarderia::afectar_animales(){
+    for(int i = 1; i <= this->obtener_cantidad(); i++) {
+       this->obtener_animal(i)->ensuciar();
+       this->obtener_animal(i)->dar_hambre();
 
+    }
+}
