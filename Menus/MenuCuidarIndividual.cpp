@@ -1,4 +1,5 @@
 #include "MenuCuidarIndividual.h"
+#include "MenuPrincipal.h"
 
 using namespace std;
 
@@ -33,7 +34,8 @@ void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia
             ++animal;
             break;
         case 4:
-            return;
+            std::cout << "Volviendo a Menu Principal..." << std::endl ;
+            MenuPrincipal().ejecutar(mi_guarderia);
             break;
         default:
             std::cout << "Opcion Invalida, ingresa nuevamente." << std::endl ;
@@ -44,16 +46,17 @@ void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia
 void MenuCuidarIndividual::ejecutar(Guarderia* mi_guarderia) { 
     int eleccion;
     do{
-        mi_guarderia->obtener_animal(animal);
+        mi_guarderia->obtener_animal(animal)->mostrar();
         mostrar(); 
         eleccion = pedir_eleccion(4);
         ejecutar_opcion(eleccion, mi_guarderia);
     }while((animal <= mi_guarderia->obtener_cantidad()) && (eleccion != 4));
 
     if (animal > mi_guarderia->obtener_cantidad()) {
-        std::cout << "Opcion Invalida, ingresa nuevamente." << std::endl ;
+        std::cout << "No tenes mas animales para cuidar. Volviendo a Menu Principal..." << std::endl ;
+        OpcionVolverAMenu().ejecutar(mi_guarderia);
     }
-
+    return;
 }
 
 MenuCuidarIndividual::~MenuCuidarIndividual(){
