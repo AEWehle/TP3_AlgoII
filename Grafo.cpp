@@ -147,5 +147,5 @@ Grafo::~Grafo() {
     // liberarMatrizAdyacencia();
     matriz_de_adyacencia = nullptr;
     delete lista_vertices;
-    // delete algoritmoCaminoMinimo;
+    delete algoritmo_camino_minimo;
 }
