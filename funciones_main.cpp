@@ -5,7 +5,6 @@
 #include "Archivos_auxiliares/funciones_auxiliares.h" 
 #include "Archivos_auxiliares/nodo.h" 
 #include "funciones_main.h" 
-#include "opciones.h" 
 #include "Guarderia.h"
 using namespace std;  
 

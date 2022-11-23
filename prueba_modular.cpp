@@ -30,15 +30,9 @@ int main(){
     //OpcionCargarCombustible* opcion_cargar_combustible = new OpcionCargarCombustible;
     //OpcionGuardarSalir* opcion_guardar = new OpcionGuardarSalir;
 
-    int eleccion;
     MenuPrincipal* menu_principal = new MenuPrincipal;//(opcion_listar, opcion_rescatar, opcion_buscar, opcion_cuidar, opcion_adoptar, opcion_cargar_combustible, opcion_guardar);
-   //menu_principal->ejecutar_opcion(1, mi_guarderia);
-    do{
-        menu_principal->mostrar();
-        eleccion = pedir_eleccion(CANTIDAD_OPCIONES);
-        menu_principal->ejecutar_opcion(eleccion, mi_guarderia);
-    }
-    while ( eleccion != GUARDAR_Y_SALIR );
+   
+    menu_principal->ejecutar(mi_guarderia);
     
     delete menu_principal;
     delete mi_guarderia;

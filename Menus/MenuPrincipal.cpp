@@ -2,30 +2,18 @@
 
 using namespace std;
 
-//const int CANTIDAD_OPCIONES_PPAL = 7;
-
-//OpcionListarAnimales* opcion_listar, OpcionRescatarAnimal* opcion_rescatar, OpcionBuscarAnimal* opcion_buscar,OpcionCuidarAnimales* opcion_cuidar, OpcionAdoptarAnimal* opcion_adoptar, OpcionCargarCombustible* opcion_cargar_combustible, OpcionGuardarSalir* opcion_guardar
 
 
-MenuPrincipal::MenuPrincipal(){
+MenuPrincipal::MenuPrincipal() : opciones(Lista<Opcion>()){
 
-    OpcionListarAnimales* opcion_listar = new OpcionListarAnimales;
-    OpcionRescatarAnimal* opcion_rescatar = new OpcionRescatarAnimal;
-    OpcionBuscarAnimal* opcion_buscar = new OpcionBuscarAnimal;
-    OpcionCuidarAnimales* opcion_cuidar = new OpcionCuidarAnimales;
-    OpcionAdoptarAnimal* opcion_adoptar = new OpcionAdoptarAnimal;
-    OpcionCargarCombustible* opcion_cargar_combustible = new OpcionCargarCombustible;
-    OpcionGuardarSalir* opcion_guardar = new OpcionGuardarSalir;
+    Opcion* opcion_listar = new OpcionListarAnimales;
+    Opcion* opcion_rescatar = new OpcionRescatarAnimal;
+    Opcion* opcion_buscar = new OpcionBuscarAnimal;
+    Opcion* opcion_cuidar = new OpcionCuidarAnimales;
+    Opcion* opcion_adoptar = new OpcionAdoptarAnimal;
+    Opcion* opcion_cargar_combustible = new OpcionCargarCombustible;
+    Opcion* opcion_guardar = new OpcionGuardarSalir;
 
-    //OpcionListarAnimales opcion_listar = OpcionListarAnimales();
-    //OpcionRescatarAnimal opcion_rescatar = OpcionRescatarAnimal();
-    //OpcionBuscarAnimal opcion_buscar = OpcionBuscarAnimal();
-    //OpcionCuidarAnimales opcion_cuidar = OpcionCuidarAnimales();
-    //OpcionAdoptarAnimal opcion_adoptar = OpcionAdoptarAnimal();
-    //OpcionCargarCombustible opcion_cargar_combustible = OpcionCargarCombustible();
-    //OpcionGuardarSalir opcion_guardar = OpcionGuardarSalir();
-
-    Lista<Opcion> opciones;
     opciones.alta(opcion_listar, 1);
     opciones.alta(opcion_rescatar, 2);
     opciones.alta(opcion_buscar, 3);
@@ -49,15 +37,26 @@ void MenuPrincipal::mostrar(){
 }
 
 void MenuPrincipal::ejecutar_opcion(int eleccion, Guarderia *mi_guarderia){
-    opciones.consulta(eleccion+1)->ejecutar(mi_guarderia);
+    opciones.consulta(eleccion)->ejecutar(mi_guarderia);
     
 }
 
-void MenuPrincipal::ejecutar(){
-    mostrar();
+void MenuPrincipal::ejecutar(Guarderia *mi_guarderia){
+    int eleccion;
+    do{
+        mostrar();
+        eleccion = pedir_eleccion(CANTIDAD_OPCIONES);
+        ejecutar_opcion(eleccion, mi_guarderia);
+    }
+    while ( eleccion != (CANTIDAD_OPCIONES) );
     
 }
 
 MenuPrincipal::~MenuPrincipal(){
-
+    int cant_opciones = opciones.obtener_cantidad();
+     for (int i = 1; i < (cant_opciones + 1); ++i) {
+        cout << i << '\n'; // se tiene que ejecutar 7 veces
+        Opcion* actual = opciones.consulta(i);
+        delete actual;
+    }
 }

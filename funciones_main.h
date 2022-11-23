@@ -13,33 +13,6 @@ _______________________________________________________________________________*
 const string CANCELAR = "CANCELAR";
 
 
-enum OpcionMenu {
-    LISTAR_ANIMALES = 1,
-    RESCATAR_ANIMAL,
-    BUSCAR_ANIMAL,
-    CUIDAR_ANIMALES,
-    ADOPTAR_ANIMAL,
-    CARGAR_COMBUSTIBLE,
-    GUARDAR_Y_SALIR,
-    CANTIDAD_OPCIONES = 7
-};
-
-
-enum OpcionMenuOpcion4 {
-    ELEGIR_ANIMAL = 1,
-    VOLVER_MENU_PPAL,
-    CANTIDAD_OPCIONES_OP4 = 2
-};
-
-
-enum OpcionElegirAnimal {
-    ALIMENTAR = 1,
-    DUCHAR,
-    SIGUIENTE,
-    VOLVER_MENU_OP4,
-    CANTIDAD_OPCIONES_EA = 4
-};
-
 
 /*________crear_nuevo_animal()__________________________________________________ 
  PRE:  Datos para crear el animal son correctos

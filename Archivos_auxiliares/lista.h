@@ -35,14 +35,14 @@ class Lista {
         Dato* consulta(int POS);
 
         // PRE: 0 < POS <= cantidad
-        // POS: da de baja el dato que esta en la posicion POS (empieza en 1)
+        // POS: da de baja el nodo que esta en la posicion POS (empieza en 1)
         void baja(int POS);
 
         // PRE: 0 < POS <= cantidad
         //      Guardarse el puntero del dato previamente.
         // POS: da de baja el dato que esta en la posicion POS,
-        //sin hacer delete de los datos (empieza en 1).
-        void baja_sin_delete(int POS);
+        //haciendo delete de los datos (empieza en 1).
+        void baja_con_delete(int POS);
 
         // PRE: -
         // POS: True si la Lista esta vacia, False si no
@@ -111,6 +111,23 @@ Dato* Lista<Dato>::consulta(int POS) {
 template <typename Dato>
 void Lista<Dato>::baja(int POS) {
 
+    Nodo<Dato>* a_borrar = this->primero;
+    if (POS == 1) {
+        this->primero = a_borrar->obtener_siguiente();
+    } else {
+        Nodo<Dato>* anterior = obtener_nodo(POS - 1);
+        a_borrar             = anterior->obtener_siguiente();
+        anterior->cambiar_siguiente(a_borrar->obtener_siguiente());
+    }
+
+    delete a_borrar;
+    this->cantidad--;
+
+}
+
+template <typename Dato>
+void Lista<Dato>::baja_con_delete(int POS) {
+
     Nodo<Dato>* a_borrar = this -> primero;
     if (POS == 1)
         this -> primero = a_borrar->obtener_siguiente();
@@ -121,24 +138,6 @@ void Lista<Dato>::baja(int POS) {
     }
 
     delete a_borrar->obtener_dato();
-    delete a_borrar;
-    this -> cantidad--;
-
-}
-
-template <typename Dato>
-void Lista<Dato>::baja_sin_delete(int POS) {
-
-    Nodo<Dato>* a_borrar = this -> primero;
-    if (POS == 1)
-        this -> primero = a_borrar->obtener_siguiente();
-    else {
-        Nodo<Dato>* anterior = obtener_nodo(POS - 1);
-        a_borrar = anterior->obtener_siguiente();
-        anterior->cambiar_siguiente(a_borrar->obtener_siguiente());
-    }
-
-    // delete a_borrar->obtener_dato();
     delete a_borrar;
     this -> cantidad--;
 

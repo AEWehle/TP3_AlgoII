@@ -2,7 +2,6 @@
 #define _MENU_PRINCIPAL_H
 
 #include "Menu.h"
-#include "../Opciones/Opcion.h"
 #include "../Archivos_auxiliares/lista.h"
 #include "../Opciones/Opcion.h"
 #include "../Opciones/OpcionListarAnimales.h"
@@ -14,6 +13,7 @@
 #include "../Opciones/OpcionGuardarSalir.h"
 #include <string>
 
+const int CANTIDAD_OPCIONES = 7;
 
 class MenuPrincipal: public Menu{
     // Atributos
@@ -26,9 +26,7 @@ class MenuPrincipal: public Menu{
         
         MenuPrincipal();
 
-        //MenuPrincipal(OpcionListarAnimales* opcion_listar, OpcionRescatarAnimal* opcion_rescatar, OpcionBuscarAnimal* opcion_buscar,OpcionCuidarAnimales* opcion_cuidar, OpcionAdoptarAnimal* opcion_adoptar, OpcionCargarCombustible* opcion_cargar_combustible, OpcionGuardarSalir* opcion_guardar);
-
-        void ejecutar() override;
+        void ejecutar(Guarderia *mi_guarderia) override;
 
         ~MenuPrincipal() override;
 

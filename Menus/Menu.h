@@ -10,7 +10,7 @@ class Menu{
     public:
         Menu() {};
         
-        virtual void ejecutar() = 0;
+        virtual void ejecutar(Guarderia *mi_guarderia) = 0;
 
         virtual void ejecutar_opcion(int eleccion, Guarderia *mi_guarderia) = 0;
         

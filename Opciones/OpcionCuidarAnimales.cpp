@@ -1,10 +1,11 @@
 #include "OpcionCuidarAnimales.h"
 
 OpcionCuidarAnimales::OpcionCuidarAnimales(){
-    menu_cuidar = MenuCuidar();
+    
 }
 
 void OpcionCuidarAnimales::ejecutar(Guarderia *mi_guarderia){
-    menu_cuidar.ejecutar();
-
+    MenuCuidar* menu_cuidar = new MenuCuidar;
+    menu_cuidar->ejecutar(mi_guarderia);
+    delete menu_cuidar;
 }
