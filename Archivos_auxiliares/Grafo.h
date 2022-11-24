@@ -1,8 +1,9 @@
 #ifndef GRAFO_H
 #define GRAFO_H
-#include "Lista.h"
+#include "lista.h"
 #include "Vertice.h"
 #include "Algoritmo_camino_min.h"
+#include <iostream>
 
 using namespace std;
 

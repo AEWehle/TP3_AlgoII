@@ -11,7 +11,7 @@ class Opcion {
 
     public:
         //Constructor tiene que asegurar las invariantes
-        Opcion() {} ;
+        Opcion() {};
 
         virtual void ejecutar(Guarderia * mi_guarderia) = 0;
 
