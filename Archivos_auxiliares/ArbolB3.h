@@ -332,7 +332,7 @@ Lista<Dato>* ArbolB3<Dato, Clave>       :: ordenar_mayor_menor( ){
 
 template <typename Dato, typename Clave>
 Lista<Clave>* ArbolB3<Dato, Clave>       :: obtener_lista_de_claves(){
-
+// NO TIENEN QUE IR LOS QUE TENGEAN EL FUNCIONAL EN FALSE
 }
 
 

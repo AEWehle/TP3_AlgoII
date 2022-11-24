@@ -53,6 +53,7 @@ class NodoB3{
    
         /*  PRE: -
             POS: Devuelve un puntero al Dato de la clave.
+            Si el dato esta dado de baja, es como si la clave no existiese
             */
         Dato* obtener_dato( Clave clave );
 
@@ -248,6 +249,7 @@ Dato* NodoB3<Dato, Clave>               :: obtener_dato( Clave clave ) {
         return nullptr;
     }
 }
+
 
 
 // Obtener clave segun posicion
@@ -468,13 +470,16 @@ template <typename Dato, typename Clave>
 void NodoB3<Dato, Clave>                :: mostrar_nodob3(){ 
     for( int i = 1 ; i <= this -> elementos -> obtener_cantidad() ; i++){
         cout << "Clave:" << this -> obtener_clave_de( i ) << endl;
-        cout << "Dato:" << *(this -> obtener_dato( this -> obtener_clave_de( i ) )) << endl;
+        if ( this -> elementos -> consulta(i) -> es_funcional() ){
+            cout << "Dato:" << *(this -> obtener_dato( this -> obtener_clave_de( i ) )) << endl;}
+        else{
+            cout << "Dado de baja" << endl;
+        }
     }
     cout << "mi padre es: " << endl;
     if ( nodo_padre != nullptr){
         for( int i = 1 ; i <= this -> nodo_padre -> elementos -> obtener_cantidad() ; i++){
             cout << this -> nodo_padre -> obtener_clave_de( i ) << " " ;
-            // cout << "Dato:" << *(this -> nodo_padre -> obtener_dato( this -> nodo_padre -> obtener_clave_de( i ) )) << endl;
         }
         cout << endl;
     }
