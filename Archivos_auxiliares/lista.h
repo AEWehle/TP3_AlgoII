@@ -62,6 +62,12 @@ class Lista {
         //haciendo delete de los datos (empieza en 1).
         void baja_con_delete(int POS);
 
+
+        // PRE:
+        // POS: da de baja todos los datos de la lista, haciendo delete de ellos.
+        void destruir_con_delete();
+
+
         // PRE: -
         // POS: True si la Lista esta vacia, False si no
         bool vacia();
@@ -97,6 +103,7 @@ class Lista {
         Nodo<Dato>* obtener_nodo(int POS);
 };
 
+// Constructor sin parametros
 template <typename Dato>
 Lista<Dato>::Lista() {
 
@@ -104,6 +111,15 @@ Lista<Dato>::Lista() {
     this -> cantidad = 0;
     this -> actual = primero;
 
+}
+
+//Destructor
+template <typename Dato>
+Lista<Dato>::~Lista() {
+
+    while (! vacia()){
+        baja(1);
+    }
 }
 
 
@@ -196,18 +212,20 @@ void Lista<Dato>::baja_con_delete(int POS) {
 
 
 template <typename Dato>
+void Lista<Dato>:: destruir_con_delete() {
+    while (! vacia()){
+        baja_con_delete(1);
+    }
+}
+
+
+
+
+
+template <typename Dato>
 bool Lista<Dato>::vacia() {
 
     return (this -> cantidad == 0);
-
-}
-
-template <typename Dato>
-Lista<Dato>::~Lista() {
-
-    while (! vacia()){
-        baja(1);
-    }
 
 }
 

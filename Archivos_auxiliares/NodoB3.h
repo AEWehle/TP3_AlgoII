@@ -53,6 +53,7 @@ class NodoB3{
    
         /*  PRE: -
             POS: Devuelve un puntero al Dato de la clave.
+            Si el dato esta dado de baja, es como si la clave no existiese
             */
         Dato* obtener_dato( Clave clave );
 
@@ -101,6 +102,10 @@ class NodoB3{
             */
         NodoB3<Dato, Clave>* agregar_elemento_existente( Elemento<Dato, Clave>* elemento_entrante );
 
+
+        // Le indica al elemento de la clave que ya no participará
+        // devuelve true si la clave estaba en este nodo
+        bool baja_dato( Clave clave );
 
 
         /* Cambia el hijo al que se apunta, 1 para el hijo menor, 2 oara el 
@@ -158,13 +163,22 @@ class NodoB3{
 
 
         void ordenar_mayor_menor( Lista<Dato>* datos );
+
+        private:
+
+        // Se encarga de reordenar los elementos entre nodos para mantener el arbol de 3 vias
+        void verificar_3vias();
+
+        // Se encarga de subir a padre el elemento del medio y asignar padres con hijos
+        // crea un padre si no habia
+        void subir_a_padre(  Elemento<Dato,Clave>* elemento_a_subir, NodoB3<Dato, Clave>* nodo_hermano_mayor );
 };
 
 
 // Constructor por dato y clave
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>                     :: NodoB3( Dato* dato, Clave clave){
-    Elemento<Dato, Clave>* elemento = new Elemento<Dato, Clave>(dato, clave);
+    Elemento<Dato, Clave>* elemento = new Elemento<Dato, Clave>(dato, clave, true);
     this -> elementos = new Lista<Elemento<Dato, Clave>>();
     elementos -> alta( elemento, 1 );
     ultimo_hijo = nullptr;
@@ -190,8 +204,26 @@ NodoB3<Dato, Clave>                     :: ~NodoB3(){
     delete ultimo_hijo;
     cout << "Chau nodo" << elementos -> consulta(1) -> obtener_clave() << endl;
     ultimo_hijo = nullptr;
+    elementos -> destruir_con_delete();
     delete elementos;
     elementos = nullptr;
+}
+
+
+template <typename Dato, typename Clave>
+bool NodoB3<Dato,Clave> :: baja_dato( Clave clave ){
+    if (elementos -> consulta(1) -> obtener_clave() == clave){
+        elementos -> consulta(1) -> dar_de_baja();
+        return true;
+    }
+    else if ( ( elementos -> obtener_cantidad() == 2 ) && (elementos -> consulta(2) -> obtener_clave() == clave) ){
+        elementos -> consulta(2) -> dar_de_baja();
+        return true;
+    }
+    else{
+        // no esta esa clave
+        return false;
+    }
 }
 
 
@@ -204,10 +236,12 @@ bool NodoB3<Dato,Clave> :: tiene_padre(){
 // obtener dato
 template <typename Dato, typename Clave>
 Dato* NodoB3<Dato, Clave>               :: obtener_dato( Clave clave ) {
-    if (elementos -> consulta(1) -> obtener_clave() == clave){
+    if (  (elementos -> consulta(1) -> obtener_clave() == clave )  &&   (  elementos -> consulta(1) -> es_funcional() )){
         return elementos -> consulta(1) -> obtener_dato();
     }
-    else if ( ( elementos -> obtener_cantidad() == 2 ) && (elementos -> consulta(2) -> obtener_clave() == clave) ){
+    else if ( ( elementos -> obtener_cantidad() == 2 ) &&
+              ( elementos -> consulta(2) -> obtener_clave() == clave) &&
+              ( elementos -> consulta(2) -> es_funcional() )){
         return elementos -> consulta(2) -> obtener_dato();
     }
     else{
@@ -215,6 +249,7 @@ Dato* NodoB3<Dato, Clave>               :: obtener_dato( Clave clave ) {
         return nullptr;
     }
 }
+
 
 
 // Obtener clave segun posicion
@@ -288,7 +323,7 @@ void NodoB3<Dato, Clave>                :: ubicar_nodo_hijo( NodoB3<Dato,Clave>*
 //Agregar elemento dando Dato y Clave
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: agregar_elemento( Dato* dato_nuevo, Clave clave_nueva ){
-    Elemento<Dato,Clave>* elemento_nuevo = new Elemento<Dato,Clave> ( dato_nuevo, clave_nueva );
+    Elemento<Dato,Clave>* elemento_nuevo = new Elemento<Dato,Clave> ( dato_nuevo, clave_nueva, true );
     NodoB3<Dato, Clave>* nodo_padre = this -> agregar_elemento_existente( elemento_nuevo );
     return nodo_padre;
 }
@@ -311,14 +346,21 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
     }
 
     // SI AGREGUÉ UNA TERCERA CLAVE:
-    if ( elementos->obtener_cantidad() == VIAS ){
-        
+    verificar_3vias();
 
-        Elemento<Dato,Clave> * elemento_a_subir = new Elemento<Dato,Clave>( this -> elementos -> consulta(2) -> obtener_dato() , this -> elementos -> consulta(2) -> obtener_clave() );
+    return this -> nodo_padre;
+}
+
+
+template <typename Dato, typename Clave>
+void NodoB3<Dato, Clave> :: verificar_3vias(){
+    if ( elementos->obtener_cantidad() == VIAS ){
+        Elemento<Dato,Clave> * elemento_a_subir = new Elemento<Dato,Clave>( this -> elementos -> consulta(2) -> obtener_dato() , this -> elementos -> consulta(2) -> obtener_clave() , this -> elementos -> consulta(2) -> es_funcional() );
 
         this -> elementos -> consulta(2) -> cambiar_dato(nullptr);
         NodoB3<Dato,Clave>* nodo_hermano_mayor = new NodoB3<Dato,Clave>( this -> elementos -> consulta(3) -> obtener_dato(),
                                                      this -> elementos -> consulta(3) -> obtener_clave() );
+        nodo_hermano_mayor -> obtener_lista_elementos() -> consulta(1) -> cambiar_funcional (this -> elementos -> consulta(3) -> es_funcional());
         this -> elementos -> consulta(3) -> cambiar_dato(nullptr);
 
         NodoB3<Dato,Clave>* nodo_hijo_2;
@@ -332,8 +374,8 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
 
             nodo_hijo_2 = this -> elementos -> consulta(2) -> obtener_hijo() ;
         }
-        this -> elementos -> baja(3);
-        this -> elementos -> baja(2);
+        this -> elementos -> baja_con_delete(3);
+        this -> elementos -> baja_con_delete(2);
         
         elemento_a_subir -> cambiar_hijo( this );
 
@@ -342,36 +384,39 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<
             nodo_hijo_2 -> cambiar_nodo_padre( this );
         }
 
-
-        if ( nodo_padre == nullptr ){ // SI NO TENGO PADRE
-            NodoB3<Dato,Clave>* nuevo_nodo_padre = new NodoB3<Dato,Clave>( elemento_a_subir );
-            nuevo_nodo_padre -> cambiar_nodo_padre( this -> nodo_padre );
-            nodo_hermano_mayor -> cambiar_nodo_padre( nuevo_nodo_padre );
-            if ( nodo_hermano_mayor -> obtener_clave_de(1) > elemento_a_subir -> obtener_clave() ){
-                nuevo_nodo_padre  -> cambiar_ultimo_hijo( nodo_hermano_mayor ); 
-            }
-            else{
-                nuevo_nodo_padre  -> ubicar_nodo_hijo( nodo_hermano_mayor );
-            }    
-            this -> nodo_padre = nuevo_nodo_padre;
-        }
-        else{ //SI YA TENGO PADRE
-            nodo_hermano_mayor -> cambiar_nodo_padre( this -> nodo_padre );
-            this -> nodo_padre -> agregar_elemento_existente( elemento_a_subir );// le dice a hermano mayor su nuevo padre
-            
-            if ( nodo_hermano_mayor -> obtener_clave_de(1) > this -> nodo_padre -> obtener_clave_de(2)  ){
-                this -> nodo_padre -> cambiar_ultimo_hijo( nodo_hermano_mayor ); 
-            }
-            else{
-                this -> nodo_padre -> ubicar_nodo_hijo( nodo_hermano_mayor );
-            }
-            nodo_hermano_mayor -> cambiar_nodo_padre( this -> nodo_padre ); // si, esta repetido
-        }
-        
+        subir_a_padre( elemento_a_subir, nodo_hermano_mayor );        
     }
-    return this -> nodo_padre;
 }
 
+
+// Cambiar puntero hijo de la derecha
+template <typename Dato, typename Clave>
+void NodoB3<Dato, Clave> :: subir_a_padre(  Elemento<Dato,Clave>* elemento_a_subir, NodoB3<Dato, Clave>* nodo_hermano_mayor ){
+    if ( nodo_padre == nullptr ){ // SI NO TENGO PADRE
+        NodoB3<Dato,Clave>* nuevo_nodo_padre = new NodoB3<Dato,Clave>( elemento_a_subir );
+        nuevo_nodo_padre -> cambiar_nodo_padre( this -> nodo_padre );
+        nodo_hermano_mayor -> cambiar_nodo_padre( nuevo_nodo_padre );
+        if ( nodo_hermano_mayor -> obtener_clave_de(1) > elemento_a_subir -> obtener_clave() ){
+            nuevo_nodo_padre  -> cambiar_ultimo_hijo( nodo_hermano_mayor ); 
+        }
+        else{
+            nuevo_nodo_padre  -> ubicar_nodo_hijo( nodo_hermano_mayor );
+        }    
+        this -> nodo_padre = nuevo_nodo_padre;
+    }
+    else{ //SI YA TENGO PADRE
+        nodo_hermano_mayor -> cambiar_nodo_padre( this -> nodo_padre );
+        this -> nodo_padre -> agregar_elemento_existente( elemento_a_subir );// le dice a hermano mayor su nuevo padre
+        
+        if ( nodo_hermano_mayor -> obtener_clave_de(1) > this -> nodo_padre -> obtener_clave_de(2)  ){
+            this -> nodo_padre -> cambiar_ultimo_hijo( nodo_hermano_mayor ); 
+        }
+        else{
+            this -> nodo_padre -> ubicar_nodo_hijo( nodo_hermano_mayor );
+        }
+        nodo_hermano_mayor -> cambiar_nodo_padre( this -> nodo_padre ); // si, esta repetido
+    }
+}
 
 
 // Cambiar puntero hijo de la derecha
@@ -381,59 +426,10 @@ void NodoB3<Dato, Clave>                :: cambiar_ultimo_hijo( NodoB3<Dato, Cla
 }
 
 
-
 // Cambiar el puntero del nodo padre
 template <typename Dato, typename Clave>
 void NodoB3<Dato, Clave>                :: cambiar_nodo_padre( NodoB3<Dato, Clave>* nuevo_nodo_padre ){
     this ->  nodo_padre = nuevo_nodo_padre;
-}
-
-
-
-// MImprimir en terminal clave y dato
-template <typename Dato, typename Clave>
-void NodoB3<Dato, Clave>                :: mostrar_nodob3(){ 
-    for( int i = 1 ; i <= this -> elementos -> obtener_cantidad() ; i++){
-        cout << "Clave:" << this -> obtener_clave_de( i ) << endl;
-        cout << "Dato:" << *(this -> obtener_dato( this -> obtener_clave_de( i ) )) << endl;
-    }
-    cout << "mi padre es: " << endl;
-    if ( nodo_padre != nullptr){
-        for( int i = 1 ; i <= this -> nodo_padre -> elementos -> obtener_cantidad() ; i++){
-            cout << this -> nodo_padre -> obtener_clave_de( i ) << " " ;
-            // cout << "Dato:" << *(this -> nodo_padre -> obtener_dato( this -> nodo_padre -> obtener_clave_de( i ) )) << endl;
-        }
-        cout << endl;
-    }
-}
-
-// MImprimir en terminal clave y dato
-template <typename Dato, typename Clave>
-void NodoB3<Dato, Clave>                :: mostrar_hijos(){ 
-    for( int i = 1 ; i <= ( this-> elementos -> obtener_cantidad() +1 ) ; i++){
-        cout << "Hijo "<< i <<": puntero " << this -> obtener_hijo(i) << endl;
-    }
-}
-
-
-
-// True si completo
-template <typename Dato, typename Clave>
-bool NodoB3<Dato, Clave>                :: esta_completo( ){
-    return elementos -> obtener_cantidad() == (VIAS-1);
-}
-
-
-
-// True si todo hijo = nullptr
-template <typename Dato, typename Clave>
-bool NodoB3<Dato, Clave>                :: es_hoja( ){
-    bool es_hoja = true;
-    es_hoja = es_hoja &&  ( this -> ultimo_hijo  == nullptr );
-    for (  int i = 1 ; (i <= elementos -> obtener_cantidad()) && es_hoja ; i++ ){
-        es_hoja = es_hoja && (elementos -> consulta( i ) -> obtener_hijo()  == nullptr);
-    }
-    return es_hoja;
 }
 
 
@@ -450,6 +446,54 @@ int NodoB3<Dato, Clave>                 :: clave_menor_entra_mayor( Clave clave 
 }
 
 
+// True si completo
+template <typename Dato, typename Clave>
+bool NodoB3<Dato, Clave>                :: esta_completo( ){
+    return elementos -> obtener_cantidad() == (VIAS-1);
+}
+
+
+// True si todo hijo = nullptr
+template <typename Dato, typename Clave>
+bool NodoB3<Dato, Clave>                :: es_hoja( ){
+    bool es_hoja = true;
+    es_hoja = es_hoja &&  ( this -> ultimo_hijo  == nullptr );
+    for (  int i = 1 ; (i <= elementos -> obtener_cantidad()) && es_hoja ; i++ ){
+        es_hoja = es_hoja && (elementos -> consulta( i ) -> obtener_hijo()  == nullptr);
+    }
+    return es_hoja;
+}
+
+
+// MImprimir en terminal clave y dato
+template <typename Dato, typename Clave>
+void NodoB3<Dato, Clave>                :: mostrar_nodob3(){ 
+    for( int i = 1 ; i <= this -> elementos -> obtener_cantidad() ; i++){
+        cout << "Clave:" << this -> obtener_clave_de( i ) << endl;
+        if ( this -> elementos -> consulta(i) -> es_funcional() ){
+            cout << "Dato:" << *(this -> obtener_dato( this -> obtener_clave_de( i ) )) << endl;}
+        else{
+            cout << "Dado de baja" << endl;
+        }
+    }
+    cout << "mi padre es: " << endl;
+    if ( nodo_padre != nullptr){
+        for( int i = 1 ; i <= this -> nodo_padre -> elementos -> obtener_cantidad() ; i++){
+            cout << this -> nodo_padre -> obtener_clave_de( i ) << " " ;
+        }
+        cout << endl;
+    }
+}
+
+// MImprimir en terminal clave y dato
+template <typename Dato, typename Clave>
+void NodoB3<Dato, Clave>                :: mostrar_hijos(){ 
+    for( int i = 1 ; i <= ( this-> elementos -> obtener_cantidad() +1 ) ; i++){
+        cout << "Hijo "<< i <<": puntero " << this -> obtener_hijo(i) << endl;
+    }
+}
+
+
 
 template <typename Dato, typename Clave>
 void NodoB3<Dato, Clave>                 :: ordenar_mayor_menor( Lista<Dato>* datos ){
@@ -457,11 +501,13 @@ void NodoB3<Dato, Clave>                 :: ordenar_mayor_menor( Lista<Dato>* da
         if ( !this -> es_hoja() ){
             this -> obtener_hijo(i+1) -> ordenar_mayor_menor( datos );}
         
-        if(i != 0){
+        if(i != 0 && elementos -> consulta( i ) -> es_funcional() ){
             Dato* dato_ordenado = new Dato(   *(this -> obtener_dato( this -> obtener_clave_de(i) ))   );
-            datos -> alta( dato_ordenado );}
+            datos -> alta( dato_ordenado );      
+        }      
     }
 }
+
 
 
 

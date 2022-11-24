@@ -70,13 +70,14 @@ class Guarderia{
             int obtener_cantidad();
 
         /*Eliminar animal
-            PRE:  La posición recibida del animal a borrar es válida.
-            POST: Elimina del la lista de animales al animal en la posicion dada.*/
-            // void eliminar_animal(int posicion);
+            PRE:  El nombre del animal a borrar es válido.
+            POST: Da de baja del diccionario de animales al animal.
+            NO HACE DELETE*/
+            void eliminar_animal( string nombre );
 
         /* Obtener animal
-        PRE:  el nopmbre ingresado debe ser existente.
-        POST: Develve un puntero al Animal en la posicion dada*/
+        PRE:  el nombre ingresado debe ser existente.
+        POST: Develve un puntero al Animal con ese nombre*/
             Animal* obtener_animal( string nombre );
 
         /* Obtener auto

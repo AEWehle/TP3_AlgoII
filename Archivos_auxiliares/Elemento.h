@@ -19,17 +19,29 @@ class Elemento{
     Clave clave;
     Dato* dato;
     NodoB3<Dato, Clave>* hijo;
+    bool funcional; // indica si este dato participa en el arbol
 
     public:
         // Constructor
         /*  PRE: -
-            POS: Crea un Elemento con dato y clave, apuntando a Null
+            POS: Crea un Elemento con dato, clave y funcionalidad, con hijo apuntando a Null
             */
-        Elemento( Dato* dato, Clave clave);
+        Elemento( Dato* dato, Clave clave, bool funcional);
 
         // Destructor
         ~Elemento();
 
+
+        /*  PRE: -
+            POS: Le indica al elemento que ya no es funcional en el arbol
+            */
+        void dar_de_baja( );
+
+
+        /*  PRE: -
+            POS: devuelve true si participa en el arbol
+            */
+        bool es_funcional( );
 
         /*  PRE: -
             POS: Devuelve un puntero que apunta a lo mismo que el atributo Dato
@@ -41,6 +53,8 @@ class Elemento{
             */
         void cambiar_dato(  Dato* dato_nuevo );
 
+
+        void cambiar_funcional ( bool funcional );
 
         /*  PRE: -
             POS: Devuelve la clave
@@ -62,10 +76,11 @@ class Elemento{
 
 // Constructor
 template <typename Dato, typename Clave>
-Elemento<Dato, Clave> :: Elemento( Dato* dato, Clave clave ){
+Elemento<Dato, Clave> :: Elemento( Dato* dato, Clave clave , bool funcional){
     this -> dato = dato;
     this -> clave = clave;
     this -> hijo = nullptr;
+    this -> funcional = funcional;
 }
 
 
@@ -74,6 +89,19 @@ Elemento<Dato, Clave> :: ~Elemento(){
     if ( dato != nullptr){
         delete this -> dato;}
 }
+
+
+template <typename Dato, typename Clave>
+void Elemento<Dato, Clave> :: dar_de_baja( ){
+    funcional = false;
+}
+
+
+template <typename Dato, typename Clave>
+bool Elemento<Dato, Clave> :: es_funcional( ){
+    return funcional;
+}
+
 
 
 // obtener dato
@@ -90,6 +118,11 @@ void Elemento<Dato, Clave> :: cambiar_dato( Dato* dato_nuevo) {
     dato = dato_nuevo;
 }
 
+
+template <typename Dato, typename Clave>
+void Elemento<Dato, Clave> :: cambiar_funcional( bool funcional ) {
+    this -> funcional = funcional;
+}
 
 // obtener clave
 template <typename Dato, typename Clave>
