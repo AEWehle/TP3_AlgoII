@@ -4,7 +4,7 @@ COMANDO: g++ *.cpp Especies/*.cpp Archivos_auxiliares/*.cpp -o TP3 -Wall -Werror
 
 # Para compilar version meli: 
 
-$g++ Guarderia.cpp Animal.cpp funciones_main.cpp prueba_modular.cpp Especies/*.cpp Archivos_auxiliares/*.cpp Menus/*.cpp Opciones/*.cpp Auto.cpp -o TP3_MOD -Wall -Werror -Wconversion -std=c++11 -v -fsanitize=address -g$
+$g++ Animal.cpp Auto.cpp funciones_main.cpp Guarderia.cpp main.cpp mapa.cpp Especies/*.cpp Archivos_auxiliares/*.cpp Menus/*.cpp Opciones/*.cpp  -o TP3 -Wall -Werror -Wconversion -std=c++11 -v -fsanitize=address -g$
 
 Para ejecutar ./TP3
 
