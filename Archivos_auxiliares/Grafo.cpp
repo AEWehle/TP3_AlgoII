@@ -1,5 +1,4 @@
 #include "Grafo.h"
-#include <iostream>
 
 Grafo::Grafo(){
     matriz_de_adyacencia = nullptr;
