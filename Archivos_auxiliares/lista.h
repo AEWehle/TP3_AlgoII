@@ -98,7 +98,7 @@ class Lista {
 
 
         /*Devuelve true si el datoe stá dentro de la lista*/
-        bool dato_existente( Dato dato_buscado );
+        bool dato_existente( Dato* dato_buscado );
 
 
         //PRE: -
@@ -183,12 +183,12 @@ Dato* Lista<Dato>::consulta() {
 
 
 template <typename Dato>
-bool Lista<Dato>::dato_existente(Dato dato_buscado) {
+bool Lista<Dato>::dato_existente(Dato* dato_buscado) {
     if( vacia() ){
         return false;
     }
     Nodo<Dato>* nodo_actual = this->primero;
-    while (( *nodo_actual -> obtener_dato() != dato_buscado ) ){
+    while (( *nodo_actual -> obtener_dato() != *dato_buscado ) ){
         nodo_actual = nodo_actual -> obtener_siguiente();
         if ( nodo_actual == nullptr ){
             return false;
