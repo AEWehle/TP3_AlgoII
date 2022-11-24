@@ -25,7 +25,7 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
 
             if ( !es_cancelar(elegido)  ){
                 cout << endl << "Adoptaste a " << elegido << endl;
-                Animal* animal_elegido = animales_adoptables -> obtener_animal( elegido );
+                //Animal* animal_elegido = animales_adoptables -> obtener_animal( elegido );
                 mi_guarderia -> obtener_animal( elegido ) -> mostrar();
                 mi_guarderia -> eliminar_animal( elegido );
             }
@@ -69,26 +69,26 @@ Guarderia* OpcionAdoptarAnimal::crear_lista_adoptables(Guarderia* mi_guarderia, 
     Devuelve el nombre del animal que desea adoptar, o nullptr si quiere cancelar*/
 string* OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* diccionario_adoptables ){
 
-    string entrada = "";
-    int cant_adoptables = diccionario_adoptables -> obtener_cantidad();
+    string* entrada = nullptr;
+    //int cant_adoptables = diccionario_adoptables -> obtener_cantidad();
 
-    while ( !es_cancelar(entrada) ){ 
+    while ( !es_cancelar(*entrada) ){ 
 
         cout << "En caso de no querer adoptar ingrese CANCELAR, y volvera al menú inicial" << endl;
-        entrada = ingresar_nombre();
+        *entrada = ingresar_nombre();
 
-        if( es_cancelar(entrada)){
+        if( es_cancelar(*entrada)){
             cout << "Se ha cancelado la adopción" << endl;
         }
 
         else{
-            if ( diccionario_adoptables -> obtener_animal( entrada ) == nullptr ){
+            if ( diccionario_adoptables -> obtener_animal( *entrada ) == nullptr ){
                 cout << "El nombre ingresado no es de un animal disponble para adoptar." << endl;
             }
         }
     }
 
-    return &entrada;
+    return entrada;
 
 }
 

@@ -11,13 +11,13 @@ class OpcionElegirAnimal:public Opcion {
     //Atributos
     private:
         //Menu
-        MenuCuidarIndividual menu_cuidar_individual;
+        MenuCuidarIndividual* menu_cuidar_individual;
 
     public:
         // Constructor tiene que asegurar las invariantes
-        OpcionElegirAnimal();
+        OpcionElegirAnimal(Guarderia* mi_guarderia);
 
-        void ejecutar(Guarderia * mi_guarderia) override;
+        void ejecutar(Guarderia* mi_guarderia) override;
 };
 
 #endif

@@ -103,7 +103,7 @@ void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacent
 int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
     Vertice* vertice = new Vertice(vertice_a_buscar);
 
-    int posicion_vertice = lista_vertices->obtener_posicion_en_lista(vertice);
+    int posicion_vertice = lista_vertices->obtener_posicion(vertice);
 
     if(posicion_vertice == NO_SE_ENCUENTRA){
         cout << "El vertice " << vertice << " no se encuentra en el grafo." << endl;

@@ -2,7 +2,7 @@
 #define _OPCION_CARGAR_COMBUSTIBLE_H
 
 #include "Opcion.h"
-
+#include <limits>
 #include <string>
 using namespace std; 
 
