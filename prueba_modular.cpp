@@ -14,6 +14,7 @@
 using namespace std;
 
 /*_____________________________TP2: LA RESERVA SOÑADA____________________*/
+/*
 int main(){
 
     cout << "Hola," << endl << "En este programa te aseguramos una Reserva Soñada." << endl << "     DISFRUTALO!" << endl << endl;
@@ -30,3 +31,4 @@ int main(){
     delete mi_guarderia;
     return 0;
 }
+*/

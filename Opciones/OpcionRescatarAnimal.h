@@ -4,7 +4,7 @@
 #include "Opcion.h"
 #include "../funciones_main.h"
 #include "../Archivos_auxiliares/funciones_auxiliares.h"
-
+#include <limits>
 #include <string>
 using namespace std; 
 

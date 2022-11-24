@@ -7,6 +7,7 @@
 using namespace std;
 
 const int INFINITO = 99999;
+const int NO_SE_ENCUENTRA = -1;
 
 class Grafo{
     // Atributos

@@ -1,8 +1,8 @@
 #include "MenuCuidar.h"
 
-MenuCuidar::MenuCuidar() : opciones(Lista<Opcion>()){
-    Opcion* opcion_elegir = new OpcionElegirAnimal;
-    Opcion* opcion_menu_ppal = new OpcionVolverAMenu;
+MenuCuidar::MenuCuidar(Guarderia* mi_guarderia) : opciones(Lista<Opcion>()){
+    Opcion* opcion_elegir = new OpcionElegirAnimal(mi_guarderia);
+    Opcion* opcion_menu_ppal = new OpcionVolverAMenu();
   
     opciones.alta(opcion_elegir, 1);
     opciones.alta(opcion_menu_ppal, 2);

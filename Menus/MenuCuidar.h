@@ -21,7 +21,7 @@ class MenuCuidar: public Menu{
         Lista<Opcion> opciones;
 
     public:
-        MenuCuidar();
+        MenuCuidar(Guarderia* mi_guarderia);
 
         void ejecutar(Guarderia *mi_guarderia) override;
 
