@@ -15,7 +15,7 @@ void OpcionBuscarAnimal::ejecutar(Guarderia * mi_guarderia){
         nombre = pedir_nombre();
 
         Lista<string>* lista_nombres = mi_guarderia -> obtener_lista_nombres();
-        if( ! lista_nombres -> dato_existente(nombre) )
+        if( ! lista_nombres -> dato_existente(&nombre) ) 
             cout << nombre << " no se encuentra en la guardería." << endl << endl;
         
         else{

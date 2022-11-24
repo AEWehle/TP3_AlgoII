@@ -160,7 +160,7 @@ bool OpcionRescatarAnimal::otro_nombre( Guarderia* mi_guarderia, string & nombre
     int opcion;
     bool otro_nombre = true;
     Lista<string>* nombres = mi_guarderia -> obtener_lista_nombres();
-    while (otro_nombre && (nombres -> dato_existente(nombre))){  
+    while (otro_nombre && (nombres -> dato_existente(&nombre))){  
 
         cout << "Este nombre ya lo tiene otro animal! Podés elegir otro nombre o volver al menú." << endl
              << "Para elegir otro nombre ingresá 1, para volver al menú ingresá 2:" << endl << " >> ";
