@@ -9,6 +9,7 @@ class AlgoritmoCaminoMinimo{
     protected:
         int ** matriz_de_adyacencia;
         Lista<Vertice>* lista_vertices;
+        int cantidad_vertices_en_algoritmo;
 
     // Métodos
     public:
