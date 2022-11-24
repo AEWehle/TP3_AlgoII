@@ -10,7 +10,7 @@
 #include "./Opciones/OpcionCargarGuarderia.h"
 using namespace std;
 
-/*_____________________________TP2: LA RESERVA SOÑADA____________________*/
+/*_____________________________TP3: LA RESERVA SOÑADA____________________*/
 int main(){
 
     cout << "Hola," << endl << "En este programa te aseguramos una Reserva Soñada." << endl << "     DISFRUTALO!" << endl << endl;

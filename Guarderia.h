@@ -55,14 +55,9 @@ class Guarderia{
 
         /*Agregar
             PRE: Puntero a Animal está creado correctamente
-            PPOST: Agrega un animal a la lista de animales */
+            PPOST: Agrega un animal a al diccionario de animales */
             void agregar_animal(Animal* nuevo_animal);
 
-        /*Obtener Posicion
-            PRE:  -
-            POST: Devuelve la posicion en la lista del Animal con el nombre dado
-            Si no lo encuentra devuelve la cantidad de animales + 1  */
-            // int obtener_posicion(string nombre);
 
         /*Obtener cantidad
             PRE: -
@@ -91,6 +86,9 @@ class Guarderia{
               según sus caracteristicas*/  
             void afectar_animales();
         
+        /*Devuelve una lista con los nombres de los animales no adoptados
+         del diccionario*/
+            Lista<string>* obtener_lista_nombres();
 
 };
 

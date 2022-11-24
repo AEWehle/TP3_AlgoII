@@ -13,12 +13,14 @@ class MenuCuidarIndividual: public Menu{
     // Atributos
     private:
 
-        int animal;
+        string nombre_animal;
+        int numero_de_animal;
+        Lista<string>* lista_nombres;
         
     // Metodos
     public:
         
-        MenuCuidarIndividual();
+        MenuCuidarIndividual(Guarderia *mi_guarderia);
 
         void ejecutar(Guarderia *mi_guarderia) override;
 

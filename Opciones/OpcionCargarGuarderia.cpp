@@ -22,7 +22,7 @@ void OpcionCargarGuarderia::ejecutar(Guarderia* mi_guarderia){
 
         Animal* nuevo_animal = crear_nuevo_animal(especie[0], nombre, stoi(edad), tamano, personalidad);
 
-        mi_guarderia->agregar_animal(nuevo_animal);
+        mi_guarderia -> agregar_animal(nuevo_animal);
     }
 
     archivo_guarderia.close();

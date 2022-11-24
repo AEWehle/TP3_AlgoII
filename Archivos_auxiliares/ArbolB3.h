@@ -14,6 +14,7 @@ class ArbolB3 {
         
         NodoB3<Dato,Clave>* nodo_raiz;
         int cantidad;
+        Lista<Clave>* lista_de_claves;
 
 //metodos
     public:
@@ -118,7 +119,9 @@ ArbolB3<Dato, Clave>                     :: ArbolB3( ){
 template <typename Dato, typename Clave>
 ArbolB3<Dato, Clave>                     :: ArbolB3( Dato* dato, Clave clave){
     this -> nodo_raiz = new NodoB3<Dato, Clave> ( dato , clave );
+    this -> lista_de_claves = new Lista<Clave>();
     cantidad = 1;
+    this -> lista_de_claves -> alta( clave ) ;
 }
 
 
@@ -127,6 +130,9 @@ template <typename Dato, typename Clave>
 ArbolB3<Dato, Clave>                     :: ~ArbolB3( ){
         delete nodo_raiz;
         nodo_raiz = nullptr;
+        lsita_de_claves = destruir_con_delete();
+        delete lista_de_claves;
+        lista_de_claves = nullptr;
         cantidad = 0;
 }
 
@@ -153,6 +159,7 @@ bool ArbolB3<Dato, Clave>               :: baja(  NodoB3<Dato,Clave>* nodo_actua
             return false; // no esta en este nodo
         }
         if( existia ){
+            lista_de_claves -> baja_con_delete (clave);
             cantidad --;
             return true; // dado de baja exitosamente
         }
@@ -191,6 +198,7 @@ template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
     
     this -> cantidad++;
+    this -> lista_de_claves -> alta( clave );
     if ( nodo_actual == nullptr) {
         nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
     }
@@ -333,7 +341,7 @@ Lista<Dato>* ArbolB3<Dato, Clave>       :: ordenar_mayor_menor( ){
 template <typename Dato, typename Clave>
 Lista<Clave>* ArbolB3<Dato, Clave>       :: obtener_lista_de_claves(){
 // NO TIENEN QUE IR LOS QUE TENGEAN EL FUNCIONAL EN FALSE
-    return nullptr;
+    return this -> lista_de_claves;
 }
 
 
