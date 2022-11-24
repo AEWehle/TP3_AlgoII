@@ -6,5 +6,5 @@ void OpcionListarAnimales::ejecutar(Guarderia * mi_guarderia){
     
     mi_guarderia->obtener_auto()->cargar_combustible();
 
-    mi_guarderia->ver_lista_de_animales();
+    mi_guarderia->ver_diccionario_de_animales();
 }

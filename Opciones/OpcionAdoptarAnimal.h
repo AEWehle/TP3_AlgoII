@@ -17,9 +17,11 @@ class OpcionAdoptarAnimal: public Opcion {
 
     private:
 
-        int pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* lista_adoptables );
+        string* pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* lista_adoptables );
 
         Guarderia* crear_lista_adoptables(Guarderia* mi_guarderia, float espacio);
+
+        float pedir_espacio();
 
 };
 

@@ -14,13 +14,13 @@ void OpcionBuscarAnimal::ejecutar(Guarderia * mi_guarderia){
         cout << "Ingrese el nombre del animal que busca:" << endl << " >> ";
         nombre = pedir_nombre();
 
-
-        if(mi_guarderia->obtener_posicion(nombre) == mi_guarderia->obtener_cantidad()+1)
+        Lista<string>* lista_nombres = mi_guarderia -> obtener_lista_nombres();
+        if( ! lista_nombres -> dato_existente(nombre) )
             cout << nombre << " no se encuentra en la guardería." << endl << endl;
         
         else{
             cout << "SI! " << nombre << " está en la guardería: " << endl ;
-            mi_guarderia -> obtener_animal(mi_guarderia->obtener_posicion(nombre))->mostrar();
+            mi_guarderia -> obtener_animal( nombre )->mostrar();
         }   
     }
 }

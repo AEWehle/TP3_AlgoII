@@ -97,6 +97,10 @@ class Lista {
         void agregar_lista( Lista<Dato>* lista_entrante );
 
 
+        /*Devuelve true si el datoe stá dentro de la lista*/
+        bool dato_existente( Dato dato_buscado );
+
+
     private:
         // PRE: 0 < POS <= cantidad
         // POS: devuelve un ptr al nodo que esta en POS
@@ -171,6 +175,23 @@ Dato* Lista<Dato>::consulta() {
     Nodo<Dato>* nodo = obtener_nodo( this -> cantidad );
     return (nodo->obtener_dato());
 }
+
+
+template <typename Dato>
+bool Lista<Dato>::dato_existente(Dato dato_buscado) {
+    if( vacia() ){
+        return false;
+    }
+    Nodo<Dato>* nodo_actual = this->primero;
+    while (( *nodo_actual -> obtener_dato() != dato_buscado ) ){
+        nodo_actual = nodo_actual -> obtener_siguiente();
+        if ( nodo_actual == nullptr ){
+            return false;
+        }
+    } 
+    return true;
+}
+
 
 
 template <typename Dato>

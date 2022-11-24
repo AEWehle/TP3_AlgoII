@@ -9,7 +9,7 @@ using namespace std;
 // NO HACE DELETE DE LOS ANIMALES, POR SI SE DESEAN SEGUIR USANDO
 
 Guarderia::Guarderia(){
-    //se crea una lista vacía
+    //se crea un diccionario vacío
 }
 
 
@@ -90,4 +90,9 @@ void Guarderia::ver_los_animales( Lista <string>* nombres ){
     else
         cout << "No hay animales en la lista" << endl;
 
+}
+
+
+Lista<string>* Guarderia:: obtener_lista_nombres(){
+    return diccionario_de_animales.obtener_lista_de_claves();
 }

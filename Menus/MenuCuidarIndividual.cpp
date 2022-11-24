@@ -5,8 +5,10 @@ using namespace std;
 // const int CANTIDAD_OPCIONES_PPAL = 7;
 
 
-MenuCuidarIndividual::MenuCuidarIndividual(){
-    animal = 1;   
+MenuCuidarIndividual::MenuCuidarIndividual( Guarderia* mi_guarderia ){
+    lista_nombres = mi_guarderia -> obtener_lista_nombres();
+    numero_de_animal = 1;   
+    nombre_animal = *lista_nombres -> consulta( numero_de_animal );
 
 }
 
@@ -24,13 +26,14 @@ void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia
 {
     switch (eleccion) {
         case 1:
-            mi_guarderia->obtener_animal(animal)->alimentar();
+            mi_guarderia->obtener_animal(nombre_animal)->alimentar();
             break;
         case 2:
-            mi_guarderia->obtener_animal(animal)->duchar();
+            mi_guarderia->obtener_animal(nombre_animal)->duchar();
             break;
         case 3:
-            ++animal;
+            numero_de_animal ++ ;
+            nombre_animal = *lista_nombres -> consulta( numero_de_animal ) ;
             break;
         case 4:
             return;
@@ -44,16 +47,14 @@ void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia
 void MenuCuidarIndividual::ejecutar(Guarderia* mi_guarderia) { 
     int eleccion;
     do{
-        mi_guarderia->obtener_animal(animal);
-        mostrar(); 
+        mi_guarderia -> obtener_animal(nombre_animal) -> mostrar(); 
         eleccion = pedir_eleccion(4);
         ejecutar_opcion(eleccion, mi_guarderia);
-    }while((animal <= mi_guarderia->obtener_cantidad()) && (eleccion != 4));
+    }while((numero_de_animal <= lista_nombres->obtener_cantidad()) && (eleccion != 4));
 
-    if (animal > mi_guarderia->obtener_cantidad()) {
+    if (numero_de_animal > lista_nombres->obtener_cantidad()) {
         std::cout << "Opcion Invalida, ingresa nuevamente." << std::endl ;
     }
-
 }
 
 MenuCuidarIndividual::~MenuCuidarIndividual(){
