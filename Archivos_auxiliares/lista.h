@@ -101,6 +101,11 @@ class Lista {
         bool dato_existente( Dato dato_buscado );
 
 
+        //PRE: -
+        //POST: Devuelve la posición en la lista del dato, o -1 si no se encuentra
+        int obtener_posicion(Dato* dato);
+
+
     private:
         // PRE: 0 < POS <= cantidad
         // POS: devuelve un ptr al nodo que esta en POS
@@ -298,5 +303,27 @@ void Lista<Dato> :: agregar_lista( Lista<Dato>* lista_entrante ) {
         mas_reciente = mas_reciente -> obtener_siguiente();}
     mas_reciente -> cambiar_siguiente( lista_entrante -> obtener_primero());
 }
+
+
+template <typename Dato>
+int Lista<Dato> :: obtener_posicion(Dato* dato){
+
+    int posicion = 1;
+    Nodo<Dato>* auxiliar = this -> primero;
+
+    while( auxiliar -> obtener_dato() != dato && posicion <= obtener_cantidad()){
+
+        auxiliar = auxiliar -> obtener_siguiente();
+        posicion++;
+
+        if( posicion == obtener_cantidad())
+            posicion = 0;
+
+    }
+
+    return posicion;
+
+}
+
 
 #endif // LISTA_TEMPLATE

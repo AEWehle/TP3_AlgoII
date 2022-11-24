@@ -6,6 +6,8 @@ COMANDO: g++ *.cpp Especies/*.cpp Archivos_auxiliares/*.cpp -o TP3 -Wall -Werror
 
 $g++ Animal.cpp Auto.cpp funciones_main.cpp Guarderia.cpp main.cpp mapa.cpp Especies/*.cpp Archivos_auxiliares/*.cpp Menus/*.cpp Opciones/*.cpp  -o TP3 -Wall -Werror -Wconversion -std=c++11 -v -fsanitize=address -g$
 
+g++ *.cpp Especies/*.cpp Archivos_auxiliares/*.cpp Menus/*.cpp Opciones/*.cpp -o TP3 -Wall -Werror -Wconversion
+
 Para ejecutar ./TP3
 
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./TP3

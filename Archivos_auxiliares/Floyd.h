@@ -4,6 +4,8 @@
 
 using namespace std;
 
+const int NO_SE_ENCUENTRA = -1;
+
 // Algoritmo de camino mínimo: Floyd Warshall
 
 class Floyd : public AlgoritmoCaminoMinimo{
