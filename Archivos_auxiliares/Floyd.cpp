@@ -7,8 +7,8 @@ const int INFINITO = 99999;
 Floyd::Floyd(Lista<Vertice>* lista_vertices, int** matriz_de_adyacencia):AlgoritmoCaminoMinimo(lista_vertices,matriz_de_adyacencia){
     matriz_de_caminos = nullptr;
     matriz_de_costos = nullptr;
-    crear_matriz_de_caminos();
-    crear_matriz_de_costos(matriz_de_adyacencia);
+    //crear_matriz_de_caminos();
+    //crear_matriz_de_costos(matriz_de_adyacencia);
     aplicar_floyd();
 }
 
