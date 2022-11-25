@@ -158,6 +158,7 @@ void Floyd::aplicar_floyd(){
             for(int k=0; k<cantidad_vertices_en_algoritmo; k++){
                 if( (matriz_de_adyacencia[j][i] + matriz_de_adyacencia[i][k]) < matriz_de_adyacencia[j][k] && matriz_de_adyacencia[i][k]!=INFINITO && matriz_de_adyacencia[j][i]!=INFINITO){
                     matriz_de_adyacencia[j][k] = matriz_de_adyacencia[j][i] + matriz_de_adyacencia[i][k];
+                    matriz_de_costos[j][k] = matriz_de_adyacencia[j][k];
                     matriz_de_caminos[j][k] = matriz_de_caminos[j][i];
                 }
             }
