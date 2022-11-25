@@ -104,6 +104,11 @@ class Lista {
         //PRE: -
         //POST: Devuelve la posición en la lista del dato, o -1 si no se encuentra
         int obtener_posicion(Dato* dato);
+        
+        //PRE: -
+        //POS: Devuelve la posicion en la lista de un dato pero buscando en la lista por el NOMBRE del dato
+        // (La uso en grafo, en el método dejé comentario sobre luego ver si nos quedamos con ambas o que onda)
+        int obtener_posicion_en_lista(Tipo* dato)
 
 
     private:
@@ -323,6 +328,26 @@ int Lista<Dato> :: obtener_posicion(Dato* dato){
 
     return posicion;
 
+}
+
+// Agrego esta que uso en grafos...igual viendo la anterior creo que difieren en que
+// en ésta se busca en base al nombre del dato y en la anterior se busca por el nodo
+// De última después vemos si nos quedamos con las dos o qué onda
+template <typename Tipo>
+int Lista<Tipo>::obtener_posicion_en_lista(Tipo* dato){
+
+    int posicion_en_lista = NO_SE_ENCUENTRA;
+    int contador = 1;
+
+    while(posicion_en_lista == NO_SE_ENCUENTRA && contador<=cantidad){
+        
+        if((obtener_nodo(contador)->obtener_dato()->obtener_nombre()) == dato->obtener_nombre()){
+            posicion_en_lista = contador;
+        }
+        contador++;
+    }
+
+    return posicion_en_lista;
 }
 
 

@@ -1,5 +1,7 @@
 #include "Grafo.h"
+#include "Algoritmo_camino_min.h"
 #include <iostream>
+
 
 Grafo::Grafo(){
     matriz_de_adyacencia = nullptr;
@@ -74,14 +76,20 @@ void Grafo::mostrar_matriz_adyacencia(){
     int cantidad_vertices = lista_vertices->obtener_cantidad();
     for(int i=0; i<cantidad_vertices; i++){
         for(int j=0; j<cantidad_vertices; j++){
-            cout << "|" <<  matriz_de_adyacencia[i][j] << "|";
+            if(matriz_de_adyacencia[i][j] == INFINITO){
+                cout << "|" <<  "-" << "|";    
+            }else{
+                cout << "|" <<  matriz_de_adyacencia[i][j] << "|";
+            }
+            
         }
         cout << endl;
     }
+
+    cout << endl;
 }
 
-void Grafo::liberar_matriz_adyacencia(){
-    int cantidad_vertices = lista_vertices->obtener_cantidad();
+void Grafo::liberar_matriz_adyacencia(int cantidad_vertices){
     for(int i=0; i<cantidad_vertices; i++){
         delete[] matriz_de_adyacencia[i];
     }
@@ -90,39 +98,46 @@ void Grafo::liberar_matriz_adyacencia(){
 }
 
 void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacente){
-    int nuevo_tamanio = lista_vertices->obtener_cantidad();
+    // tamanio_original porque empiezan en 0 las posiciones en las matrices
+    int tamanio_original = lista_vertices->obtener_cantidad() - 1;
     // Pongo infinito donde aún no hay datos (en toda la fila y toda la col nuevo_tamanio)
-    for(int i=0; i<nuevo_tamanio; i++){
-        nueva_matriz_adyacente[nuevo_tamanio][i] = INFINITO;
-        nueva_matriz_adyacente[i][nuevo_tamanio] = INFINITO;
+    for(int i=0; i<tamanio_original; i++){
+        nueva_matriz_adyacente[tamanio_original][i] = INFINITO;
+        nueva_matriz_adyacente[i][tamanio_original] = INFINITO;
     }
     // Pongo un 0 en la posición en la tabla que refiere a la distancia del vértice a sí mismo
-    nueva_matriz_adyacente[nuevo_tamanio][nuevo_tamanio] = 0;
+    nueva_matriz_adyacente[tamanio_original][tamanio_original] = 0;
 }
 
 int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
     Vertice* vertice = new Vertice(vertice_a_buscar);
 
-    int posicion_vertice = lista_vertices->obtener_posicion(vertice);
+    int posicion_vertice = lista_vertices->obtener_posicion_en_lista(vertice);
 
     if(posicion_vertice == NO_SE_ENCUENTRA){
         cout << "El vertice " << vertice << " no se encuentra en el grafo." << endl;
     }
 
+    delete vertice;
+
     return posicion_vertice;
 }
 
 void Grafo::agregar_camino(int origen, int destino, int costo){
-    // Vertice* vertice_origen = new Vertice(origen);
-    // Vertice* vertice_destino = new Vertice(destino);
-
     int pos_origen = obtener_vertice_en_grafo(origen);
     int pos_destino = obtener_vertice_en_grafo(destino);
 
     if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA){
-        matriz_de_adyacencia[pos_origen][pos_destino] = costo;
-        matriz_de_adyacencia[pos_destino][pos_origen] = costo;
+        matriz_de_adyacencia[pos_origen-1][pos_destino-1] = costo;
+        // Si los costos de ida y vuelta fueran iguales:
+        // matriz_de_adyacencia[pos_destino-1][pos_origen-1] = costo;
     }
+
+    //mostrar_matriz_adyacencia();
+}
+
+void Grafo::aplicar_algoritmo_camino_minimo(){
+    algoritmo_camino_minimo = new Floyd(lista_vertices,matriz_de_adyacencia);
 }
 
 void Grafo::obtener_camino_minimo(int origen, int destino){
@@ -145,6 +160,7 @@ void Grafo::obtener_camino_minimo(int origen, int destino){
 
 Grafo::~Grafo() {
     //delete matrices probar
+    liberar_matriz_adyacencia(lista_vertices->obtener_cantidad());
     matriz_de_adyacencia = nullptr;
     delete lista_vertices;
     delete algoritmo_camino_minimo;

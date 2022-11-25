@@ -11,7 +11,7 @@ class OpcionCuidarAnimales:public Opcion {
     //Atributos
     private:
         //Menu
-        MenuCuidar menu_cuidar;
+        MenuCuidar* menu_cuidar;
 
     public:
         // Constructor tiene que asegurar las invariantes

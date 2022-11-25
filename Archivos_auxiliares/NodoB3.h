@@ -29,7 +29,7 @@ class NodoB3{
     private:
     NodoB3* ultimo_hijo;
     NodoB3* nodo_padre;
-    Lista<Elemento<Dato, Clave>>* elementos; // Contiene por lo menos uno, y hasta dos
+    Lista<Elemento<Dato, Clave> >* elementos; // Contiene por lo menos uno, y hasta dos
 
     public:
         // Constructor
@@ -68,7 +68,7 @@ class NodoB3{
         /*  PRE: -
             POS: Devuelve el puntero a la lista de elementos del nodo.
             */
-        Lista<Elemento<Dato,Clave>>* obtener_lista_elementos();
+        Lista<Elemento<Dato,Clave> >* obtener_lista_elementos();
 
 
         /*  PRE: 
@@ -179,7 +179,7 @@ class NodoB3{
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>                     :: NodoB3( Dato* dato, Clave clave){
     Elemento<Dato, Clave>* elemento = new Elemento<Dato, Clave>(dato, clave, true);
-    this -> elementos = new Lista<Elemento<Dato, Clave>>();
+    this -> elementos = new Lista<Elemento<Dato, Clave> >();
     elementos -> alta( elemento, 1 );
     ultimo_hijo = nullptr;
     nodo_padre = nullptr;
@@ -188,7 +188,7 @@ NodoB3<Dato, Clave>                     :: NodoB3( Dato* dato, Clave clave){
 // Constructor por elemento
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>                     :: NodoB3( Elemento<Dato, Clave>* elemento_entrante ){
-    this -> elementos = new Lista<Elemento<Dato, Clave>>();
+    this -> elementos = new Lista<Elemento<Dato, Clave> >();
     this -> elementos -> alta( elemento_entrante , 1 );
     ultimo_hijo = nullptr;
     nodo_padre = nullptr;
@@ -268,7 +268,7 @@ Clave NodoB3<Dato, Clave>               :: obtener_clave_de( int pos ){
 
 
 template <typename Dato, typename Clave>
-Lista<Elemento<Dato,Clave>>* NodoB3<Dato, Clave> :: obtener_lista_elementos(){
+Lista<Elemento<Dato,Clave> >* NodoB3<Dato, Clave> :: obtener_lista_elementos(){
     return elementos;
 }
 
