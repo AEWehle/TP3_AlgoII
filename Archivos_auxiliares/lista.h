@@ -2,6 +2,7 @@
 #define LISTA_TEMPLATE
 
 #include "nodo.h"
+#include <iostream>
 
 //  EL ORDEN DE LOS ELEMENTOS SE EMPIEZA A CONTAR DESDE 1, NO DESDE 0
 
@@ -141,18 +142,18 @@ Nodo<Dato>* Lista<Dato>::obtener_primero(){
 
 template <typename Dato>
 void Lista<Dato>::alta(Dato* dato, int POS) {
-
+    
     Nodo<Dato>* nuevo = new Nodo<Dato>(dato);
+   
     Nodo<Dato>* siguiente = primero;
 
-    if (POS == 1)
+    if (POS == 1){
         this -> primero = nuevo;
-    else {
+    }else {
         Nodo<Dato>* anterior = obtener_nodo(POS - 1);
         siguiente = anterior -> obtener_siguiente();
         anterior->cambiar_siguiente(nuevo);
     }
-
     nuevo->cambiar_siguiente(siguiente);
     this -> cantidad++;
 
@@ -161,7 +162,8 @@ void Lista<Dato>::alta(Dato* dato, int POS) {
 
 template <typename Dato>
 void Lista<Dato>::alta(Dato* dato) {
-    this -> alta( dato, cantidad+1);
+
+    this -> alta( dato, cantidad); //+1
 }
 
 

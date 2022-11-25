@@ -22,13 +22,7 @@ class ArbolB3 {
         // PRE: -
         // POS: crea un arbol 3 vias vacio y con nodo raiz apuntando a nullptr.
         ArbolB3(  );
-
-
-        // Constructor con parámetros
-        // PRE: -
-        // POS: construye un nodo raiz de arbol B 3 vias
-        ArbolB3( Dato* dato, Clave clave );
-
+        
 
         // Destructor
         ~ArbolB3(  );
@@ -111,18 +105,10 @@ class ArbolB3 {
 template <typename Dato, typename Clave>
 ArbolB3<Dato, Clave>                     :: ArbolB3( ){
     this -> nodo_raiz = nullptr;
+    this -> lista_de_claves = new Lista<Clave>();
     cantidad = 0;
 }
 
-
-// Constructor con parametros
-template <typename Dato, typename Clave>
-ArbolB3<Dato, Clave>                     :: ArbolB3( Dato* dato, Clave clave){
-    this -> nodo_raiz = new NodoB3<Dato, Clave> ( dato , clave );
-    this -> lista_de_claves = new Lista<Clave>();
-    cantidad = 1;
-    this -> lista_de_claves -> alta( clave ) ;
-}
 
 
 // Destructor
@@ -198,7 +184,7 @@ template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
     
     this -> cantidad++;
-    this -> lista_de_claves -> alta(&clave); 
+    this -> lista_de_claves -> alta(&clave, cantidad); 
     if ( nodo_actual == nullptr) {
         nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
     }

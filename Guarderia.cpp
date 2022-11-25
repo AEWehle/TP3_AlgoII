@@ -67,6 +67,8 @@ void Guarderia::ver_diccionario_de_animales(  ){
         Lista <string>*  nombres = diccionario_de_animales.obtener_lista_de_claves();
 
         for( int numero_animal = 1 ; numero_animal <= nombres -> obtener_cantidad(); numero_animal++){
+           cout <<  *nombres -> consulta( numero_animal ) << endl;
+           
            diccionario_de_animales.consulta( *nombres -> consulta( numero_animal ) ) -> mostrar();
         }
     } 
