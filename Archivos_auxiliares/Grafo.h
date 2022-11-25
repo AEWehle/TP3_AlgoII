@@ -46,7 +46,7 @@ class Grafo{
 
         void mostrar_matriz_adyacencia();
         
-        void liberar_matriz_adyacencia();
+        void liberar_matriz_adyacencia(int cantidad_vertices);
 
         int obtener_vertice_en_grafo(int vertice);
 
