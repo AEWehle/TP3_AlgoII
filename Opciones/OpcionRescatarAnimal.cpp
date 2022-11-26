@@ -1,4 +1,5 @@
 #include "OpcionRescatarAnimal.h"
+#include <time.h>
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
     mi_guarderia->afectar_animales();
@@ -6,37 +7,60 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
 
     Mapa* mapa = introduccion();
 
-    int combustible_gastado;
-    
-    char especie_rescatada = mapa->ejecutar(mi_guarderia->obtener_auto()->obtener_combustible, combustible_gastado);
+    int combustible_gastado = 0;
+    char especie_rescatada = ' ';
+    bool rescatando = true;
 
-    mi_guarderia->obtener_auto()->decrementar_combustible(combustible_gastado);
+    while(rescatando){
+        bool salida_ok = mapa->ejecutar(mi_guarderia->obtener_auto()->obtener_combustible(), combustible_gastado, especie_rescatada);
 
-    cout << endl << "Rescataste un animal?" << endl;
-    cout << endl << "Cómo se va a llamar?" << endl;
-    cout << " >> ";
-    string nombre = pedir_nombre();
+        if(!salida_ok)
+            rescatando = false;
 
-    if ( !otro_nombre( mi_guarderia, nombre )){
-        cout << "Rescate cancelado." << endl;
-        return;
+        else{        
+
+            mi_guarderia->obtener_auto()->decrementar_combustible(combustible_gastado);
+
+            Animal* nuevo_animal = generar_animal(especie_rescatada);
+
+            mi_guarderia -> agregar_animal(nuevo_animal);
+
+        }
+
     }
-
-    int edad = pedir_edad();
-    string tamano = pedir_tamano(); 
-    char especie = ESPECIE_CHAR[pedir_especie()];
-    string personalidad = PERSONALIDADES[pedir_personalidad()];
-
-    Animal* nuevo_animal = crear_nuevo_animal(especie, nombre, edad, tamano, personalidad);
-
-    mi_guarderia -> agregar_animal(nuevo_animal);
-
-    cout << endl << nombre << " fue rescatado!" << endl << endl;
-    //mi_guarderia -> obtener_animal( mi_guarderia -> obtener_cantidad() ) -> mostrar();
 }
 
 
-Mapa* introduccion(){
+Animal* OpcionRescatarAnimal::generar_animal(char especie){
+
+    int especie_int;
+
+    for(int i = 0; i < CANTIDAD_ESPECIES; i++){
+        if(ESPECIE_CHAR[i] == especie)
+            especie_int = i;
+    }
+    
+    cout << "Que bien! Rescataste un " << ESPECIE_STRING[especie_int] << endl;
+
+    srand((unsigned int)time(nullptr));
+    int edad = rand() % 101; //De 0 a 100
+    string tamano = TAMANOS_STRING[rand() % 5];
+    string personalidad = PERSONALIDADES[rand() % 4];
+    string nombre;
+
+    cout << "Parece tener unos " << edad << " años, su tamaño es " << tamano << " y parece " << personalidad << "." << endl;
+    cout << "Qué nombre le querés poner?";
+
+    cin >> nombre;
+
+    Animal* nuevo_animal = crear_nuevo_animal(especie, nombre, edad, tamano, personalidad);
+
+    return nuevo_animal;
+
+}
+
+
+Mapa* OpcionRescatarAnimal::introduccion(){
 
     cout << "Ahora la reserva cuenta con un vehículo para rescatar animales!" << endl
         << "Pero el camino hasta el animal a rescatar puede ser peligroso y gastar mucho combustible, cuidado!" << endl
