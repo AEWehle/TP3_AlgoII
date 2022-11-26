@@ -1,12 +1,11 @@
 #include "Grafo.h"
-#include "Algoritmo_camino_min.h"
 #include <iostream>
-
+#include "Algoritmo_camino_min.h"
 
 Grafo::Grafo(){
     matriz_de_adyacencia = nullptr;
-    lista_vertices = new Lista<Vertice>();
     algoritmo_camino_minimo = nullptr;
+    lista_vertices = new Lista<Vertice>();
 }
 
 void Grafo::mostrar_grafo(){
@@ -17,19 +16,24 @@ void Grafo::mostrar_grafo(){
 void Grafo::mostrar_vertices(){
     cout << "Vértices: ";
     int cantidad_vertices = lista_vertices->obtener_cantidad();
-    for(int i=1; i<=cantidad_vertices; i++){
-        cout << lista_vertices->consulta(i)->obtener_nombre();
-        if( (i+1) != cantidad_vertices){
+
+    int contador = 1;
+    while(contador != cantidad_vertices+1){
+        cout << lista_vertices->consulta(contador)->obtener_nombre();
+        if(contador != cantidad_vertices){
             cout << " - ";
         }
-    }
+        contador++;
+    };
+
+    cout << endl << endl;
 }
 
 void Grafo::agregar_vertice(int nuevo){
     Vertice* nuevo_vertice = new Vertice(nuevo);
+
     lista_vertices->alta(nuevo_vertice,lista_vertices->obtener_cantidad()+1);
 
-    //algo con matriz de adyacencia
     if(lista_vertices->obtener_cantidad() == 1){
         // Creo matriz de adyacencia
         crear_matriz_de_adyacencia();
@@ -66,7 +70,7 @@ void Grafo::agrandar_matriz_de_adyacencia(){
     actualizar_vertices_en_matriz_adyacencia(matriz_aux);
 
     // Libero la memoria pedida para la matriz original y la reemplazo por la nueva
-    liberar_matriz_adyacencia();
+    liberar_matriz_adyacencia(tamanio_original);
 
     matriz_de_adyacencia = matriz_aux;
 }
@@ -133,7 +137,6 @@ void Grafo::agregar_camino(int origen, int destino, int costo){
         // matriz_de_adyacencia[pos_destino-1][pos_origen-1] = costo;
     }
 
-    //mostrar_matriz_adyacencia();
 }
 
 void Grafo::aplicar_algoritmo_camino_minimo(){
@@ -148,18 +151,8 @@ void Grafo::obtener_camino_minimo(int origen, int destino){
     algoritmo_camino_minimo->mostrar_camino_minimo(pos_origen,pos_destino);
 }
 
-// void Grafo::aplicar_algoritmo_camino_minimo(int origen, int destino){
-
-//     algoritmo_camino_minimo->mostrar_camino_minimo(origen,destino);
-
-
-// }
-
-
-
 
 Grafo::~Grafo() {
-    //delete matrices probar
     liberar_matriz_adyacencia(lista_vertices->obtener_cantidad());
     matriz_de_adyacencia = nullptr;
     delete lista_vertices;

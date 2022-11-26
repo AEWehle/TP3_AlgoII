@@ -4,8 +4,6 @@
 
 using namespace std;
 
-const int NO_SE_ENCUENTRA = -1;
-
 // Algoritmo de camino mínimo: Floyd Warshall
 
 class Floyd : public AlgoritmoCaminoMinimo{
@@ -31,13 +29,16 @@ class Floyd : public AlgoritmoCaminoMinimo{
 
         void aplicar_floyd();
 
-        // void mostrar_matriz_de_costos();
+        int hallar_siguiente_vertice_en_el_camino(int origen, int destino);
 
-        // void mostrar_matriz_de_caminos();
+        void mostrar_siguiente_paso_en_camino(int nuevo_origen);
+
+        void mostrar_matriz_de_costos();
+
+        void mostrar_matriz_de_caminos();
 
         void liberar_matriz(int** matriz);
 };
-
 
 
 #endif // FLOYD_H
