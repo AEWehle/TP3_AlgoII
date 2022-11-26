@@ -178,9 +178,11 @@ class NodoB3{
 // Constructor por dato y clave
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>                     :: NodoB3( Dato* dato, Clave clave){
+    // cout << "El animal es "<< endl;
+    // dato -> mostrar();
     Elemento<Dato, Clave>* elemento = new Elemento<Dato, Clave>(dato, clave, true);
     this -> elementos = new Lista<Elemento<Dato, Clave> >();
-    elementos -> alta( elemento, 1 );
+    elementos -> alta( elemento);
     ultimo_hijo = nullptr;
     nodo_padre = nullptr;
 }

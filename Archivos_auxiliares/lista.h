@@ -109,7 +109,7 @@ class Lista {
         //PRE: -
         //POS: Devuelve la posicion en la lista de un dato pero buscando en la lista por el NOMBRE del dato
         // (La uso en grafo, en el método dejé comentario sobre luego ver si nos quedamos con ambas o que onda)
-        int obtener_posicion_en_lista(Tipo* dato)
+        int obtener_posicion_en_lista(Dato* dato);
 
 
     private:
@@ -168,7 +168,7 @@ void Lista<Dato>::alta(Dato* dato, int POS) {
 template <typename Dato>
 void Lista<Dato>::alta(Dato* dato) {
 
-    this -> alta( dato, cantidad); //+1
+    this -> alta( dato, cantidad+1); //+1
 }
 
 
@@ -177,7 +177,7 @@ template <typename Dato>
 Dato* Lista<Dato>::consulta(int POS) {
 
     Nodo<Dato>* nodo = obtener_nodo(POS);
-    return (nodo->obtener_dato());
+    return (nodo -> obtener_dato());
 }
 
 
@@ -327,17 +327,15 @@ int Lista<Dato> :: obtener_posicion(Dato* dato){
             posicion = 0;
 
     }
-
     return posicion;
-
 }
 
 // Agrego esta que uso en grafos...igual viendo la anterior creo que difieren en que
 // en ésta se busca en base al nombre del dato y en la anterior se busca por el nodo
 // De última después vemos si nos quedamos con las dos o qué onda
-template <typename Tipo>
-int Lista<Tipo>::obtener_posicion_en_lista(Tipo* dato){
-
+template <typename Dato>
+int Lista<Dato>::obtener_posicion_en_lista(Dato* dato){
+    int NO_SE_ENCUENTRA = -1;
     int posicion_en_lista = NO_SE_ENCUENTRA;
     int contador = 1;
 

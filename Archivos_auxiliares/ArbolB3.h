@@ -99,8 +99,6 @@ class ArbolB3 {
 };
 
 
-
-
 // Constructor sin parametros
 template <typename Dato, typename Clave>
 ArbolB3<Dato, Clave>                     :: ArbolB3( ){
@@ -108,7 +106,6 @@ ArbolB3<Dato, Clave>                     :: ArbolB3( ){
     this -> lista_de_claves = new Lista<Clave>();
     cantidad = 0;
 }
-
 
 
 // Destructor
@@ -120,6 +117,43 @@ ArbolB3<Dato, Clave>                     :: ~ArbolB3( ){
         delete lista_de_claves;
         lista_de_claves = nullptr;
         cantidad = 0;
+}
+
+
+// Ingresar dato segun clave, llamo a recursion
+template <typename Dato, typename Clave>
+void ArbolB3<Dato, Clave>               :: agregar_dato( Dato* dato, Clave clave){
+    agregar_dato( nodo_raiz , dato , clave );
+    return;    
+}    
+
+
+// Ingresar dato segun clave
+template <typename Dato, typename Clave>
+void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
+    
+    this -> lista_de_claves -> alta( &clave); 
+    this -> cantidad++;
+
+    if ( nodo_actual == nullptr) {
+        nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
+    }
+    else{
+        if( nodo_actual -> es_hoja() ){
+            NodoB3<Dato,Clave>* nodo_padre = nodo_actual -> agregar_elemento( dato, clave );
+            if ( nodo_padre != nullptr ){ // Me fijo si tengo que cambiar el nodo raiz
+                nodo_actual = nodo_padre;
+                while ( nodo_actual -> tiene_padre() ){
+                    nodo_actual = nodo_actual -> obtener_nodo_padre();
+                }
+                this -> nodo_raiz = nodo_actual;
+            }
+            return;
+        }
+        else{// Si no es hoja tengo que buscar a que nodo hijo le correpsonde la clave
+            return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
+        }
+    }
 }
 
 
@@ -135,6 +169,7 @@ void ArbolB3<Dato, Clave>               :: baja( Clave clave ){
     }
     return;
 }
+
 
 template <typename Dato, typename Clave>
 bool ArbolB3<Dato, Clave>               :: baja(  NodoB3<Dato,Clave>* nodo_actual,  Clave clave ){
@@ -156,54 +191,6 @@ bool ArbolB3<Dato, Clave>               :: baja(  NodoB3<Dato,Clave>* nodo_actua
         return false;
     }
     return baja( nodo_actual -> obtener_hijo( clave_men_igu_o_may +1 ) , clave) ;
-}
-
-
-
-
-
-
-
-template <typename Dato, typename Clave>
-int ArbolB3<Dato, Clave>               :: obtener_cantidad(){
-    return this -> cantidad;
-}
-
-
-// Ingresar dato segun clave, llamo a recursion
-template <typename Dato, typename Clave>
-void ArbolB3<Dato, Clave>               :: agregar_dato( Dato* dato, Clave clave){
-    agregar_dato( nodo_raiz , dato , clave );
-    return;    
-}    
-
-
-
-// Ingresar dato segun clave
-template <typename Dato, typename Clave>
-void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
-    
-    this -> cantidad++;
-    this -> lista_de_claves -> alta(&clave, cantidad); 
-    if ( nodo_actual == nullptr) {
-        nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
-    }
-    else{
-        if( nodo_actual -> es_hoja() ){
-            NodoB3<Dato,Clave>* nodo_padre = nodo_actual -> agregar_elemento( dato, clave );
-            if ( nodo_padre != nullptr ){ // Me fijo si tengo que cambiar el nodo raiz
-                nodo_actual = nodo_padre;
-                while ( nodo_actual -> tiene_padre() ){
-                    nodo_actual = nodo_actual -> obtener_nodo_padre();
-                }
-                this -> nodo_raiz = nodo_actual;
-            }
-            return;
-        }
-        else{// Si no es hoja tengo que buscar a que nodo hijo le correpsonde la clave
-            return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
-        }
-    }
 }
 
 
@@ -283,6 +270,12 @@ void ArbolB3<Dato, Clave>               :: mostrar_arbolb3( NodoB3<Dato,Clave> *
         mostrar_arbolb3(nodo_actual -> obtener_hijo(3), generacion+1);
     }
     return;
+}
+
+
+template <typename Dato, typename Clave>
+int ArbolB3<Dato, Clave>               :: obtener_cantidad(){
+    return this -> cantidad;
 }
 
 
