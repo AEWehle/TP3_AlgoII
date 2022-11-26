@@ -4,8 +4,16 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
     mi_guarderia->afectar_animales();
     mi_guarderia->obtener_auto()->cargar_combustible();
 
+    Mapa* mapa = introduccion();
+
+    int combustible_gastado;
+    
+    char especie_rescatada = mapa->ejecutar(mi_guarderia->obtener_auto()->obtener_combustible, combustible_gastado);
+
+    mi_guarderia->obtener_auto()->decrementar_combustible(combustible_gastado);
+
     cout << endl << "Rescataste un animal?" << endl;
-    cout << endl << "Cómo se llama?" << endl;
+    cout << endl << "Cómo se va a llamar?" << endl;
     cout << " >> ";
     string nombre = pedir_nombre();
 
@@ -25,6 +33,38 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
 
     cout << endl << nombre << " fue rescatado!" << endl << endl;
     //mi_guarderia -> obtener_animal( mi_guarderia -> obtener_cantidad() ) -> mostrar();
+}
+
+
+Mapa* introduccion(){
+
+    cout << "Ahora la reserva cuenta con un vehículo para rescatar animales!" << endl
+        << "Pero el camino hasta el animal a rescatar puede ser peligroso y gastar mucho combustible, cuidado!" << endl
+        << "Solo se podrán rescatar animales cuando el combustible sea suficiente" << endl << endl;
+
+    string respuesta = "";
+
+    while(respuesta != "si" && respuesta != "no"){
+
+        cout << "Desea rescatar animales en un terreno personalizado? [si/no]" << endl;
+        cin >> respuesta;
+
+    }
+
+    Mapa* mapa;
+
+    if(respuesta == "no")
+        mapa = new Mapa();
+    else{
+
+        cout << endl << "Ingrese el nombre del terreno en la forma \"mi_terreno.csv\"" << endl;
+        cin >> respuesta;
+        mapa = new Mapa(respuesta);
+
+    }
+
+    return mapa;
+
 }
 
 
@@ -119,7 +159,6 @@ int OpcionRescatarAnimal::pedir_especie(){
     return especie-1;
 
 }
-
 
 
 int OpcionRescatarAnimal::pedir_personalidad(){
