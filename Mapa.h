@@ -67,6 +67,19 @@ class Mapa{
         //
         void imprimir_casilla(int i, int j);
 
+        //
+        void explicacion();
+
+        // PRE: el combustible está entre 0 y 100
+        // POST: 
+        char ejecutar(int combustible, int combustible_gastado);
+
+        //
+        void pedir_coordenadas(int &coord_num, int &coord_letra);
+
+        //
+        void verificar_coordenadas(int &coord_num, int &coord_letra, char &salida);
+
 };
 
 #endif //MAPA_H
