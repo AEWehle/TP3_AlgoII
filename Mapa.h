@@ -70,15 +70,17 @@ class Mapa{
         //
         void explicacion();
 
-        // PRE: el combustible está entre 0 y 100
-        // POST: 
-        char ejecutar(int combustible, int combustible_gastado);
-
         //
         void pedir_coordenadas(int &coord_num, int &coord_letra);
 
         //
-        void verificar_coordenadas(int &coord_num, int &coord_letra, char &salida);
+        char verificar_coordenadas(int &coord_num, int &coord_letra, bool &coord_ok);
+
+    public:
+        
+        // PRE: el combustible está entre 0 y 100
+        // POST: 
+        bool ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada);
 
 };
 

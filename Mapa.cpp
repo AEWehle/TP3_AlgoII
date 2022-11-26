@@ -286,25 +286,31 @@ void Mapa::explicacion(){
 }
 
 
-char Mapa::ejecutar(int combustible, int combustible_gastado){
+bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada){
 
     mostrar();
 
     int coord_num, coord_letra;
-    char salida = '';
+    bool coord_ok = false;
 
-    while(salida != ' '){
+    while(!coord_ok){
 
         pedir_coordenadas(coord_num, coord_letra);
 
         if(coord_num == 0)
-            salida = ' ';  //Cancelar rescate
+            return false;  //Cancelar rescate
 
-        verificar_coordenadas(coord_num, coord_letra, salida);
+        especie_rescatada = verificar_coordenadas(coord_num, coord_letra, coord_ok);
 
     }
 
-    return salida;
+    //Chequear con camino mínimo
+
+    ocupantes[coord_num][coord_letra] = 'A';
+
+    //Marcar el camino recorrido
+
+    return true;
 
 }
 
@@ -339,16 +345,21 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra){
 }
 
 
-void Mapa::verificar_coordenadas(int &coord_num, int &coord_letra, char &salida){
-
-    if(salida == ' ')
-        return;
+char Mapa::verificar_coordenadas(int &coord_num, int &coord_letra, bool &coord_ok){
 
     char ocupante = ocupantes[coord_num][coord_letra];
 
-    if(ocupante == 'A'){
+    if(ocupante == 'A')
         cout << "Esta es tu ubicación!" << endl;
-        return;
+
+    else if(ocupante == ' ')
+        cout << "No hay ningún animal ahí!" << endl;
+
+    else{
+        cout << "Se avistó un animal en esas coordenadas!" << endl;
+        coord_ok = true;
     }
+
+    return ocupante;
 
 }

@@ -18,6 +18,8 @@ class OpcionRescatarAnimal: public Opcion {
 
     private:
 
+        Animal* generar_animal(char especie);
+
         Mapa* introduccion();
 
         bool otro_nombre( Guarderia* mi_guarderia, string & nombre );
