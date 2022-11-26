@@ -50,8 +50,6 @@ class Grafo{
 
         int obtener_vertice_en_grafo(int vertice);
 
-        // void aplicar_algoritmo_camino_minimo(int origen, int destino);
-
 };
 
 #endif //GRAFO_H
