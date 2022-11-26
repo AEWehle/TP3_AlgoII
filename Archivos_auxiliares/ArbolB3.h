@@ -75,7 +75,7 @@ class ArbolB3 {
         // PRE: la clave no se puede repetir
         // POS: Inresa el dato en su ubicacion segun la clave
         // Esta otra forma de la funcion es para aplicar recursividad
-        void agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave);
+        void agregar_dato( NodoB3<Dato,Clave>*& nodo_actual, Dato* dato, Clave clave);
 
 
         // PRE: 
@@ -123,16 +123,17 @@ ArbolB3<Dato, Clave>                     :: ~ArbolB3( ){
 // Ingresar dato segun clave, llamo a recursion
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: agregar_dato( Dato* dato, Clave clave){
-    agregar_dato( nodo_raiz , dato , clave );
-    return;    
+    return agregar_dato( this -> nodo_raiz , dato , clave );    
 }    
 
 
 // Ingresar dato segun clave
 template <typename Dato, typename Clave>
-void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nodo_actual, Dato* dato, Clave clave){
+void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* &nodo_actual, Dato* dato, Clave clave){
     
-    this -> lista_de_claves -> alta( &clave); 
+    // Clave* clave_heap = new Clave;
+    // *clave_heap = clave;
+    this -> lista_de_claves -> alta( new Clave {clave}); 
     this -> cantidad++;
 
     if ( nodo_actual == nullptr) {
@@ -151,7 +152,8 @@ void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* nod
             return;
         }
         else{// Si no es hoja tengo que buscar a que nodo hijo le correpsonde la clave
-            return agregar_dato( nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 ), dato, clave );
+            NodoB3<Dato,Clave>*hijo = nodo_actual -> obtener_hijo( nodo_actual -> clave_menor_entra_mayor( clave ) + 1 );
+            return agregar_dato( hijo, dato, clave );
         }
     }
 }
@@ -237,8 +239,8 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_ac
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: mostrar_arbolb3(){
     cout << "Nodo raiz:" << endl;
-    this-> nodo_raiz -> mostrar_nodob3() ;
-    if ( nodo_raiz->es_hoja() ){
+    this -> nodo_raiz -> mostrar_nodob3();
+    if ( this -> nodo_raiz -> es_hoja() ){
         cout << "Es hoja"<< endl << endl;
         return;
     }
