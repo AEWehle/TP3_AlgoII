@@ -72,10 +72,8 @@ void Guarderia::ver_diccionario_de_animales(  ){
            diccionario_de_animales.consulta( *nombres -> consulta( numero_animal ) ) -> mostrar();
         }
     } 
-
     else
         cout << "No hay animales en la lista" << endl;
-
 }
 
 

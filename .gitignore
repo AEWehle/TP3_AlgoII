@@ -31,6 +31,7 @@
 *.out
 *.app
 TP3
+TP3_MOD
 
 #Drive
 *.ini
