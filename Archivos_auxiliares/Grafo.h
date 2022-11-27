@@ -4,12 +4,11 @@
 #include "Vertice.h"
 #include "Algoritmo_camino_min.h"
 #include "Floyd.h"
-#include <iostream>
 
 using namespace std;
 
 const int INFINITO = 99999;
-const int NO_SE_ENCUENTRA = -1;
+
 class Grafo{
     // Atributos
     private:
@@ -31,7 +30,11 @@ class Grafo{
         
         void agregar_camino(int origen, int destino, int costo);
 
+        void mapa_a_grafo(int dimensiones, int** matriz_de_costos_en_mapa);
+
         void obtener_camino_minimo(int origen, int destino);
+
+        void obtener_camino_minimo_por_coordenadas(int coord_x_origen, int coord_y_origen, int coord_x_destino, int coord_y_destino);
 
         void aplicar_algoritmo_camino_minimo();
 
@@ -42,13 +45,15 @@ class Grafo{
 
         void agrandar_matriz_de_adyacencia();
 
-        void actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacente);
+        void actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacencia);
 
         void mostrar_matriz_adyacencia();
         
         void liberar_matriz_adyacencia(int cantidad_vertices);
 
         int obtener_vertice_en_grafo(int vertice);
+
+        int convertir_coordenadas_a_celda(int coord_x, int coord_y);
 
 };
 

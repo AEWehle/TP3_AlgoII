@@ -61,15 +61,38 @@ void Mapa::iniciar_matrices(){
     terreno = crear_matriz<char>();
     ocupantes = crear_matriz<char>();
     visitados = crear_matriz<bool>();
+    matriz_de_costos_por_destino = crear_matriz<int>();
 
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             terreno[i][j] = ' ';
             ocupantes[i][j] = ' ';
             visitados[i][j] = false;
+            matriz_de_costos_por_destino[i][j] = obtener_costo_de_viaje(terreno[i][j]);
         }
     }
 
+}
+
+int Mapa::obtener_costo_de_viaje(char destino){
+    int costo = 0;
+    
+    switch (destino){
+    case 'C':
+        costo = 1;
+        break;
+    case 'T':
+        costo = 2;
+        break;
+    case 'M':
+        costo = 5;
+        break;
+    case 'P':
+        costo = 40;
+        break;
+    }
+
+    return costo;
 }
 
 
@@ -299,6 +322,18 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
     }
 
     //Chequear con camino mínimo
+    int coord_x_origen = 0;
+    int coord_y_origen = 0;
+    int coord_x_destino = coord_num;
+    int coord_y_destino = coord_letra;
+
+    Grafo* grafo = new Grafo();
+
+    grafo->mapa_a_grafo(8,matriz_de_costos_por_destino);
+
+    grafo->aplicar_algoritmo_camino_minimo();
+
+    grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino);
 
     ocupantes[coord_num][coord_letra] = 'A';
 
