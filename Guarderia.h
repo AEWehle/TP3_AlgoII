@@ -26,6 +26,7 @@ class Guarderia{
     private:
         ArbolB3<Animal, string>* diccionario_de_animales;
         Auto automovil;
+        int escapados;
 
     //Metodos
 
@@ -90,6 +91,10 @@ class Guarderia{
          del diccionario*/
             Lista<string>* obtener_lista_nombres();
 
+        /* Obtener escapados 
+        PRE: -
+        POST: Devuelve escapados*/
+            int obtener_escapados();
 };
 
 #endif

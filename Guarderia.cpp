@@ -1,3 +1,4 @@
+#include <ostream>
 #include <string>
 #include <iostream> 
 #include "Guarderia.h"
@@ -10,6 +11,7 @@ using namespace std;
 
 Guarderia::Guarderia(){
     this -> diccionario_de_animales = new ArbolB3<Animal,string>();
+    this->escapados = 0;
 }
 
 
@@ -27,10 +29,24 @@ void Guarderia::agregar_animal( Animal* nuevo_animal ){
 
 void Guarderia::afectar_animales(){
     Lista<string>* claves = diccionario_de_animales -> obtener_lista_de_claves();
+    
     for(int i = 1; i <= claves -> obtener_cantidad(); i++) {
-       this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
-       this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
+    this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
+    this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
+
+        if((this -> obtener_animal(*claves -> consulta(i))->obtener_hambre()==100) || (this -> obtener_animal(*claves -> consulta(i))->obtener_higiene()==0)){
+            
+            //this->eliminar_animal(*claves->consulta(i));
+            ++this->escapados;
+        }
+
+        if (escapados == 3) {
+            cout << "Se escaparon 3 animales... Tenemos que clausurar la guarderia." << endl;
+            return;
+        }
+
     }
+    
 }
 
 
@@ -95,4 +111,8 @@ void Guarderia::ver_los_animales( Lista <string>* nombres ){
 
 Lista<string>* Guarderia:: obtener_lista_nombres(){
     return diccionario_de_animales -> obtener_lista_de_claves();
+}
+
+int Guarderia::obtener_escapados(){
+    return escapados;
 }

@@ -2,9 +2,6 @@
 #include <time.h>
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
-    mi_guarderia->afectar_animales();
-    mi_guarderia->obtener_auto()->cargar_combustible();
-
     Mapa* mapa = introduccion();
 
     int combustible_gastado = 0;
@@ -28,6 +25,9 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
         }
 
     }
+
+    mi_guarderia->afectar_animales();
+    mi_guarderia->obtener_auto()->cargar_combustible();
 }
 
 

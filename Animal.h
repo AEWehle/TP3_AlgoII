@@ -10,7 +10,7 @@ const int CANTIDAD_ESPECIES = 7;
 const int CANTIDAD_PERSONALIDADES = 4;
 const int CANTIDAD_TAMANOS = 5;
 const int PUNTOS_HAMBRE = 10;
-const int PUNTOS_HIGIENTE = 10;
+const int PUNTOS_HIGIENE = 10;
 
 const char ESPECIE_CHAR[ CANTIDAD_ESPECIES ] = { 'P', 'G', 'C', 'R', 'O', 'E', 'L' }; 
 const string ESPECIE_STRING[ CANTIDAD_ESPECIES ]= { "Perro", "Gato", "Caballo", "Roedor", "Conejo", "Erizo", "Lagartija" }; 
