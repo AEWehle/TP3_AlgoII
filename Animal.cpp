@@ -141,14 +141,14 @@ void Animal::ensuciar(){
     if(higiene!=0){
         if (personalidad == PERSONALIDADES[2]) {
             //Caso se ensucia la mitad
-            higiene = higiene - PUNTOS_HIGIENTE/2;
+            higiene = higiene - PUNTOS_HIGIENE/2;
         }
         else if (personalidad == PERSONALIDADES[3]) {
             //Caso se ensucia el doble
-            higiene = higiene - 2*PUNTOS_HIGIENTE;
+            higiene = higiene - 2*PUNTOS_HIGIENE;
         }
         else{
-            higiene = higiene - PUNTOS_HIGIENTE;
+            higiene = higiene - PUNTOS_HIGIENE;
         }
 
         if(higiene < 30){
