@@ -3,10 +3,6 @@
 
 
 void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
-
-    mi_guarderia->afectar_animales();
-    mi_guarderia->obtener_auto()->cargar_combustible();
-
     if(mi_guarderia->obtener_cantidad()==0){
         cout << "No hay animales disponibles para adoptar." << endl;
     }
@@ -36,6 +32,9 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
         
         delete animales_adoptables;
     }
+    mi_guarderia->afectar_animales();
+    
+    mi_guarderia->obtener_auto()->cargar_combustible();
 
 }
 

@@ -48,14 +48,14 @@ void MenuPrincipal::ejecutar(Guarderia *mi_guarderia){
         eleccion = pedir_eleccion(CANTIDAD_OPCIONES);
         ejecutar_opcion(eleccion, mi_guarderia);
     }
-    while ( eleccion != (CANTIDAD_OPCIONES) );
+    while ( (eleccion != (CANTIDAD_OPCIONES)) && (mi_guarderia->obtener_escapados()<3));
     
 }
 
 MenuPrincipal::~MenuPrincipal(){
     int cant_opciones = opciones.obtener_cantidad();
      for (int i = 1; i < (cant_opciones + 1); ++i) {
-        cout << i << '\n'; // se tiene que ejecutar 7 veces
+        //cout << i << '\n'; // se tiene que ejecutar 7 veces
         Opcion* actual = opciones.consulta(i);
         delete actual;
     }

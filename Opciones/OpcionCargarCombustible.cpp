@@ -12,6 +12,7 @@
     mi_guarderia->obtener_auto()->cargar_combustible(cant_a_cargar);
 
     //cout << "El auto tiene: " << mi_guarderia->obtener_auto()->obtener_combustible() << " de combustible." << endl;
+    mi_guarderia->afectar_animales();
 }
 
 int OpcionCargarCombustible::pedir_cantidad_combustible(){
