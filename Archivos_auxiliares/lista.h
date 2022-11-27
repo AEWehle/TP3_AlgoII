@@ -318,7 +318,7 @@ int Lista<Dato> :: obtener_posicion(Dato* dato){
     int posicion = 1;
     Nodo<Dato>* auxiliar = this -> primero;
 
-    while( auxiliar -> obtener_dato() != dato && posicion <= obtener_cantidad()){
+    while( (*auxiliar -> obtener_dato() != *dato ) && posicion <= obtener_cantidad()){
 
         auxiliar = auxiliar -> obtener_siguiente();
         posicion++;
