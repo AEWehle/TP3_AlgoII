@@ -67,6 +67,21 @@ class Mapa{
         //
         void imprimir_casilla(int i, int j);
 
+        //
+        void explicacion();
+
+        //
+        void pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar);
+
+        //
+        char verificar_coordenadas(int &coord_num, int &coord_letra, bool &coord_ok);
+
+    public:
+        
+        // PRE: el combustible está entre 0 y 100
+        // POST: 
+        bool ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada);
+
 };
 
 #endif //MAPA_H

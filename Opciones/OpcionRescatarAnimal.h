@@ -6,6 +6,7 @@
 #include "../Archivos_auxiliares/funciones_auxiliares.h"
 #include <limits>
 #include <string>
+#include "../Mapa.h"
 using namespace std; 
 
 class OpcionRescatarAnimal: public Opcion {
@@ -16,6 +17,10 @@ class OpcionRescatarAnimal: public Opcion {
         void ejecutar(Guarderia * mi_guarderia) override;
 
     private:
+
+        Animal* generar_animal(char especie);
+
+        Mapa* introduccion();
 
         bool otro_nombre( Guarderia* mi_guarderia, string & nombre );
 
