@@ -71,7 +71,7 @@ class Mapa{
         void explicacion();
 
         //
-        void pedir_coordenadas(int &coord_num, int &coord_letra);
+        void pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar);
 
         //
         char verificar_coordenadas(int &coord_num, int &coord_letra, bool &coord_ok);

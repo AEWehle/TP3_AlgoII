@@ -212,24 +212,16 @@ void Mapa::buscar_mapa(string ruta){
 }
 
 
-void Mapa::mostrar(){
-
-    //visitados[0][0] = true;
-    //visitados[1][0] = true;
-    //visitados[2][0] = true;
-    //visitados[2][1] = true;
-    //visitados[2][2] = true;
-    //visitados[3][2] = true;
-    
+void Mapa::mostrar(){    
 
     cout << BORDE << "    a  b  c  d  e  f  g  h    " << RESET << endl;
     
     for(int i = 0; i < 8; i++){
-        cout << BORDE << " " << i << " " << RESET;
+        cout << BORDE << " " << i+1 << " " << RESET;
         for (int j = 0; j < 8; j++){
             imprimir_casilla(i, j);
         }
-        cout << BORDE << " " << i << " " << RESET << endl;
+        cout << BORDE << " " << i+1 << " " << RESET << endl;
     }
 
     cout << BORDE << "    a  b  c  d  e  f  g  h    " << RESET << endl << endl;
@@ -291,14 +283,16 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
     mostrar();
 
     int coord_num, coord_letra;
-    bool coord_ok = false;
+    bool coord_ok = false, cancelar = false;
 
     while(!coord_ok){
 
-        pedir_coordenadas(coord_num, coord_letra);
+        pedir_coordenadas(coord_num, coord_letra, cancelar);
 
-        if(coord_num == 0)
+        if(cancelar){
+            cout << "Rescate cancelado!" << endl;
             return false;  //Cancelar rescate
+        }
 
         especie_rescatada = verificar_coordenadas(coord_num, coord_letra, coord_ok);
 
@@ -315,19 +309,22 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 }
 
 
-void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra){
+void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
     cout << "Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << ">>" << endl;
     cin >> coord_num;
 
-    while(coord_num < 0 || coord_num > 8){
+    while(coord_num < 0 || coord_num > 9){
         cout << "La coordenada no es válida! Puebe de nuevo:" << endl << ">>" << endl;
         cin >> coord_num;
     }
 
-    if(coord_num == 0)
+    if(coord_num == 0){
+        cancelar = true;
         return;
+    }
 
+    coord_num--;
     char coord_letra_char;
 
     cout << "Ingrese la letra de la coordenada:" << endl << ">>" << endl;
@@ -338,7 +335,9 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra){
         cin >> coord_letra;
     }
 
-    coord_letra = (int)coord_letra_char - 96; //Por ejemplo (int)'a' - 96 = 97 - 96 = 1 
+    coord_letra = (int)coord_letra_char - (int)'a';
+
+    cout << coord_letra << endl; 
 
     return;
 
