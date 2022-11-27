@@ -49,7 +49,7 @@ Animal* OpcionRescatarAnimal::generar_animal(char especie){
     string nombre;
 
     cout << "Parece tener unos " << edad << " años, su tamaño es " << tamano << " y parece " << personalidad << "." << endl;
-    cout << "Qué nombre le querés poner?";
+    cout << "Qué nombre le querés poner?" << endl;
 
     cin >> nombre;
 
