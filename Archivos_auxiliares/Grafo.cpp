@@ -204,11 +204,22 @@ void Grafo::obtener_camino_minimo_por_coordenadas(int coord_x_origen, int coord_
     int pos_origen = convertir_coordenadas_a_celda(coord_x_origen,coord_y_origen);
     int pos_destino = convertir_coordenadas_a_celda(coord_x_destino,coord_y_destino);
 
+    cout << "Coord x origen: " << coord_x_origen << endl;
+    cout << "Coord y origen: " << coord_y_origen << endl;
+    cout << "Celda origen: " << pos_origen << endl << endl;
+    
+    cout << "Coord x destino: " << coord_x_destino << endl;
+    cout << "Coord y destino: " << coord_y_destino << endl;
+    cout << "Celda destino: " << pos_destino << endl << endl;
+
+
     obtener_camino_minimo(pos_origen,pos_destino);
 }
 
 int Grafo::convertir_coordenadas_a_celda(int coord_x, int coord_y){
-    return (coord_x + 1)*(coord_y + 1);
+    // 8 HARCODEADO CAMBIARLO 
+
+    return coord_x*8 + coord_y + 1;
 }
 
 

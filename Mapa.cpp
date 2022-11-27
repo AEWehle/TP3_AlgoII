@@ -68,10 +68,8 @@ void Mapa::iniciar_matrices(){
             terreno[i][j] = ' ';
             ocupantes[i][j] = ' ';
             visitados[i][j] = false;
-            matriz_de_costos_por_destino[i][j] = obtener_costo_de_viaje(terreno[i][j]);
         }
     }
-
 }
 
 int Mapa::obtener_costo_de_viaje(char destino){
@@ -177,6 +175,12 @@ void Mapa::usar_terreno_por_defecto(){ //Se puede cargar de alguna forma más bo
     terreno[7][2] = 'T';
     terreno[7][3] = 'T';
     */
+
+   for(int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+            matriz_de_costos_por_destino[i][j] = obtener_costo_de_viaje(terreno[i][j]);
+        }
+    }
 
 }
 
@@ -372,7 +376,7 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
     coord_letra = (int)coord_letra_char - (int)'a';
 
-    cout << coord_letra << endl; 
+    // cout << coord_letra << endl; 
 
     return;
 

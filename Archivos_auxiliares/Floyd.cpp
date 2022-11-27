@@ -26,11 +26,18 @@ void Floyd::mostrar_camino_minimo(int origen, int destino){
     }else if(origen == destino){
         cout << "El destino del camino coincide con su origen." << endl;
     }else{
-        cout << "El camino mínimo entre " << origen << " y " << destino;
+        int coord_x_origen=0, coord_y_origen=0, coord_x_destino=0, coord_y_destino=0;
+
+        convertir_celdas_a_coordenadas(origen,8,coord_x_origen,coord_y_origen);
+        
+        convertir_celdas_a_coordenadas(destino,8,coord_x_destino,coord_y_destino);
+
+        
+        cout << "El camino mínimo entre [" << coord_x_origen << "," << coord_y_origen << "] y [" << coord_x_destino << "," << coord_y_destino << "]";
         cout << " tiene un costo de $" << matriz_de_costos[origen-1][destino-1] << " y es: ";
         
         // Imprimo el origen
-        cout << origen;
+        cout << "[" << coord_x_origen << "," << coord_y_origen << "]";
         // Sigo recorriendo el camino hasta llegar al destino
         while(origen != destino){
             origen = hallar_siguiente_vertice_en_el_camino(origen,destino);
@@ -46,10 +53,21 @@ int Floyd::hallar_siguiente_vertice_en_el_camino(int origen, int destino){
     return matriz_de_caminos[origen-1][destino-1];
 }
 
+void Floyd::convertir_celdas_a_coordenadas(int celda, int dim, int& coord_x, int& coord_y){
+    // Fila
+    coord_x = (celda-1)/dim;
+    
+    // Columna
+    coord_y = (celda-1)%dim;
+}
+
 void Floyd::mostrar_siguiente_paso_en_camino(int nuevo_origen){
-    Vertice* vertice = new Vertice(nuevo_origen);
-    cout << " -> " << lista_vertices->obtener_posicion_en_lista(vertice);
-    delete vertice;
+    // Vertice* vertice = new Vertice(nuevo_origen);
+    // cout << " -> " << lista_vertices->obtener_posicion_en_lista(vertice);
+    // delete vertice;
+    int coord_x_siguiente=0, coord_y_siguiente=0;
+    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_x_siguiente,coord_y_siguiente);
+    cout << " -> [" << coord_x_siguiente << "," << coord_y_siguiente << "]";
 }
 
 void Floyd::liberar_matriz(int** matriz){
@@ -136,9 +154,6 @@ void Floyd::mostrar_matriz_de_caminos(){
 }
 
 void Floyd::aplicar_floyd(){
-
-    cout << "\t\t ALGORITMO FLOYD" << endl << endl;
-
     // Creo las matrices de costos y de caminos
     crear_matriz_de_costos(matriz_de_adyacencia);
     crear_matriz_de_caminos();
@@ -157,12 +172,6 @@ void Floyd::aplicar_floyd(){
             }
         }
     }
-
-    cout << endl;
-
-    mostrar_matriz_de_caminos();
-
-    mostrar_matriz_de_costos();
 
     cout << endl;
 }
