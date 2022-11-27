@@ -199,27 +199,27 @@ void Grafo::obtener_camino_minimo(int origen, int destino){
     algoritmo_camino_minimo->mostrar_camino_minimo(pos_origen,pos_destino);
 }
 
-void Grafo::obtener_camino_minimo_por_coordenadas(int coord_x_origen, int coord_y_origen, int coord_x_destino, int coord_y_destino){
+void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino){
     // Transformo coordenadas en vertices
-    int pos_origen = convertir_coordenadas_a_celda(coord_x_origen,coord_y_origen);
-    int pos_destino = convertir_coordenadas_a_celda(coord_x_destino,coord_y_destino);
+    int pos_origen = convertir_coordenadas_a_celda(coord_vertical_origen,coord_horizontal_origen);
+    int pos_destino = convertir_coordenadas_a_celda(coord_vertical_destino,coord_horizontal_destino);
 
-    cout << "Coord x origen: " << coord_x_origen << endl;
-    cout << "Coord y origen: " << coord_y_origen << endl;
+    cout << "Coord vertical (numero) origen: " << coord_vertical_origen << endl;
+    cout << "Coord horizontal (letra) origen: " << coord_horizontal_origen << endl;
     cout << "Celda origen: " << pos_origen << endl << endl;
     
-    cout << "Coord x destino: " << coord_x_destino << endl;
-    cout << "Coord y destino: " << coord_y_destino << endl;
+    cout << "Coord vertical (numero) destino: " << coord_vertical_destino << endl;
+    cout << "Coord horizontal (letra) destino: " << coord_horizontal_destino << endl;
     cout << "Celda destino: " << pos_destino << endl << endl;
 
 
     obtener_camino_minimo(pos_origen,pos_destino);
 }
 
-int Grafo::convertir_coordenadas_a_celda(int coord_x, int coord_y){
+int Grafo::convertir_coordenadas_a_celda(int coord_vertical, int coord_horizontal){
     // 8 HARCODEADO CAMBIARLO 
 
-    return coord_x*8 + coord_y + 1;
+    return coord_vertical*8 + coord_horizontal + 1;
 }
 
 

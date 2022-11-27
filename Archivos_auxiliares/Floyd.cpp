@@ -26,18 +26,18 @@ void Floyd::mostrar_camino_minimo(int origen, int destino){
     }else if(origen == destino){
         cout << "El destino del camino coincide con su origen." << endl;
     }else{
-        int coord_x_origen=0, coord_y_origen=0, coord_x_destino=0, coord_y_destino=0;
+        int coord_vertical_origen=0, coord_horizontal_origen=0, coord_vertical_destino=0, coord_horizontal_destino=0;
 
-        convertir_celdas_a_coordenadas(origen,8,coord_x_origen,coord_y_origen);
+        convertir_celdas_a_coordenadas(origen,8,coord_vertical_origen,coord_horizontal_origen);
         
-        convertir_celdas_a_coordenadas(destino,8,coord_x_destino,coord_y_destino);
+        convertir_celdas_a_coordenadas(destino,8,coord_vertical_destino,coord_horizontal_destino);
 
         
-        cout << "El camino mínimo entre [" << coord_x_origen << "," << coord_y_origen << "] y [" << coord_x_destino << "," << coord_y_destino << "]";
+        cout << "El camino mínimo entre [" << coord_vertical_origen << "," << coord_horizontal_origen << "] y [" << coord_vertical_destino << "," << coord_horizontal_destino << "]";
         cout << " tiene un costo de $" << matriz_de_costos[origen-1][destino-1] << " y es: ";
         
         // Imprimo el origen
-        cout << "[" << coord_x_origen << "," << coord_y_origen << "]";
+        cout << "[" << coord_vertical_origen << "," << coord_horizontal_origen << "]";
         // Sigo recorriendo el camino hasta llegar al destino
         while(origen != destino){
             origen = hallar_siguiente_vertice_en_el_camino(origen,destino);
@@ -53,21 +53,21 @@ int Floyd::hallar_siguiente_vertice_en_el_camino(int origen, int destino){
     return matriz_de_caminos[origen-1][destino-1];
 }
 
-void Floyd::convertir_celdas_a_coordenadas(int celda, int dim, int& coord_x, int& coord_y){
+void Floyd::convertir_celdas_a_coordenadas(int celda, int dim, int& coord_vertical, int& coord_horizontal){
     // Fila
-    coord_x = (celda-1)/dim;
+    coord_vertical = (celda-1)/dim;
     
     // Columna
-    coord_y = (celda-1)%dim;
+    coord_horizontal = (celda-1)%dim;
 }
 
 void Floyd::mostrar_siguiente_paso_en_camino(int nuevo_origen){
     // Vertice* vertice = new Vertice(nuevo_origen);
     // cout << " -> " << lista_vertices->obtener_posicion_en_lista(vertice);
     // delete vertice;
-    int coord_x_siguiente=0, coord_y_siguiente=0;
-    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_x_siguiente,coord_y_siguiente);
-    cout << " -> [" << coord_x_siguiente << "," << coord_y_siguiente << "]";
+    int coord_vertical_siguiente=0, coord_horizontal_siguiente=0;
+    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_vertical_siguiente,coord_horizontal_siguiente);
+    cout << " -> [" << coord_vertical_siguiente << "," << coord_horizontal_siguiente << "]";
 }
 
 void Floyd::liberar_matriz(int** matriz){
