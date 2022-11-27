@@ -6,22 +6,22 @@ using namespace std;
 
 // g++ prueba.cpp -o TP3 -Wall -Werror -Wconversion
 
-/*
+
 int main(){
-    int* dato1 = new int( 1 );
-    int clave1 = 1;
-    int* dato2 = new int( 2 );
-    int clave2 = 2;
-    int* dato3 = new int( 3 ); 
-    int clave3 = 3;
-    int* dato4 = new int( 4 );
-    int clave4 = 4;
-    int* dato5 = new int( 5 );
-    int clave5 = 5;
-    int* dato6 = new int( 6 );
-    int clave6 = 6;
-    int* dato7 = new int( 7 );
-    int clave7 = 7;
+    string* dato1 = new string( "dato1" );
+    string clave1 = "clave1";
+    string* dato2 = new string( "dato2" );
+    string clave2 = "clave2";
+    string* dato3 = new string( "dato3" ); 
+    string clave3 = "clave3";
+    string* dato4 = new string( "dato4" );
+    string clave4 = "clave4";
+    string* dato5 = new string( "dato5" );
+    string clave5 = "clave5";
+    string* dato6 = new string( "dato6" );
+    string clave6 = "clave6";
+    // int* dato7 = new int( 7 );
+    // int clave7 = 7;
     // int* dato8 =  new int(-1 );
     // int clave8 = -1;
 
@@ -33,7 +33,7 @@ int main(){
 
     // int* dato9 =  new int(0 );
     // int clave9 = 0;
-    ArbolB3<int,int>* diccionario = new ArbolB3<int,int>();
+    ArbolB3<string,string>* diccionario = new ArbolB3<string,string>();
     diccionario -> agregar_dato(dato1, clave1);
     diccionario -> mostrar_arbolb3();
     diccionario -> agregar_dato(dato2, clave2);
@@ -44,31 +44,31 @@ int main(){
     diccionario -> mostrar_arbolb3();
     diccionario -> agregar_dato(dato5, clave5);
     diccionario -> mostrar_arbolb3();
-    // diccionario -> baja( clave4 );
+    diccionario -> baja( clave4 );
     diccionario -> agregar_dato(dato6, clave6);
     diccionario -> mostrar_arbolb3();
     // diccionario -> agregar_dato(dato7, clave7);
     // diccionario -> agregar_dato(dato9, clave9);
     // diccionario -> agregar_dato(dato8, clave8);
-    cout << "todo agregado" << endl;
+    // cout << "todo agregado" << endl;
 
-    // diccionario -> baja( clave5 );
+    diccionario -> baja( clave5 );
 
-    // string aux = "";
+    string aux = "";
 
-    //     cout << "ingrese clave a buscar"<< endl<< " >> ";
-    //     cin >> aux;
-    // while( !(aux == "s")){
+        cout << "ingrese clave a buscar"<< endl<< " >> ";
+        cin >> aux;
+    while( !(aux == "s")){
 
-    //     int * dato = ( diccionario -> consulta( stoi(aux) ) );
-    //     if (dato!=nullptr){
-    //         cout << *dato << endl;
-    //     }
-    //     cout << "ingrese dato a buscar, o 's' para salir"<< endl<< " >> ";
-    //     cin >> aux;
-    // }
+        string * dato = ( diccionario -> consulta( aux ) );
+        if (dato!=nullptr){
+            cout << *dato << endl;
+        }
+        cout << "ingrese dato a buscar, o 's' para salir"<< endl<< " >> ";
+        cin >> aux;
+    }
 
-    Lista<int>* datos = diccionario -> ordenar_mayor_menor();
+    Lista<string>* datos = diccionario -> ordenar_mayor_menor();
     for ( int i = 1 ; i <= datos -> obtener_cantidad() ; i++){
         cout << *(datos -> consulta(i)) << ", ";
     }
@@ -76,4 +76,3 @@ int main(){
     delete datos;
     return 0;
 }
-*/

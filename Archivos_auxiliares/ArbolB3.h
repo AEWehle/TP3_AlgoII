@@ -85,7 +85,7 @@ class ArbolB3 {
 
         // PRE: 
         // POS: devuelve el puntero al dato segun la clave, buscando desde nodo actual
-        Dato* consulta( NodoB3<Dato,Clave> * nodo_actual , Clave clave );
+        Dato* consulta( NodoB3<Dato,Clave> * nodo_actual , Clave& clave );
 
 
         // Me llaman para imprimir en recursion todo el arbol
@@ -182,7 +182,7 @@ bool ArbolB3<Dato, Clave>               :: baja(  NodoB3<Dato,Clave>* nodo_actua
             return false; // no esta en este nodo
         }
         if( existia ){
-            lista_de_claves -> baja_con_delete ( lista_de_claves -> obtener_posicion(&clave));
+            lista_de_claves -> baja_con_delete ( lista_de_claves -> obtener_posicion(&clave) );
             cantidad --;
             return true; // dado de baja exitosamente
         }
@@ -215,7 +215,7 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( Clave clave ){
 
 // consulta desde un nodo con la clave
 template <typename Dato, typename Clave>
-Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_actual , Clave clave ){
+Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_actual , Clave& clave ){
     int clave_men_igu_o_may = nodo_actual -> clave_menor_entra_mayor( clave );
     // La clave entra en el nodo
     if( clave_men_igu_o_may == 1){

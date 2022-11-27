@@ -21,7 +21,7 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
 
             cout << endl << "Si desea adoptar alguno, ingrese el nombre de animal como se muestra." << endl;
             cout << "Nuestros Erizos y Lagartijas NO SON ADOPTABLES ya que son salvajes, por lo que no aparecerán en la lista" << endl;
-            string elegido = *pedir_el_adoptado( mi_guarderia, animales_adoptables );
+            string elegido = pedir_el_adoptado( mi_guarderia, animales_adoptables );
 
             if ( !es_cancelar(elegido)  ){
                 cout << endl << "Adoptaste a " << elegido << endl;
@@ -67,26 +67,29 @@ Guarderia* OpcionAdoptarAnimal::crear_lista_adoptables(Guarderia* mi_guarderia, 
 /*  PEDIR EL ADOPTADO:
     Pide al usuario el nombre del animal que desea aoptar, o si desea cancelar.
     Devuelve el nombre del animal que desea adoptar, o nullptr si quiere cancelar*/
-string* OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* diccionario_adoptables ){
-
-    string* entrada = nullptr;
+string OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* diccionario_adoptables ){
+    cout << "entré a pedir el adoptado " << endl;
+    string entrada = "";
     //int cant_adoptables = diccionario_adoptables -> obtener_cantidad();
-
-    while ( !es_cancelar(*entrada) ){ 
-
+    bool adopto = false;
+    do{ 
         cout << "En caso de no querer adoptar ingrese CANCELAR, y volvera al menú inicial" << endl;
-        *entrada = ingresar_nombre();
+        entrada = ingresar_nombre();
 
-        if( es_cancelar(*entrada)){
+        if( es_cancelar(entrada)){
             cout << "Se ha cancelado la adopción" << endl;
         }
 
         else{
-            if ( diccionario_adoptables -> obtener_animal( *entrada ) == nullptr ){
+            if ( diccionario_adoptables -> obtener_animal( entrada ) == nullptr ){
                 cout << "El nombre ingresado no es de un animal disponble para adoptar." << endl;
+            }
+            else{
+                adopto = true;
             }
         }
     }
+    while( !es_cancelar(entrada) && !adopto );
 
     return entrada;
 
