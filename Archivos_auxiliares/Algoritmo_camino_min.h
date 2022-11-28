@@ -2,6 +2,7 @@
 #define ALGORITMO_CAMINO_MIN_H
 #include "lista.h"
 #include "Vertice.h"
+#include "Coordenada.h"
 #include <iostream>
 
 class AlgoritmoCaminoMinimo{
@@ -15,7 +16,7 @@ class AlgoritmoCaminoMinimo{
     public:
         AlgoritmoCaminoMinimo(Lista<Vertice>* lista_vertices, int** matriz_de_adyacencia);
 
-        virtual void mostrar_camino_minimo(int origen, int destino) = 0;
+        virtual void mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas) = 0;
 
         virtual ~AlgoritmoCaminoMinimo() = default;
 };

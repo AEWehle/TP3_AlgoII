@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 #include "Archivos_auxiliares/Grafo.h"
+#include "Archivos_auxiliares/Coordenada.h"
 #include <string>
 using namespace std; 
 
@@ -29,6 +30,7 @@ class Mapa{
         char** ocupantes;
         bool** visitados;
         int** matriz_de_costos_por_destino;
+        Lista<Coordenada>* lista_coordenadas_recorridas;
 
     public:
 

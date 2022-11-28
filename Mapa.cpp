@@ -13,6 +13,8 @@ Mapa::Mapa(){
     usar_terreno_por_defecto();
     generar_animales();
 
+    lista_coordenadas_recorridas = new Lista<Coordenada>();
+
     explicacion();
 
 }
@@ -40,7 +42,7 @@ Mapa::~Mapa(){
     delete terreno;
     delete ocupantes;
     delete visitados;
-
+    delete lista_coordenadas_recorridas;
 }
 
 
@@ -335,9 +337,7 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     grafo->mapa_a_grafo(8,matriz_de_costos_por_destino);
 
-    grafo->aplicar_algoritmo_camino_minimo();
-
-    grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino);
+    grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino,lista_coordenadas_recorridas);
 
     ocupantes[coord_num][coord_letra] = 'A';
 

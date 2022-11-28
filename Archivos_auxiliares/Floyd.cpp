@@ -19,7 +19,8 @@ Floyd::~Floyd(){
     matriz_de_caminos = nullptr;
 }
 
-void Floyd::mostrar_camino_minimo(int origen, int destino){
+void Floyd::mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas){
+
     // Me fijo si existe un camino
     if(matriz_de_caminos[origen-1][destino-1] == 0){
         cout << "No existe un camino entre " << origen << " y " << destino << endl;
@@ -29,18 +30,24 @@ void Floyd::mostrar_camino_minimo(int origen, int destino){
         int coord_vertical_origen=0, coord_horizontal_origen=0, coord_vertical_destino=0, coord_horizontal_destino=0;
 
         convertir_celdas_a_coordenadas(origen,8,coord_vertical_origen,coord_horizontal_origen);
-        
         convertir_celdas_a_coordenadas(destino,8,coord_vertical_destino,coord_horizontal_destino);
-
         
         cout << "El camino mínimo entre [" << coord_vertical_origen << "," << coord_horizontal_origen << "] y [" << coord_vertical_destino << "," << coord_horizontal_destino << "]";
         cout << " tiene un costo de $" << matriz_de_costos[origen-1][destino-1] << " y es: ";
-        
+
+        // CREAR LISTA CON VERTICES RECORRIDOS PARA PODER MARCARLOS EN EL MAPA
+        Coordenada* coordenada_origen = new Coordenada(coord_vertical_origen,coord_horizontal_origen);
+        lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
+
         // Imprimo el origen
         cout << "[" << coord_vertical_origen << "," << coord_horizontal_origen << "]";
         // Sigo recorriendo el camino hasta llegar al destino
         while(origen != destino){
             origen = hallar_siguiente_vertice_en_el_camino(origen,destino);
+            convertir_celdas_a_coordenadas(origen,8,coord_vertical_origen,coord_horizontal_origen);
+
+            Coordenada* coordenada_origen = new Coordenada(coord_vertical_origen,coord_horizontal_origen);
+            lista_coordenadas_recorridas->alta(coordenada_origen);
             
             mostrar_siguiente_paso_en_camino(origen);
         }
