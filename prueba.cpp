@@ -6,6 +6,7 @@ using namespace std;
 
 // g++ prueba.cpp -o TP3 -Wall -Werror -Wconversion
 
+
 /*
 int main(){
     string* dato1 = new string( "dato1" );
@@ -25,11 +26,12 @@ int main(){
     // int* dato8 =  new int(-1 );
     // int clave8 = -1;
 
-    // Lista<int>* enteros = new Lista <int>();
-    // enteros -> alta(&clave1);
-    // enteros -> alta(&clave2);
-    // for ( int i = 1 ; i<= enteros -> obtener_cantidad() ; i++ ){
-    // cout<< "Lista" << *(enteros -> consulta(i))<< endl;}
+
+//     // Lista<int>* enteros = new Lista <int>();
+//     // enteros -> alta(&clave1);
+//     // enteros -> alta(&clave2);
+//     // for ( int i = 1 ; i<= enteros -> obtener_cantidad() ; i++ ){
+//     // cout<< "Lista" << *(enteros -> consulta(i))<< endl;}
 
     // int* dato9 =  new int(0 );
     // int clave9 = 0;
@@ -53,21 +55,22 @@ int main(){
     // diccionario -> agregar_dato(dato8, clave8);
     // cout << "todo agregado" << endl;
 
-    diccionario -> baja( clave5 );
+//     diccionario -> baja( clave5 );
 
-    string aux = "";
+//     string aux = "";
 
-        cout << "ingrese clave a buscar"<< endl<< " >> ";
-        cin >> aux;
-    while( !(aux == "s")){
+//         cout << "ingrese clave a buscar"<< endl<< " >> ";
+//         cin >> aux;
+//     while( !(aux == "s")){
 
-        string * dato = ( diccionario -> consulta( aux ) );
-        if (dato!=nullptr){
-            cout << *dato << endl;
-        }
-        cout << "ingrese dato a buscar, o 's' para salir"<< endl<< " >> ";
-        cin >> aux;
-    }
+//         string * dato = ( diccionario -> consulta( aux ) );
+//         if (dato!=nullptr){
+//             cout << *dato << endl;
+//         }
+//         cout << "ingrese dato a buscar, o 's' para salir"<< endl<< " >> ";
+//         cin >> aux;
+//     }
+
 
     Lista<string>* datos = diccionario -> ordenar_mayor_menor();
     for ( int i = 1 ; i <= datos -> obtener_cantidad() ; i++){

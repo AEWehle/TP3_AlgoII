@@ -38,6 +38,8 @@ class Floyd : public AlgoritmoCaminoMinimo{
         void mostrar_matriz_de_caminos();
 
         void liberar_matriz(int** matriz);
+
+        void convertir_celdas_a_coordenadas(int celda, int dim, int& coord_x, int& coord_y);
 };
 
 
