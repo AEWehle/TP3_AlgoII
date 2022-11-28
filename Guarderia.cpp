@@ -17,6 +17,9 @@ Guarderia::Guarderia(){
 
 
 Guarderia::~Guarderia(){
+    for ( int n_animal = 1; n_animal <= obtener_cantidad() ; n_animal++){
+        cout << "Chau " << *obtener_lista_nombres() -> consulta( n_animal ) << endl;
+    }
     delete diccionario_de_animales;
 }
 
