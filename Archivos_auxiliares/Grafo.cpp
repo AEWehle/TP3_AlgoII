@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Algoritmo_camino_min.h"
 
+const int NO_SE_ENCUENTRA = -1;
+
 Grafo::Grafo(){
     matriz_de_adyacencia = nullptr;
     algoritmo_camino_minimo = nullptr;
@@ -11,6 +13,52 @@ Grafo::Grafo(){
 void Grafo::mostrar_grafo(){
     mostrar_vertices();
     mostrar_matriz_adyacencia();
+}
+
+void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
+
+    // Creo grafo de dim*dim
+    for(int i=1; i<= dim*dim; i++){
+        agregar_vertice(i);
+    }
+
+    int costo_camino_ida = 0;
+    int costo_camino_vuelta = 0;
+    
+    // Creo caminos
+    int celda = 1;
+    while(celda != (dim*dim)+1){
+        for(int fila=0; fila<dim; fila++){
+            for(int col=0; col<dim; col++){
+
+                if(col < dim-1){
+
+                    costo_camino_ida = matriz_de_costos_por_destino[fila][col+1];
+                    costo_camino_vuelta = matriz_de_costos_por_destino[fila][col];
+                    
+                    // cout << "\t\t$$$ costo para ir de " << celda << " a " << celda+1 << ": " << costo_camino_ida << endl<<endl;
+
+                    agregar_camino(celda,celda+1,costo_camino_ida);
+                    agregar_camino(celda+1,celda,costo_camino_vuelta);
+                }
+                
+                if(fila < dim-1){
+
+                    costo_camino_ida = matriz_de_costos_por_destino[fila+1][col];
+                    costo_camino_vuelta = matriz_de_costos_por_destino[fila][col];
+
+                    // cout << "\t\t$$$ costo para ir de " << celda << " a " << celda+dim << ": " << costo_camino_ida << endl<<endl;
+
+                    agregar_camino(celda,celda+dim,costo_camino_ida);
+                    agregar_camino(celda+dim,celda,costo_camino_vuelta);
+                }
+                celda++;
+            }
+        }
+
+    }
+    
+
 }
 
 void Grafo::mostrar_vertices(){
@@ -101,16 +149,16 @@ void Grafo::liberar_matriz_adyacencia(int cantidad_vertices){
     delete[] matriz_de_adyacencia;
 }
 
-void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacente){
+void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacencia){
     // tamanio_original porque empiezan en 0 las posiciones en las matrices
     int tamanio_original = lista_vertices->obtener_cantidad() - 1;
     // Pongo infinito donde aún no hay datos (en toda la fila y toda la col nuevo_tamanio)
     for(int i=0; i<tamanio_original; i++){
-        nueva_matriz_adyacente[tamanio_original][i] = INFINITO;
-        nueva_matriz_adyacente[i][tamanio_original] = INFINITO;
+        nueva_matriz_adyacencia[tamanio_original][i] = INFINITO;
+        nueva_matriz_adyacencia[i][tamanio_original] = INFINITO;
     }
     // Pongo un 0 en la posición en la tabla que refiere a la distancia del vértice a sí mismo
-    nueva_matriz_adyacente[tamanio_original][tamanio_original] = 0;
+    nueva_matriz_adyacencia[tamanio_original][tamanio_original] = 0;
 }
 
 int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
@@ -149,6 +197,29 @@ void Grafo::obtener_camino_minimo(int origen, int destino){
     int pos_destino = obtener_vertice_en_grafo(destino);
 
     algoritmo_camino_minimo->mostrar_camino_minimo(pos_origen,pos_destino);
+}
+
+void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino){
+    // Transformo coordenadas en vertices
+    int pos_origen = convertir_coordenadas_a_celda(coord_vertical_origen,coord_horizontal_origen);
+    int pos_destino = convertir_coordenadas_a_celda(coord_vertical_destino,coord_horizontal_destino);
+
+    cout << "Coord vertical (numero) origen: " << coord_vertical_origen << endl;
+    cout << "Coord horizontal (letra) origen: " << coord_horizontal_origen << endl;
+    cout << "Celda origen: " << pos_origen << endl << endl;
+    
+    cout << "Coord vertical (numero) destino: " << coord_vertical_destino << endl;
+    cout << "Coord horizontal (letra) destino: " << coord_horizontal_destino << endl;
+    cout << "Celda destino: " << pos_destino << endl << endl;
+
+
+    obtener_camino_minimo(pos_origen,pos_destino);
+}
+
+int Grafo::convertir_coordenadas_a_celda(int coord_vertical, int coord_horizontal){
+    // 8 HARCODEADO CAMBIARLO 
+
+    return coord_vertical*8 + coord_horizontal + 1;
 }
 
 
