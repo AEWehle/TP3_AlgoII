@@ -40,6 +40,7 @@ int main(){
     diccionario -> mostrar_arbolb3();
     diccionario -> agregar_dato(dato3, clave3);
     diccionario -> mostrar_arbolb3();
+    diccionario -> cambiar_dato( dato3, clave1 );
     diccionario -> agregar_dato(dato4, clave4);
     diccionario -> mostrar_arbolb3();
     diccionario -> agregar_dato(dato5, clave5);
