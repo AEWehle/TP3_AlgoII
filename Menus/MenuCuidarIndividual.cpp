@@ -20,7 +20,7 @@ void MenuCuidarIndividual::mostrar()
     cout << "   1. Alimentar Animal" << endl;
     cout << "   2. Duchar Animal" << endl;
     cout << "   3. Pasar a Animal siguiente" << endl;
-    cout << "   4. Volver a Menu Anterior" << endl;
+    cout << "   4. Volver a Menu Principal" << endl;
 }
 
 void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia)
@@ -43,7 +43,7 @@ void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia
             }
             break;
         case 4:
-            std::cout << "Volviendo a menú anterior..." << std::endl ;
+            std::cout << "Volviendo a menú principal..." << std::endl ;
             volver_menu_ppal = true;
             //return;
             break;
