@@ -2,6 +2,7 @@
 #include "../Archivos_auxiliares/funciones_auxiliares.h"
 
  void OpcionCargarCombustible::ejecutar(Guarderia * mi_guarderia){
+    cout << "Elegiste la opción 6, cargar combustible al auto." << endl << endl;
     //int aux =50;
     //mi_guarderia->obtener_auto()->decrementar_combustible(aux);
     cout << "El auto tiene: " << mi_guarderia->obtener_auto()->obtener_combustible() << " de combustible." << endl;

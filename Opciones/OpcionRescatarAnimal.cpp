@@ -2,6 +2,7 @@
 #include <time.h>
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
+    cout << "Elegiste la opcion 2, Recastar un animal."<< endl<< endl;
     Mapa* mapa = introduccion();
 
     int combustible_gastado = 0;

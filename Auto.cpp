@@ -22,6 +22,11 @@ void Auto::cargar_combustible(){
 }
 
 void Auto::cargar_combustible(int cantidad){
+    if ( cantidad == 0 ){
+        cout << "No le cargas combustible al auto." << endl;
+        cout << "El auto tiene: " << combustible << " de combustible." << endl;
+        return;
+    }
     int aux = combustible + cantidad;
     if (aux > MAX_COMBUSTIBLE) {
         cout << "No derroches combustible. No podes cargar mas combustible del necesario." << endl;
