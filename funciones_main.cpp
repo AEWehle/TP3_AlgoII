@@ -124,7 +124,7 @@ string ingresar_nombre(){
     string nombre; 
 
     while ( nombre.length() == 0 ){ 
-        //cout << " >> " ;
+        cout << " >> " ;
         getline( cin, nombre, '\n' ); 
     } 
 

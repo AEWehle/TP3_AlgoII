@@ -1,16 +1,15 @@
 #include "OpcionRescatarAnimal.h"
 #include <time.h>
-#include <limits>
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
     cout << "Elegiste la opcion 2, Recastar un animal."<< endl<< endl;
     Mapa* mapa = introduccion();
 
-    int combustible_gastado = 0, rescatados = 0;
+    int combustible_gastado = 0;
     char especie_rescatada = ' ';
     bool rescatando = true;
 
-    while(rescatando && rescatados < 5){
+    while(rescatando){
         bool salida_ok = mapa->ejecutar(mi_guarderia->obtener_auto()->obtener_combustible(), combustible_gastado, especie_rescatada);
 
         if(!salida_ok)
@@ -25,13 +24,10 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
             mi_guarderia -> agregar_animal(nuevo_animal);
             cout << "Agregaste al animal: " << endl;
             nuevo_animal -> mostrar();
-            rescatados++;
         }
 
-        if(rescatados == 5)
-            cout << "Felicidades! Rescataste a todos los animales de la zona, volvamos al refugio." << endl << endl;
-
     }
+
     mi_guarderia->afectar_animales();
     mi_guarderia->obtener_auto()->cargar_combustible();
     delete mapa;
@@ -58,7 +54,10 @@ Animal* OpcionRescatarAnimal::generar_animal(Guarderia * mi_guarderia, char espe
     cout << "Parece tener unos " << edad << " años, su tamaño es " << tamano << " y parece " << personalidad << "." << endl;
     cout << "Qué nombre le querés poner?" << endl;
 
+
     nombre = pedir_nombre( mi_guarderia );
+    
+    // cin >> nombre;
 
     Animal* nuevo_animal = crear_nuevo_animal(especie, nombre, edad, tamano, personalidad);
 
@@ -74,20 +73,11 @@ Mapa* OpcionRescatarAnimal::introduccion(){
         << "Solo se podrán rescatar animales cuando el combustible sea suficiente" << endl << endl;
 
     string respuesta = "";
-    bool respuesta_ok = false;
 
-    cout << "Desea rescatar animales en un terreno personalizado? [si/no]" << endl;
+    while(respuesta != "si" && respuesta != "no"){
 
-    while(!respuesta_ok){
-
-        cout << " >> " ;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Desea rescatar animales en un terreno personalizado? [si/no]" << endl << " >> ";
         cin >> respuesta;
-
-        if(respuesta != "si" && respuesta != "no")
-            cout << "Ingrese \"si\" o \"no\":" << endl;
-        else
-            respuesta_ok = true;
 
     }
 
