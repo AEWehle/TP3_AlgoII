@@ -43,22 +43,17 @@ class Guarderia{
         //Constructor de copia
             Guarderia(const Guarderia &guarderia_aux);
 
-        /*Ver lista de animales en la guarderia
-            PRE: 
-            POST: Imprime en terminal todos los animales de la guarderia*/
-            void ver_diccionario_de_animales(  );
-
-            
-        /*ver los animales en la lista
-            PRE:  Necesita una lista con los nombres
-            POST: Imprime en terminal todos los animales de la lista ingresada*/
-            void ver_los_animales( Lista<string>* nombres );
-
         /*Agregar
             PRE: Puntero a Animal está creado correctamente
             PPOST: Agrega un animal a al diccionario de animales */
             void agregar_animal(Animal* nuevo_animal);
 
+
+        /* Afectar animales
+        PRE:  Guardería cargada con animales
+        POST: Disminuye higiene y aumenta hambre a todos los animales 
+              según sus caracteristicas*/  
+            void afectar_animales();
 
         /*Obtener cantidad
             PRE: -
@@ -67,9 +62,11 @@ class Guarderia{
 
         /*Eliminar animal
             PRE:  El nombre del animal a borrar es válido.
-            POST: Da de baja del diccionario de animales al animal.
-            NO HACE DELETE*/
+            POST: Da de baja del diccionario de animales al animal.*/
             void eliminar_animal( string nombre );
+
+        /*Devuelve true si el nombre ya le pertence a un anmal*/
+            bool nombre_existente( string nombre );
 
         /* Obtener animal
         PRE:  el nombre ingresado debe ser existente.
@@ -80,12 +77,6 @@ class Guarderia{
         PRE:  -
         POST: Develve un puntero al Auto*/  
             Auto* obtener_auto();
-
-        /* Afectar animales
-        PRE:  Guardería cargada con animales
-        POST: Disminuye higiene y aumenta hambre a todos los animales 
-              según sus caracteristicas*/  
-            void afectar_animales();
         
         /*Devuelve una lista con los nombres de los animales no adoptados
          del diccionario*/
@@ -95,6 +86,26 @@ class Guarderia{
         PRE: -
         POST: Devuelve escapados*/
             int obtener_escapados();
+
+
+        /*PRE:
+        POST:  Devuelve una Lista de striing con los nombres de los animales
+         ordenamsode mas viejo a mas joven
+        Como método de ordenamiento usa quicksort
+        */
+            Lista<string> * obtener_lista_viejo_a_joven();
+
+
+        /*Ver lista de animales en la guarderia
+            PRE: 
+            POST: Imprime en terminal todos los animales de la guarderia*/
+            void ver_diccionario_de_animales(  );
+
+            
+        /*ver los animales en la lista
+            PRE:  Necesita una lista con los nombres
+            POST: Imprime en terminal todos los animales de la lista ingresada*/
+            void ver_los_animales( Lista<string>* nombres );
 };
 
 #endif

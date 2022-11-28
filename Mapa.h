@@ -31,6 +31,9 @@ class Mapa{
         bool** visitados;
         int** matriz_de_costos_por_destino;
         Lista<Coordenada>* lista_coordenadas_recorridas;
+        int coord_auto_num;
+        int coord_auto_letra;
+
 
     public:
 

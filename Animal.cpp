@@ -77,7 +77,11 @@ string Animal::obtener_personalidad(){
 bool Animal::es_adoptable(){
 
     return es_domestico;
+}
 
+
+bool es_primer_animal_mayor( Animal* animal1, Animal* animal2 ){
+    return animal1 -> obtener_edad() > animal2 -> obtener_edad();
 }
 
 

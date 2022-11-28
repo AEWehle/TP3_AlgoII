@@ -124,21 +124,29 @@ string ingresar_nombre(){
     string nombre; 
 
     while ( nombre.length() == 0 ){ 
+        //cout << " >> " ;
         getline( cin, nombre, '\n' ); 
     } 
 
     return nombre; 
 }
 
-string pedir_nombre(){
+string pedir_nombre( Guarderia* mi_guarderia ){
     string nombre = ingresar_nombre();
-
-    while(es_cancelar(nombre)) {
-        cout << "Este nombre no puede ser usado, deberías elegir otro:" << endl;
-        cout << " >> ";
-        nombre = ingresar_nombre();
+    bool nombre_invalido = true;
+    while( nombre_invalido ) {
+        if( es_cancelar(nombre) ){
+            cout << "Este nombre no puede ser usado, deberías elegir otro:" << endl;
+            nombre = ingresar_nombre();
+        }
+        else if( mi_guarderia -> nombre_existente( nombre ) ){
+            cout << "Este nombre ya lo tiene otro animal en la reserva, elegí otro" << endl;
+            nombre = ingresar_nombre();
+        }
+        else{
+            nombre_invalido = false;
+        }
     }
-
     return nombre;
 }
 
@@ -168,20 +176,12 @@ bool validar_edad(string edad_st, int &edad){
 
 bool tamano_ok(Animal* animal, float espacio){ //espacio es mayor a 0
 
-    string tamano = animal->obtener_tamano();
+    int tamano_animal = buscar_en_array_de_string( TAMANOS_STRING, animal->obtener_tamano(), CANTIDAD_TAMANOS );
     bool ok = false;
 
-    if(espacio < 2)
-        ok = (tamano == TAMANOS_STRING[0]) || (tamano == TAMANOS_STRING[1]);
-    else if(espacio < 10)   // 2 <= espacio < 10
-        ok = (tamano == TAMANOS_STRING[1]);
-    else if(espacio >= 50)
-        ok = (tamano == TAMANOS_STRING[4]) || (tamano == TAMANOS_STRING[3]) || (tamano == TAMANOS_STRING[2]);
-    else if(espacio >= 20)   // 20 <= espacio < 50
-        ok = (tamano == TAMANOS_STRING[3]) || (tamano == TAMANOS_STRING[2]);
-    else                    // 10 <= espacio < 20
-        ok = (tamano == TAMANOS_STRING[2]);
-    
+    int tamano_disponible = (int) (espacio >= 2)  + (int) (espacio >= 10) + (int) (espacio >= 20) + (int) (espacio >= 50);
+    if( tamano_animal <= tamano_disponible ){
+        ok = true;
+    }
     return ok;
-
 }

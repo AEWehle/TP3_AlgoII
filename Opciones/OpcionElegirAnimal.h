@@ -12,12 +12,17 @@ class OpcionElegirAnimal:public Opcion {
     private:
         //Menu
         MenuCuidarIndividual* menu_cuidar_individual;
+        bool volver_menu_ppal;
 
     public:
         // Constructor tiene que asegurar las invariantes
         OpcionElegirAnimal(Guarderia* mi_guarderia);
 
         void ejecutar(Guarderia* mi_guarderia) override;
+
+        bool volver_menu_principal();
+
+       ~OpcionElegirAnimal(); 
 };
 
 #endif

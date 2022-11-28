@@ -54,7 +54,7 @@ void ejecutar_eleccion( Guarderia* mi_Guarderia, int eleccion);
 
 string ingresar_nombre();
 
-string pedir_nombre();
+string pedir_nombre(  Guarderia* mi_Guarderia );
 
 bool es_cancelar(string nombre);
 
