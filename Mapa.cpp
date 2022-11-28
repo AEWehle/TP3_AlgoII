@@ -311,11 +311,11 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
 void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
-    cout << "Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << ">>" << endl;
+    cout << "Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << " >> " ;
     cin >> coord_num;
 
     while(coord_num < 0 || coord_num > 9){
-        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << ">>" << endl;
+        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << " >> " ;
         cin >> coord_num;
     }
 
@@ -327,11 +327,11 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
     coord_num--;
     char coord_letra_char;
 
-    cout << "Ingrese la letra de la coordenada:" << endl << ">>" << endl;
+    cout << "Ingrese la letra de la coordenada:" << endl << ">>";
     cin >> coord_letra_char;
 
     while((int)coord_letra_char < 97 || (int)coord_letra_char > 104){     //Entre 'a' y 'h'
-        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << ">>" << endl;
+        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
         cin >> coord_letra;
     }
 

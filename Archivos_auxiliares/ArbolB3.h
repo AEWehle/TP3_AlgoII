@@ -48,6 +48,8 @@ class ArbolB3 {
         POST: Cambia el dato que le coresponde la clave por el dato_nuevo ingresado*/
         void cambiar_dato( Dato* dato_nuevo ,Clave clave );
 
+        /* Devuelve true si la clave esta en el arbol        */
+        bool clave_existente(  Clave clave );
 
         /* Es para imprimir en terminal el arbol como arbol y no para mostrar
         los datos en sí*/
@@ -213,7 +215,7 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( Clave clave ){
     Dato * dato = consulta( this -> nodo_raiz , clave );
     
     if ( dato == nullptr ){ //el dato no se encuentra en el arbol
-        cout << "Clave inexistente" << endl;
+        // cout << "Clave inexistente" << endl;
     }
     return dato;
 }
@@ -252,6 +254,22 @@ void ArbolB3<Dato, Clave>              :: cambiar_dato( Dato* dato_nuevo , Clave
     return agregar_dato( this -> nodo_raiz , dato_nuevo , clave );
 }
 
+
+
+template <typename Dato, typename Clave>
+bool ArbolB3<Dato, Clave>               :: clave_existente(  Clave clave ){
+    if ( cantidad == 0 ) {
+        cout << "La base de datos esta vacía" << endl;
+        return false;
+    }
+    
+    Dato * dato = consulta( this -> nodo_raiz , clave );
+    
+    if ( dato == nullptr ){ 
+    return false;
+    }
+    return true;
+}
 
 
 template <typename Dato, typename Clave>

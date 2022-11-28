@@ -124,21 +124,29 @@ string ingresar_nombre(){
     string nombre; 
 
     while ( nombre.length() == 0 ){ 
+        cout << " >> " ;
         getline( cin, nombre, '\n' ); 
     } 
 
     return nombre; 
 }
 
-string pedir_nombre(){
+string pedir_nombre( Guarderia* mi_guarderia ){
     string nombre = ingresar_nombre();
-
-    while(es_cancelar(nombre)) {
-        cout << "Este nombre no puede ser usado, deberías elegir otro:" << endl;
-        cout << " >> ";
-        nombre = ingresar_nombre();
+    bool nombre_invalido = true;
+    while( nombre_invalido ) {
+        if( es_cancelar(nombre) ){
+            cout << "Este nombre no puede ser usado, deberías elegir otro:" << endl;
+            nombre = ingresar_nombre();
+        }
+        else if( mi_guarderia -> nombre_existente( nombre ) ){
+            cout << "Este nombre ya lo tiene otro animal en la reserva, elegí otro" << endl;
+            nombre = ingresar_nombre();
+        }
+        else{
+            nombre_invalido = false;
+        }
     }
-
     return nombre;
 }
 
