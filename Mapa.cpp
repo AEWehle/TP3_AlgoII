@@ -33,14 +33,13 @@ Mapa::Mapa(string ruta){
 Mapa::~Mapa(){
 
     for(int i = 0; i < 8; i++){
-        delete terreno[i];
-        delete ocupantes[i];
-        delete visitados[i];
+        delete [] terreno[i];
+        delete [] ocupantes[i];
+        delete [] visitados[i];
     }
-    delete terreno;
-    delete ocupantes;
-    delete visitados;
-
+    delete [] terreno;
+    delete [] ocupantes;
+    delete [] visitados;
 }
 
 
@@ -290,7 +289,7 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
         pedir_coordenadas(coord_num, coord_letra, cancelar);
 
         if(cancelar){
-            cout << "Rescate cancelado!" << endl;
+            cout << "Rescate finalizado!" << endl;
             return false;  //Cancelar rescate
         }
 
@@ -327,7 +326,7 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
     coord_num--;
     char coord_letra_char;
 
-    cout << "Ingrese la letra de la coordenada:" << endl << ">>";
+    cout << "Ingrese la letra de la coordenada:" << endl << " >> ";
     cin >> coord_letra_char;
 
     while((int)coord_letra_char < 97 || (int)coord_letra_char > 104){     //Entre 'a' y 'h'
