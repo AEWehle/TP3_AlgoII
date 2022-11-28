@@ -342,6 +342,9 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     }
 
+//////////
+/*
+
     //Chequear con camino mínimo
     int coord_x_origen = 0;
     int coord_y_origen = 0;
@@ -355,6 +358,10 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
     grafo->aplicar_algoritmo_camino_minimo();
 
     grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino);
+
+    delete grafo;
+*/
+////////////
 
     ocupantes[coord_auto_num][coord_auto_letra] = ' ';
     coord_auto_num = coord_num;
