@@ -27,6 +27,8 @@ class Mapa{
         char** terreno;
         char** ocupantes;
         bool** visitados;
+        int coord_auto_num;
+        int coord_auto_letra;
 
     public:
 
