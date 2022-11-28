@@ -16,6 +16,7 @@ class MenuCuidarIndividual: public Menu{
         string nombre_animal;
         int numero_de_animal;
         Lista<string>* lista_nombres;
+        bool volver_menu_ppal;
         
     // Metodos
     public:
@@ -29,6 +30,8 @@ class MenuCuidarIndividual: public Menu{
         void mostrar() override;
 
         void ejecutar_opcion(int eleccion, Guarderia *mi_guarderia) override;
+
+        bool volver_menu_principal();
         
 };
 
