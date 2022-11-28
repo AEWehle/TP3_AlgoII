@@ -29,6 +29,7 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
 
     mi_guarderia->afectar_animales();
     mi_guarderia->obtener_auto()->cargar_combustible();
+    delete mapa;
 }
 
 
