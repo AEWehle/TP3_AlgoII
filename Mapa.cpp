@@ -324,6 +324,8 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     mostrar();
 
+    cout << "En este momento hay " << combustible << " de combustible" << endl;
+
     int coord_num, coord_letra;
     bool coord_ok = false, cancelar = false;
 
@@ -340,6 +342,9 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     }
 
+//////////
+/*
+
     //Chequear con camino mínimo
     int coord_x_origen = 0;
     int coord_y_origen = 0;
@@ -354,6 +359,10 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino);
 
+    delete grafo;
+*/
+////////////
+
     ocupantes[coord_auto_num][coord_auto_letra] = ' ';
     coord_auto_num = coord_num;
     coord_auto_letra = coord_letra;
@@ -361,7 +370,7 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     //Marcar el camino recorrido
 
-    combustible_gastado = 0; //Editar combustible
+    combustible_gastado = 7; //Editar combustible
 
     return true;
 
@@ -386,13 +395,6 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
         if(es_numero(coord_num_string))
             coord_num = stoi(coord_num_string);
     }
-/*
-    while(coord_num < 0 || coord_num > 8){
-        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << " >> " ;
-        cout << " >> " ;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> coord_num;
-    }*/
 
     if(coord_num == 0){
         cancelar = true;
