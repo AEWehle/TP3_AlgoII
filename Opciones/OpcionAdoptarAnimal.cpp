@@ -3,6 +3,7 @@
 
 
 void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
+    cout << "Elegiste la opción 5,adoptar una animal de la reserva." << endl<< endl;
     if(mi_guarderia->obtener_cantidad()==0){
         cout << "No hay animales disponibles para adoptar." << endl;
     }
@@ -71,7 +72,7 @@ Guarderia* OpcionAdoptarAnimal::crear_lista_adoptables(Guarderia* mi_guarderia, 
     Pide al usuario el nombre del animal que desea aoptar, o si desea cancelar.
     Devuelve el nombre del animal que desea adoptar, o nullptr si quiere cancelar*/
 string OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* diccionario_adoptables ){
-    cout << "entré a pedir el adoptado " << endl;
+    
     string entrada = "";
     //int cant_adoptables = diccionario_adoptables -> obtener_cantidad();
     bool adopto = false;

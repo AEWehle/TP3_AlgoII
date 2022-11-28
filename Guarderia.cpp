@@ -32,7 +32,6 @@ void Guarderia::afectar_animales(){
     Lista<string>* claves = diccionario_de_animales -> obtener_lista_de_claves();
     
     for(int i = 1; i <= claves -> obtener_cantidad(); i++) {
-        cout << *claves -> consulta(i) << endl;
     this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
     this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
 
@@ -86,7 +85,7 @@ void Guarderia::ver_diccionario_de_animales(  ){
 
     if( this -> diccionario_de_animales -> obtener_cantidad()){
 
-        cout << "Hay " << diccionario_de_animales -> obtener_cantidad() << " animales en la reserva." << endl;
+        cout << "Hay " << diccionario_de_animales -> obtener_cantidad() << " animales en la reserva." << endl<< endl;
         Lista <string>*  nombres = diccionario_de_animales -> obtener_lista_de_claves();
 
         for( int numero_animal = 1 ; numero_animal <= nombres -> obtener_cantidad(); numero_animal++){

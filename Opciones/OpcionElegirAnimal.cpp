@@ -14,5 +14,5 @@ bool OpcionElegirAnimal::volver_menu_principal(){
 }
 
 OpcionElegirAnimal::~OpcionElegirAnimal(){
-    
+    delete menu_cuidar_individual;
 }
