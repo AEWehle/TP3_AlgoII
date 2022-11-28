@@ -39,16 +39,6 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS A MODIFICAR/CORREGIR:
 1. Camino mínimo (LN)
-3. Cambiar la implementacion de listar animales, buscar animal, ya que ahora no usamos lista sino diccionario de arbol 3 vias.
-4. Agregar opcion del menú principal:
-        5. Adoptar animal.
-        
-   ---> 6. Cargar combutible. (Muestra cuanto y regunta cuanto agregar)*LISTO(M)*
-   
-        7. Guardar y salir.
-        
-   El auto se autocarga 5 de combustible cada vez que se selecciona una opcion del menú (max_combustible = 100)*LISTO (M)*
-   
 5. - Mapa: matriz de 8x8
    - Mostramos al inicio el mapa y animales generados random ( propner otra forma si prefiere )
    - Terreno y Costo: montana: 5, camino: 1, precipicio: 40, tierra: 2
@@ -58,12 +48,11 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 6. Diría de agregar un atributo a los animales que sea su ubicacion
    Si tiene 0 higiene o 100 hambre el animal se escapa. Si escapan 3 --> GAME OVER
 7. En cuidar animales el menú ahora es otro. Pero para volver al menú inicial hay que apretar 4 (NO SÉ QUE ONDA jajaj) *EN ESO (M)*
-8. En adoptar animal hay que mostrar los animales de mayor a menor según edad
 10. Actualizar UML
 
 ## COSAS HECHAS:
 
-CARGAR_COMBUSTIBLE, CLASE AUTO, AFECTAR_COMBUSTIBLE(+5)
+CARGAR_COMBUSTIBLE, CLASE AUTO, AFECTAR_COMBUSTIBLE(+5), ORDENAR MAYOR MENOR POR EDAD, ADAPTACION A ARBOL, CARGAR AUTO, Y MENU PRINCIPAL
 
 
 ## UPDATES:
