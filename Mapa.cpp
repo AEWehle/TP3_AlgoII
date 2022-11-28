@@ -297,6 +297,8 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     mostrar();
 
+    cout << "En este momento hay " << combustible << " de combustible" << endl;
+
     int coord_num, coord_letra;
     bool coord_ok = false, cancelar = false;
 
@@ -322,7 +324,7 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     //Marcar el camino recorrido
 
-    combustible_gastado = 0; //Editar combustible
+    combustible_gastado = 7; //Editar combustible
 
     return true;
 
@@ -347,13 +349,6 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
         if(es_numero(coord_num_string))
             coord_num = stoi(coord_num_string);
     }
-/*
-    while(coord_num < 0 || coord_num > 8){
-        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << " >> " ;
-        cout << " >> " ;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> coord_num;
-    }*/
 
     if(coord_num == 0){
         cancelar = true;
