@@ -37,10 +37,12 @@ Mapa::~Mapa(){
         delete [] terreno[i];
         delete [] ocupantes[i];
         delete [] visitados[i];
+        delete [] matriz_de_costos_por_destino[i];
     }
     delete [] terreno;
     delete [] ocupantes;
     delete [] visitados;
+    delete [] matriz_de_costos_por_destino;
 }
 
 
