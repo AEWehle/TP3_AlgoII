@@ -36,9 +36,9 @@ void Guarderia::afectar_animales(){
     this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
     this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
 
-        if((this -> obtener_animal(*claves -> consulta(i))->obtener_hambre()==100) || (this -> obtener_animal(*claves -> consulta(i))->obtener_higiene()==0)){
+        if((this -> obtener_animal(*claves -> consulta(i)) -> obtener_hambre() == 100) || (this -> obtener_animal(*claves -> consulta(i)) -> obtener_higiene() == 0)){
             
-            //this->eliminar_animal(*claves->consulta(i));
+            this->eliminar_animal(*claves->consulta(i));
             ++this->escapados;
         }
 
@@ -56,6 +56,10 @@ void Guarderia::eliminar_animal( string nombre ){
 
     diccionario_de_animales -> baja( nombre );
 
+}
+
+bool Guarderia:: nombre_existente( string nombre ){
+    return diccionario_de_animales -> clave_existente( nombre );
 }
 
 

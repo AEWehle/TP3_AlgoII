@@ -65,6 +65,9 @@ class Guarderia{
             POST: Da de baja del diccionario de animales al animal.*/
             void eliminar_animal( string nombre );
 
+        /*Devuelve true si el nombre ya le pertence a un anmal*/
+            bool nombre_existente( string nombre );
+
         /* Obtener animal
         PRE:  el nombre ingresado debe ser existente.
         POST: Develve un puntero al Animal con ese nombre*/

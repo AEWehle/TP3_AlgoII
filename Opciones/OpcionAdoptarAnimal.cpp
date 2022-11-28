@@ -84,7 +84,7 @@ string OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarder
         }
 
         else{
-            if ( diccionario_adoptables -> obtener_animal( entrada ) == nullptr ){
+            if ( !diccionario_adoptables -> nombre_existente( entrada )  ){
                 cout << "El nombre ingresado no es de un animal disponble para adoptar." << endl;
             }
             else{
@@ -101,7 +101,7 @@ string OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarder
 
 float OpcionAdoptarAnimal:: pedir_espacio(){
     cout << endl << "Para adoptar un animal es necesario saber de cuánto espacio dispondrán, según eso se le mostrará una lista de los disponibles" << endl;
-    cout << "Ingrese cuántos metros cuadrados tiene disponibles:" << endl;
+    cout << "Ingrese cuántos metros cuadrados tiene disponibles:" << endl << " >> ";
 
     string espacio_string;
     float espacio;

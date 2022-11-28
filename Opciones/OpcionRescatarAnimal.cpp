@@ -18,10 +18,11 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
 
             mi_guarderia->obtener_auto()->decrementar_combustible(combustible_gastado);
 
-            Animal* nuevo_animal = generar_animal(especie_rescatada);
+            Animal* nuevo_animal = generar_animal( mi_guarderia, especie_rescatada);
 
             mi_guarderia -> agregar_animal(nuevo_animal);
-
+            cout << "Agregaste al animal: " << endl;
+            nuevo_animal -> mostrar();
         }
 
     }
@@ -31,7 +32,7 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
 }
 
 
-Animal* OpcionRescatarAnimal::generar_animal(char especie){
+Animal* OpcionRescatarAnimal::generar_animal(Guarderia * mi_guarderia, char especie){
 
     int especie_int;
 
@@ -51,7 +52,10 @@ Animal* OpcionRescatarAnimal::generar_animal(char especie){
     cout << "Parece tener unos " << edad << " años, su tamaño es " << tamano << " y parece " << personalidad << "." << endl;
     cout << "Qué nombre le querés poner?" << endl;
 
-    cin >> nombre;
+
+    nombre = pedir_nombre( mi_guarderia );
+    
+    // cin >> nombre;
 
     Animal* nuevo_animal = crear_nuevo_animal(especie, nombre, edad, tamano, personalidad);
 
@@ -70,7 +74,7 @@ Mapa* OpcionRescatarAnimal::introduccion(){
 
     while(respuesta != "si" && respuesta != "no"){
 
-        cout << "Desea rescatar animales en un terreno personalizado? [si/no]" << endl;
+        cout << "Desea rescatar animales en un terreno personalizado? [si/no]" << endl << " >> ";
         cin >> respuesta;
 
     }
@@ -222,8 +226,8 @@ bool OpcionRescatarAnimal::otro_nombre( Guarderia* mi_guarderia, string & nombre
 
     int opcion;
     bool otro_nombre = true;
-    Lista<string>* nombres = mi_guarderia -> obtener_lista_nombres();
-    while (otro_nombre && (nombres -> dato_existente(&nombre))){  
+    // Lista<string>* nombres = mi_guarderia -> obtener_lista_nombres();
+    while (otro_nombre && (mi_guarderia -> nombre_existente( nombre ))){  
 
         cout << "Este nombre ya lo tiene otro animal! Podés elegir otro nombre o volver al menú." << endl
              << "Para elegir otro nombre ingresá 1, para volver al menú ingresá 2:" << endl << " >> ";
@@ -240,7 +244,7 @@ bool OpcionRescatarAnimal::otro_nombre( Guarderia* mi_guarderia, string & nombre
         if (opcion == 2)
             otro_nombre = false;
 
-        nombre = pedir_nombre();
+        nombre = pedir_nombre( mi_guarderia );
 
     } 
 
