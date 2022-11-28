@@ -1,5 +1,6 @@
 #ifndef MAPA_H
 #define MAPA_H
+#include "Archivos_auxiliares/Grafo.h"
 #include <string>
 using namespace std; 
 
@@ -27,6 +28,10 @@ class Mapa{
         char** terreno;
         char** ocupantes;
         bool** visitados;
+        int** matriz_de_costos_por_destino;
+        int coord_auto_num;
+        int coord_auto_letra;
+
 
     public:
 
@@ -75,6 +80,9 @@ class Mapa{
 
         //
         char verificar_coordenadas(int &coord_num, int &coord_letra, bool &coord_ok);
+
+        //
+        int obtener_costo_de_viaje(char destino);
 
     public:
         
