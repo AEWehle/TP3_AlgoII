@@ -6,7 +6,7 @@ using namespace std;
 
 // g++ prueba.cpp -o TP3 -Wall -Werror -Wconversion
 
-
+/*
 int main(){
     string* dato1 = new string( "dato1" );
     string clave1 = "clave1";
@@ -77,3 +77,4 @@ int main(){
     delete datos;
     return 0;
 }
+*/
