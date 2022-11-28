@@ -5,6 +5,7 @@
 #include <iostream>
 
 //  EL ORDEN DE LOS ELEMENTOS SE EMPIEZA A CONTAR DESDE 1, NO DESDE 0
+using namespace std;  
 
 
 template <typename Dato>
@@ -323,7 +324,7 @@ int Lista<Dato> :: obtener_posicion(Dato* dato){
         auxiliar = auxiliar -> obtener_siguiente();
         posicion++;
 
-        if( posicion == obtener_cantidad())
+        if( posicion == obtener_cantidad()+1)
             posicion = 0;
 
     }

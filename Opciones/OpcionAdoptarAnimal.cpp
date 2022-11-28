@@ -13,7 +13,11 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
         if( animales_adoptables -> obtener_cantidad() != 0){
 
             cout << endl << "Estos son los animales que podés adoptar:" << endl;
-            animales_adoptables -> ver_diccionario_de_animales();
+
+
+            Lista<string>* nombres_ordenados_edad = animales_adoptables -> obtener_lista_viejo_a_joven();
+            animales_adoptables -> ver_los_animales( nombres_ordenados_edad );
+            
 
             cout << endl << "Si desea adoptar alguno, ingrese el nombre de animal como se muestra." << endl;
             cout << "Nuestros Erizos y Lagartijas NO SON ADOPTABLES ya que son salvajes, por lo que no aparecerán en la lista" << endl;

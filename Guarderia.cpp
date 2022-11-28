@@ -4,6 +4,7 @@
 #include "Guarderia.h"
 #include "Auto.h"
 #include "Archivos_auxiliares/funciones_auxiliares.h"
+#include "Archivos_auxiliares/Quicksort.h"
 using namespace std; 
 
 
@@ -31,6 +32,7 @@ void Guarderia::afectar_animales(){
     Lista<string>* claves = diccionario_de_animales -> obtener_lista_de_claves();
     
     for(int i = 1; i <= claves -> obtener_cantidad(); i++) {
+        cout << *claves -> consulta(i) << endl;
     this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
     this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
 
@@ -107,6 +109,32 @@ void Guarderia::ver_los_animales( Lista <string>* nombres ){
         cout << "No hay animales en la lista" << endl;
 
 }
+
+
+
+Lista<string>* Guarderia :: obtener_lista_viejo_a_joven(){
+    // crear array de animales
+    // ordenar el array con quicksort
+    // crear la lista con los nombres
+    
+    Lista<string>* nombres = obtener_lista_nombres();
+    Animal** lista_animales = new Animal*[ obtener_cantidad() ];
+    for (  int numero_animal = 1 ; numero_animal <= obtener_cantidad() ; numero_animal++ ){
+        lista_animales[ numero_animal-1 ] = diccionario_de_animales -> consulta( *nombres -> consulta ( numero_animal ) ) ;
+    }
+    Quicksort<Animal*> quicksort( lista_animales , obtener_cantidad(), es_primer_animal_mayor);
+    quicksort.ordenar();
+    // nombres = new Lista<string>();
+    
+    nombres -> destruir_con_delete();
+    for ( int numero_animal = 0 ; numero_animal < obtener_cantidad() ; numero_animal++ ) {
+        string* nombre = new string (lista_animales[ numero_animal ] -> obtener_nombre() );
+        nombres -> alta( nombre );
+    }
+    delete [] lista_animales;
+    return nombres;
+}
+
 
 
 Lista<string>* Guarderia:: obtener_lista_nombres(){
