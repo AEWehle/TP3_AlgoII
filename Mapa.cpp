@@ -1,17 +1,15 @@
 #include <string>
 #include <iostream>
-#include <fstream>
 #include <time.h>
 #include "Mapa.h"
 #include "Animal.h"
-#include <limits>
-#include "Archivos_auxiliares/funciones_auxiliares.h"
 using namespace std;
 
 
 Mapa::Mapa(){
 
     iniciar_matrices();
+
     usar_terreno_por_defecto();
     generar_animales();
 
@@ -23,6 +21,7 @@ Mapa::Mapa(){
 Mapa::Mapa(string ruta){
 
     iniciar_matrices();
+
     buscar_mapa(ruta);
     generar_animales();
 
@@ -75,7 +74,6 @@ void Mapa::iniciar_matrices(){
 
 void Mapa::usar_terreno_por_defecto(){ //Se puede cargar de alguna forma más bonita?
 
-    cout << "Generando terreno..." << endl;
     //Cargo los precipicios
     terreno[0][1] = 'P';
     terreno[1][4] = 'P';
@@ -165,9 +163,7 @@ void Mapa::generar_animales(){
     int i;
     int j;
 
-    coord_auto_num = 0;
-    coord_auto_letra = 0;
-    ocupantes[coord_auto_num][coord_auto_letra] = 'A'; //Cargo el auto primero
+    ocupantes[0][0] = 'A'; //Cargo el auto primero
 
     while(creados < 5){
 
@@ -186,34 +182,32 @@ void Mapa::generar_animales(){
 }
 
 
-void Mapa::buscar_mapa(string ruta_terreno){
+void Mapa::buscar_mapa(string ruta){
 
-    fstream archivo_terreno(ruta_terreno, ios::in);
+    //fstream archivo_terreno(RUTA, ios::in);
 
-    if(!archivo_terreno.is_open()){
-        cout << "No se encontro un archivo con nombre \"" << ruta_terreno << "\", se usará el terreno por defecto." << endl << endl;
+    //if(!archivo_terreno.is_open()){
+        cout << "No se encontro un archivo con nombre \"" << /*ruta <<*/ "\", se usará el terreno por defecto" << endl << endl;
         usar_terreno_por_defecto();
-    }
-
+    //}
+/*
     else{
 
-        cout << "Generando terreno..." << endl;
-
-        string lectura;
+        char lectura;
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 7; j++){
                 getline(archivo_terreno, lectura, ',');
-                terreno[i][j] = lectura[0];
+                terreno[i][j] = lectura;
             }
             getline(archivo_terreno, lectura);  //Después del 8vo no hay ',' sino un '\n'
-            terreno[i][7] = lectura[0];
+            terreno[i][7] = lectura;
         }
 
         archivo_terreno.close();
 
     }
-
+*/
 }
 
 
@@ -277,18 +271,8 @@ void Mapa::explicacion(){
         << CAMINO << "   " << RESET << " - El CAMINO consume 1 de combustible" << endl
         << TIERRA << "   " << RESET << " - La TIERRA consume 2 de combustible" << endl
         << MONTANA << "   " << RESET << " - La MONTANA consume 5 de combustible" << endl
-        << PRECIPICIO << "   " << RESET << " - El PRECIPICIO consume 40 de combustible" << endl << endl;
-
-    cout << "En este mapa la \"A\" representa la ubicación de auto, tu ubicación. El resto de casillas marcadas están ocupadas por animales. Las especies son:" << endl
-        << "P: Perro" << endl
-        << "G: Gato" << endl
-        << "C: Caballo" << endl
-        << "R: Roedor" << endl
-        << "O: Conejo" << endl
-        << "E: Erizo" << endl
-        << "L: Lagartija" << endl << endl;
-
-    cout << "Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
+        << PRECIPICIO << "   " << RESET << " - El PRECIPICIO consume 40 de combustible" << endl << endl
+        << "Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
 
 }
 
@@ -315,14 +299,9 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     //Chequear con camino mínimo
 
-    ocupantes[coord_auto_num][coord_auto_letra] = ' ';
-    coord_auto_num = coord_num;
-    coord_auto_letra = coord_letra;
-    ocupantes[coord_auto_num][coord_auto_letra] = 'A';
+    ocupantes[coord_num][coord_letra] = 'A';
 
     //Marcar el camino recorrido
-
-    combustible_gastado = 0; //Editar combustible
 
     return true;
 
@@ -332,28 +311,12 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
     cout << "Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << " >> " ;
-    string coord_num_string;
-    cin >> coord_num_string;
+    cin >> coord_num;
 
-    if(es_numero(coord_num_string)){
-        coord_num = stoi(coord_num_string);
-    }
-
-    while( !es_numero(coord_num_string) || !(coord_num >= 0 && coord_num <= 8)){
+    while(coord_num < 0 || coord_num > 9){
         cout << "La coordenada no es válida! Puebe de nuevo:" << endl << " >> " ;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> coord_num_string;
-        if(es_numero(coord_num_string))
-            coord_num = stoi(coord_num_string);
-    }
-/*
-    while(coord_num < 0 || coord_num > 8){
-        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << " >> " ;
-        cout << " >> " ;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> coord_num;
-    }*/
+    }
 
     if(coord_num == 0){
         cancelar = true;
@@ -361,7 +324,6 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
     }
 
     coord_num--;
-
     char coord_letra_char;
 
     cout << "Ingrese la letra de la coordenada:" << endl << " >> ";
@@ -369,12 +331,12 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
     while((int)coord_letra_char < 97 || (int)coord_letra_char > 104){     //Entre 'a' y 'h'
         cout << "La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cin >> coord_letra_char;
+        cin >> coord_letra;
     }
 
     coord_letra = (int)coord_letra_char - (int)'a';
+
+    cout << coord_letra << endl; 
 
     return;
 
@@ -392,6 +354,7 @@ char Mapa::verificar_coordenadas(int &coord_num, int &coord_letra, bool &coord_o
         cout << "No hay ningún animal ahí!" << endl;
 
     else{
+        cout << "Se avistó un animal en esas coordenadas!" << endl;
         coord_ok = true;
     }
 
