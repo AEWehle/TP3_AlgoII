@@ -26,6 +26,9 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
             cout << "Agregaste al animal: " << endl;
             nuevo_animal -> mostrar();
             rescatados++;
+
+            cout << "En este rescate se gastaron " << combustible_gastado << " de combustible, quedan " << mi_guarderia->obtener_auto()->obtener_combustible() << endl;
+
         }
 
         if(rescatados == 5)
