@@ -1,6 +1,6 @@
 # TP3_AlgoII
 
-COMANDO: g++ *.cpp Especies/*.cpp Archivos_auxiliares/*.cpp -o TP3 -Wall -Werror -Wconversion
+COMANDO: g++ *.cpp Especies/*.cpp Menus/*.cpp Opciones/*.cpp Archivos_auxiliares/*.cpp -o TP3 -Wall -Werror -Wconversion
 
 # Para compilar version meli: 
 
@@ -39,7 +39,6 @@ git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS A MODIFICAR/CORREGIR:
 1. Camino mínimo (LN)
-2. Crear funcion que genere 5 animales random (LN)
 3. Cambiar la implementacion de listar animales, buscar animal, ya que ahora no usamos lista sino diccionario de arbol 3 vias.
 4. Agregar opcion del menú principal:
         5. Adoptar animal.
