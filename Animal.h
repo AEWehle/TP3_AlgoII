@@ -87,6 +87,7 @@ class Animal{
         virtual void ensuciar();
 
 
+
     /*________mostrar()_____________________________________________________
      PRE: -
      POST:  El Animal se muestra individualmente,
@@ -160,5 +161,14 @@ class Animal{
         void setear_higiene(int higiene_int);
 
 };
+
+
+
+        
+/*________es_primer_animal_mayor()_____________________________________________
+    PRE: -
+    POST: DEvuelve true si el animal1 tiene mas edad que el animal 2
+_______________________________________________________________________________*/        
+    bool es_primer_animal_mayor( Animal* animal1, Animal* animal2 );
 
 #endif

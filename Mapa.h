@@ -29,6 +29,9 @@ class Mapa{
         char** ocupantes;
         bool** visitados;
         int** matriz_de_costos_por_destino;
+        int coord_auto_num;
+        int coord_auto_letra;
+
 
     public:
 

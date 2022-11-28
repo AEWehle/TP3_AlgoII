@@ -19,6 +19,7 @@ class MenuCuidar: public Menu{
     //Atributos
     private:
         Lista<Opcion> opciones;
+        OpcionElegirAnimal* opcion_elegir; 
 
     public:
         MenuCuidar(Guarderia* mi_guarderia);

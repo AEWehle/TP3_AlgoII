@@ -47,7 +47,7 @@ class NodoB3{
         ~NodoB3();
 
 
-        /*  PRE: La clave no se debe repetir.
+        /*  PRE: La clave no se debe repetir. Si es una ya agregada reemplaza el dato
             Es necesario que la clave le correponda a este nodo y no a uno menor o mayor.
             POS: Agrega el dato y clave al nodo.
             Devuelve el puntero al nodo padre de este nodo, esto es por si el
@@ -202,7 +202,7 @@ NodoB3<Dato, Clave>                     :: ~NodoB3(){
         elementos -> consulta(i) -> cambiar_hijo(nullptr);
     }
     delete ultimo_hijo;
-    cout << "Chau nodo" << elementos -> consulta(1) -> obtener_clave() << endl;
+    cout << "Chau " << elementos -> consulta(1) -> obtener_clave() << endl;
     ultimo_hijo = nullptr;
     elementos -> destruir_con_delete();
     delete elementos;
@@ -223,13 +223,17 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: agregar_elemento( Dato* dato_nuevo, 
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* NodoB3<Dato, Clave>:: agregar_elemento_existente( Elemento<Dato, Clave>* elemento_entrante ){
     // NodoB3<Dato,Clave>* nodo_hermano_mayor = nullptr;
-
-
-    if ( elemento_entrante -> obtener_clave() < this -> obtener_clave_de(1) ){
+    if ( elemento_entrante -> obtener_clave() <= this -> obtener_clave_de(1) ){
+        if (elemento_entrante -> obtener_clave() == this -> obtener_clave_de(1)){
+            elemento_entrante -> cambiar_hijo(  this -> elementos -> consulta(1) -> obtener_hijo() );
+            this -> elementos -> baja_con_delete(1);}
         this -> elementos -> alta( elemento_entrante , 1);
     }
     else if( ( this -> elementos -> obtener_cantidad() == 1 )  ||
-             (elemento_entrante -> obtener_clave() < this -> obtener_clave_de(2) )){
+             (elemento_entrante -> obtener_clave() <= this -> obtener_clave_de(2) )){
+         if (elemento_entrante -> obtener_clave() == this -> obtener_clave_de(2)){
+            elemento_entrante -> cambiar_hijo(  this -> elementos -> consulta(2) -> obtener_hijo() );
+            this -> elementos -> baja_con_delete(2);}
         elementos -> alta( elemento_entrante , 2); // puede que ahora tenga 3 claves
     }
     else{

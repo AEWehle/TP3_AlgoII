@@ -28,7 +28,7 @@ class ArbolB3 {
         ~ArbolB3(  );
 
 
-        // PRE: la clave no se puede repetir
+        // PRE: la clave no se puede repetir, si se repite reemplaza el dato
         // POS: Inresa el dato en su ubicacion segun la clave
         // Esta es la funcion que utilizará el usuario
         void agregar_dato( Dato* dato, Clave clave);
@@ -43,6 +43,13 @@ class ArbolB3 {
         // POS: devuelve el puntero al dato segun la clave
         Dato* consulta( Clave clave );
 
+
+        /*PRE: Si la clave no existe lo agrega
+        POST: Cambia el dato que le coresponde la clave por el dato_nuevo ingresado*/
+        void cambiar_dato( Dato* dato_nuevo ,Clave clave );
+
+        /* Devuelve true si la clave esta en el arbol        */
+        bool clave_existente(  Clave clave );
 
         /* Es para imprimir en terminal el arbol como arbol y no para mostrar
         los datos en sí*/
@@ -87,7 +94,6 @@ class ArbolB3 {
         // POS: devuelve el puntero al dato segun la clave, buscando desde nodo actual
         Dato* consulta( NodoB3<Dato,Clave> * nodo_actual , Clave& clave );
 
-
         // Me llaman para imprimir en recursion todo el arbol
         // Imprimo el arbol, no los datos
         void mostrar_arbolb3( NodoB3<Dato,Clave>* nodo_actual, int generacion );
@@ -123,6 +129,8 @@ ArbolB3<Dato, Clave>                     :: ~ArbolB3( ){
 // Ingresar dato segun clave, llamo a recursion
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: agregar_dato( Dato* dato, Clave clave){
+    this -> lista_de_claves -> alta( new Clave {clave}); 
+    this -> cantidad++;
     return agregar_dato( this -> nodo_raiz , dato , clave );    
 }    
 
@@ -133,8 +141,6 @@ void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* &no
     
     // Clave* clave_heap = new Clave;
     // *clave_heap = clave;
-    this -> lista_de_claves -> alta( new Clave {clave}); 
-    this -> cantidad++;
 
     if ( nodo_actual == nullptr) {
         nodo_actual = new NodoB3<Dato, Clave> ( dato , clave );
@@ -182,7 +188,9 @@ bool ArbolB3<Dato, Clave>               :: baja(  NodoB3<Dato,Clave>* nodo_actua
             return false; // no esta en este nodo
         }
         if( existia ){
-            lista_de_claves -> baja_con_delete ( lista_de_claves -> obtener_posicion(&clave) );
+
+            lista_de_claves -> baja_con_delete ( lista_de_claves -> obtener_posicion( &clave ) );
+
             cantidad --;
             return true; // dado de baja exitosamente
         }
@@ -207,7 +215,7 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( Clave clave ){
     Dato * dato = consulta( this -> nodo_raiz , clave );
     
     if ( dato == nullptr ){ //el dato no se encuentra en el arbol
-        cout << "Clave inexistente" << endl;
+        // cout << "Clave inexistente" << endl;
     }
     return dato;
 }
@@ -233,6 +241,34 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_ac
         return nullptr;
     }
     return consulta( nodo_actual -> obtener_hijo( clave_men_igu_o_may +1 ) , clave );
+}
+
+
+
+template <typename Dato, typename Clave>
+void ArbolB3<Dato, Clave>              :: cambiar_dato( Dato* dato_nuevo , Clave clave ){
+    if ( cantidad == 0 ) {
+        cout << "La base de datos esta vacía" << endl;
+        return;
+    }
+    return agregar_dato( this -> nodo_raiz , dato_nuevo , clave );
+}
+
+
+
+template <typename Dato, typename Clave>
+bool ArbolB3<Dato, Clave>               :: clave_existente(  Clave clave ){
+    if ( cantidad == 0 ) {
+        cout << "La base de datos esta vacía" << endl;
+        return false;
+    }
+    
+    Dato * dato = consulta( this -> nodo_raiz , clave );
+    
+    if ( dato == nullptr ){ 
+    return false;
+    }
+    return true;
 }
 
 

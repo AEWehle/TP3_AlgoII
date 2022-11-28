@@ -1,7 +1,7 @@
 #include "MenuCuidar.h"
 
 MenuCuidar::MenuCuidar(Guarderia* mi_guarderia) : opciones(Lista<Opcion>()){
-    Opcion* opcion_elegir = new OpcionElegirAnimal(mi_guarderia);
+    opcion_elegir = new OpcionElegirAnimal(mi_guarderia);
     Opcion* opcion_menu_ppal = new OpcionVolverAMenu();
   
     opciones.alta(opcion_elegir, 1);
@@ -25,7 +25,7 @@ void MenuCuidar::ejecutar(Guarderia *mi_guarderia){
         eleccion = pedir_eleccion(CANTIDAD_OPCIONES_CUIDAR);
         ejecutar_opcion(eleccion, mi_guarderia);
     }
-    while ( eleccion != (CANTIDAD_OPCIONES_CUIDAR) );
+    while ( (eleccion != (CANTIDAD_OPCIONES_CUIDAR)) && !(opcion_elegir->volver_menu_principal())); // && !()
 }
 
 void MenuCuidar::ejecutar_opcion(int eleccion, Guarderia *mi_guarderia){

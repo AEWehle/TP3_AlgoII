@@ -4,6 +4,7 @@
 #include "Guarderia.h"
 #include "Auto.h"
 #include "Archivos_auxiliares/funciones_auxiliares.h"
+#include "Archivos_auxiliares/Quicksort.h"
 using namespace std; 
 
 
@@ -34,9 +35,9 @@ void Guarderia::afectar_animales(){
     this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
     this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
 
-        if((this -> obtener_animal(*claves -> consulta(i))->obtener_hambre()==100) || (this -> obtener_animal(*claves -> consulta(i))->obtener_higiene()==0)){
+        if((this -> obtener_animal(*claves -> consulta(i)) -> obtener_hambre() == 100) || (this -> obtener_animal(*claves -> consulta(i)) -> obtener_higiene() == 0)){
             
-            //this->eliminar_animal(*claves->consulta(i));
+            this->eliminar_animal(*claves->consulta(i));
             ++this->escapados;
         }
 
@@ -54,6 +55,10 @@ void Guarderia::eliminar_animal( string nombre ){
 
     diccionario_de_animales -> baja( nombre );
 
+}
+
+bool Guarderia:: nombre_existente( string nombre ){
+    return diccionario_de_animales -> clave_existente( nombre );
 }
 
 
@@ -80,7 +85,7 @@ void Guarderia::ver_diccionario_de_animales(  ){
 
     if( this -> diccionario_de_animales -> obtener_cantidad()){
 
-        cout << "Hay " << diccionario_de_animales -> obtener_cantidad() << " animales en la reserva." << endl;
+        cout << "Hay " << diccionario_de_animales -> obtener_cantidad() << " animales en la reserva." << endl<< endl;
         Lista <string>*  nombres = diccionario_de_animales -> obtener_lista_de_claves();
 
         for( int numero_animal = 1 ; numero_animal <= nombres -> obtener_cantidad(); numero_animal++){
@@ -107,6 +112,32 @@ void Guarderia::ver_los_animales( Lista <string>* nombres ){
         cout << "No hay animales en la lista" << endl;
 
 }
+
+
+
+Lista<string>* Guarderia :: obtener_lista_viejo_a_joven(){
+    // crear array de animales
+    // ordenar el array con quicksort
+    // crear la lista con los nombres
+    
+    Lista<string>* nombres = obtener_lista_nombres();
+    Animal** lista_animales = new Animal*[ obtener_cantidad() ];
+    for (  int numero_animal = 1 ; numero_animal <= obtener_cantidad() ; numero_animal++ ){
+        lista_animales[ numero_animal-1 ] = diccionario_de_animales -> consulta( *nombres -> consulta ( numero_animal ) ) ;
+    }
+    Quicksort<Animal*> quicksort( lista_animales , obtener_cantidad(), es_primer_animal_mayor);
+    quicksort.ordenar();
+    // nombres = new Lista<string>();
+    
+    nombres -> destruir_con_delete();
+    for ( int numero_animal = 0 ; numero_animal < obtener_cantidad() ; numero_animal++ ) {
+        string* nombre = new string (lista_animales[ numero_animal ] -> obtener_nombre() );
+        nombres -> alta( nombre );
+    }
+    delete [] lista_animales;
+    return nombres;
+}
+
 
 
 Lista<string>* Guarderia:: obtener_lista_nombres(){
