@@ -10,12 +10,20 @@ Grafo::Grafo(){
     lista_vertices = new Lista<Vertice>();
 }
 
+Grafo::Grafo(int dimensiones, int** matriz_de_costos){
+    matriz_de_adyacencia = nullptr;
+    algoritmo_camino_minimo = nullptr;
+    lista_vertices = new Lista<Vertice>();
+
+    crear_grafo_regular_orden2_con_pesos(dimensiones,matriz_de_costos);
+}
+
 void Grafo::mostrar_grafo(){
     mostrar_vertices();
     mostrar_matriz_adyacencia();
 }
 
-void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
+void Grafo::crear_grafo_regular_orden2_con_pesos(int dim, int** matriz_de_costos_por_destino){
 
     // Creo grafo de dim*dim
     for(int i=1; i<= dim*dim; i++){
@@ -53,8 +61,7 @@ void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
         }
 
     }
-    
-    aplicar_algoritmo_camino_minimo();
+
 }
 
 void Grafo::mostrar_vertices(){
@@ -195,7 +202,8 @@ void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lis
 }
 
 void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje){
-
+    
+    aplicar_algoritmo_camino_minimo();
     
     // Transformo coordenadas en vertices
     int pos_origen = convertir_coordenadas_a_celda(coord_vertical_origen,coord_horizontal_origen);
@@ -225,7 +233,6 @@ Grafo::~Grafo() {
     liberar_matriz_adyacencia(lista_vertices->obtener_cantidad());
     matriz_de_adyacencia = nullptr;
 
-    cout <<"DESTRUCTOR DEL GRAFO" << endl;
     lista_vertices->destruir_con_delete();
     delete lista_vertices;
     lista_vertices = nullptr;

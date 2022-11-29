@@ -15,8 +15,6 @@ Floyd::~Floyd(){
     liberar_matriz(matriz_de_costos);
     liberar_matriz(matriz_de_caminos);
 
-        cout <<"DESTRUCTOR DE FLOYD" << endl;
-
     matriz_de_costos = nullptr;
     matriz_de_caminos = nullptr;
 }
@@ -42,7 +40,7 @@ void Floyd::mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* li
         // CREAR LISTA CON VERTICES RECORRIDOS PARA PODER MARCARLOS EN EL MAPA
         Coordenada* coordenada_origen = new Coordenada(coord_vertical_origen,coord_horizontal_origen);
         lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
-
+        
         // Imprimo el origen
         cout << "[" << coord_vertical_origen << "," << coord_horizontal_origen << "]";
         // Sigo recorriendo el camino hasta llegar al destino
@@ -78,7 +76,7 @@ void Floyd::mostrar_siguiente_paso_en_camino(int nuevo_origen){
     // delete vertice;
     int coord_vertical_siguiente=0, coord_horizontal_siguiente=0;
     convertir_celdas_a_coordenadas(nuevo_origen,8,coord_vertical_siguiente,coord_horizontal_siguiente);
-    cout << " -> [" << coord_vertical_siguiente << "," << coord_horizontal_siguiente << "]";
+    cout << " -> [" << coord_vertical_siguiente +1 << "," << coord_horizontal_siguiente +1<< "]";
 }
 
 void Floyd::liberar_matriz(int** matriz){

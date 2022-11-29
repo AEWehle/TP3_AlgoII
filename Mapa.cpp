@@ -9,6 +9,8 @@
 
 using namespace std;
 
+// const int DIMENSION = 8;
+
 
 Mapa::Mapa(){
 
@@ -52,10 +54,9 @@ Mapa::~Mapa(){
     delete[] ocupantes;
     delete[] visitados;
     delete[] matriz_de_costos_por_destino;
-    // lista_coordenadas_recorridas->destruir_con_delete();
-    delete lista_coordenadas_recorridas;
 
-        cout <<"DESTRUCTOR DEL MAPA" << endl;
+    delete lista_coordenadas_recorridas;
+    lista_coordenadas_recorridas=nullptr;
 }
 
 
@@ -87,6 +88,7 @@ void Mapa::iniciar_matrices(){
     }
 }
 
+
 int Mapa::obtener_costo_de_viaje(char destino){
     int costo = 0;
     
@@ -110,6 +112,8 @@ int Mapa::obtener_costo_de_viaje(char destino){
 
 
 void Mapa::usar_terreno_por_defecto(){ //Se puede cargar de alguna forma más bonita?
+
+    cout << "Generando terreno..." << endl;
 
     //Cargo los precipicios
     terreno[0][1] = 'P';
@@ -191,9 +195,8 @@ void Mapa::usar_terreno_por_defecto(){ //Se puede cargar de alguna forma más bo
     terreno[7][3] = 'T';
     */
 
-   
-
 }
+
 
 void Mapa::inicializar_matriz_de_costos_por_destino(){
     for(int i = 0; i < 8; i++){
@@ -203,13 +206,16 @@ void Mapa::inicializar_matriz_de_costos_por_destino(){
     }
 }
 
+
 void Mapa::generar_animales(){
 
     int creados = 0;
-    int i;
-    int j;
+    int i,j;
 
-    ocupantes[0][0] = 'A'; //Cargo el auto primero
+    coord_auto_letra = 0;
+    coord_auto_num = 0;
+
+    ocupantes[coord_auto_num][coord_auto_letra] = 'A'; //Cargo el auto primero
 
     while(creados < 5){
 
@@ -230,10 +236,10 @@ void Mapa::generar_animales(){
 
 void Mapa::buscar_mapa(string ruta_terreno){
 
-    fstream archivo_terreno(RUTA, ios::in);
+    fstream archivo_terreno(ruta_terreno, ios::in);
 
     if(!archivo_terreno.is_open()){
-        cout << "No se encontro un archivo con nombre \"" << /*ruta <<*/ "\", se usará el terreno por defecto" << endl << endl;
+        cout << "No se encontro un archivo con nombre \"" << ruta_terreno << "\", se usará el terreno por defecto" << endl << endl;
         usar_terreno_por_defecto();
     }
 
@@ -324,6 +330,15 @@ void Mapa::explicacion(){
 
 }
 
+void Mapa::limpiar_visitados(){
+
+    for(int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
+            visitados[i][j] = false;
+        }
+    }
+    
+}
 
 bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada){
 
@@ -345,30 +360,27 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
     }
 
-    //Chequear con camino mínimo
-    int coord_x_origen = 0;
-    int coord_y_origen = 0;
-    int coord_x_destino = coord_num;
-    int coord_y_destino = coord_letra;
+    limpiar_visitados();
 
-    int gasto_en_combustible = 0;
+    Grafo* grafo = new Grafo(8,matriz_de_costos_por_destino);
 
-    Grafo* grafo = new Grafo();
+    grafo->obtener_camino_minimo_por_coordenadas(coord_auto_num,coord_auto_letra,coord_num,coord_letra,lista_coordenadas_recorridas,combustible_gastado);
 
-    grafo->mapa_a_grafo(8,matriz_de_costos_por_destino);
-
-    grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino,lista_coordenadas_recorridas,gasto_en_combustible);
-
-    cout << endl << "\t\t\tCOSTO DEL VIAJE: " << gasto_en_combustible << endl << endl;
-
-    ocupantes[coord_num][coord_letra] = 'A';
+    // agregar chequeo del combustible
+    ocupantes[coord_auto_num][coord_auto_letra] = ' ';
+    coord_auto_num = coord_num;
+    coord_auto_letra = coord_letra;
+    ocupantes[coord_auto_num][coord_auto_letra] = 'A';
 
     //Marcar el camino recorrido
+    for(int i=1; i<=lista_coordenadas_recorridas->obtener_cantidad(); i++){
+        Coordenada* coordenada = lista_coordenadas_recorridas->consulta(i);
+
+        visitados[coordenada->obtener_vertical()][coordenada->obtener_horizontal()] = true;
+    }
 
 
-    // Luego de usar las coordenadas borro la lista porque cuando quiera rescatar un animal nuevo la reemplazaré
-    delete lista_coordenadas_recorridas;
-    lista_coordenadas_recorridas=nullptr;
+    lista_coordenadas_recorridas->destruir_con_delete();
     delete grafo;
 
     return true;
