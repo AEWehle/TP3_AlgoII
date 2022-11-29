@@ -112,7 +112,7 @@ int Mapa::obtener_costo_de_viaje(char destino){
 }
 
 
-void Mapa::usar_terreno_por_defecto(){ //Se puede cargar de alguna forma más bonita?
+void Mapa::usar_terreno_por_defecto(){ //Mapa default hardcodeado
 
     cout << "Generando terreno..." << endl;
 
@@ -165,7 +165,8 @@ void Mapa::usar_terreno_por_defecto(){ //Se puede cargar de alguna forma más bo
                 terreno[i][j] = 'T';
         }
     }
-    /*
+
+    /* El for Hardcodea esto:
     terreno[0][2] = 'T';
     terreno[0][3] = 'T';
     terreno[0][4] = 'T';
@@ -220,7 +221,7 @@ void Mapa::generar_animales(){
 
     while(creados < 5){
 
-        srand((unsigned int)time(nullptr)); //Probar dejando solo un srand
+        srand((unsigned int)time(nullptr));
         i = rand() % 8;
         srand((unsigned int)time(nullptr));
         j = rand() % 8;
@@ -341,51 +342,62 @@ void Mapa::limpiar_visitados(){
     
 }
 
-bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada){
+bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada, bool &combustible_suficiente){
 
     mostrar();
 
     int coord_num, coord_letra;
     bool coord_ok = false, cancelar = false;
 
-    while(!coord_ok){
+    while(!coord_ok && !cancelar){
 
         pedir_coordenadas(coord_num, coord_letra, cancelar);
 
-        if(cancelar){
-            cout << "Rescate cancelado!" << endl;
-            return false;  //Cancelar rescate
+        if(!cancelar)
+            especie_rescatada = verificar_coordenadas(coord_num, coord_letra, coord_ok);
+
+    }
+
+    if(!cancelar){
+
+        limpiar_visitados();
+
+        Grafo* grafo = new Grafo(8,matriz_de_costos_por_destino);
+        grafo->obtener_camino_minimo_por_coordenadas(coord_auto_num,coord_auto_letra,coord_num,coord_letra,lista_coordenadas_recorridas,combustible_gastado);
+
+        if(combustible_gastado <= combustible){
+
+            ocupantes[coord_auto_num][coord_auto_letra] = ' ';
+            coord_auto_num = coord_num;
+            coord_auto_letra = coord_letra;
+            ocupantes[coord_auto_num][coord_auto_letra] = 'A';
+
+            for(int i=1; i<=lista_coordenadas_recorridas->obtener_cantidad(); i++){
+                Coordenada* coordenada = lista_coordenadas_recorridas->consulta(i);
+
+                visitados[coordenada->obtener_vertical()][coordenada->obtener_horizontal()] = true;
+            }
+
+            lista_coordenadas_recorridas->destruir_con_delete();
+            delete grafo;
+
         }
 
-        especie_rescatada = verificar_coordenadas(coord_num, coord_letra, coord_ok);
+        else{
+
+            cout << "No hay suficiente combustible para el rescate!" << endl
+                << "Este rescate tiene un costo de " << combustible_gastado << ", pero solo hay " << combustible << "!" << endl << endl;
+            combustible_suficiente = false;
+
+        }
+
+        return true;
 
     }
 
-    limpiar_visitados();
-
-    Grafo* grafo = new Grafo(8,matriz_de_costos_por_destino);
-
-    grafo->obtener_camino_minimo_por_coordenadas(coord_auto_num,coord_auto_letra,coord_num,coord_letra,lista_coordenadas_recorridas,combustible_gastado);
-
-    // agregar chequeo del combustible
-    ocupantes[coord_auto_num][coord_auto_letra] = ' ';
-    coord_auto_num = coord_num;
-    coord_auto_letra = coord_letra;
-    ocupantes[coord_auto_num][coord_auto_letra] = 'A';
-
-    //Marcar el camino recorrido
-    for(int i=1; i<=lista_coordenadas_recorridas->obtener_cantidad(); i++){
-        Coordenada* coordenada = lista_coordenadas_recorridas->consulta(i);
-
-        visitados[coordenada->obtener_vertical()][coordenada->obtener_horizontal()] = true;
-    }
-
-
-    lista_coordenadas_recorridas->destruir_con_delete();
-    delete grafo;
-
-    return true;
-
+    else
+        return false;
+    
 }
 
 

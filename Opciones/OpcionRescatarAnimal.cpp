@@ -4,21 +4,32 @@
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
     cout << "Elegiste la opcion 2, rescatar un animal."<< endl<< endl;
+
+    int combustible_disponible = mi_guarderia->obtener_auto()->obtener_combustible();
+
+    if(combustible_disponible == 0){
+        cout << "No hay nada de combustible! Se cancela el rescate." << endl;
+    }
+
     Mapa* mapa = introduccion();
 
     int combustible_gastado = 0, rescatados = 0;
     char especie_rescatada = ' ';
-    bool rescatando = true;
+    bool rescatando = true, combistible_suficiente = true;
 
     while(rescatando && rescatados < 5){
-        bool salida_ok = mapa->ejecutar(mi_guarderia->obtener_auto()->obtener_combustible(), combustible_gastado, especie_rescatada);
+        bool salida_ok = mapa->ejecutar(combustible_disponible, combustible_gastado, especie_rescatada, combistible_suficiente);
 
-        if(!salida_ok)
+        if(!salida_ok){
+            cout << "Rescate cancelado!" << endl << endl;
             rescatando = false;
+        }
 
-        else{        
+        else if(combistible_suficiente){        
 
             mi_guarderia->obtener_auto()->decrementar_combustible(combustible_gastado);
+
+            combustible_disponible = mi_guarderia->obtener_auto()->obtener_combustible();
 
             Animal* nuevo_animal = generar_animal( mi_guarderia, especie_rescatada);
 

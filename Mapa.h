@@ -95,7 +95,7 @@ class Mapa{
         
         // PRE: el combustible está entre 0 y 100
         // POST: 
-        bool ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada);
+        bool ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada, bool &combustible_suficiente);
 
 };
 
