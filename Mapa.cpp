@@ -1,8 +1,12 @@
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <time.h>
 #include "Mapa.h"
 #include "Animal.h"
+#include <limits>
+#include "Archivos_auxiliares/funciones_auxiliares.h"
+
 using namespace std;
 
 
@@ -217,32 +221,34 @@ void Mapa::generar_animales(){
 }
 
 
-void Mapa::buscar_mapa(string ruta){
+void Mapa::buscar_mapa(string ruta_terreno){
 
-    //fstream archivo_terreno(RUTA, ios::in);
+    fstream archivo_terreno(RUTA, ios::in);
 
-    //if(!archivo_terreno.is_open()){
+    if(!archivo_terreno.is_open()){
         cout << "No se encontro un archivo con nombre \"" << /*ruta <<*/ "\", se usará el terreno por defecto" << endl << endl;
         usar_terreno_por_defecto();
-    //}
-/*
+    }
+
     else{
 
-        char lectura;
+        cout << "Generando terreno..." << endl;
+
+        string lectura;
 
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 7; j++){
                 getline(archivo_terreno, lectura, ',');
-                terreno[i][j] = lectura;
+                terreno[i][j] = lectura[0];
             }
             getline(archivo_terreno, lectura);  //Después del 8vo no hay ',' sino un '\n'
-            terreno[i][7] = lectura;
+            terreno[i][7] = lectura[0];
         }
 
         archivo_terreno.close();
 
     }
-*/
+
 }
 
 
