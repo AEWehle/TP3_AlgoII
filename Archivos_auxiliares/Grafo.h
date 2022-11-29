@@ -22,6 +22,8 @@ class Grafo{
         // Constructor
         Grafo();
 
+        Grafo(int dimensiones, int** matriz_de_costos);
+
         // Destructor
         ~Grafo();
 
@@ -31,7 +33,7 @@ class Grafo{
         
         void agregar_camino(int origen, int destino, int costo);
 
-        void mapa_a_grafo(int dimensiones, int** matriz_de_costos_en_mapa);
+        void crear_grafo_regular_orden2_con_pesos(int dimensiones, int** matriz_de_costos);
 
         void obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje);
 

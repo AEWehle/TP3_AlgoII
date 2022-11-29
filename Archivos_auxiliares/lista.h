@@ -52,12 +52,7 @@ class Lista {
         // PRE: 0 < POS <= cantidad
         // POS: da de baja el nodo que esta en la posicion POS (empieza en 1)
         void baja(int POS);
-
-        /* elimina el nodo de la lista pero LO DEVUELVE SIN DELETE!!!
-        */
-        Nodo<Dato>* extraer(int POS);
-
-
+        
         // PRE: 0 < POS <= cantidad
         //      Guardarse el puntero del dato previamente.
         // POS: da de baja el dato que esta en la posicion POS,
@@ -132,8 +127,6 @@ Lista<Dato>::Lista() {
 //Destructor
 template <typename Dato>
 Lista<Dato>::~Lista() {
-
-        cout <<"DESTRUCTOR DE LISTA" << endl;
 
     while (! vacia()){
         baja(1);

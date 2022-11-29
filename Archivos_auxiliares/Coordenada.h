@@ -16,6 +16,10 @@ class Coordenada {
         Coordenada(int coordenada_vertical, int coordenada_horizontal);
 
         ~Coordenada();
+
+        int obtener_vertical();
+
+        int obtener_horizontal();
 };
 
 

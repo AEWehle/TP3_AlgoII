@@ -88,6 +88,9 @@ class Mapa{
         //
         int obtener_costo_de_viaje(char destino);
 
+        //
+        void limpiar_visitados();
+
     public:
         
         // PRE: el combustible está entre 0 y 100
