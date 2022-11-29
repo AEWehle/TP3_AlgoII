@@ -20,7 +20,7 @@ class Floyd : public AlgoritmoCaminoMinimo{
         // Destructor
         ~Floyd();
 
-        void mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas) override;
+        void mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje) override;
 
     private:
         void crear_matriz_de_costos(int** matriz_de_adyacencia);

@@ -35,14 +35,19 @@ Mapa::Mapa(string ruta){
 Mapa::~Mapa(){
 
     for(int i = 0; i < 8; i++){
-        delete terreno[i];
-        delete ocupantes[i];
-        delete visitados[i];
+        delete[] terreno[i];
+        delete[] ocupantes[i];
+        delete[] visitados[i];
+        delete[] matriz_de_costos_por_destino[i];
     }
-    delete terreno;
-    delete ocupantes;
-    delete visitados;
+    delete[] terreno;
+    delete[] ocupantes;
+    delete[] visitados;
+    delete[] matriz_de_costos_por_destino;
+    // lista_coordenadas_recorridas->destruir_con_delete();
     delete lista_coordenadas_recorridas;
+
+        cout <<"DESTRUCTOR DEL MAPA" << endl;
 }
 
 
@@ -333,15 +338,25 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
     int coord_x_destino = coord_num;
     int coord_y_destino = coord_letra;
 
+    int gasto_en_combustible = 0;
+
     Grafo* grafo = new Grafo();
 
     grafo->mapa_a_grafo(8,matriz_de_costos_por_destino);
 
-    grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino,lista_coordenadas_recorridas);
+    grafo->obtener_camino_minimo_por_coordenadas(coord_x_origen,coord_y_origen,coord_x_destino,coord_y_destino,lista_coordenadas_recorridas,gasto_en_combustible);
+
+    cout << endl << "\t\t\tCOSTO DEL VIAJE: " << gasto_en_combustible << endl << endl;
 
     ocupantes[coord_num][coord_letra] = 'A';
 
     //Marcar el camino recorrido
+
+
+    // Luego de usar las coordenadas borro la lista porque cuando quiera rescatar un animal nuevo la reemplazaré
+    delete lista_coordenadas_recorridas;
+    lista_coordenadas_recorridas=nullptr;
+    delete grafo;
 
     return true;
 

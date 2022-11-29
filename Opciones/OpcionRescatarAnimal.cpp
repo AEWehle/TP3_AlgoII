@@ -3,7 +3,7 @@
 #include <limits>
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
-    cout << "Elegiste la opcion 2, Recastar un animal."<< endl<< endl;
+    cout << "Elegiste la opcion 2, rescatar un animal."<< endl<< endl;
     Mapa* mapa = introduccion();
 
     int combustible_gastado = 0, rescatados = 0;

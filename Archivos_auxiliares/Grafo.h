@@ -33,9 +33,9 @@ class Grafo{
 
         void mapa_a_grafo(int dimensiones, int** matriz_de_costos_en_mapa);
 
-        void obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas);
+        void obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje);
 
-        void obtener_camino_minimo_por_coordenadas(int coord_x_origen, int coord_y_origen, int coord_x_destino, int coord_y_destino, Lista<Coordenada>* lista_coordenadas_recorridas);
+        void obtener_camino_minimo_por_coordenadas(int coord_x_origen, int coord_y_origen, int coord_x_destino, int coord_y_destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje);
 
         void aplicar_algoritmo_camino_minimo();
 

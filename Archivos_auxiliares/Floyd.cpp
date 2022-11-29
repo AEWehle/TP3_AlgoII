@@ -15,11 +15,13 @@ Floyd::~Floyd(){
     liberar_matriz(matriz_de_costos);
     liberar_matriz(matriz_de_caminos);
 
+        cout <<"DESTRUCTOR DE FLOYD" << endl;
+
     matriz_de_costos = nullptr;
     matriz_de_caminos = nullptr;
 }
 
-void Floyd::mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas){
+void Floyd::mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje){
 
     // Me fijo si existe un camino
     if(matriz_de_caminos[origen-1][destino-1] == 0){
@@ -35,6 +37,8 @@ void Floyd::mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* li
         cout << "El camino mínimo entre [" << coord_vertical_origen << "," << coord_horizontal_origen << "] y [" << coord_vertical_destino << "," << coord_horizontal_destino << "]";
         cout << " tiene un costo de $" << matriz_de_costos[origen-1][destino-1] << " y es: ";
 
+        costo_viaje = matriz_de_costos[origen-1][destino-1];
+
         // CREAR LISTA CON VERTICES RECORRIDOS PARA PODER MARCARLOS EN EL MAPA
         Coordenada* coordenada_origen = new Coordenada(coord_vertical_origen,coord_horizontal_origen);
         lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
@@ -47,7 +51,7 @@ void Floyd::mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* li
             convertir_celdas_a_coordenadas(origen,8,coord_vertical_origen,coord_horizontal_origen);
 
             Coordenada* coordenada_origen = new Coordenada(coord_vertical_origen,coord_horizontal_origen);
-            lista_coordenadas_recorridas->alta(coordenada_origen);
+            lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
             
             mostrar_siguiente_paso_en_camino(origen);
         }

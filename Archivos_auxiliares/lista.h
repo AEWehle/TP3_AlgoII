@@ -133,6 +133,8 @@ Lista<Dato>::Lista() {
 template <typename Dato>
 Lista<Dato>::~Lista() {
 
+        cout <<"DESTRUCTOR DE LISTA" << endl;
+
     while (! vacia()){
         baja(1);
     }
@@ -215,16 +217,13 @@ void Lista<Dato>::baja(int POS) {
         this->primero = a_borrar->obtener_siguiente();
     } else {
         Nodo<Dato>* anterior = obtener_nodo(POS - 1);
-        a_borrar             = anterior->obtener_siguiente();
+        a_borrar = anterior->obtener_siguiente();
         anterior->cambiar_siguiente(a_borrar->obtener_siguiente());
     }
 
     delete a_borrar;
     this -> cantidad--;
 }
-
-
-
 
 template <typename Dato>
 void Lista<Dato>::baja_con_delete(int POS) {

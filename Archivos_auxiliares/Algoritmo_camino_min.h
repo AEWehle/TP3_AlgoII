@@ -16,7 +16,7 @@ class AlgoritmoCaminoMinimo{
     public:
         AlgoritmoCaminoMinimo(Lista<Vertice>* lista_vertices, int** matriz_de_adyacencia);
 
-        virtual void mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas) = 0;
+        virtual void mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje) = 0;
 
         virtual ~AlgoritmoCaminoMinimo() = default;
 };
