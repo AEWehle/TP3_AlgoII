@@ -59,7 +59,7 @@ Animal* OpcionRescatarAnimal::generar_animal(Guarderia * mi_guarderia, char espe
     string nombre;
 
     cout << "Parece tener unos " << edad << " años, su tamaño es " << tamano << " y parece " << personalidad << "." << endl;
-    cout << "Qué nombre le querés poner?" << endl;
+    cout << "Qué nombre le querés poner?" << endl << " >> ";
 
     nombre = pedir_nombre( mi_guarderia );
 

@@ -45,6 +45,7 @@ Mapa::Mapa(string ruta){
 Mapa::~Mapa(){
 
     for(int i = 0; i < 8; i++){
+
         delete[] terreno[i];
         delete[] ocupantes[i];
         delete[] visitados[i];
