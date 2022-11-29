@@ -202,7 +202,6 @@ NodoB3<Dato, Clave>                     :: ~NodoB3(){
         elementos -> consulta(i) -> cambiar_hijo(nullptr);
     }
     delete ultimo_hijo;
-    cout << "Chau " << elementos -> consulta(1) -> obtener_clave() << endl;
     ultimo_hijo = nullptr;
     elementos -> destruir_con_delete();
     delete elementos;
