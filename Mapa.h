@@ -62,6 +62,8 @@ class Mapa{
         //Carga en la matriz de terreno el mapa por defecto
         void usar_terreno_por_defecto();
 
+        void inicializar_matriz_de_costos_por_destino();
+
         //Genera 5 animales aleatorios (solo el char) y coordenadas aleatorias para c/u.
         //Carga en la matriz de ocupantes los chars correspondientes a los animales y al auto
         void generar_animales();

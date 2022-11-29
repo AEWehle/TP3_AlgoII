@@ -17,6 +17,7 @@ Mapa::Mapa(){
     usar_terreno_por_defecto();
     generar_animales();
 
+    inicializar_matriz_de_costos_por_destino();
     lista_coordenadas_recorridas = new Lista<Coordenada>();
 
     explicacion();
@@ -30,6 +31,9 @@ Mapa::Mapa(string ruta){
 
     buscar_mapa(ruta);
     generar_animales();
+
+    inicializar_matriz_de_costos_por_destino();
+    lista_coordenadas_recorridas = new Lista<Coordenada>();
 
     explicacion();
 
@@ -187,14 +191,17 @@ void Mapa::usar_terreno_por_defecto(){ //Se puede cargar de alguna forma más bo
     terreno[7][3] = 'T';
     */
 
-   for(int i = 0; i < 8; i++){
+   
+
+}
+
+void Mapa::inicializar_matriz_de_costos_por_destino(){
+    for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             matriz_de_costos_por_destino[i][j] = obtener_costo_de_viaje(terreno[i][j]);
         }
     }
-
 }
-
 
 void Mapa::generar_animales(){
 
