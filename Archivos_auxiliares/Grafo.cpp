@@ -36,8 +36,6 @@ void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
                     costo_camino_ida = matriz_de_costos_por_destino[fila][col+1];
                     costo_camino_vuelta = matriz_de_costos_por_destino[fila][col];
                     
-                    // cout << "\t\t$$$ costo para ir de " << celda << " a " << celda+1 << ": " << costo_camino_ida << endl<<endl;
-
                     agregar_camino(celda,celda+1,costo_camino_ida);
                     agregar_camino(celda+1,celda,costo_camino_vuelta);
                 }
@@ -46,8 +44,6 @@ void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
 
                     costo_camino_ida = matriz_de_costos_por_destino[fila+1][col];
                     costo_camino_vuelta = matriz_de_costos_por_destino[fila][col];
-
-                    // cout << "\t\t$$$ costo para ir de " << celda << " a " << celda+dim << ": " << costo_camino_ida << endl<<endl;
 
                     agregar_camino(celda,celda+dim,costo_camino_ida);
                     agregar_camino(celda+dim,celda,costo_camino_vuelta);
@@ -58,7 +54,7 @@ void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
 
     }
     
-
+    aplicar_algoritmo_camino_minimo();
 }
 
 void Grafo::mostrar_vertices(){
@@ -88,12 +84,12 @@ void Grafo::agregar_vertice(int nuevo){
     }else{
         agrandar_matriz_de_adyacencia();
     }
+
 }
 
 void Grafo::crear_matriz_de_adyacencia(){
     matriz_de_adyacencia = new int*[1];
     matriz_de_adyacencia[0] = new int[1];
-
     matriz_de_adyacencia[0][0] = 0;
 }
 
@@ -181,8 +177,6 @@ void Grafo::agregar_camino(int origen, int destino, int costo){
 
     if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA){
         matriz_de_adyacencia[pos_origen-1][pos_destino-1] = costo;
-        // Si los costos de ida y vuelta fueran iguales:
-        // matriz_de_adyacencia[pos_destino-1][pos_origen-1] = costo;
     }
 
 }
@@ -191,29 +185,33 @@ void Grafo::aplicar_algoritmo_camino_minimo(){
     algoritmo_camino_minimo = new Floyd(lista_vertices,matriz_de_adyacencia);
 }
 
-void Grafo::obtener_camino_minimo(int origen, int destino){
+void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje){
 
     int pos_origen = obtener_vertice_en_grafo(origen);
     int pos_destino = obtener_vertice_en_grafo(destino);
 
-    algoritmo_camino_minimo->mostrar_camino_minimo(pos_origen,pos_destino);
+    algoritmo_camino_minimo->mostrar_camino_minimo(pos_origen,pos_destino, lista_coordenadas_recorridas,costo_viaje);
+    
 }
 
-void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino){
+void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje){
+
+    
     // Transformo coordenadas en vertices
     int pos_origen = convertir_coordenadas_a_celda(coord_vertical_origen,coord_horizontal_origen);
     int pos_destino = convertir_coordenadas_a_celda(coord_vertical_destino,coord_horizontal_destino);
 
-    cout << "Coord vertical (numero) origen: " << coord_vertical_origen << endl;
-    cout << "Coord horizontal (letra) origen: " << coord_horizontal_origen << endl;
-    cout << "Celda origen: " << pos_origen << endl << endl;
+    // DESPUES BORRAR ESTOS COMENTARIOS
+    // cout << "Coord vertical (numero) origen: " << coord_vertical_origen << endl;
+    // cout << "Coord horizontal (letra) origen: " << coord_horizontal_origen << endl;
+    // cout << "Celda origen: " << pos_origen << endl << endl;
     
-    cout << "Coord vertical (numero) destino: " << coord_vertical_destino << endl;
-    cout << "Coord horizontal (letra) destino: " << coord_horizontal_destino << endl;
-    cout << "Celda destino: " << pos_destino << endl << endl;
+    // cout << "Coord vertical (numero) destino: " << coord_vertical_destino << endl;
+    // cout << "Coord horizontal (letra) destino: " << coord_horizontal_destino << endl;
+    // cout << "Celda destino: " << pos_destino << endl << endl;
 
+    obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_viaje);
 
-    obtener_camino_minimo(pos_origen,pos_destino);
 }
 
 int Grafo::convertir_coordenadas_a_celda(int coord_vertical, int coord_horizontal){
@@ -226,6 +224,11 @@ int Grafo::convertir_coordenadas_a_celda(int coord_vertical, int coord_horizonta
 Grafo::~Grafo() {
     liberar_matriz_adyacencia(lista_vertices->obtener_cantidad());
     matriz_de_adyacencia = nullptr;
+
+    cout <<"DESTRUCTOR DEL GRAFO" << endl;
+    lista_vertices->destruir_con_delete();
     delete lista_vertices;
+    lista_vertices = nullptr;
     delete algoritmo_camino_minimo;
+    algoritmo_camino_minimo = nullptr;
 }
