@@ -25,14 +25,14 @@ MenuPrincipal::MenuPrincipal() : opciones(Lista<Opcion>()){
 }
 
 void MenuPrincipal::mostrar(){
-    cout << endl << "*****   MENU   *****" << endl << endl;
-    cout << "   1. Listar animales." << endl; 
-    cout << "   2. Rescatar un animal." << endl; 
-    cout << "   3. Buscar un animal." << endl;
-    cout << "   4. Cuidar animales." << endl;
-    cout << "   5. Adoptar un animal." << endl;
-    cout << "   6. Cargar Combustible." << endl;
-    cout << "   7. Guardar y salir." << endl << endl;
+    cout << endl << "        *****   MENU   *****" << endl << endl;
+    cout << "         1. Listar animales." << endl; 
+    cout << "         2. Rescatar un animal." << endl; 
+    cout << "         3. Buscar un animal." << endl;
+    cout << "         4. Cuidar animales." << endl;
+    cout << "         5. Adoptar un animal." << endl;
+    cout << "         6. Cargar Combustible." << endl;
+    cout << "         7. Guardar y salir." << endl << endl;
 
 }
 

@@ -29,19 +29,19 @@ Animal::~Animal(){
 void Animal::alimentar(){
 
     hambre = 0;
-    cout << "Soy " << nombre << ", como " << comida << "." << endl;
+    cout << "      Soy " << nombre << ", como " << comida << "." << endl;
 
 }
 
 
 void Animal::mostrar(){
     
-    // cout << "____________________"<< especie << "______________________________" << endl;
-    cout << "       - " << "Nombre: " << nombre << "." << endl;
-    cout << "       - " << edad << " años." << endl;
-    cout << "       - " << "Es " << tamano << endl;
-    cout << "       - " << "Es muy " << personalidad << "." << endl;
-    cout << "       - " << "Tiene " << hambre << "\% de hambre y está " << higiene << "\% limpio." << endl << endl;
+    // cout << "      ____________________"<< especie << "______________________________" << endl;
+    cout << "             - " << "Nombre: " << nombre << "." << endl;
+    cout << "             - " << edad << " años." << endl;
+    cout << "             - " << "Es " << tamano << endl;
+    cout << "             - " << "Es muy " << personalidad << "." << endl;
+    cout << "             - " << "Tiene " << hambre << "\% de hambre y está " << higiene << "\% limpio." << endl << endl;
 
 }
 
@@ -113,55 +113,59 @@ void Animal::setear_higiene(int higiene_int){
 }
 
 
-void Animal::dar_hambre(){
+bool Animal::dar_hambre(){
 
-    if(hambre!=100){
-        if (personalidad == PERSONALIDADES[0]) {
-            //Caso mitad del hambre
-            hambre = hambre + PUNTOS_HAMBRE/2;
-        }
-        else if (personalidad == PERSONALIDADES[1]) {
-            //Caso doble del hambre
-            hambre = hambre + 2*PUNTOS_HAMBRE;
-        }
-        else{
-            hambre = hambre + PUNTOS_HAMBRE;
-        }
-            
-        //Eliminar a discreción
-        if(hambre > 70){
-            cout << "Parece que " << nombre << " tiene mucha hambre. Quizás es hora de alimentarl@." << endl;
-        }
-
+    bool se_escapa = false;
+    if(hambre >= 100){
+        se_escapa = true;
+        cout << "      NOOOOO, " << nombre << " SE ESTÁ ESCAPANDO!!! NO LE DISTE COMIDA A TIEMPO" << endl;
+        return se_escapa;
     }
     
-    else
-        cout << "NOOOOO, " << nombre << " SE ESTÁ ESCAPANDO!!! NO LE DISTE COMIDA A TIEMPO" << endl;
-
+    if (personalidad == PERSONALIDADES[0]) {
+        //Caso mitad del hambre
+        hambre = hambre + PUNTOS_HAMBRE/2;
+    }
+    else if (personalidad == PERSONALIDADES[1]) {
+        //Caso doble del hambre
+        hambre = hambre + 2*PUNTOS_HAMBRE;
+    }
+    else{
+        hambre = hambre + PUNTOS_HAMBRE;
+    }
+        
+    //Eliminar a discreción
+    if(hambre >= 70){
+        cout << "      Parece que " << nombre << " tiene mucha hambre. Quizás es hora de alimentarl@." << endl;
+    }
+    return se_escapa;
 }
 
-void Animal::ensuciar(){
-
-    if(higiene!=0){
-        if (personalidad == PERSONALIDADES[2]) {
-            //Caso se ensucia la mitad
-            higiene = higiene - PUNTOS_HIGIENE/2;
-        }
-        else if (personalidad == PERSONALIDADES[3]) {
-            //Caso se ensucia el doble
-            higiene = higiene - 2*PUNTOS_HIGIENE;
-        }
-        else{
-            higiene = higiene - PUNTOS_HIGIENE;
-        }
-
-        if(higiene < 30){
-            cout << "Parece que " << nombre << " está muy suci@. Quizás es hora de ducharl@." << endl;
-        }
+bool Animal::ensuciar(){
+bool se_escapa = false;
+    if( higiene <= 0  ){
+        se_escapa = true;
+        cout << "      NOOOOO, " << nombre << " SE ESTÁ ESCAPANDO!!! NO L@ DUCHASTE A TIEMPO" << endl;
+        return se_escapa;
     }
 
-    else
-        cout << "NOOOOO, " << nombre << " SE ESTÁ ESCAPANDO!!! NO L@ DUCHASTE A TIEMPO" << endl;
+    if (personalidad == PERSONALIDADES[2]) {
+        //Caso se ensucia la mitad
+        higiene = higiene - PUNTOS_HIGIENE/2;
+    }
+    else if (personalidad == PERSONALIDADES[3]) {
+        //Caso se ensucia el doble
+        higiene = higiene - 2*PUNTOS_HIGIENE;
+    }
+    else{
+        higiene = higiene - PUNTOS_HIGIENE;
+    }
+
+    if(higiene <= 30){
+        cout << "      Parece que " << nombre << " está muy suci@. Quizás es hora de ducharl@." << endl;
+    }
+
+    return se_escapa;
 }
 
 
