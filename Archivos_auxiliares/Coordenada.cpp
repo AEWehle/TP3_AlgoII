@@ -5,7 +5,7 @@ Coordenada::Coordenada(){
     coordenada_columna = 0;
 }
 
-Coordenada::Coordenada(int coordenada_vertical, int coordenada_horizontal){
+Coordenada::Coordenada(int coordenada_fila, int coordenada_columna){
     this->coordenada_fila = coordenada_fila;
     this->coordenada_columna = coordenada_columna;
 }
