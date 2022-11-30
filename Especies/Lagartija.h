@@ -39,7 +39,7 @@ public:
      PRE: - 
      POST: Reestablece la higiene a 100 sin decrementarla
     _______________________________________________________________________________*/
-    void ensuciar() override;
+    bool ensuciar() override;
 
     /*________resolver_especie()_____________________________________________________
      PRE: - 

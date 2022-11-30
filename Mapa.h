@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 #include "Archivos_auxiliares/Grafo.h"
+#include "Archivos_auxiliares/Coordenada.h"
 #include <string>
 using namespace std; 
 
@@ -29,6 +30,7 @@ class Mapa{
         char** ocupantes;
         bool** visitados;
         int** matriz_de_costos_por_destino;
+        Lista<Coordenada>* lista_coordenadas_recorridas;
         int coord_auto_num;
         int coord_auto_letra;
 
@@ -60,6 +62,8 @@ class Mapa{
         //Carga en la matriz de terreno el mapa por defecto
         void usar_terreno_por_defecto();
 
+        void inicializar_matriz_de_costos_por_destino();
+
         //Genera 5 animales aleatorios (solo el char) y coordenadas aleatorias para c/u.
         //Carga en la matriz de ocupantes los chars correspondientes a los animales y al auto
         void generar_animales();
@@ -84,11 +88,14 @@ class Mapa{
         //
         int obtener_costo_de_viaje(char destino);
 
+        //
+        void limpiar_visitados();
+
     public:
         
         // PRE: el combustible está entre 0 y 100
         // POST: 
-        bool ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada);
+        bool ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada, bool &combustible_suficiente);
 
 };
 

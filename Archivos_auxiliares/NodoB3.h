@@ -386,14 +386,14 @@ NodoB3<Dato, Clave>* NodoB3<Dato, Clave> :: obtener_nodo_padre( ){
 template <typename Dato, typename Clave>
 void NodoB3<Dato, Clave>                :: mostrar_nodob3(){ 
     for( int i = 1 ; i <= this -> elementos -> obtener_cantidad() ; i++){
-        cout << "Clave:" << this -> obtener_clave_de( i ) << endl;
+        cout << "      Clave:" << this -> obtener_clave_de( i ) << endl;
         if ( this -> elementos -> consulta(i) -> es_funcional() ){
-            cout << "Dato:" << *(this -> obtener_dato( this -> obtener_clave_de( i ) )) << endl;}
+            cout << "      Dato:" << *(this -> obtener_dato( this -> obtener_clave_de( i ) )) << endl;}
         else{
-            cout << "Dado de baja" << endl;
+            cout << "      Dado de baja" << endl;
         }
     }
-    cout << "mi padre es: " << endl;
+    cout << "      mi padre es: " << endl;
     if ( nodo_padre != nullptr){
         for( int i = 1 ; i <= this -> nodo_padre -> elementos -> obtener_cantidad() ; i++){
             cout << this -> nodo_padre -> obtener_clave_de( i ) << " " ;
@@ -406,7 +406,7 @@ void NodoB3<Dato, Clave>                :: mostrar_nodob3(){
 template <typename Dato, typename Clave>
 void NodoB3<Dato, Clave>                :: mostrar_hijos(){ 
     for( int i = 1 ; i <= ( this-> elementos -> obtener_cantidad() +1 ) ; i++){
-        cout << "Hijo "<< i <<": puntero " << this -> obtener_hijo(i) << endl;
+        cout << "      Hijo "<< i <<": puntero " << this -> obtener_hijo(i) << endl;
     }
 }
 
@@ -432,7 +432,7 @@ void NodoB3<Dato, Clave>                :: ubicar_nodo_hijo( NodoB3<Dato,Clave>*
         this -> ultimo_hijo = nodo_hijo_entrante;
     }
 }
-    // cout << "la cantidad" << endl;
+    // cout << "      la cantidad" << endl;
     // cout << this -> elementos -> obtener_cantidad()<< endl;
 
 
@@ -450,7 +450,7 @@ void NodoB3<Dato, Clave> :: verificar_3vias(){
         NodoB3<Dato,Clave>* nodo_hijo_2;
 
         if( !(this -> es_hoja() )){
-            // cout << "no es hoja" << endl;
+            // cout << "      no es hoja" << endl;
             nodo_hermano_mayor -> ubicar_nodo_hijo( this -> obtener_hijo(3) );
             nodo_hermano_mayor -> ubicar_nodo_hijo( this -> obtener_hijo(4) );
             this -> obtener_hijo(3) -> cambiar_nodo_padre( nodo_hermano_mayor );

@@ -16,11 +16,11 @@ MenuCuidarIndividual::MenuCuidarIndividual( Guarderia* mi_guarderia ){
 void MenuCuidarIndividual::mostrar()
 {
    cout << endl << "¿Qué querés hacer con él?" << endl;
-    cout << "Ingresá el número de la opción deseada." << endl;
-    cout << "   1. Alimentar Animal" << endl;
-    cout << "   2. Duchar Animal" << endl;
-    cout << "   3. Pasar a Animal siguiente" << endl;
-    cout << "   4. Volver a Menu Principal" << endl;
+    cout << "      Ingresá el número de la opción deseada." << endl;
+    cout << "         1. Alimentar Animal" << endl;
+    cout << "         2. Duchar Animal" << endl;
+    cout << "         3. Pasar a Animal siguiente" << endl;
+    cout << "         4. Volver a Menu Principal" << endl;
 }
 
 void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia)
@@ -37,18 +37,18 @@ void MenuCuidarIndividual::ejecutar_opcion(int eleccion, Guarderia* mi_guarderia
             if (!(numero_de_animal > lista_nombres->obtener_cantidad())) {
                 nombre_animal = *lista_nombres -> consulta( numero_de_animal ) ;
             }else {
-                std::cout << "No hay más animales en la lista, volviendo a menú anterior..." << std::endl ;
+                std::cout << "      No hay más animales en la lista, volviendo a menú anterior..." << std::endl ;
                 volver_menu_ppal = true;
                 //return;    
             }
             break;
         case 4:
-            std::cout << "Volviendo a menú principal..." << std::endl ;
+            std::cout << "      Volviendo a menú principal..." << std::endl ;
             volver_menu_ppal = true;
             //return;
             break;
         default:
-            std::cout << "Opcion Invalida, ingresa nuevamente." << std::endl ;
+            std::cout << "      Opcion Invalida, ingresa nuevamente." << std::endl ;
             eleccion = pedir_eleccion(4);
     }
 }

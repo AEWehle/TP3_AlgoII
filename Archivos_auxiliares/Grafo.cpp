@@ -10,12 +10,20 @@ Grafo::Grafo(){
     lista_vertices = new Lista<Vertice>();
 }
 
+Grafo::Grafo(int dimensiones, int** matriz_de_costos){
+    matriz_de_adyacencia = nullptr;
+    algoritmo_camino_minimo = nullptr;
+    lista_vertices = new Lista<Vertice>();
+
+    crear_grafo_regular_orden2_con_pesos(dimensiones,matriz_de_costos);
+}
+
 void Grafo::mostrar_grafo(){
     mostrar_vertices();
     mostrar_matriz_adyacencia();
 }
 
-void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
+void Grafo::crear_grafo_regular_orden2_con_pesos(int dim, int** matriz_de_costos_por_destino){
 
     // Creo grafo de dim*dim
     for(int i=1; i<= dim*dim; i++){
@@ -36,8 +44,6 @@ void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
                     costo_camino_ida = matriz_de_costos_por_destino[fila][col+1];
                     costo_camino_vuelta = matriz_de_costos_por_destino[fila][col];
                     
-                    // cout << "\t\t$$$ costo para ir de " << celda << " a " << celda+1 << ": " << costo_camino_ida << endl<<endl;
-
                     agregar_camino(celda,celda+1,costo_camino_ida);
                     agregar_camino(celda+1,celda,costo_camino_vuelta);
                 }
@@ -47,8 +53,6 @@ void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
                     costo_camino_ida = matriz_de_costos_por_destino[fila+1][col];
                     costo_camino_vuelta = matriz_de_costos_por_destino[fila][col];
 
-                    // cout << "\t\t$$$ costo para ir de " << celda << " a " << celda+dim << ": " << costo_camino_ida << endl<<endl;
-
                     agregar_camino(celda,celda+dim,costo_camino_ida);
                     agregar_camino(celda+dim,celda,costo_camino_vuelta);
                 }
@@ -57,19 +61,18 @@ void Grafo::mapa_a_grafo(int dim, int** matriz_de_costos_por_destino){
         }
 
     }
-    
 
 }
 
 void Grafo::mostrar_vertices(){
-    cout << "Vértices: ";
+    cout << "      Vértices: ";
     int cantidad_vertices = lista_vertices->obtener_cantidad();
 
     int contador = 1;
     while(contador != cantidad_vertices+1){
         cout << lista_vertices->consulta(contador)->obtener_nombre();
         if(contador != cantidad_vertices){
-            cout << " - ";
+            cout << "       - ";
         }
         contador++;
     };
@@ -78,27 +81,29 @@ void Grafo::mostrar_vertices(){
 }
 
 void Grafo::agregar_vertice(int nuevo){
+
     Vertice* nuevo_vertice = new Vertice(nuevo);
 
     lista_vertices->alta(nuevo_vertice,lista_vertices->obtener_cantidad()+1);
 
     if(lista_vertices->obtener_cantidad() == 1){
-        // Creo matriz de adyacencia
         crear_matriz_de_adyacencia();
     }else{
         agrandar_matriz_de_adyacencia();
     }
+
 }
 
 void Grafo::crear_matriz_de_adyacencia(){
+
     matriz_de_adyacencia = new int*[1];
     matriz_de_adyacencia[0] = new int[1];
-
     matriz_de_adyacencia[0][0] = 0;
+    
 }
 
 void Grafo::agrandar_matriz_de_adyacencia(){
-    // Creo una matriz auxiliar
+
     int tamanio_original = lista_vertices->obtener_cantidad() - 1;
     int nuevo_tamanio = lista_vertices->obtener_cantidad();
     int ** matriz_aux = new int*[nuevo_tamanio];
@@ -107,31 +112,29 @@ void Grafo::agrandar_matriz_de_adyacencia(){
         matriz_aux[i] = new int[nuevo_tamanio];
     }
 
-    // Le copio lo que ya tenía la matriz de adyacencia
     for(int i=0; i<tamanio_original; i++){
         for(int j=0; j<tamanio_original; j++){
             matriz_aux[i][j] = matriz_de_adyacencia[i][j];
         }
     }
 
-    // Agrego el nuevo vertice a la matriz de adyacencia
     actualizar_vertices_en_matriz_adyacencia(matriz_aux);
 
-    // Libero la memoria pedida para la matriz original y la reemplazo por la nueva
     liberar_matriz_adyacencia(tamanio_original);
 
     matriz_de_adyacencia = matriz_aux;
+
 }
 
 void Grafo::mostrar_matriz_adyacencia(){
-    cout << "MATRIZ DE ADYACENCIA" << endl;
+    cout << "      MATRIZ DE ADYACENCIA" << endl;
     int cantidad_vertices = lista_vertices->obtener_cantidad();
     for(int i=0; i<cantidad_vertices; i++){
         for(int j=0; j<cantidad_vertices; j++){
             if(matriz_de_adyacencia[i][j] == INFINITO){
-                cout << "|" <<  "-" << "|";    
+                cout << "      |" <<  "-" << "|";    
             }else{
-                cout << "|" <<  matriz_de_adyacencia[i][j] << "|";
+                cout << "      |" <<  matriz_de_adyacencia[i][j] << "|";
             }
             
         }
@@ -139,17 +142,21 @@ void Grafo::mostrar_matriz_adyacencia(){
     }
 
     cout << endl;
+
 }
 
 void Grafo::liberar_matriz_adyacencia(int cantidad_vertices){
+
     for(int i=0; i<cantidad_vertices; i++){
         delete[] matriz_de_adyacencia[i];
     }
 
     delete[] matriz_de_adyacencia;
+
 }
 
 void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacencia){
+
     // tamanio_original porque empiezan en 0 las posiciones en las matrices
     int tamanio_original = lista_vertices->obtener_cantidad() - 1;
     // Pongo infinito donde aún no hay datos (en toda la fila y toda la col nuevo_tamanio)
@@ -159,61 +166,71 @@ void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacenc
     }
     // Pongo un 0 en la posición en la tabla que refiere a la distancia del vértice a sí mismo
     nueva_matriz_adyacencia[tamanio_original][tamanio_original] = 0;
+
 }
 
 int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
-    Vertice* vertice = new Vertice(vertice_a_buscar);
 
-    int posicion_vertice = lista_vertices->obtener_posicion_en_lista(vertice);
+    int i = 1;
 
-    if(posicion_vertice == NO_SE_ENCUENTRA){
-        cout << "El vertice " << vertice << " no se encuentra en el grafo." << endl;
+    int posicion_vertice = NO_SE_ENCUENTRA;
+
+
+    while(i<=lista_vertices->obtener_cantidad() && posicion_vertice == NO_SE_ENCUENTRA){
+
+        if(lista_vertices->consulta(i)->obtener_nombre() == vertice_a_buscar){
+            posicion_vertice = i;
+        }
+
+        i++;
     }
 
-    delete vertice;
-
+    if(posicion_vertice == NO_SE_ENCUENTRA){
+        cout << "El vertice " << vertice_a_buscar << " no se encuentra en el grafo." << endl;
+    }
+    
     return posicion_vertice;
+
 }
 
 void Grafo::agregar_camino(int origen, int destino, int costo){
+
     int pos_origen = obtener_vertice_en_grafo(origen);
     int pos_destino = obtener_vertice_en_grafo(destino);
 
     if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA){
         matriz_de_adyacencia[pos_origen-1][pos_destino-1] = costo;
-        // Si los costos de ida y vuelta fueran iguales:
-        // matriz_de_adyacencia[pos_destino-1][pos_origen-1] = costo;
     }
 
 }
 
 void Grafo::aplicar_algoritmo_camino_minimo(){
+
     algoritmo_camino_minimo = new Floyd(lista_vertices,matriz_de_adyacencia);
+
 }
 
-void Grafo::obtener_camino_minimo(int origen, int destino){
+void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino){
+    
+    aplicar_algoritmo_camino_minimo();
 
     int pos_origen = obtener_vertice_en_grafo(origen);
     int pos_destino = obtener_vertice_en_grafo(destino);
 
-    algoritmo_camino_minimo->mostrar_camino_minimo(pos_origen,pos_destino);
+    algoritmo_camino_minimo->mostrar_camino_minimo(pos_origen,pos_destino, lista_coordenadas_recorridas,costo_camino);
+    
 }
 
-void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino){
-    // Transformo coordenadas en vertices
+void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino){
+    
     int pos_origen = convertir_coordenadas_a_celda(coord_vertical_origen,coord_horizontal_origen);
     int pos_destino = convertir_coordenadas_a_celda(coord_vertical_destino,coord_horizontal_destino);
 
-    cout << "Coord vertical (numero) origen: " << coord_vertical_origen << endl;
-    cout << "Coord horizontal (letra) origen: " << coord_horizontal_origen << endl;
-    cout << "Celda origen: " << pos_origen << endl << endl;
     
-    cout << "Coord vertical (numero) destino: " << coord_vertical_destino << endl;
-    cout << "Coord horizontal (letra) destino: " << coord_horizontal_destino << endl;
-    cout << "Celda destino: " << pos_destino << endl << endl;
+    // Transformo coordenadas en vertices
+    obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_camino);
 
 
-    obtener_camino_minimo(pos_origen,pos_destino);
 }
 
 int Grafo::convertir_coordenadas_a_celda(int coord_vertical, int coord_horizontal){
@@ -224,8 +241,13 @@ int Grafo::convertir_coordenadas_a_celda(int coord_vertical, int coord_horizonta
 
 
 Grafo::~Grafo() {
+
     liberar_matriz_adyacencia(lista_vertices->obtener_cantidad());
     matriz_de_adyacencia = nullptr;
+    lista_vertices->destruir_con_delete();
     delete lista_vertices;
+    lista_vertices = nullptr;
     delete algoritmo_camino_minimo;
+    algoritmo_camino_minimo = nullptr;
+
 }

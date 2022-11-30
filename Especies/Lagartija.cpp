@@ -33,10 +33,10 @@ void Lagartija::mostrar(){
 }
 
 
-void Lagartija::ensuciar(){
+bool Lagartija::ensuciar(){
 
     higiene = 100;
-
+    return false;
 }
 
 
