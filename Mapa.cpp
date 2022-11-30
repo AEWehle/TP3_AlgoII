@@ -201,11 +201,13 @@ void Mapa::usar_terreno_por_defecto(){ //Mapa default hardcodeado
 
 
 void Mapa::inicializar_matriz_de_costos_por_destino(){
+
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             matriz_de_costos_por_destino[i][j] = obtener_costo_de_viaje(terreno[i][j]);
         }
     }
+
 }
 
 
@@ -375,7 +377,7 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
             for(int i=1; i<=lista_coordenadas_recorridas->obtener_cantidad(); i++){
                 Coordenada* coordenada = lista_coordenadas_recorridas->consulta(i);
 
-                visitados[coordenada->obtener_vertical()][coordenada->obtener_horizontal()] = true;
+                visitados[coordenada->obtener_fila()][coordenada->obtener_columna()] = true;
             }
 
             lista_coordenadas_recorridas->destruir_con_delete();
