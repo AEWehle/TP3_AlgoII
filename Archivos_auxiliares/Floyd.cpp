@@ -83,19 +83,19 @@ int Floyd::hallar_siguiente_vertice_en_el_camino(int origen, int destino){
 
 }
 
-void Floyd::convertir_celdas_a_coordenadas(int celda, int dimension, int& coord_vertical, int& coord_horizontal){
+void Floyd::convertir_celdas_a_coordenadas(int celda, int dimension, int& coord_fila, int& coord_columna){
     // Fila
-    coord_vertical = (celda-1)/dimension;
+    coord_fila = (celda-1)/dimension;
     
     // Columna
-    coord_horizontal = (celda-1)%dimension;
+    coord_columna = (celda-1)%dimension;
 }
 
 void Floyd::mostrar_siguiente_vertice_en_coordenadas(int nuevo_origen){
 
-    int coord_vertical_siguiente = 0, coord_horizontal_siguiente = 0;
-    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_vertical_siguiente,coord_horizontal_siguiente);
-    cout << " -> [" << coord_vertical_siguiente << "," << coord_horizontal_siguiente << "]";
+    int coord_fila_siguiente = 0, coord_columna_siguiente = 0;
+    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_fila_siguiente,coord_columna_siguiente);
+    cout << " -> [" << coord_fila_siguiente << "," << coord_columna_siguiente << "]";
 
 }
 
