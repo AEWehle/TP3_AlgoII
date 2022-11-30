@@ -75,16 +75,18 @@ class Animal{
      PRE: -
      POST: Aumenta el hambre de acuerdo a PERSONALIDAD. Si hambre es 100,
      deja en 100 e informa que se llegó al límite.
+     Devuelve true si el animal llega al límite
     _______________________________________________________________________________*/
-        void dar_hambre();
+        bool dar_hambre();
 
 
     /*________ensuciar()_____________________________________________________________
      PRE: -
      POST: Baja la higiene de acuerdo a ESPECIE y PERSONALIDAD. Si higiene es 0,
      deja en 0 e informa que se llegó al límite
+     Devuelve true si el animal llega al límite
     _______________________________________________________________________________*/
-        virtual void ensuciar();
+        virtual bool ensuciar();
 
 
 

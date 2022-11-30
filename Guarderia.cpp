@@ -18,7 +18,7 @@ Guarderia::Guarderia(){
 
 Guarderia::~Guarderia(){
     for ( int n_animal = 1; n_animal <= obtener_cantidad() ; n_animal++){
-        cout << "Chau " << *obtener_lista_nombres() -> consulta( n_animal ) << endl;
+        cout << "      Chau " << *obtener_lista_nombres() -> consulta( n_animal ) << endl;
     }
     delete diccionario_de_animales;
 }
@@ -32,20 +32,21 @@ void Guarderia::agregar_animal( Animal* nuevo_animal ){
 
 
 void Guarderia::afectar_animales(){
-    Lista<string>* claves = diccionario_de_animales -> obtener_lista_de_claves();
+    Lista<string>* nombres = diccionario_de_animales -> obtener_lista_de_claves();
     
-    for(int i = 1; i <= claves -> obtener_cantidad(); i++) {
-    this -> obtener_animal( *claves -> consulta(i) ) -> ensuciar();
-    this -> obtener_animal( *claves -> consulta(i) ) -> dar_hambre();
+    for(int i = 1; i <= nombres -> obtener_cantidad(); i++) {
+    
 
-        if((this -> obtener_animal(*claves -> consulta(i)) -> obtener_hambre() == 100) || (this -> obtener_animal(*claves -> consulta(i)) -> obtener_higiene() == 0)){
+        if (this -> obtener_animal( *nombres -> consulta(i) ) -> ensuciar() ||
+            this -> obtener_animal( *nombres -> consulta(i) ) -> dar_hambre()  ){
             
-            this->eliminar_animal(*claves->consulta(i));
+            this->eliminar_animal(*nombres->consulta(i));
             ++this->escapados;
         }
 
         if (escapados == 3) {
-            cout << "Se escaparon 3 animales... Tenemos que clausurar la guarderia." << endl;
+            cout << endl << "      Se te escaparon 3 animales... Tenemos que clausurar la guarderia." << endl << endl;
+            cout << "      XXXXXXXXXXXXXX   GUARDERIA CLAUSURADA    XXXXXXXXXXXXXX " << endl << endl;
             return;
         }
 
@@ -88,7 +89,7 @@ void Guarderia::ver_diccionario_de_animales(  ){
 
     if( this -> diccionario_de_animales -> obtener_cantidad()){
 
-        cout << "Hay " << diccionario_de_animales -> obtener_cantidad() << " animales en la reserva." << endl<< endl;
+        cout << "      Hay " << diccionario_de_animales -> obtener_cantidad() << " animales en la reserva." << endl<< endl;
         Lista <string>*  nombres = diccionario_de_animales -> obtener_lista_de_claves();
 
         for( int numero_animal = 1 ; numero_animal <= nombres -> obtener_cantidad(); numero_animal++){
@@ -97,7 +98,7 @@ void Guarderia::ver_diccionario_de_animales(  ){
         }
     } 
     else
-        cout << "No hay animales en la lista" << endl;
+        cout << "      No hay animales en la lista" << endl;
 }
 
 
@@ -105,14 +106,14 @@ void Guarderia::ver_los_animales( Lista <string>* nombres ){
 
     if( this -> diccionario_de_animales -> obtener_cantidad()){
 
-        cout << "Se muestran " << nombres -> obtener_cantidad() << " animales." << endl;
+        cout << "      Se muestran " << nombres -> obtener_cantidad() << " animales." << endl;
         for( int numero_animal = 1 ; numero_animal <= nombres -> obtener_cantidad(); numero_animal++){
            diccionario_de_animales -> consulta( *(nombres -> consulta( numero_animal ) ) ) -> mostrar();
         }
     } 
 
     else
-        cout << "No hay animales en la lista" << endl;
+        cout << "      No hay animales en la lista" << endl;
 
 }
 
