@@ -38,7 +38,7 @@ git chechout -b nombre_nueva_brunch          Crear brunch
 git push origin nombrE_nueva_brunch          Luego de haber hecho add y commit
 
 ## COSAS A MODIFICAR/CORREGIR:
-1. Camino mínimo (LN)
+1. Que hacemos con el mapa por default? Lo ponemos como un archivo o lo dejamos así letra por letra?
 5. - Mapa: matriz de 8x8
    - Mostramos al inicio el mapa y animales generados random ( propner otra forma si prefiere )
    - Terreno y Costo: montana: 5, camino: 1, precipicio: 40, tierra: 2
