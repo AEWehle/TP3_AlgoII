@@ -32,10 +32,10 @@ void Gato::mostrar(){
 
 }
 
-void Gato::ensuciar(){
+bool Gato::ensuciar(){
 
     higiene = 100;
-
+    return false;
 }
 
 

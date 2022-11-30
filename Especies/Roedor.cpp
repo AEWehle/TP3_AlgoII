@@ -33,10 +33,10 @@ void Roedor::mostrar(){
 }
 
 
-void Roedor::ensuciar(){
+bool Roedor::ensuciar(){
 
     higiene = 100;
-
+    return false;
 }
 
 
