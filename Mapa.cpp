@@ -114,7 +114,7 @@ int Mapa::obtener_costo_de_viaje(char destino){
 
 void Mapa::usar_terreno_por_defecto(){ //Mapa default hardcodeado
 
-    cout << "Generando terreno..." << endl;
+    cout << "      Generando terreno..." << endl;
 
     //Cargo los precipicios
     terreno[0][1] = 'P';
@@ -241,13 +241,13 @@ void Mapa::buscar_mapa(string ruta_terreno){
     fstream archivo_terreno(ruta_terreno, ios::in);
 
     if(!archivo_terreno.is_open()){
-        cout << "No se encontro un archivo con nombre \"" << ruta_terreno << "\", se usará el terreno por defecto" << endl << endl;
+        cout << "      No se encontro un archivo con nombre \"" << ruta_terreno << "\", se usará el terreno por defecto" << endl << endl;
         usar_terreno_por_defecto();
     }
 
     else{
 
-        cout << "Generando terreno..." << endl;
+        cout << "      Generando terreno..." << endl;
 
         string lectura;
 
@@ -281,7 +281,7 @@ void Mapa::mostrar(){
 
     cout << BORDE << "    a  b  c  d  e  f  g  h    " << RESET << endl << endl;
 
-    cout << "*Si no puede visualizar el mapa pruebe en otra terminal*" << endl;
+    cout << "     *Si no puede visualizar el mapa pruebe en otra terminal*" << endl;
 
 }
 
@@ -323,12 +323,12 @@ void Mapa::imprimir_casilla(int i, int j){
 
 void Mapa::explicacion(){
 
-    cout << endl << "Cada tipo de terreno consume distinta cantidad de combustible:" << endl
-        << CAMINO << "   " << RESET << " - El CAMINO consume 1 de combustible" << endl
-        << TIERRA << "   " << RESET << " - La TIERRA consume 2 de combustible" << endl
-        << MONTANA << "   " << RESET << " - La MONTANA consume 5 de combustible" << endl
-        << PRECIPICIO << "   " << RESET << " - El PRECIPICIO consume 40 de combustible" << endl << endl
-        << "Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
+    cout << endl << "      Cada tipo de terreno consume distinta cantidad de combustible:" << endl
+        << CAMINO << "         " << RESET << " - El CAMINO consume 1 de combustible" << endl
+        << TIERRA << "         " << RESET << " - La TIERRA consume 2 de combustible" << endl
+        << MONTANA << "         " << RESET << " - La MONTANA consume 5 de combustible" << endl
+        << PRECIPICIO << "         " << RESET << " - El PRECIPICIO consume 40 de combustible" << endl << endl
+        << "      Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
 
 }
 
@@ -385,8 +385,8 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
         else{
 
-            cout << "No hay suficiente combustible para el rescate!" << endl
-                << "Este rescate tiene un costo de " << combustible_gastado << ", pero solo hay " << combustible << "!" << endl << endl;
+            cout << "      No hay suficiente combustible para el rescate!" << endl
+                << "      Este rescate tiene un costo de " << combustible_gastado << ", pero solo hay " << combustible << "!" << endl << endl;
             combustible_suficiente = false;
 
         }
@@ -403,11 +403,11 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
 void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
-    cout << "Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << ">>" << endl;
+    cout << "      Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << " >> ";
     cin >> coord_num;
 
     while(coord_num < 0 || coord_num > 9){
-        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << ">>" << endl;
+        cout << "      La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
         cin >> coord_num;
     }
 
@@ -419,11 +419,11 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
     coord_num--;
     char coord_letra_char;
 
-    cout << "Ingrese la letra de la coordenada:" << endl << ">>" << endl;
+    cout << "      Ingrese la letra de la coordenada:" << endl << " >> ";
     cin >> coord_letra_char;
 
     while((int)coord_letra_char < 97 || (int)coord_letra_char > 104){     //Entre 'a' y 'h'
-        cout << "La coordenada no es válida! Puebe de nuevo:" << endl << ">>" << endl;
+        cout << "      La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
         cin >> coord_letra;
     }
 
@@ -441,13 +441,13 @@ char Mapa::verificar_coordenadas(int &coord_num, int &coord_letra, bool &coord_o
     char ocupante = ocupantes[coord_num][coord_letra];
 
     if(ocupante == 'A')
-        cout << "Esta es tu ubicación!" << endl;
+        cout << "      Esta es tu ubicación!" << endl;
 
     else if(ocupante == ' ')
-        cout << "No hay ningún animal ahí!" << endl;
+        cout << "      No hay ningún animal ahí!" << endl;
 
     else{
-        cout << "Se avistó un animal en esas coordenadas!" << endl;
+        cout << "      Se avistó un animal en esas coordenadas!" << endl;
         coord_ok = true;
     }
 

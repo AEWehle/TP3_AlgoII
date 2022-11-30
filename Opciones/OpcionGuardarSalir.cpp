@@ -2,7 +2,7 @@
 
 void OpcionGuardarSalir::ejecutar( Guarderia* mi_guarderia ){ 
 
-    cout << "Guardando..." << endl; 
+    cout << "      Guardando..." << endl; 
 
     fstream archivo_guarderia(RUTA_ARCHIVO, ios::out);
     Lista<string> * nombres = mi_guarderia -> obtener_lista_nombres();
@@ -25,6 +25,8 @@ void OpcionGuardarSalir::ejecutar( Guarderia* mi_guarderia ){
  
     archivo_guarderia.close(); 
 
-    cout << "Listo, tu registro de animales esta terminado." << endl << "Hasta la proxima!" << endl; 
+    cout << "      Listo, tu registro de animales esta terminado." << endl;
+    cout << "      Hasta la proxima!" << endl << endl;
+    cout << "****************************************************************************" << endl << endl; 
 
 } 

@@ -3,12 +3,12 @@
 
 
 void OpcionBuscarAnimal::ejecutar(Guarderia * mi_guarderia){
-    cout << "Elegiste la opción 3, buscar un animal de la reserva." << endl << endl;
+    cout << "      Elegiste la opción 3, buscar un animal de la reserva." << endl << endl;
     if (mi_guarderia->obtener_cantidad() == 0) {
-        cout << "No hay animales para buscar." << endl;   
+        cout << "      No hay animales para buscar." << endl;   
     }else{
         string nombre;
-        cout << "Ingrese el nombre del animal que busca:" << endl;
+        cout << "      Ingrese el nombre del animal que busca:" << endl << " >> ";
         nombre = ingresar_nombre( );
 
         // Lista<string>* lista_nombres = mi_guarderia -> obtener_lista_nombres();
@@ -16,7 +16,7 @@ void OpcionBuscarAnimal::ejecutar(Guarderia * mi_guarderia){
             cout << nombre << " no se encuentra en la guardería." << endl << endl;
         
         else{
-            cout << "SI! " << nombre << " está en la guardería: " << endl ;
+            cout << "      SI! " << nombre << " está en la guardería: " << endl ;
             mi_guarderia -> obtener_animal( nombre )->mostrar();
         }   
     }

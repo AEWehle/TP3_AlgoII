@@ -36,7 +36,7 @@ void cargar_guarderia(Guarderia* mi_guarderia){
     fstream archivo_guarderia(RUTA_ARCHIVO, ios::in);
 
     if(!archivo_guarderia.is_open()){
-        cout << "No se encontro un archivo con nombre \"" << RUTA_ARCHIVO << "\", se va a crear el archivo" << endl << endl;
+        cout << "      No se encontro un archivo con nombre \"" << RUTA_ARCHIVO << "\", se va a crear el archivo" << endl << endl;
         archivo_guarderia.open(RUTA_ARCHIVO, ios::out);     //Si no existe el archivo lo creo
         archivo_guarderia.close();
         archivo_guarderia.open(RUTA_ARCHIVO, ios::in);
@@ -69,18 +69,18 @@ void imprimir_menu(int cantidad_elecciones){
 
     if(cantidad_elecciones == 7){ //Menú principal
         cout << endl << "*****   MENU   *****" << endl << endl;
-        cout << "   1. Listar animales." << endl; 
-        cout << "   2. Rescatar un animal." << endl; 
-        cout << "   3. Buscar un animal." << endl;
-        cout << "   4. Cuidar animales." << endl;
-        cout << "   5. Adoptar un animal." << endl;
-        cout << "   6. Cargar Combustible." << endl;
-        cout << "   7. Guardar y salir." << endl << endl;
+        cout << "         1. Listar animales." << endl; 
+        cout << "         2. Rescatar un animal." << endl; 
+        cout << "         3. Buscar un animal." << endl;
+        cout << "         4. Cuidar animales." << endl;
+        cout << "         5. Adoptar un animal." << endl;
+        cout << "         6. Cargar Combustible." << endl;
+        cout << "         7. Guardar y salir." << endl << endl;
 
     }else if (cantidad_elecciones == 2) { //Menú de cuidar animales
         cout << endl << "*****   CUIDAR ANIMALES: MENU   *****" << endl << endl;
-        cout << "   1. Elegir Individualmente." << endl; 
-        cout << "   2. Regresar al Menu Principal." << endl << endl;
+        cout << "         1. Elegir Individualmente." << endl; 
+        cout << "         2. Regresar al Menu Principal." << endl << endl;
     }
 
 }
@@ -95,7 +95,7 @@ bool eleccion_valida(int eleccion, int cantidad_opciones){
 
 int pedir_eleccion(int cantidad_opciones){ 
 
-    cout << "Ingrese el numero de la opcion elegida: " << endl << " >> ";
+    cout << "      Ingrese el numero de la opcion elegida: " << endl << " >> ";
     string eleccion_string;
     int eleccion;
 
@@ -106,7 +106,7 @@ int pedir_eleccion(int cantidad_opciones){
     }
 
     while( !es_numero(eleccion_string) || !(eleccion >= 1 && eleccion <= cantidad_opciones)){
-        cout << "Ingresá una opción válida:" << endl << " >> ";
+        cout << "      Ingresá una opción válida:" << endl << " >> ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> eleccion_string;
@@ -121,10 +121,9 @@ int pedir_eleccion(int cantidad_opciones){
 
 string ingresar_nombre(){ 
 
-    string nombre; 
+    string nombre ; 
 
-    while ( nombre.length() == 0 ){ 
-        //cout << " >> " ;
+    while ( nombre.length() == 0 ){
         getline( cin, nombre, '\n' ); 
     } 
 
@@ -136,11 +135,11 @@ string pedir_nombre( Guarderia* mi_guarderia ){
     bool nombre_invalido = true;
     while( nombre_invalido ) {
         if( es_cancelar(nombre) ){
-            cout << "Este nombre no puede ser usado, deberías elegir otro:" << endl;
+            cout << "      Este nombre no puede ser usado, deberías elegir otro:" << endl << " >> ";
             nombre = ingresar_nombre();
         }
         else if( mi_guarderia -> nombre_existente( nombre ) ){
-            cout << "Este nombre ya lo tiene otro animal en la reserva, elegí otro" << endl;
+            cout << "      Este nombre ya lo tiene otro animal en la reserva, elegí otro" << endl << " >> ";
             nombre = ingresar_nombre();
         }
         else{

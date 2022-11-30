@@ -65,14 +65,14 @@ void Grafo::crear_grafo_regular_orden2_con_pesos(int dim, int** matriz_de_costos
 }
 
 void Grafo::mostrar_vertices(){
-    cout << "Vértices: ";
+    cout << "      Vértices: ";
     int cantidad_vertices = lista_vertices->obtener_cantidad();
 
     int contador = 1;
     while(contador != cantidad_vertices+1){
         cout << lista_vertices->consulta(contador)->obtener_nombre();
         if(contador != cantidad_vertices){
-            cout << " - ";
+            cout << "       - ";
         }
         contador++;
     };
@@ -127,14 +127,14 @@ void Grafo::agrandar_matriz_de_adyacencia(){
 }
 
 void Grafo::mostrar_matriz_adyacencia(){
-    cout << "MATRIZ DE ADYACENCIA" << endl;
+    cout << "      MATRIZ DE ADYACENCIA" << endl;
     int cantidad_vertices = lista_vertices->obtener_cantidad();
     for(int i=0; i<cantidad_vertices; i++){
         for(int j=0; j<cantidad_vertices; j++){
             if(matriz_de_adyacencia[i][j] == INFINITO){
-                cout << "|" <<  "-" << "|";    
+                cout << "      |" <<  "-" << "|";    
             }else{
-                cout << "|" <<  matriz_de_adyacencia[i][j] << "|";
+                cout << "      |" <<  matriz_de_adyacencia[i][j] << "|";
             }
             
         }
@@ -170,7 +170,7 @@ int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
     int posicion_vertice = lista_vertices->obtener_posicion_en_lista(vertice);
 
     if(posicion_vertice == NO_SE_ENCUENTRA){
-        cout << "El vertice " << vertice << " no se encuentra en el grafo." << endl;
+        cout << "      El vertice " << vertice << " no se encuentra en el grafo." << endl;
     }
 
     delete vertice;
@@ -210,13 +210,13 @@ void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int
     int pos_destino = convertir_coordenadas_a_celda(coord_vertical_destino,coord_horizontal_destino);
 
     // DESPUES BORRAR ESTOS COMENTARIOS
-    // cout << "Coord vertical (numero) origen: " << coord_vertical_origen << endl;
-    // cout << "Coord horizontal (letra) origen: " << coord_horizontal_origen << endl;
-    // cout << "Celda origen: " << pos_origen << endl << endl;
+    // cout << "      Coord vertical (numero) origen: " << coord_vertical_origen << endl;
+    // cout << "      Coord horizontal (letra) origen: " << coord_horizontal_origen << endl;
+    // cout << "      Celda origen: " << pos_origen << endl << endl;
     
-    // cout << "Coord vertical (numero) destino: " << coord_vertical_destino << endl;
-    // cout << "Coord horizontal (letra) destino: " << coord_horizontal_destino << endl;
-    // cout << "Celda destino: " << pos_destino << endl << endl;
+    // cout << "      Coord vertical (numero) destino: " << coord_vertical_destino << endl;
+    // cout << "      Coord horizontal (letra) destino: " << coord_horizontal_destino << endl;
+    // cout << "      Celda destino: " << pos_destino << endl << endl;
 
     obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_viaje);
 

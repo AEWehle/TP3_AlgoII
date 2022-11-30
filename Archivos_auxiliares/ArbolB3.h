@@ -168,12 +168,12 @@ void ArbolB3<Dato, Clave>               :: agregar_dato( NodoB3<Dato,Clave>* &no
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: baja( Clave clave ){
     if ( cantidad == 0 ) {
-        cout << "La base de datos esta vacía" << endl;
+        cout << "      La base de datos esta vacía" << endl;
         return;
     }
     bool existia = baja( nodo_raiz, clave );
     if (!existia) {
-        cout << "Clave inexistente" << endl;
+        cout << "      Clave inexistente" << endl;
     }
     return;
 }
@@ -208,14 +208,14 @@ bool ArbolB3<Dato, Clave>               :: baja(  NodoB3<Dato,Clave>* nodo_actua
 template <typename Dato, typename Clave>
 Dato* ArbolB3<Dato, Clave>              :: consulta( Clave clave ){
     if ( cantidad == 0 ) {
-        cout << "La base de datos esta vacía" << endl;
+        cout << "      La base de datos esta vacía" << endl;
         return nullptr;
     }
     
     Dato * dato = consulta( this -> nodo_raiz , clave );
     
     if ( dato == nullptr ){ //el dato no se encuentra en el arbol
-        // cout << "Clave inexistente" << endl;
+        // cout << "      Clave inexistente" << endl;
     }
     return dato;
 }
@@ -248,7 +248,7 @@ Dato* ArbolB3<Dato, Clave>              :: consulta( NodoB3<Dato,Clave>* nodo_ac
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>              :: cambiar_dato( Dato* dato_nuevo , Clave clave ){
     if ( cantidad == 0 ) {
-        cout << "La base de datos esta vacía" << endl;
+        cout << "      La base de datos esta vacía" << endl;
         return;
     }
     return agregar_dato( this -> nodo_raiz , dato_nuevo , clave );
@@ -259,7 +259,7 @@ void ArbolB3<Dato, Clave>              :: cambiar_dato( Dato* dato_nuevo , Clave
 template <typename Dato, typename Clave>
 bool ArbolB3<Dato, Clave>               :: clave_existente(  Clave clave ){
     if ( cantidad == 0 ) {
-        cout << "La base de datos esta vacía" << endl;
+        cout << "      La base de datos esta vacía" << endl;
         return false;
     }
     
@@ -274,10 +274,10 @@ bool ArbolB3<Dato, Clave>               :: clave_existente(  Clave clave ){
 
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: mostrar_arbolb3(){
-    cout << "Nodo raiz:" << endl;
+    cout << "      Nodo raiz:" << endl;
     this -> nodo_raiz -> mostrar_nodob3();
     if ( this -> nodo_raiz -> es_hoja() ){
-        cout << "Es hoja"<< endl << endl;
+        cout << "      Es hoja"<< endl << endl;
         return;
     }
     cout << endl;
@@ -293,18 +293,18 @@ void ArbolB3<Dato, Clave>               :: mostrar_arbolb3(){
 
 template <typename Dato, typename Clave>
 void ArbolB3<Dato, Clave>               :: mostrar_arbolb3( NodoB3<Dato,Clave> * nodo_actual, int generacion){
-    cout << "Generacion " << generacion << endl;
+    cout << "      Generacion " << generacion << endl;
     nodo_actual -> mostrar_nodob3() ;
     if ( nodo_actual->es_hoja() ){
-        cout << "Es hoja generacion " << generacion << endl << endl;
+        cout << "      Es hoja generacion " << generacion << endl << endl;
         return;
     }
-    cout << "Hijo 1:" << endl;
+    cout << "      Hijo 1:" << endl;
     mostrar_arbolb3( nodo_actual -> obtener_hijo(1), generacion+1 ) ;
-    cout << "Hijo 2:" << endl;
+    cout << "      Hijo 2:" << endl;
     mostrar_arbolb3( nodo_actual -> obtener_hijo(2), generacion+1 ) ;
     if ( nodo_actual-> esta_completo() ) {
-        cout << "Hijo 3:"<< endl;
+        cout << "      Hijo 3:"<< endl;
         mostrar_arbolb3(nodo_actual -> obtener_hijo(3), generacion+1);
     }
     return;

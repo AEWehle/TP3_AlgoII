@@ -12,9 +12,9 @@ MenuCuidar::MenuCuidar(Guarderia* mi_guarderia) : opciones(Lista<Opcion>()){
 
 void MenuCuidar::mostrar() {
     
-    cout << endl << "*****   CUIDAR ANIMALES: MENU   *****" << endl << endl;
-    cout << "   1. Elegir Individualmente." << endl; 
-    cout << "   2. Regresar al Menu Principal." << endl << endl;
+    cout << endl << "      *****   CUIDAR ANIMALES: MENU   *****" << endl << endl;
+    cout << "         1. Elegir Individualmente." << endl; 
+    cout << "         2. Regresar al Menu Principal." << endl << endl;
     
 }
 
