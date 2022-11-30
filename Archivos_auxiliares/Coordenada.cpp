@@ -1,19 +1,23 @@
 #include "Coordenada.h"
 
-Coordenada::Coordenada(int coordenada_vertical, int coordenada_horizontal){
-    this->coordenada_vertical = coordenada_vertical;
-    this->coordenada_horizontal = coordenada_horizontal;
+Coordenada::Coordenada(){
+    coordenada_fila = 0;
+    coordenada_columna = 0;
 }
 
+Coordenada::Coordenada(int coordenada_vertical, int coordenada_horizontal){
+    this->coordenada_fila = coordenada_fila;
+    this->coordenada_columna = coordenada_columna;
+}
 
 Coordenada::~Coordenada() {
 
 }
 
-int Coordenada::obtener_horizontal(){
-    return coordenada_horizontal;
+int Coordenada::obtener_fila(){
+    return coordenada_fila;
 }
 
-int Coordenada::obtener_vertical(){
-    return coordenada_vertical;
+int Coordenada::obtener_columna(){
+    return coordenada_columna;
 }
