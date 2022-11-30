@@ -250,18 +250,10 @@ void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lis
 
 }
 
-<<<<<<< HEAD
 void Grafo::obtener_camino_minimo_por_coordenadas(int coord_fila_origen, int coord_columna_origen, int coord_fila_destino, int coord_columna_destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
     
     int pos_origen = convertir_coordenadas_a_celda(coord_fila_origen,coord_columna_origen, dimension);
     int pos_destino = convertir_coordenadas_a_celda(coord_fila_destino,coord_columna_destino, dimension);
-=======
-void Grafo::obtener_camino_minimo_por_coordenadas(int coord_vertical_origen, int coord_horizontal_origen, int coord_vertical_destino, int coord_horizontal_destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
-
-    int pos_origen = convertir_coordenadas_a_celda(coord_vertical_origen,coord_horizontal_origen, dimension);
-    int pos_destino = convertir_coordenadas_a_celda(coord_vertical_destino,coord_horizontal_destino, dimension);
-
->>>>>>> 34788e89f6bf035d0161366f01742fb7505ce2bc
     
     obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_camino);
 
