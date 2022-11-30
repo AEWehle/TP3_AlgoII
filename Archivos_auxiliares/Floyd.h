@@ -14,12 +14,15 @@ class Floyd : public AlgoritmoCaminoMinimo{
 
     // Métodos
     public:
-        // Constructor
+        // Constructor con parámetros
+        //PRE:
         Floyd(Lista<Vertice>* lista_vertices, int** matriz_de_adyacencia);
 
         // Destructor
         ~Floyd();
 
+        //PRE: recibe una posicion de origen y una de destino
+        
         void mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje) override;
 
     private:
