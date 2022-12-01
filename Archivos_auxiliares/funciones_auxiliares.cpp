@@ -31,6 +31,20 @@ string string_a_mayuscula(string texto){
 }
 
 
+void liberar_matriz(int** matriz, int cantidad_filas){
+
+    if(matriz != nullptr){
+        for(int i = 0; i < cantidad_filas; i++){
+            delete[] matriz[i];
+        }
+
+        delete[] matriz;
+        matriz = nullptr;
+    }
+
+}
+
+
 int string_a_entero( string texto ){
 
     int entero = 0;

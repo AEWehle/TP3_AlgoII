@@ -61,6 +61,14 @@ _______________________________________________________________________________*
 string menor_alfabetico( string texto1, string texto2);
 
 
+
+/*________liberar_matriz()_____________________________________________________
+PRE:  Recibe matriz que tenga datos en heap y la cantidad de filas
+POST: libera la memeoria
+_______________________________________________________________________________*/
+void liberar_matriz(int** matriz , int cantidad_filas);
+
+
 /*________llenar_con_int()_____________________________________________________
 PRE:  largo coincide con longitud de array_int
 POST: Llena el array ingresado con el entero deseado

@@ -46,7 +46,7 @@ void MenuPrincipal::ejecutar(Guarderia *mi_guarderia){
     do{
         mostrar();
         eleccion = pedir_eleccion(CANTIDAD_OPCIONES);
-        // system( "clear" );
+        system( "clear" );
         ejecutar_opcion(eleccion, mi_guarderia);
     }
     while ( (eleccion != (CANTIDAD_OPCIONES)) && (mi_guarderia->obtener_escapados()<3));

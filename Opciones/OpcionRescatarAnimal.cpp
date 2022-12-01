@@ -113,7 +113,7 @@ Mapa* OpcionRescatarAnimal::introduccion(){
         mapa = new Mapa();
     else{
 
-        cout << endl << "      Ingrese el nombre del terreno en la forma \"mi_terreno.csv\"" << endl << " >> ";
+        cout << endl << "      Ingrese el nombre del terreno:" << endl << " >> ";
         cin >> respuesta;
         mapa = new Mapa(respuesta);
 
