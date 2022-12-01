@@ -14,9 +14,15 @@ class OpcionCuidarAnimales:public Opcion {
         MenuCuidar* menu_cuidar;
 
     public:
-        // Constructor tiene que asegurar las invariantes
+        
+        //Constructor
+        //PRE: -
+        //POS: Crea la opcion sin el menu cargado
         OpcionCuidarAnimales();
 
+        //ejecutar(Guarderia * mi_guarderia)
+        //PRE: Guarderia creada correctamente
+        //POS: Ejecuta opcion de cuidar animales
         void ejecutar(Guarderia * mi_guarderia) override;
 };
 

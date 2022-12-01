@@ -14,6 +14,9 @@ class OpcionGuardarSalir: public Opcion {
   
     public:
         
+        //ejecutar(Guarderia * mi_guarderia)
+        //PRE: Guarderia creada correctamente
+        //POS: Ejecuta opcion de guardar y salir, guarda animales en archivo .csv
         void ejecutar(Guarderia * mi_guarderia) override;
 };
 

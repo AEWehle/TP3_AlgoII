@@ -20,17 +20,34 @@ class MenuCuidarIndividual: public Menu{
         
     // Metodos
     public:
-        
+        //Constructor
+        //PRE: -
+        //POS: Crea menu con la lista de nombres, numero_de animal = 1, volver_menu_ppal = false, nombre_animal con nombre de primer animal en la lista
         MenuCuidarIndividual(Guarderia *mi_guarderia);
 
+        //ejecutar()
+        //PRE: La guarderia fue creada correctamente
+        //POS: Muestra menu, pide opcion y ejecuta mientras no se cumpla condicion de salida: elijo volver a menu principal
         void ejecutar(Guarderia *mi_guarderia) override;
 
+        //Destructor
+        //PRE: -
+        //POS: Libera memoria pedida por los atributos, destruye menu creado
         ~MenuCuidarIndividual() override;
 
+        //mostrar()
+        //PRE: -
+        //POS: Muestra en pantalla el menu cuidar individual
         void mostrar() override;
 
+        //ejecutar_opcion()
+        //PRE: La opcion ingresada es valida, la guarderia fue creada correctamente
+        //POS: Ejecuta la opcion elegida, afectando a mi_guarderia 
         void ejecutar_opcion(int eleccion, Guarderia *mi_guarderia) override;
 
+        //volver_menu_principal()
+        //PRE: -
+        //POS: Devuelve valor de atributo volver_menu_ppal
         bool volver_menu_principal();
         
 };

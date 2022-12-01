@@ -26,7 +26,7 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
 
             if ( !es_cancelar(elegido)  ){
                 cout << endl << "      Adoptaste a " << elegido << endl;
-                //Animal* animal_elegido = animales_adoptables -> obtener_animal( elegido );
+                
                 mi_guarderia -> obtener_animal( elegido ) -> mostrar();
                 mi_guarderia -> eliminar_animal( elegido );
             }
@@ -68,13 +68,11 @@ Guarderia* OpcionAdoptarAnimal::crear_lista_adoptables(Guarderia* mi_guarderia, 
 
 }
 
-/*  PEDIR EL ADOPTADO:
-    Pide al usuario el nombre del animal que desea aoptar, o si desea cancelar.
-    Devuelve el nombre del animal que desea adoptar, o nullptr si quiere cancelar*/
+
 string OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* diccionario_adoptables ){
     
     string entrada = "";
-    //int cant_adoptables = diccionario_adoptables -> obtener_cantidad();
+
     bool adopto = false;
     do{ 
         cout << "      En caso de no querer adoptar ingrese CANCELAR, y volvera al menú inicial" << endl<< " >> ";
@@ -116,7 +114,7 @@ float OpcionAdoptarAnimal:: pedir_espacio(){
     while( !es_numero(espacio_string) || espacio <= 0){
         cout << "      Ingresá un espacio válido:" << endl << " >> ";
         cin.clear();
-        cin.ignore();//numeric_limits<streamsize>::max(), '\n');
+        cin.ignore();
         cin >> espacio_string;
         if(es_numero(espacio_string))
             espacio = stof(espacio_string);

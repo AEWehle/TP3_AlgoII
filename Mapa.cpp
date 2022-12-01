@@ -326,11 +326,20 @@ void Mapa::imprimir_casilla(int i, int j){
 void Mapa::explicacion(){
 
     cout << endl << "      Cada tipo de terreno consume distinta cantidad de combustible:" << endl
-        << CAMINO << "         " << RESET << " - El CAMINO consume 1 de combustible" << endl
-        << TIERRA << "         " << RESET << " - La TIERRA consume 2 de combustible" << endl
-        << MONTANA << "         " << RESET << " - La MONTANA consume 5 de combustible" << endl
-        << PRECIPICIO << "         " << RESET << " - El PRECIPICIO consume 40 de combustible" << endl << endl
-        << "      Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
+        << CAMINO << "   " << RESET << "    - El CAMINO consume 1 de combustible" << endl
+        << TIERRA << "   " << RESET << "    - La TIERRA consume 2 de combustible" << endl
+        << MONTANA << "   " << RESET << "    - La MONTANA consume 5 de combustible" << endl
+        << PRECIPICIO << "   " << RESET << "    - El PRECIPICIO consume 40 de combustible" << endl << endl;
+
+    cout << "     En este mapa tu ubicación es la \"A\", y el resto de casillas ocupadas tienen animales:" << endl
+        << "     P - Perro" << endl
+        << "     G - Gato" << endl
+        << "     C - Caballo" << endl
+        << "     R - Roedor" << endl
+        << "     O - Conejo" << endl
+        << "     E - Erizo" << endl
+        << "     L - Lagartija" << endl << endl
+        << "     Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
 
 }
 
@@ -347,6 +356,8 @@ void Mapa::limpiar_visitados(){
 bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada, bool &combustible_suficiente){
 
     mostrar();
+
+    cout << endl << "     En este momento hay " << combustible << " de combustible" << endl << endl;
 
     int coord_num, coord_letra;
     bool coord_ok = false, cancelar = false;
