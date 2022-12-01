@@ -326,11 +326,20 @@ void Mapa::imprimir_casilla(int i, int j){
 void Mapa::explicacion(){
 
     cout << endl << "      Cada tipo de terreno consume distinta cantidad de combustible:" << endl
-        << CAMINO << "         " << RESET << " - El CAMINO consume 1 de combustible" << endl
-        << TIERRA << "         " << RESET << " - La TIERRA consume 2 de combustible" << endl
-        << MONTANA << "         " << RESET << " - La MONTANA consume 5 de combustible" << endl
-        << PRECIPICIO << "         " << RESET << " - El PRECIPICIO consume 40 de combustible" << endl << endl
-        << "      Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
+        << CAMINO << "   " << RESET << "    - El CAMINO consume 1 de combustible" << endl
+        << TIERRA << "   " << RESET << "    - La TIERRA consume 2 de combustible" << endl
+        << MONTANA << "   " << RESET << "    - La MONTANA consume 5 de combustible" << endl
+        << PRECIPICIO << "   " << RESET << "    - El PRECIPICIO consume 40 de combustible" << endl << endl;
+
+    cout << "     En este mapa tu ubicación es la \"A\", y el resto de casillas ocupadas tienen animales:" << endl
+        << "     P - Perro" << endl
+        << "     G - Gato" << endl
+        << "     C - Caballo" << endl
+        << "     R - Roedor" << endl
+        << "     O - Conejo" << endl
+        << "     E - Erizo" << endl
+        << "     L - Lagartija" << endl << endl
+        << "     Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
 
 }
 
@@ -347,6 +356,8 @@ void Mapa::limpiar_visitados(){
 bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada, bool &combustible_suficiente){
 
     mostrar();
+
+    cout << endl << "     En este momento hay " << combustible << " de combustible" << endl << endl;
 
     int coord_num, coord_letra;
     bool coord_ok = false, cancelar = false;
@@ -381,9 +392,6 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
                 visitados[coordenada->obtener_fila()][coordenada->obtener_columna()] = true;
             }
 
-            lista_coordenadas_recorridas->destruir_con_delete();
-            delete grafo;
-
         }
 
         else{
@@ -393,6 +401,9 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
             combustible_suficiente = false;
 
         }
+
+        lista_coordenadas_recorridas->destruir_con_delete();
+        delete grafo;
 
         return true;
 
@@ -407,11 +418,22 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
     cout << "      Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << " >> ";
-    cin >> coord_num;
+    
+    string coord_num_string;
+    
+    cin >> coord_num_string;
 
-    while(coord_num < 0 || coord_num > 9){
+    if(es_numero(coord_num_string)){
+        coord_num = stoi(coord_num_string);
+    }
+
+    while( !es_numero(coord_num_string) || !(coord_num >= 0 && coord_num <= 8)){
         cout << "      La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
-        cin >> coord_num;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> coord_num_string;
+        if(es_numero(coord_num_string))
+            coord_num = stoi(coord_num_string);
     }
 
     if(coord_num == 0){
@@ -420,19 +442,20 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
     }
 
     coord_num--;
+    string coord_letra_string;
     char coord_letra_char;
 
     cout << "      Ingrese la letra de la coordenada:" << endl << " >> ";
-    cin >> coord_letra_char;
+    cin >> coord_letra_string;
+    coord_letra_char = coord_letra_string[0];
 
     while((int)coord_letra_char < 97 || (int)coord_letra_char > 104){     //Entre 'a' y 'h'
         cout << "      La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
-        cin >> coord_letra;
+        cin >> coord_letra_string;
+        coord_letra_char = coord_letra_string[0];
     }
 
     coord_letra = (int)coord_letra_char - (int)'a';
-
-    // cout << coord_letra << endl; 
 
     return;
 
