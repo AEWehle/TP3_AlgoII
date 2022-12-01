@@ -1,19 +1,23 @@
 #ifndef ALGORITMO_CAMINO_MIN_H
 #define ALGORITMO_CAMINO_MIN_H
+
 #include "Lista.h"
 #include "Vertice.h"
 #include "Coordenada.h"
 #include <iostream>
 
 class AlgoritmoCaminoMinimo{
+
     // Atributos
     protected:
         int ** matriz_de_adyacencia;
         Lista<Vertice>* lista_vertices;
         int cantidad_vertices_en_algoritmo;
 
+
     // Métodos
     public:
+
         // Constructor con parámetros
         // PRE: recibe una lista con vertices y una matriz de adyacencia
         // POS: inicializa el objeto AlgoritmoCaminoMinimo con la lista de vertices, la matriz de adyacencia y la cantidad de vertices
@@ -26,6 +30,7 @@ class AlgoritmoCaminoMinimo{
 
         // Destructor
         virtual ~AlgoritmoCaminoMinimo();
+        
 };
 
 #endif // ALGORITMO_CAMINO_MIN_H

@@ -14,14 +14,17 @@ using namespace std;
 
 template <typename Dato, typename Clave>
 class Elemento{
-        // Atributos
+
+    // Atributos
     private:
     Clave clave;
     Dato* dato;
     NodoB3<Dato, Clave>* hijo;
     bool funcional; // indica si este dato participa en el arbol
 
+
     public:
+
         // Constructor
         /*  PRE: -
             POS: Crea un Elemento con dato, clave y funcionalidad, con hijo apuntando a Null
@@ -31,12 +34,10 @@ class Elemento{
         // Destructor
         ~Elemento();
 
-
         /*  PRE: -
             POS: Le indica al elemento que ya no es funcional en el arbol
             */
         void dar_de_baja( );
-
 
         /*  PRE: -
             POS: devuelve true si participa en el arbol
@@ -52,7 +53,6 @@ class Elemento{
             POS: cambia el puntero a dato
             */
         void cambiar_dato(  Dato* dato_nuevo );
-
 
         void cambiar_funcional ( bool funcional );
 
@@ -77,68 +77,89 @@ class Elemento{
 // Constructor
 template <typename Dato, typename Clave>
 Elemento<Dato, Clave> :: Elemento( Dato* dato, Clave clave , bool funcional){
+
     this -> dato = dato;
     this -> clave = clave;
     this -> hijo = nullptr;
     this -> funcional = funcional;
+
 }
 
 
 template <typename Dato, typename Clave>
 Elemento<Dato, Clave> :: ~Elemento(){
+
     if ( dato != nullptr){
         delete this -> dato;}
+
 }
 
 
 template <typename Dato, typename Clave>
 void Elemento<Dato, Clave> :: dar_de_baja( ){
+
     funcional = false;
+
 }
 
 
 template <typename Dato, typename Clave>
 bool Elemento<Dato, Clave> :: es_funcional( ){
-    return funcional;
-}
 
+    return funcional;
+
+}
 
 
 // obtener dato
 template <typename Dato, typename Clave>
 Dato* Elemento<Dato, Clave> :: obtener_dato( ) {
-    return dato;
-}
 
+    return dato;
+
+}
 
 
 // obtener dato
 template <typename Dato, typename Clave>
 void Elemento<Dato, Clave> :: cambiar_dato( Dato* dato_nuevo) {
+
     dato = dato_nuevo;
+
 }
 
 
 template <typename Dato, typename Clave>
 void Elemento<Dato, Clave> :: cambiar_funcional( bool funcional ) {
+
     this -> funcional = funcional;
+
 }
+
 
 // obtener clave
 template <typename Dato, typename Clave>
 Clave Elemento<Dato, Clave> :: obtener_clave( ) {
+
     return clave;
+
 }
+
 
 template <typename Dato, typename Clave>
 NodoB3<Dato, Clave>* Elemento<Dato, Clave> :: obtener_hijo( ) {
+
     return this-> hijo;
+
 }
 
 
 template <typename Dato, typename Clave>
 void Elemento<Dato, Clave> :: cambiar_hijo( NodoB3<Dato, Clave>* nodo_hijo ) {
+
     this-> hijo = nodo_hijo;
+
 }
+
 
 #endif // Elemento_TEMPLATE

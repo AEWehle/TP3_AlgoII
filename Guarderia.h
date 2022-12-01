@@ -23,13 +23,14 @@ const int NO_SE_ENCUENTRA = -1;
 class Guarderia{
     //Atributos
 
+
     private:
         ArbolB3<Animal, string>* diccionario_de_animales;
         Auto automovil;
         int escapados;
 
-    //Metodos
 
+    //Metodos
     public:
         //Constructores
             //Sin Parametros
@@ -106,6 +107,7 @@ class Guarderia{
             PRE:  Necesita una lista con los nombres
             POST: Imprime en terminal todos los animales de la lista ingresada*/
             void ver_los_animales( Lista<string>* nombres );
+            
 };
 
 #endif

@@ -3,15 +3,17 @@
 
 #include "Opcion.h"
 #include "../Menus/MenuCuidar.h"
-
 #include <string>
+
 using namespace std; 
 
 class OpcionCuidarAnimales:public Opcion {
+
     //Atributos
     private:
         //Menu
         MenuCuidar* menu_cuidar;
+
 
     public:
         
@@ -20,11 +22,10 @@ class OpcionCuidarAnimales:public Opcion {
         //POS: Crea la opcion sin el menu cargado
         OpcionCuidarAnimales();
 
-        //ejecutar(Guarderia * mi_guarderia)
         //PRE: Guarderia creada correctamente
         //POS: Ejecuta opcion de cuidar animales
         void ejecutar(Guarderia * mi_guarderia) override;
-};
 
+};
 
 #endif

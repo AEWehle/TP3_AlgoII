@@ -3,10 +3,13 @@
 
 
 void OpcionBuscarAnimal::ejecutar(Guarderia * mi_guarderia){
+
     cout << "      Elegiste la opción 3, buscar un animal de la reserva." << endl << endl;
-    if (mi_guarderia->obtener_cantidad() == 0) {
+    if (mi_guarderia->obtener_cantidad() == 0) 
         cout << "      No hay animales para buscar." << endl;   
-    }else{
+    
+    else{
+
         string nombre;
         cout << "      Ingrese el nombre del animal que busca:" << endl << " >> ";
         nombre = ingresar_nombre( );
@@ -17,9 +20,11 @@ void OpcionBuscarAnimal::ejecutar(Guarderia * mi_guarderia){
         else{
             cout << "      SI! " << nombre << " está en la guardería: " << endl ;
             mi_guarderia -> obtener_animal( nombre )->mostrar();
-        }   
+        }  
+
     }
+
     mi_guarderia->afectar_animales();
-    
     mi_guarderia->obtener_auto()->cargar_combustible();
+
 }

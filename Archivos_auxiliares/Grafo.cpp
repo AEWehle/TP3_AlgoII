@@ -12,6 +12,7 @@ Grafo::Grafo(){
 
 }
 
+
 void Grafo::mostrar_grafo(){
 
     mostrar_vertices();
@@ -63,6 +64,7 @@ void Grafo::mapa_a_grafo(int dimension, int** matriz_de_costos_por_destino){
 
 }
 
+
 void Grafo::mostrar_vertices(){
 
     cout << "      Vértices: ";
@@ -80,7 +82,9 @@ void Grafo::mostrar_vertices(){
     };
 
     cout << endl << endl;
+
 }
+
 
 void Grafo::agregar_vertice(int nuevo){
 
@@ -88,15 +92,14 @@ void Grafo::agregar_vertice(int nuevo){
 
     lista_vertices->alta(nuevo_vertice,lista_vertices->obtener_cantidad()+1);
 
-    if(lista_vertices->obtener_cantidad() == 1){
+    if(lista_vertices->obtener_cantidad() == 1)
         crear_matriz_de_adyacencia();
-    }
     
-    else{
+    else
         agrandar_matriz_de_adyacencia();
-    }
 
 }
+
 
 void Grafo::crear_matriz_de_adyacencia(){
 
@@ -105,6 +108,7 @@ void Grafo::crear_matriz_de_adyacencia(){
     matriz_de_adyacencia[0][0] = 0;
     
 }
+
 
 void Grafo::agrandar_matriz_de_adyacencia(){
 
@@ -130,6 +134,7 @@ void Grafo::agrandar_matriz_de_adyacencia(){
 
 }
 
+
 void Grafo::mostrar_matriz_adyacencia(){
 
     cout << "      MATRIZ DE ADYACENCIA" << endl;
@@ -153,6 +158,7 @@ void Grafo::mostrar_matriz_adyacencia(){
 
 }
 
+
 void Grafo::liberar_matriz_adyacencia(int cantidad_vertices){
 
     for(int i=0; i<cantidad_vertices; i++){
@@ -162,6 +168,7 @@ void Grafo::liberar_matriz_adyacencia(int cantidad_vertices){
     delete[] matriz_de_adyacencia;
 
 }
+
 
 void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacencia){
 
@@ -179,6 +186,7 @@ void Grafo::actualizar_vertices_en_matriz_adyacencia(int** nueva_matriz_adyacenc
 
 }
 
+
 int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
 
     int contador = 1;
@@ -194,34 +202,34 @@ int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
         contador++;
     }
 
-    if(posicion_vertice == NO_SE_ENCUENTRA){
+    if(posicion_vertice == NO_SE_ENCUENTRA)
         cout << "El vertice " << vertice_a_buscar << " no se encuentra en el grafo." << endl;
-    }
     
     return posicion_vertice;
 
 }
+
 
 void Grafo::agregar_camino(int origen, int destino, int costo){
 
     int pos_origen = obtener_vertice_en_grafo(origen);
     int pos_destino = obtener_vertice_en_grafo(destino);
 
-    if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA){
+    if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA)
         matriz_de_adyacencia[pos_origen-1][pos_destino-1] = costo;
-    }
 
-    else{
+    else
         cout << "Ocurrió un error al intentar agregar un camino en el grafo." << endl;
-    }
 
 }
+
 
 void Grafo::aplicar_algoritmo_camino_minimo(){
 
     algoritmo_camino_minimo = new Floyd(lista_vertices,matriz_de_adyacencia);
 
 }
+
 
 void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension){
     
@@ -230,15 +238,14 @@ void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lis
     int pos_origen = obtener_vertice_en_grafo(origen);
     int pos_destino = obtener_vertice_en_grafo(destino);
 
-    if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA){
+    if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA)
         algoritmo_camino_minimo->obtener_camino_minimo(pos_origen,pos_destino, lista_coordenadas_recorridas,costo,dimension);
-    }
     
-    else{
+    else
         cout << "Ocurrió un error al intentar obtener el camino mínimo." << endl;
-    }
 
 }
+
 
 void Grafo::obtener_camino_minimo_por_coordenadas(Coordenada* coord_origen, Coordenada* coord_destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension){
     
@@ -248,6 +255,7 @@ void Grafo::obtener_camino_minimo_por_coordenadas(Coordenada* coord_origen, Coor
     obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo,dimension);
 
 }
+
 
 Grafo::~Grafo() {
 

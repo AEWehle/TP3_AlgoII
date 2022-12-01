@@ -16,10 +16,12 @@ using namespace std;
 const int CANTIDAD_OPCIONES_CUIDAR = 2;
 
 class MenuCuidar: public Menu{
+
     //Atributos
     private:
         Lista<Opcion> opciones;
         OpcionElegirAnimal* opcion_elegir; 
+
 
     public:
 
@@ -28,17 +30,14 @@ class MenuCuidar: public Menu{
         //POS: Crea menu cuidar con sus opciones
         MenuCuidar(Guarderia* mi_guarderia);
 
-        //ejecutar()
         //PRE: La guarderia fue creada correctamente
         //POS: Muestra menu, pide opcion y ejecuta mientras no se cumpla condicion de salida: elijo volver a menu principal
         void ejecutar(Guarderia *mi_guarderia) override;
 
-        //ejecutar_opcion()
         //PRE: La opcion ingresada es valida, la guarderia fue creada correctamente
         //POS: Ejecuta la opcion elegida, afectando a mi_guarderia 
         void ejecutar_opcion(int eleccion, Guarderia *mi_guarderia) override;
         
-        //mostrar()
         //PRE: -
         //POS: Muestra en pantalla el menu cuidar
         void mostrar() override;
@@ -47,8 +46,7 @@ class MenuCuidar: public Menu{
         //PRE: -
         //POS: Libera memoria pedida por las opciones, destruye Menu creado
         ~MenuCuidar();
-        
+    
 };
-
 
 #endif

@@ -16,10 +16,13 @@
 const int CANTIDAD_OPCIONES = 7;
 
 class MenuPrincipal: public Menu{
+
     // Atributos
+
     private:
 
         Lista<Opcion> opciones; //Trabajo con puntero a clase base, que es un vector de opciones
+
 
     // Metodos
     public:
@@ -29,7 +32,6 @@ class MenuPrincipal: public Menu{
         //POS: Crea menu principal con sus opciones
         MenuPrincipal();
 
-        //ejecutar()
         //PRE: La guarderia fue creada correctamente
         //POS: Muestra menu, pide opcion y ejecuta mientras no se cumpla condicion de salida: quiero guardar y salir, o tengo 3 escapados
         void ejecutar(Guarderia *mi_guarderia) override;
@@ -39,17 +41,14 @@ class MenuPrincipal: public Menu{
         //POS: Libera memoria pedida por las opciones, destruye Menu creado
         ~MenuPrincipal() override;
 
-        //mostrar()
         //PRE: -
         //POS: Muestra en pantalla el menu principal
         void mostrar() override;
 
-        //ejecutar_opcion()
         //PRE: La opcion ingresada es valida, la guarderia fue creada correctamente
         //POS: Ejecuta la opcion elegida, afectando a mi_guarderia 
         void ejecutar_opcion(int eleccion, Guarderia *mi_guarderia) override;
         
 };
-
 
 #endif

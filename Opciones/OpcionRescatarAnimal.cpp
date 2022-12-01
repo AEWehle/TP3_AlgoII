@@ -4,6 +4,7 @@
 #include <dirent.h>
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
+
     cout << "      Elegiste la opcion 2, rescatar un animal."<< endl<< endl;
 
     int combustible_disponible = mi_guarderia->obtener_auto()->obtener_combustible();
@@ -52,9 +53,11 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
         }
 
     }
+
     mi_guarderia->afectar_animales();
     mi_guarderia->obtener_auto()->cargar_combustible();
     delete mapa;
+
 }
 
 
@@ -88,13 +91,18 @@ Animal* OpcionRescatarAnimal::generar_animal(Guarderia * mi_guarderia, char espe
 
 
 void  mostrar_lista_mapas(){
+
     cout << "      Para cargar nuevos mapas solo tenes que cargar el archivo con el nombre deseado en formato 'csv' a la carpeta 'mis_mapas'." << endl;
     cout << "      Los mapas disponibles son:" << endl;
+
     DIR* carpeta_mapas = opendir( "mis_mapas" );
+
     if( ( carpeta_mapas != nullptr ) ){
+
         string nombre_mapa;
         struct dirent *diread;
         diread = readdir( carpeta_mapas );
+
         while( ( diread != nullptr) ){
             nombre_mapa = diread -> d_name;
             if ( es_csv( nombre_mapa ) ){
@@ -102,10 +110,14 @@ void  mostrar_lista_mapas(){
                 }
             diread = readdir( carpeta_mapas );
         }
+        
         closedir( carpeta_mapas );
-    } else {
-    cout << "No se encuentra el directorio de mapas" << endl;
+
     }
+
+    else 
+        cout << "No se encuentra el directorio de mapas" << endl;
+
 }
 
 
@@ -137,7 +149,9 @@ Mapa* OpcionRescatarAnimal::introduccion(){
 
     if( string_a_mayuscula( respuesta ) == "NO")
         mapa = new Mapa();
+    
     else{
+
         mostrar_lista_mapas();
         cout << endl << "      Ingrese el nombre del terreno:" << endl << " >> ";
         cin >> respuesta;
@@ -148,7 +162,6 @@ Mapa* OpcionRescatarAnimal::introduccion(){
     return mapa;
 
 }
-
 
 
 int OpcionRescatarAnimal::pedir_edad(){ 
@@ -162,11 +175,13 @@ int OpcionRescatarAnimal::pedir_edad(){
     edad_valida = validar_edad(edad_st, edad);
     
     while( !edad_valida ){ 
+
         cout << "      Tiene que ser entre 0 y "<< EDAD_MAX << ", volvé a ingresar la edad:" << endl << " >> "; 
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> edad_st;
         edad_valida = validar_edad(edad_st, edad);
+
     } 
 
     return edad;
@@ -195,12 +210,14 @@ string OpcionRescatarAnimal::pedir_tamano(){
     }
 
     while( !es_numero(tamano_string) || !(tamano >= 1 && tamano <= 5)){
+
         cout << "      Ingresá el número correspondiente a una categoría:" << endl << " >> ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> tamano_string;
         if(es_numero(tamano_string))
             tamano = stoi(tamano_string);
+
     }
 
     return TAMANOS_STRING[ tamano-1];
@@ -226,9 +243,9 @@ int OpcionRescatarAnimal::pedir_especie(){
 
     cin >> especie_string;
 
-    if(es_numero(especie_string)){
+    if(es_numero(especie_string))
         especie = stoi(especie_string);
-    }
+
 
     while( !es_numero(especie_string) || !(especie >= 1 && especie <= 7)){
         cout << "      Ingresá el número correspondiente a una especie:" << endl << " >> ";
@@ -259,17 +276,19 @@ int OpcionRescatarAnimal::pedir_personalidad(){
 
     cin >> personalidad_string;
 
-    if(es_numero(personalidad_string)){
+    if(es_numero(personalidad_string))
         personalidad = stoi(personalidad_string);
-    }
+
 
     while( !es_numero(personalidad_string) || !(personalidad >= 1 && personalidad <= 4)){
+
         cout << "      Ingresá el número correspondiente a una personalidad:" << endl << " >> ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> personalidad_string;
         if(es_numero(personalidad_string))
             personalidad = stoi(personalidad_string);
+
     }
     
     return personalidad-1;
@@ -281,7 +300,7 @@ bool OpcionRescatarAnimal::otro_nombre( Guarderia* mi_guarderia, string & nombre
 
     int opcion;
     bool otro_nombre = true;
-    // Lista<string>* nombres = mi_guarderia -> obtener_lista_nombres();
+    
     while (otro_nombre && (mi_guarderia -> nombre_existente( nombre ))){  
 
         cout << "      Este nombre ya lo tiene otro animal! Podés elegir otro nombre o volver al menú." << endl

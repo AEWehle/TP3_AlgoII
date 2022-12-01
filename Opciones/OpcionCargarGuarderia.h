@@ -7,9 +7,11 @@
 #include "../funciones_main.h"
 #include <fstream>
 #include <string>
+
 using namespace std; 
 
 class OpcionCargarGuarderia: public Opcion {
+
     //Atributos ---> No tiene
 
     public:
@@ -18,8 +20,6 @@ class OpcionCargarGuarderia: public Opcion {
         //POS: Ejecuta opcion de cargar animales de un archivo a la guarderia
         void ejecutar(Guarderia * mi_guarderia) override;
 
-        
 };
-
 
 #endif

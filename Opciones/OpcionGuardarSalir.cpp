@@ -11,7 +11,9 @@ void OpcionGuardarSalir::ejecutar( Guarderia* mi_guarderia ){
     string tamano;
     char especie;
     string personalidad;
+
     for ( int numero_de_animal = 1; numero_de_animal < (mi_guarderia->obtener_cantidad()+1) ; numero_de_animal++ ){ 
+        
         nombre = *nombres -> consulta ( numero_de_animal );
         edad            = mi_guarderia -> obtener_animal( nombre ) -> obtener_edad();
         tamano       = mi_guarderia -> obtener_animal( nombre ) -> obtener_tamano();

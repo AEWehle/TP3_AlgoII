@@ -1,5 +1,6 @@
 #ifndef GRAFO_H
 #define GRAFO_H
+
 #include "Lista.h"
 #include "Vertice.h"
 #include "Algoritmo_camino_min.h"
@@ -11,19 +12,21 @@ using namespace std;
 const int INFINITO = 99999;
 
 class Grafo{
+
     // Atributos
     private:
         int** matriz_de_adyacencia;
         Lista<Vertice>* lista_vertices;
         AlgoritmoCaminoMinimo* algoritmo_camino_minimo;
 
+
     // Métodos
     public:
+
         // Constructor sin parámetros
         // PRE: -
         // POS: construye un grafo vacío
         Grafo();
-
 
         // Destructor
         ~Grafo();
@@ -56,6 +59,7 @@ class Grafo{
         // PRE: -
         // POS: inicializa el algoritmo de camino minimo
         void aplicar_algoritmo_camino_minimo();
+
 
     private:
         // PRE: -

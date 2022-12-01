@@ -9,6 +9,7 @@ using namespace std;
 
 
 Animal* crear_nuevo_animal( char especie, string nombre, int edad, string tamano, string personalidad ){ 
+
     Animal* nuevo_animal; 
     if(especie == 'P')
         nuevo_animal = new Perro( nombre, edad, tamano, personalidad );
@@ -29,8 +30,6 @@ Animal* crear_nuevo_animal( char especie, string nombre, int edad, string tamano
 
 } 
  
-
-
 
 bool eleccion_valida(int eleccion, int cantidad_opciones){
 
@@ -65,6 +64,7 @@ int pedir_eleccion(int cantidad_opciones){
 
 }
 
+
 string ingresar_nombre(){ 
 
     string nombre ; 
@@ -74,31 +74,44 @@ string ingresar_nombre(){
     } 
 
     return nombre; 
+
 }
 
+
 string pedir_nombre( Guarderia* mi_guarderia ){
+
     string nombre = ingresar_nombre();
+
     bool nombre_invalido = true;
+
     while( nombre_invalido ) {
+
         if( es_cancelar(nombre) ){
             cout << "      Este nombre no puede ser usado, deberías elegir otro:" << endl << " >> ";
             nombre = ingresar_nombre();
         }
+
         else if( mi_guarderia -> nombre_existente( nombre ) ){
             cout << "      Este nombre ya lo tiene otro animal en la reserva, elegí otro" << endl << " >> ";
             nombre = ingresar_nombre();
         }
+
         else{
             nombre_invalido = false;
         }
+
     }
+
     return nombre;
+
 }
+
 
 bool es_cancelar(string nombre){
-    return (string_a_mayuscula(nombre) == CANCELAR);
-}
 
+    return (string_a_mayuscula(nombre) == CANCELAR);
+
+}
 
 
 bool validar_edad(string edad_st, int &edad){
@@ -114,14 +127,18 @@ bool validar_edad(string edad_st, int &edad){
 
 }
 
+
 bool tamano_ok(Animal* animal, float espacio){ //espacio es mayor a 0
 
     int tamano_animal = buscar_en_array_de_string( TAMANOS_STRING, animal->obtener_tamano(), CANTIDAD_TAMANOS );
     bool ok = false;
 
     int tamano_disponible = (int) (espacio >= 2)  + (int) (espacio >= 10) + (int) (espacio >= 20) + (int) (espacio >= 50);
+    
     if( tamano_animal <= tamano_disponible ){
         ok = true;
     }
+
     return ok;
+
 }

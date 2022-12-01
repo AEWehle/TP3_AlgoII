@@ -1,6 +1,8 @@
 #ifndef _FUNCIONESAUXILIARES_H_
 #define _FUNCIONESAUXILIARES_H_
+
 #include <string>
+
 using namespace std; 
 
 
@@ -69,7 +71,6 @@ _______________________________________________________________________________*
 string menor_alfabetico( string texto1, string texto2);
 
 
-
 /*________liberar_matriz()_____________________________________________________
 PRE:  Recibe matriz que tenga datos en heap y la cantidad de filas
 POST: libera la memeoria
@@ -90,6 +91,5 @@ POST: Verifica si todos los caracteres de string son numericos, devuelve true
       Caso contrario devuelve false.
 _______________________________________________________________________________*/
 bool es_numero(string st);
-
 
 #endif
