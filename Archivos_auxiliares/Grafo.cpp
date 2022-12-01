@@ -12,15 +12,15 @@ Grafo::Grafo(){
 
 }
 
-Grafo::Grafo(int dimension, int** matriz_de_costos){
+// Grafo::Grafo(int dimension, int** matriz_de_costos){
 
-    matriz_de_adyacencia = nullptr;
-    algoritmo_camino_minimo = nullptr;
-    lista_vertices = new Lista<Vertice>();
+//     matriz_de_adyacencia = nullptr;
+//     algoritmo_camino_minimo = nullptr;
+//     lista_vertices = new Lista<Vertice>();
 
-    crear_grafo_regular_orden2_con_pesos(dimension,matriz_de_costos);
+//     crear_grafo_regular_orden2_con_pesos(dimension,matriz_de_costos);
 
-}
+// }
 
 void Grafo::mostrar_grafo(){
 
@@ -29,7 +29,7 @@ void Grafo::mostrar_grafo(){
 
 }
 
-void Grafo::crear_grafo_regular_orden2_con_pesos(int dimension, int** matriz_de_costos_por_destino){
+void Grafo::mapa_a_grafo(int dimension, int** matriz_de_costos_por_destino){
 
     // Creo grafo de tamanio dimension*dimension
     for(int i=1; i<= dimension*dimension; i++){
