@@ -37,6 +37,7 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
         
         delete animales_adoptables;
     }
+    cout << endl << endl ;
     mi_guarderia->afectar_animales();
     
     mi_guarderia->obtener_auto()->cargar_combustible();

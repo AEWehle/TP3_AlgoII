@@ -24,6 +24,7 @@ class Grafo{
         // POS: construye un grafo vacío
         Grafo();
 
+
         // Destructor
         ~Grafo();
 

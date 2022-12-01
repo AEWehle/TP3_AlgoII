@@ -1,6 +1,7 @@
 #include "OpcionRescatarAnimal.h"
 #include <time.h>
 #include <limits>
+#include <dirent.h>
 
 void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
     cout << "      Elegiste la opcion 2, rescatar un animal."<< endl<< endl;
@@ -83,6 +84,32 @@ Animal* OpcionRescatarAnimal::generar_animal(Guarderia * mi_guarderia, char espe
 }
 
 
+// bool es_csv( string nombre_archivo ){
+//     return (nombre_archivo.length() > 4) & (nombre_archivo.substr(nombre_archivo.length()-4, nombre_archivo.length()) == ".csv" ) ;
+// }
+
+void  mostrar_lista_mapas(){
+    cout << "      Para cargar nuevos mapas solo tenes que cargar el archivo con el nombre deseado en formato 'csv' a la carpeta 'mis_mapas'." << endl;
+    cout << "      Los mapas disponibles son:" << endl;
+    DIR* carpeta_mapas = opendir( "mis_mapas" );
+    if( ( carpeta_mapas != nullptr ) ){
+        string nombre_mapa;
+        struct dirent *diread;
+        diread = readdir( carpeta_mapas );
+        while( ( diread != nullptr) ){
+            nombre_mapa = diread -> d_name;
+            if ( es_csv( nombre_mapa ) ){
+                cout << "          -  " << nombre_mapa.substr(0, nombre_mapa.length()-4) << endl;
+                }
+            diread = readdir( carpeta_mapas );
+        }
+        closedir( carpeta_mapas );
+    } else {
+    cout << "No se encuentra el directorio de mapas" << endl;
+    }
+}
+
+
 Mapa* OpcionRescatarAnimal::introduccion(){
 
     cout << "      Ahora la reserva cuenta con un vehículo para rescatar animales!" << endl
@@ -96,7 +123,7 @@ Mapa* OpcionRescatarAnimal::introduccion(){
 
     while(!respuesta_ok){
 
-        cout << "       >> " ;
+        cout << " >> " ;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cin >> respuesta;
 
@@ -112,8 +139,8 @@ Mapa* OpcionRescatarAnimal::introduccion(){
     if( string_a_mayuscula( respuesta ) == "NO")
         mapa = new Mapa();
     else{
-
-        cout << endl << "      Ingrese el nombre del terreno en la forma \"mi_terreno.csv\"" << endl << " >> ";
+        mostrar_lista_mapas();
+        cout << endl << "      Ingrese el nombre del terreno:" << endl << " >> ";
         cin >> respuesta;
         mapa = new Mapa(respuesta);
 
@@ -122,6 +149,7 @@ Mapa* OpcionRescatarAnimal::introduccion(){
     return mapa;
 
 }
+
 
 
 int OpcionRescatarAnimal::pedir_edad(){ 

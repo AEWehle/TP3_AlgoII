@@ -1,3 +1,4 @@
+#include "funciones_auxiliares.h"
 #include "Algoritmo_camino_min.h"
 
 AlgoritmoCaminoMinimo::AlgoritmoCaminoMinimo(Lista<Vertice>* lista_vertices, int** matriz_de_adyacencia){
@@ -7,5 +8,4 @@ AlgoritmoCaminoMinimo::AlgoritmoCaminoMinimo(Lista<Vertice>* lista_vertices, int
 }
 
 AlgoritmoCaminoMinimo::~AlgoritmoCaminoMinimo(){
-    
 }
