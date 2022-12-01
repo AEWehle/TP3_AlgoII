@@ -16,17 +16,20 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
 
     int combustible_gastado = 0, rescatados = 0;
     char especie_rescatada = ' ';
-    bool rescatando = true, combistible_suficiente = true;
+    bool rescatando = true, combustible_suficiente;
 
     while(rescatando && rescatados < 5){
-        bool salida_ok = mapa->ejecutar(combustible_disponible, combustible_gastado, especie_rescatada, combistible_suficiente);
+
+        combustible_suficiente = true;
+
+        bool salida_ok = mapa->ejecutar(combustible_disponible, combustible_gastado, especie_rescatada, combustible_suficiente);
 
         if(!salida_ok){
             cout << "      Rescate cancelado!" << endl << endl;
             rescatando = false;
         }
 
-        else if(combistible_suficiente){        
+        else if(combustible_suficiente){        
 
             mi_guarderia->obtener_auto()->decrementar_combustible(combustible_gastado);
 
@@ -83,10 +86,6 @@ Animal* OpcionRescatarAnimal::generar_animal(Guarderia * mi_guarderia, char espe
 
 }
 
-
-// bool es_csv( string nombre_archivo ){
-//     return (nombre_archivo.length() > 4) & (nombre_archivo.substr(nombre_archivo.length()-4, nombre_archivo.length()) == ".csv" ) ;
-// }
 
 void  mostrar_lista_mapas(){
     cout << "      Para cargar nuevos mapas solo tenes que cargar el archivo con el nombre deseado en formato 'csv' a la carpeta 'mis_mapas'." << endl;

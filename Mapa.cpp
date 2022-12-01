@@ -9,8 +9,6 @@
 
 using namespace std;
 
-// const int DIMENSION = 8;
-
 
 Mapa::Mapa(){
 
@@ -158,44 +156,13 @@ void Mapa::usar_terreno_por_defecto(){ //Mapa default hardcodeado
     terreno[7][6] = 'C';
     terreno[7][7] = 'C';
 
-    //Cargo las tierras
+    //Cargo las tierras (el resto de casillas)
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if(terreno[i][j] == ' ')
                 terreno[i][j] = 'T';
         }
     }
-
-    /* El for Hardcodea esto:
-    terreno[0][2] = 'T';
-    terreno[0][3] = 'T';
-    terreno[0][4] = 'T';
-    terreno[0][5] = 'T';
-    terreno[0][6] = 'T';
-    terreno[0][7] = 'T';
-    terreno[1][1] = 'T';
-    terreno[1][2] = 'T';
-    terreno[1][3] = 'T';
-    terreno[2][5] = 'T';
-    terreno[3][5] = 'T';
-    terreno[4][5] = 'T';
-    terreno[5][5] = 'T';
-    terreno[6][5] = 'T';
-    terreno[3][0] = 'T';
-    terreno[3][1] = 'T';
-    terreno[3][2] = 'T';
-    terreno[3][3] = 'T';
-    terreno[4][3] = 'T';
-    terreno[5][3] = 'T';
-    terreno[5][2] = 'T';
-    terreno[5][1] = 'T';
-    terreno[5][0] = 'T';
-    terreno[6][0] = 'T';
-    terreno[7][0] = 'T';
-    terreno[7][1] = 'T';
-    terreno[7][2] = 'T';
-    terreno[7][3] = 'T';
-    */
 
 }
 
@@ -340,6 +307,7 @@ void Mapa::explicacion(){
         << "     O - Conejo" << endl
         << "     E - Erizo" << endl
         << "     L - Lagartija" << endl << endl
+        << "     El camino recorrido en los rescates se marcará con ***." << endl
         << "     Para rescatar un animal ingresá sus coordenadas, pero recordá que si el combustible no es suficiente no podrá ser rescatado!" << endl;
 
 }
@@ -405,7 +373,7 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
         else{
 
             cout << "      No hay suficiente combustible para el rescate!" << endl
-                << "      Este rescate tiene un costo de " << combustible_gastado << ", pero solo hay " << combustible << "!" << endl << endl;
+                << "      Este rescate tiene un costo de " << combustible_gastado << ", pero solo hay " << combustible << " de combustible!" << endl << endl;
             combustible_suficiente = false;
 
         }

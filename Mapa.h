@@ -13,14 +13,6 @@ const string TIERRA = "\u001b[48;5;179m";
 const string BORDE = "\u001b[48;5;2m";
 const string BOLD = "\u001b[1m";
 
-const string RUTA = "mapa.csv";
-
-//const int CANT_COLORES = 6;
-
-//const string COLORES[CANT_COLORES] = {RESET, BORDE, CAMINO, TIERRA, MONTANA, PRECIPICIO};
-
-//enum Colores {RESET = 0, BORDE, CAMINO, TIERRA}; 
-
 class Mapa{
 
     private:
