@@ -25,7 +25,7 @@ class AlgoritmoCaminoMinimo{
         virtual void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje) = 0;
 
         // Destructor
-        virtual ~AlgoritmoCaminoMinimo() = default;
+        virtual ~AlgoritmoCaminoMinimo() = 0;
 };
 
 #endif // ALGORITMO_CAMINO_MIN_H

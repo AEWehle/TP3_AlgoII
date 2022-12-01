@@ -13,7 +13,9 @@ class OpcionCargarGuarderia: public Opcion {
     //Atributos ---> No tiene
 
     public:
-        
+        //ejecutar(Guarderia * mi_guarderia)
+        //PRE: Guarderia creada correctamente
+        //POS: Ejecuta opcion de cargar animales de un archivo a la guarderia
         void ejecutar(Guarderia * mi_guarderia) override;
 
         

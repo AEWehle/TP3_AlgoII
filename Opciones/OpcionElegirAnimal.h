@@ -15,14 +15,25 @@ class OpcionElegirAnimal:public Opcion {
         bool volver_menu_ppal;
 
     public:
-        // Constructor tiene que asegurar las invariantes
+        //Constructor
+        //PRE: -
+        //POS: Crea la opcion, pide memoria y crea menu_cuidar_individual y volver_menu_ppal = false
         OpcionElegirAnimal(Guarderia* mi_guarderia);
 
+        //ejecutar(Guarderia * mi_guarderia)
+        //PRE: Guarderia creada correctamente
+        //POS: Ejecuta opcion de elegir animal individualmente
         void ejecutar(Guarderia* mi_guarderia) override;
 
+        //volver_menu_principal()
+        //PRE: -
+        //POS: Devuelve valor de volver_menu_ppal
         bool volver_menu_principal();
 
-       ~OpcionElegirAnimal(); 
+        //Destructor
+        //PRE: -
+        //POS: Libera memoria pedida por menu_cuidar_individual
+        ~OpcionElegirAnimal(); 
 };
 
 #endif
