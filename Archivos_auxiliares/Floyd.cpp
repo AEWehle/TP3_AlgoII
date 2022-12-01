@@ -1,6 +1,7 @@
 #include "Floyd.h"
 #include <iostream>
-
+#include "funciones_auxiliares.h"
+#include "Algoritmo_camino_min.h"
 const int INFINITO = 99999;
 
 // Constructor
@@ -16,8 +17,8 @@ Floyd::Floyd(Lista<Vertice>* lista_vertices, int** matriz_de_adyacencia):Algorit
 // Destructor
 Floyd::~Floyd(){
 
-    liberar_matriz(matriz_de_costos);
-    liberar_matriz(matriz_de_caminos);
+    liberar_matriz(matriz_de_costos , cantidad_vertices_en_algoritmo);
+    liberar_matriz(matriz_de_caminos, cantidad_vertices_en_algoritmo);
 
     matriz_de_costos = nullptr;
     matriz_de_caminos = nullptr;
@@ -99,18 +100,6 @@ void Floyd::mostrar_siguiente_vertice_en_coordenadas(int nuevo_origen){
 
 }
 
-void Floyd::liberar_matriz(int** matriz){
-
-    if(matriz != nullptr){
-        for(int i=0; i<cantidad_vertices_en_algoritmo; i++){
-            delete[] matriz[i];
-        }
-
-        delete[] matriz;
-        matriz = nullptr;
-    }
-
-}
 
 void Floyd::crear_matriz_de_costos(int** matriz_de_adyacencia){
 

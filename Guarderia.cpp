@@ -39,6 +39,7 @@ void Guarderia::afectar_animales(){
             
             this->eliminar_animal(*nombres->consulta(i));
             ++this->escapados;
+            i--;
         }
 
         if (escapados == 3) {

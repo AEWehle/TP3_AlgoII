@@ -55,9 +55,6 @@ class Floyd : public AlgoritmoCaminoMinimo{
         // POS: imprime en la termina la matriz de caminos
         void mostrar_matriz_de_caminos();
 
-        // PRE: recibe una matriz
-        // POS: libera la memoria de la matriz
-        void liberar_matriz(int** matriz);
 
         // PRE: recibe un número de celda en una matriz y la dimension de la matriz
         // POS: convierte una ubicacion de una matriz (celda) en una coordenada de dos dimensiones

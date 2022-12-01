@@ -240,10 +240,11 @@ void Mapa::generar_animales(){
 
 void Mapa::buscar_mapa(string ruta_terreno){
 
-    fstream archivo_terreno(ruta_terreno, ios::in);
+    fstream archivo_terreno("mis_mapas/"+ruta_terreno+".csv", ios::in);
 
     if(!archivo_terreno.is_open()){
-        cout << "      No se encontro un archivo con nombre \"" << ruta_terreno << "\", se usará el terreno por defecto" << endl << endl;
+        cout << "      No se encontro un mapa con nombre \"" << ruta_terreno << "\", se usará el terreno por defecto" << endl;
+        cout << "      Para cargar nuevos mapas solo tenes que cargar el archivo con el nombre deseado en formato 'csv' a la carpeta 'mis_mapas'." << endl << endl;
         usar_terreno_por_defecto();
     }
 

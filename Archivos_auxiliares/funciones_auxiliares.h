@@ -25,6 +25,14 @@ _______________________________________________________________________________*
 string string_a_mayuscula(string texto);
 
 
+/**________es_csv()___________________________________________________
+ PRE: Recive un texto (string)
+ POST: true si el nombre del archivo tiene un .csv al final
+_______________________________________________________________________________*/
+bool es_csv( string nombre_archivo );
+
+
+
 /*________elimina_espacios()___________________________________________________
  PRE: Recive un texto (string)
  POST: Devuelve el mismo (string) pero sin los isspace().
@@ -59,6 +67,14 @@ PRE:  strings ingresados no tienen caracteres con tilde
 POST: Devuelve el string que esta primeor alfabeticamente
 _______________________________________________________________________________*/
 string menor_alfabetico( string texto1, string texto2);
+
+
+
+/*________liberar_matriz()_____________________________________________________
+PRE:  Recibe matriz que tenga datos en heap y la cantidad de filas
+POST: libera la memeoria
+_______________________________________________________________________________*/
+void liberar_matriz(int** matriz , int cantidad_filas);
 
 
 /*________llenar_con_int()_____________________________________________________

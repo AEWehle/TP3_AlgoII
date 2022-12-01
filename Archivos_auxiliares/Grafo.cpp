@@ -19,6 +19,7 @@ void Grafo::mostrar_grafo(){
 
 }
 
+
 void Grafo::mapa_a_grafo(int dimension, int** matriz_de_costos_por_destino){
 
     // Creo grafo de tamanio dimension*dimension
