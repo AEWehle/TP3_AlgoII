@@ -25,6 +25,14 @@ _______________________________________________________________________________*
 string string_a_mayuscula(string texto);
 
 
+/**________es_csv()___________________________________________________
+ PRE: Recive un texto (string)
+ POST: true si el nombre del archivo tiene un .csv al final
+_______________________________________________________________________________*/
+bool es_csv( string nombre_archivo );
+
+
+
 /*________elimina_espacios()___________________________________________________
  PRE: Recive un texto (string)
  POST: Devuelve el mismo (string) pero sin los isspace().

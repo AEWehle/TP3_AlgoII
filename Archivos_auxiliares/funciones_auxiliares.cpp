@@ -63,6 +63,15 @@ int string_a_entero( string texto ){
 }
 
 
+bool es_csv( string nombre_archivo ){
+    if (nombre_archivo.length() <= 4) {
+        return false;
+    }
+    return (nombre_archivo.substr(nombre_archivo.length()-4, nombre_archivo.length()) == ".csv" ) ;
+}
+
+
+
 string elimina_espacios(string texto){
 
     texto.erase( remove_if( texto.begin(), texto.end(), ::isspace ) , texto.end());
