@@ -25,7 +25,7 @@ Floyd::~Floyd(){
 
 }
 
-void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino){
+void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension){
 
     // En caso de querer imprimir el camino descomentar *1* *2* y *3*
 
@@ -43,34 +43,30 @@ void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* li
     
     else{
 
-        int coord_fila_origen = 0, coord_columna_origen = 0, coord_fila_destino = 0, coord_columna_destino = 0;
-
-        convertir_celdas_a_coordenadas(origen,8,coord_fila_origen,coord_columna_origen);
-        convertir_celdas_a_coordenadas(destino,8,coord_fila_destino,coord_columna_destino);
-
-        costo_camino = matriz_de_costos[origen-1][destino-1];
+        costo = matriz_de_costos[origen-1][destino-1];
         
         // *1*
-        // cout << "El camino mínimo entre [" << coord_fila_origen << "," << coord_columna_origen << "] y [" << coord_fila_destino << "," << coord_columna_destino << "]";
-        // cout << " tiene un costo de $" << costo_camino << " y es: ";
+        cout << "** Para que no se imprima el camino descomentar líneas 49, 50, 57 y 68 Floyd.cpp (despues borrar este comentario)**" << endl;
+        cout << "El camino mínimo entre los puntos elegidos";
+        cout << " tiene un costo de $" << costo << " y es: ";
 
-        Coordenada* coordenada_origen = new Coordenada(coord_fila_origen,coord_columna_origen);
+        Coordenada* coordenada_origen = new Coordenada();
+        coordenada_origen->convertir_celda_a_coordenadas(origen,dimension);
         lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
         
         // *2*
-        // cout << "[" << coord_fila_origen << "," << coord_columna_origen << "]";
+        cout << "[" << coordenada_origen->obtener_fila() << "," << coordenada_origen->obtener_columna() << "]";
         
         while(origen != destino){
 
             origen = hallar_siguiente_vertice_en_el_camino(origen,destino);
 
-            convertir_celdas_a_coordenadas(origen,8,coord_fila_origen,coord_columna_origen);
-
-            Coordenada* coordenada_origen = new Coordenada(coord_fila_origen,coord_columna_origen);
-            lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
+            Coordenada* nueva_coordenada_origen = new Coordenada();
+            nueva_coordenada_origen->convertir_celda_a_coordenadas(origen,dimension);
+            lista_coordenadas_recorridas->alta(nueva_coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
 
             // *3* 
-            // mostrar_siguiente_vertice_en_coordenadas(origen);
+            cout << " -> [" << nueva_coordenada_origen->obtener_fila() << "," << nueva_coordenada_origen->obtener_columna() << "]";
         }
 
     }
@@ -84,21 +80,6 @@ int Floyd::hallar_siguiente_vertice_en_el_camino(int origen, int destino){
 
 }
 
-void Floyd::convertir_celdas_a_coordenadas(int celda, int dimension, int& coord_fila, int& coord_columna){
-    // Fila
-    coord_fila = (celda-1)/dimension;
-    
-    // Columna
-    coord_columna = (celda-1)%dimension;
-}
-
-void Floyd::mostrar_siguiente_vertice_en_coordenadas(int nuevo_origen){
-
-    int coord_fila_siguiente = 0, coord_columna_siguiente = 0;
-    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_fila_siguiente,coord_columna_siguiente);
-    cout << " -> [" << coord_fila_siguiente << "," << coord_columna_siguiente << "]";
-
-}
 
 
 void Floyd::crear_matriz_de_costos(int** matriz_de_adyacencia){
