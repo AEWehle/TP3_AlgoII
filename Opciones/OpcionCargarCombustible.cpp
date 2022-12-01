@@ -3,8 +3,7 @@
 
  void OpcionCargarCombustible::ejecutar(Guarderia * mi_guarderia){
     cout << "      Elegiste la opción 6, cargar combustible al auto." << endl << endl;
-    //int aux =50;
-    //mi_guarderia->obtener_auto()->decrementar_combustible(aux);
+    
     cout << "      El auto tiene: " << mi_guarderia->obtener_auto()->obtener_combustible() << " de combustible." << endl;
     cout << "      ¿Cuanto combustible querés agregar? Coloca un numero de 0 a " << MAX_COMBUSTIBLE << "."<< endl;
 
@@ -12,7 +11,7 @@
 
     mi_guarderia->obtener_auto()->cargar_combustible(cant_a_cargar);
 
-    //cout << "      El auto tiene: " << mi_guarderia->obtener_auto()->obtener_combustible() << " de combustible." << endl;
+
     mi_guarderia->afectar_animales();
 }
 

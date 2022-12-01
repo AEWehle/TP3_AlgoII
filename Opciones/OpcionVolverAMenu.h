@@ -13,6 +13,9 @@ class OpcionVolverAMenu: public Opcion {
   
     public:
         
+        //ejecutar(Guarderia * mi_guarderia)
+        //PRE: Guarderia creada correctamente
+        //POS: Ejecuta opcion de volver a menu (funcion vacia)
         void ejecutar(Guarderia * mi_guarderia) override;
 
 
