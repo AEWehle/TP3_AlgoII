@@ -21,3 +21,17 @@ int Coordenada::obtener_fila(){
 int Coordenada::obtener_columna(){
     return coordenada_columna;
 }
+
+int Coordenada::convertir_coordenadas_a_celda(int dimension){
+
+    return (this->coordenada_fila)*dimension + (this->coordenada_columna) + 1;
+
+}
+
+void Coordenada::convertir_celda_a_coordenadas(int celda, int dimension){
+
+    this->coordenada_fila = (celda-1)/dimension;
+
+    this->coordenada_columna = (celda-1)%dimension;
+
+}
