@@ -380,9 +380,6 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
                 visitados[coordenada->obtener_fila()][coordenada->obtener_columna()] = true;
             }
 
-            lista_coordenadas_recorridas->destruir_con_delete();
-            delete grafo;
-
         }
 
         else{
@@ -392,6 +389,9 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
             combustible_suficiente = false;
 
         }
+
+        lista_coordenadas_recorridas->destruir_con_delete();
+        delete grafo;
 
         return true;
 
@@ -406,11 +406,22 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
 
     cout << "      Ingrese el número de la coordenada, o 0 para cancelar el rescate:" << endl << " >> ";
-    cin >> coord_num;
+    
+    string coord_num_string;
+    
+    cin >> coord_num_string;
 
-    while(coord_num < 0 || coord_num > 9){
+    if(es_numero(coord_num_string)){
+        coord_num = stoi(coord_num_string);
+    }
+
+    while( !es_numero(coord_num_string) || !(coord_num >= 0 && coord_num <= 8)){
         cout << "      La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
-        cin >> coord_num;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin >> coord_num_string;
+        if(es_numero(coord_num_string))
+            coord_num = stoi(coord_num_string);
     }
 
     if(coord_num == 0){
@@ -419,19 +430,20 @@ void Mapa::pedir_coordenadas(int &coord_num, int &coord_letra, bool &cancelar){
     }
 
     coord_num--;
+    string coord_letra_string;
     char coord_letra_char;
 
     cout << "      Ingrese la letra de la coordenada:" << endl << " >> ";
-    cin >> coord_letra_char;
+    cin >> coord_letra_string;
+    coord_letra_char = coord_letra_string[0];
 
     while((int)coord_letra_char < 97 || (int)coord_letra_char > 104){     //Entre 'a' y 'h'
         cout << "      La coordenada no es válida! Puebe de nuevo:" << endl << " >> ";
-        cin >> coord_letra;
+        cin >> coord_letra_string;
+        coord_letra_char = coord_letra_string[0];
     }
 
     coord_letra = (int)coord_letra_char - (int)'a';
-
-    // cout << coord_letra << endl; 
 
     return;
 
