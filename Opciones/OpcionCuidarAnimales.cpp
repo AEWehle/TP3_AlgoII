@@ -1,7 +1,7 @@
 #include "OpcionCuidarAnimales.h"
 
 OpcionCuidarAnimales::OpcionCuidarAnimales(){
- 
+
 }
 
 void OpcionCuidarAnimales::ejecutar(Guarderia *mi_guarderia){

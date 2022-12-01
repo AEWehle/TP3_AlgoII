@@ -42,8 +42,10 @@ void OpcionRescatarAnimal::ejecutar(Guarderia * mi_guarderia){
 
         }
 
-        if(rescatados == 5)
+        if(rescatados == 5){
+            mapa->mostrar();
             cout << "      Felicidades! Rescataste a todos los animales de la zona, volvamos al refugio." << endl << endl;
+        }
 
     }
     mi_guarderia->afectar_animales();

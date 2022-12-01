@@ -24,14 +24,29 @@ class MenuPrincipal: public Menu{
     // Metodos
     public:
         
+        //Constructor
+        //PRE: -
+        //POS: Crea menu principal con sus opciones
         MenuPrincipal();
 
+        //ejecutar()
+        //PRE: La guarderia fue creada correctamente
+        //POS: Muestra menu, pide opcion y ejecuta mientras no se cumpla condicion de salida: quiero guardar y salir, o tengo 3 escapados
         void ejecutar(Guarderia *mi_guarderia) override;
 
+        //Destructor
+        //PRE: -
+        //POS: Libera memoria pedida por las opciones, destruye Menu creado
         ~MenuPrincipal() override;
 
+        //mostrar()
+        //PRE: -
+        //POS: Muestra en pantalla el menu principal
         void mostrar() override;
 
+        //ejecutar_opcion()
+        //PRE: La opcion ingresada es valida, la guarderia fue creada correctamente
+        //POS: Ejecuta la opcion elegida, afectando a mi_guarderia 
         void ejecutar_opcion(int eleccion, Guarderia *mi_guarderia) override;
         
 };

@@ -21,20 +21,6 @@ _______________________________________________________________________________*
 Animal* crear_nuevo_animal( char especie, string nombre, int edad, string tamano, string personalidad );
 
 
-/*________cargar_guarderia()_______________________________________________________ 
- PRE: Guarderia fue creada correctamente
- POST: Carga la guardería con los animales leídos de un archivo
-      predeterminado. Si el archivo no existe, lo crea y deja la guardería vacía.
-_______________________________________________________________________________*/ 
-void cargar_guarderia(Guarderia* mi_guarderia); 
-
-
-/*________imprimir_menu()_______________________________________________________ 
- PRE:  La cantidad de elecciones es un entero 4 o 6 
- POST: Imprime en pantalla el menú de acuerdo con el valor de cantidad_elecciones
-_______________________________________________________________________________*/ 
-void imprimir_menu(int cantidad_elecciones);
-
 
 /*________pedir_eleccion()_____________________________________________________ 
  PRE:  Recibe cantidad_opciones que es 4 o 6 según el menú que se esté
@@ -44,13 +30,6 @@ void imprimir_menu(int cantidad_elecciones);
 _______________________________________________________________________________*/ 
 int  pedir_eleccion(int cantidad_opciones); 
 
-
-/*________ejecutar_eleccion()__________________________________________________ 
- PRE:  Guarderia fue creada correctamente, la elección es entero entre 1 y 
-       CANTIDAD_OPCIONES 
- POST: Ejecuta la funcion correpondiente a la eleccion del usuario. 
-_______________________________________________________________________________*/ 
-void ejecutar_eleccion( Guarderia* mi_Guarderia, int eleccion); 
 
 string ingresar_nombre();
 

@@ -22,16 +22,30 @@ class MenuCuidar: public Menu{
         OpcionElegirAnimal* opcion_elegir; 
 
     public:
+
+        //Constructor
+        //PRE: -
+        //POS: Crea menu cuidar con sus opciones
         MenuCuidar(Guarderia* mi_guarderia);
 
+        //ejecutar()
+        //PRE: La guarderia fue creada correctamente
+        //POS: Muestra menu, pide opcion y ejecuta mientras no se cumpla condicion de salida: elijo volver a menu principal
         void ejecutar(Guarderia *mi_guarderia) override;
 
+        //ejecutar_opcion()
+        //PRE: La opcion ingresada es valida, la guarderia fue creada correctamente
+        //POS: Ejecuta la opcion elegida, afectando a mi_guarderia 
         void ejecutar_opcion(int eleccion, Guarderia *mi_guarderia) override;
         
+        //mostrar()
+        //PRE: -
+        //POS: Muestra en pantalla el menu cuidar
         void mostrar() override;
 
-        void ejecutar_menu(Guarderia *mi_guarderia);
-
+        //Destructor
+        //PRE: -
+        //POS: Libera memoria pedida por las opciones, destruye Menu creado
         ~MenuCuidar();
         
 };
