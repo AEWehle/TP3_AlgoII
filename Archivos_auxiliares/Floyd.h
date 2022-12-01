@@ -20,7 +20,7 @@ class Floyd : public AlgoritmoCaminoMinimo{
         Floyd(Lista<Vertice>* lista_vertices, int** matriz_de_adyacencia);
 
         // Destructor
-        ~Floyd();
+        ~Floyd() override;
 
         // PRE: recibe una posicion de origen y una de destino, y una lista de coordenadas vacia
         // POS: se obtienen las coordenadas del camino recorrido y se guardan en la lista recibida, y el costo del camino

@@ -1,6 +1,6 @@
 #ifndef GRAFO_H
 #define GRAFO_H
-#include "lista.h"
+#include "Lista.h"
 #include "Vertice.h"
 #include "Algoritmo_camino_min.h"
 #include "Floyd.h"
@@ -42,7 +42,7 @@ class Grafo{
 
         // PRE: recibe la dimension del grafo y una matriz de costos que contiene los pesos de los caminos a crear
         // POS: crea un grafo regular de orden 2 que contendrá (dimensiones*dimensiones) vertices con caminos de ida y vuelta con pesos
-        void mapa_a_grafo(int dimensiones, int** matriz_de_costos);
+        void mapa_a_grafo(int dimension, int** matriz_de_costos);
 
         // PRE: recibe coordenadas verticales (fila) y horizontales (columna) del lugar de destino y origen (posiciones en una matriz).
         // Además recibe una lista de coordenadas vacía.

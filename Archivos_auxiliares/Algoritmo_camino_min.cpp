@@ -8,5 +8,4 @@ AlgoritmoCaminoMinimo::AlgoritmoCaminoMinimo(Lista<Vertice>* lista_vertices, int
 }
 
 AlgoritmoCaminoMinimo::~AlgoritmoCaminoMinimo(){
-
 }

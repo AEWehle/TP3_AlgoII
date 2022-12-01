@@ -8,7 +8,7 @@ using namespace std;
 template <typename Dato, typename Clave>
 class NodoB3;
 
-#include "lista.h"
+#include "Lista.h"
 #include "Elemento.h"
 
 
@@ -516,8 +516,6 @@ void NodoB3<Dato, Clave>                 :: ordenar_mayor_menor( Lista<Dato>* da
         }      
     }
 }
-
-
 
 
 #endif // NODOB3_TEMPLATE
