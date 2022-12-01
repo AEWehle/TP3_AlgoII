@@ -24,41 +24,52 @@ Floyd::~Floyd(){
 
 }
 
-void Floyd::mostrar_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje){
+void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino){
+
+    // En caso de querer imprimir el camino descomentar *1* *2* y *3*
 
     if(matriz_de_caminos[origen-1][destino-1] == 0){
+
         cout << "No existe un camino entre " << origen << " y " << destino << endl;
+    
     }
     
     else if(origen == destino){
+
         cout << "El destino del camino coincide con su origen." << endl;
+    
     }
     
     else{
-        int coord_vertical_origen = 0, coord_horizontal_origen = 0, coord_vertical_destino = 0, coord_horizontal_destino = 0;
 
-        convertir_celdas_a_coordenadas(origen,8,coord_vertical_origen,coord_horizontal_origen);
-        convertir_celdas_a_coordenadas(destino,8,coord_vertical_destino,coord_horizontal_destino);
+        int coord_fila_origen = 0, coord_columna_origen = 0, coord_fila_destino = 0, coord_columna_destino = 0;
+
+        convertir_celdas_a_coordenadas(origen,8,coord_fila_origen,coord_columna_origen);
+        convertir_celdas_a_coordenadas(destino,8,coord_fila_destino,coord_columna_destino);
+
+        costo_camino = matriz_de_costos[origen-1][destino-1];
         
-        cout << "El camino mínimo entre [" << coord_vertical_origen << "," << coord_horizontal_origen << "] y [" << coord_vertical_destino << "," << coord_horizontal_destino << "]";
-        cout << " tiene un costo de $" << matriz_de_costos[origen-1][destino-1] << " y es: ";
+        // *1*
+        // cout << "El camino mínimo entre [" << coord_fila_origen << "," << coord_columna_origen << "] y [" << coord_fila_destino << "," << coord_columna_destino << "]";
+        // cout << " tiene un costo de $" << costo_camino << " y es: ";
 
-        costo_viaje = matriz_de_costos[origen-1][destino-1];
-
-        Coordenada* coordenada_origen = new Coordenada(coord_vertical_origen,coord_horizontal_origen);
+        Coordenada* coordenada_origen = new Coordenada(coord_fila_origen,coord_columna_origen);
         lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
         
-        // Imprimo el origen
-        cout << "[" << coord_vertical_origen << "," << coord_horizontal_origen << "]";
-        // Sigo recorriendo el camino hasta llegar al destino
+        // *2*
+        // cout << "[" << coord_fila_origen << "," << coord_columna_origen << "]";
+        
         while(origen != destino){
-            origen = hallar_siguiente_vertice_en_el_camino(origen,destino);
-            convertir_celdas_a_coordenadas(origen,8,coord_vertical_origen,coord_horizontal_origen);
 
-            Coordenada* coordenada_origen = new Coordenada(coord_vertical_origen,coord_horizontal_origen);
+            origen = hallar_siguiente_vertice_en_el_camino(origen,destino);
+
+            convertir_celdas_a_coordenadas(origen,8,coord_fila_origen,coord_columna_origen);
+
+            Coordenada* coordenada_origen = new Coordenada(coord_fila_origen,coord_columna_origen);
             lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
-            
-            mostrar_siguiente_paso_en_camino(origen);
+
+            // *3* 
+            // mostrar_siguiente_vertice_en_coordenadas(origen);
         }
 
     }
@@ -72,19 +83,19 @@ int Floyd::hallar_siguiente_vertice_en_el_camino(int origen, int destino){
 
 }
 
-void Floyd::convertir_celdas_a_coordenadas(int celda, int dim, int& coord_vertical, int& coord_horizontal){
+void Floyd::convertir_celdas_a_coordenadas(int celda, int dimension, int& coord_fila, int& coord_columna){
     // Fila
-    coord_vertical = (celda-1)/dim;
+    coord_fila = (celda-1)/dimension;
     
     // Columna
-    coord_horizontal = (celda-1)%dim;
+    coord_columna = (celda-1)%dimension;
 }
 
-void Floyd::mostrar_siguiente_paso_en_camino(int nuevo_origen){
+void Floyd::mostrar_siguiente_vertice_en_coordenadas(int nuevo_origen){
 
-    int coord_vertical_siguiente = 0, coord_horizontal_siguiente = 0;
-    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_vertical_siguiente,coord_horizontal_siguiente);
-    cout << " -> [" << coord_vertical_siguiente << "," << coord_horizontal_siguiente << "]";
+    int coord_fila_siguiente = 0, coord_columna_siguiente = 0;
+    convertir_celdas_a_coordenadas(nuevo_origen,8,coord_fila_siguiente,coord_columna_siguiente);
+    cout << " -> [" << coord_fila_siguiente << "," << coord_columna_siguiente << "]";
 
 }
 

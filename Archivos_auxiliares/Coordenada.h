@@ -8,18 +8,32 @@ using namespace std;
 class Coordenada {
     // Atributos
     private:
-        int coordenada_vertical;
-        int coordenada_horizontal;
+        int coordenada_fila;
+        int coordenada_columna;
 
     // Métodos
     public:
-        Coordenada(int coordenada_vertical, int coordenada_horizontal);
+        // Constructor sin parámetros
+        // PRE: -
+        // POS: construye la Coordenada origen: [0,0]
+        Coordenada();
 
+        // Constructor con parámetros
+        // PRE: -
+        // POS: construye la Coordenada: [coordenada_fila,coordenada_columna]
+        Coordenada(int coordenada_fila, int coordenada_columna);
+
+        // Destructor
         ~Coordenada();
 
-        int obtener_vertical();
+        // PRE: -
+        // POS: devuelve la coordenada fila
+        int obtener_fila();
 
-        int obtener_horizontal();
+        // PRE: -
+        // POS: devuelve la coordenada columna
+        int obtener_columna();
+
 };
 
 
