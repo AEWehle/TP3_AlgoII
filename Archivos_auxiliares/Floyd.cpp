@@ -24,7 +24,7 @@ Floyd::~Floyd(){
 
 }
 
-void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
+void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension){
 
     // En caso de querer imprimir el camino descomentar *1* *2* y *3*
 
@@ -42,12 +42,12 @@ void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* li
     
     else{
 
-        costo_camino = matriz_de_costos[origen-1][destino-1];
+        costo = matriz_de_costos[origen-1][destino-1];
         
         // *1*
         cout << "** Para que no se imprima el camino descomentar líneas 49, 50, 57 y 68 Floyd.cpp (despues borrar este comentario)**" << endl;
         cout << "El camino mínimo entre los puntos elegidos";
-        cout << " tiene un costo de $" << costo_camino << " y es: ";
+        cout << " tiene un costo de $" << costo << " y es: ";
 
         Coordenada* coordenada_origen = new Coordenada();
         coordenada_origen->convertir_celda_a_coordenadas(origen,dimension);

@@ -222,7 +222,7 @@ void Grafo::aplicar_algoritmo_camino_minimo(){
 
 }
 
-void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
+void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension){
     
     aplicar_algoritmo_camino_minimo();
 
@@ -230,7 +230,7 @@ void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lis
     int pos_destino = obtener_vertice_en_grafo(destino);
 
     if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA){
-        algoritmo_camino_minimo->obtener_camino_minimo(pos_origen,pos_destino, lista_coordenadas_recorridas,costo_camino,dimension);
+        algoritmo_camino_minimo->obtener_camino_minimo(pos_origen,pos_destino, lista_coordenadas_recorridas,costo,dimension);
     }
     
     else{
@@ -239,12 +239,12 @@ void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lis
 
 }
 
-void Grafo::obtener_camino_minimo_por_coordenadas(Coordenada* coord_origen, Coordenada* coord_destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
+void Grafo::obtener_camino_minimo_por_coordenadas(Coordenada* coord_origen, Coordenada* coord_destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension){
     
     int pos_origen = coord_origen->convertir_coordenadas_a_celda(dimension);
     int pos_destino = coord_destino->convertir_coordenadas_a_celda(dimension);
     
-    obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_camino,dimension);
+    obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo,dimension);
 
 }
 

@@ -45,12 +45,12 @@ class Grafo{
 
         // PRE: recibe coordenadas origen y destino. Además recibe una lista de coordenadas vacía.
         // POS: busca el camino mínimo entre las dos coordenadas
-        void obtener_camino_minimo_por_coordenadas(Coordenada* coord_origen, Coordenada* coord_destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension);
+        void obtener_camino_minimo_por_coordenadas(Coordenada* coord_origen, Coordenada* coord_destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension);
 
         // PRE: recibe una posición de origen y una de destino
         // POS: busca el camino mínimo entre las dos posiciones.
-        // Carga en la lista de coordenadas las ubicaciones atravesadas en el camino. Actualiza el valor de costo_camino con el costo del camino recorrido.
-        void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje, int dimension);
+        // Carga en la lista de coordenadas las ubicaciones atravesadas en el camino. Actualiza el valor de costo con el costo del camino recorrido.
+        void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension);
 
         // PRE: -
         // POS: inicializa el algoritmo de camino minimo

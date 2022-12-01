@@ -24,7 +24,7 @@ class Floyd : public AlgoritmoCaminoMinimo{
 
         // PRE: recibe una posicion de origen y una de destino, y una lista de coordenadas vacia
         // POS: se obtienen las coordenadas del camino recorrido y se guardan en la lista recibida, y el costo del camino
-        void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension) override;
+        void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo, int dimension) override;
 
     private:
         // PRE: -
@@ -54,7 +54,7 @@ class Floyd : public AlgoritmoCaminoMinimo{
         // PRE: recibe una matriz
         // POS: libera la memoria de la matriz
         void liberar_matriz(int** matriz);
-        
+
 };
 
 
