@@ -3,7 +3,7 @@
 
 
 void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
-    cout << "      Elegiste la opción 5,adoptar una animal de la reserva." << endl<< endl;
+    cout << "      Elegiste la opción 5, adoptar una animal de la reserva." << endl<< endl;
     if(mi_guarderia->obtener_cantidad()==0){
         cout << "      No hay animales disponibles para adoptar." << endl;
     }
@@ -13,19 +13,19 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
 
         if( animales_adoptables -> obtener_cantidad() != 0){
 
-            cout << endl << "Estos son los animales que podés adoptar:" << endl;
+            cout << endl << "      Estos son los animales que podés adoptar:" << endl;
 
 
             Lista<string>* nombres_ordenados_edad = animales_adoptables -> obtener_lista_viejo_a_joven();
             animales_adoptables -> ver_los_animales( nombres_ordenados_edad );
             
 
-            cout << endl << "Si desea adoptar alguno, ingrese el nombre de animal como se muestra." << endl;
+            cout << endl << "      Si desea adoptar alguno, ingrese el nombre de animal como se muestra." << endl;
             cout << "      Nuestros Erizos y Lagartijas NO SON ADOPTABLES ya que son salvajes, por lo que no aparecerán en la lista" << endl;
             string elegido = pedir_el_adoptado( mi_guarderia, animales_adoptables );
 
             if ( !es_cancelar(elegido)  ){
-                cout << endl << "Adoptaste a " << elegido << endl;
+                cout << endl << "      Adoptaste a " << elegido << endl;
                 //Animal* animal_elegido = animales_adoptables -> obtener_animal( elegido );
                 mi_guarderia -> obtener_animal( elegido ) -> mostrar();
                 mi_guarderia -> eliminar_animal( elegido );
@@ -33,7 +33,7 @@ void OpcionAdoptarAnimal::ejecutar( Guarderia* mi_guarderia ){
         }
 
         else
-            cout << endl << "No hay animales para adoptar para el espacio ingresado. Volviendo a menú principal..." << endl;
+            cout << endl << "      No hay animales para adoptar para el espacio ingresado. Volviendo a menú principal..." << endl;
         
         delete animales_adoptables;
     }
@@ -101,7 +101,7 @@ string OpcionAdoptarAnimal::pedir_el_adoptado( Guarderia* mi_guarderia , Guarder
 
 
 float OpcionAdoptarAnimal:: pedir_espacio(){
-    cout << endl << "Para adoptar un animal es necesario saber de cuánto espacio dispondrán, según eso se le mostrará una lista de los disponibles" << endl;
+    cout << endl << "      Para adoptar un animal es necesario saber de cuánto espacio dispondrán, según eso se le mostrará una lista de los disponibles" << endl;
     cout << "      Ingrese cuántos metros cuadrados tiene disponibles:" << endl << " >> ";
 
     string espacio_string;

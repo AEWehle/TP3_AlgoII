@@ -17,9 +17,6 @@ Guarderia::Guarderia(){
 
 
 Guarderia::~Guarderia(){
-    for ( int n_animal = 1; n_animal <= obtener_cantidad() ; n_animal++){
-        cout << "      Chau " << *obtener_lista_nombres() -> consulta( n_animal ) << endl;
-    }
     delete diccionario_de_animales;
 }
 
@@ -47,6 +44,9 @@ void Guarderia::afectar_animales(){
         if (escapados == 3) {
             cout << endl << "      Se te escaparon 3 animales... Tenemos que clausurar la guarderia." << endl << endl;
             cout << "      XXXXXXXXXXXXXX   GUARDERIA CLAUSURADA    XXXXXXXXXXXXXX " << endl << endl;
+            for ( int n_animal = 1; n_animal <= obtener_cantidad() ; n_animal++){
+                cout << "      Chau " << *obtener_lista_nombres() -> consulta( n_animal ) << endl;
+            }
             return;
         }
 
@@ -58,7 +58,7 @@ void Guarderia::afectar_animales(){
 void Guarderia::eliminar_animal( string nombre ){
 
     diccionario_de_animales -> baja( nombre );
-
+    cout << "      Chau " << nombre  << endl;
 }
 
 bool Guarderia:: nombre_existente( string nombre ){
