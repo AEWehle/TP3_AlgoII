@@ -377,7 +377,14 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
         Grafo* grafo = new Grafo();
         grafo->mapa_a_grafo(8,matriz_de_costos_por_destino);
-        grafo->obtener_camino_minimo_por_coordenadas(coord_auto_num,coord_auto_letra,coord_num,coord_letra,lista_coordenadas_recorridas,combustible_gastado,8);
+
+        Coordenada* coordenada_auto = new Coordenada(coord_auto_num,coord_auto_letra);
+        Coordenada* coordenada_rescate = new Coordenada(coord_num,coord_letra);
+        
+        grafo->obtener_camino_minimo_por_coordenadas(coordenada_auto,coordenada_rescate,lista_coordenadas_recorridas,combustible_gastado,8);
+
+        delete coordenada_auto;
+        delete coordenada_rescate;
 
         if(combustible_gastado <= combustible){
 

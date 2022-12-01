@@ -24,7 +24,7 @@ class Floyd : public AlgoritmoCaminoMinimo{
 
         // PRE: recibe una posicion de origen y una de destino, y una lista de coordenadas vacia
         // POS: se obtienen las coordenadas del camino recorrido y se guardan en la lista recibida, y el costo del camino
-        void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino) override;
+        void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension) override;
 
     private:
         // PRE: -
@@ -44,10 +44,6 @@ class Floyd : public AlgoritmoCaminoMinimo{
         int hallar_siguiente_vertice_en_el_camino(int origen, int destino);
 
         // PRE: -
-        // POS: imprime por pantalla el siguiente vertice en el camino en formato coordenadas de dos dimensiones
-        void mostrar_siguiente_vertice_en_coordenadas(int nuevo_origen);
-
-        // PRE: -
         // POS: imprime en la terminal la matriz de costos
         void mostrar_matriz_de_costos();
 
@@ -58,10 +54,7 @@ class Floyd : public AlgoritmoCaminoMinimo{
         // PRE: recibe una matriz
         // POS: libera la memoria de la matriz
         void liberar_matriz(int** matriz);
-
-        // PRE: recibe un número de celda en una matriz y la dimension de la matriz
-        // POS: convierte una ubicacion de una matriz (celda) en una coordenada de dos dimensiones
-        void convertir_celdas_a_coordenadas(int celda, int dimension, int& coord_fila, int& coord_columna);
+        
 };
 
 

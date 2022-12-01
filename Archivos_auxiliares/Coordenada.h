@@ -34,6 +34,15 @@ class Coordenada {
         // POS: devuelve la coordenada columna
         int obtener_columna();
 
+        // PRE: -
+        // POS: convierte una coordenada de dos dimensiones [coord_vertical,coord_horizontal] en un numero de
+        // celda de una dimension y devuelve ese numero
+        int convertir_coordenadas_a_celda(int dimension);
+
+        // PRE: recibe un número de celda en una matriz y la dimension de la matriz
+        // POS: convierte una ubicacion de una matriz (celda) en una coordenada de dos dimensiones
+        void convertir_celda_a_coordenadas(int celda, int dimension);
+
 };
 
 

@@ -222,7 +222,7 @@ void Grafo::aplicar_algoritmo_camino_minimo(){
 
 }
 
-void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino){
+void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
     
     aplicar_algoritmo_camino_minimo();
 
@@ -230,7 +230,7 @@ void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lis
     int pos_destino = obtener_vertice_en_grafo(destino);
 
     if(pos_origen != NO_SE_ENCUENTRA && pos_destino != NO_SE_ENCUENTRA){
-        algoritmo_camino_minimo->obtener_camino_minimo(pos_origen,pos_destino, lista_coordenadas_recorridas,costo_camino);
+        algoritmo_camino_minimo->obtener_camino_minimo(pos_origen,pos_destino, lista_coordenadas_recorridas,costo_camino,dimension);
     }
     
     else{
@@ -239,21 +239,14 @@ void Grafo::obtener_camino_minimo(int origen, int destino,Lista<Coordenada>* lis
 
 }
 
-void Grafo::obtener_camino_minimo_por_coordenadas(int coord_fila_origen, int coord_columna_origen, int coord_fila_destino, int coord_columna_destino,Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
+void Grafo::obtener_camino_minimo_por_coordenadas(Coordenada* coord_origen, Coordenada* coord_destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_camino, int dimension){
     
-    int pos_origen = convertir_coordenadas_a_celda(coord_fila_origen,coord_columna_origen, dimension);
-    int pos_destino = convertir_coordenadas_a_celda(coord_fila_destino,coord_columna_destino, dimension);
+    int pos_origen = coord_origen->convertir_coordenadas_a_celda(dimension);
+    int pos_destino = coord_destino->convertir_coordenadas_a_celda(dimension);
     
-    obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_camino);
+    obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_camino,dimension);
 
 }
-
-int Grafo::convertir_coordenadas_a_celda(int coord_fila, int coord_columna, int dimension){
-
-    return coord_fila*dimension + coord_columna + 1;
-
-}
-
 
 Grafo::~Grafo() {
 

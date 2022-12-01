@@ -22,7 +22,7 @@ class AlgoritmoCaminoMinimo{
         // PRE: recibe una posicion de origen y una de destino, y una lista de coordenadas vacia
         // POS: se obtienen las coordenadas del camino recorrido y se guardan en la lista recibida, y el costo del camino.
         // Variable segun la clase hija.
-        virtual void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje) = 0;
+        virtual void obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* lista_coordenadas_recorridas, int& costo_viaje, int dimension) = 0;
 
         // Destructor
         virtual ~AlgoritmoCaminoMinimo() = 0;
