@@ -23,7 +23,7 @@ void Auto::cargar_combustible(){
 
 void Auto::cargar_combustible(int cantidad){
     if ( cantidad == 0 ){
-        cout << "      No le cargas combustible al auto." << endl;
+        cout << "      No le cargaste combustible al auto." << endl;
         cout << "      El auto tiene: " << combustible << " de combustible." << endl;
         return;
     }

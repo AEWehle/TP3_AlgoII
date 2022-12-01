@@ -7,7 +7,7 @@ using namespace std;
 // g++ prueba.cpp -o TP3 -Wall -Werror -Wconversion
 
 
-
+/*
 int main(){
     char *prueba = "hola";
     string hola = prueba;
@@ -79,7 +79,7 @@ int main(){
 // //     }
 
 
-//     Lista<string>* datos = diccionario -> ordenar_mayor_menor();
+//     Lista<string>* datos = diccionario -> ordenar_mayor_menor(); ubuntu
 //     for ( int i = 1 ; i <= datos -> obtener_cantidad() ; i++){
 //         cout << *(datos -> consulta(i)) << ", ";
 //     }
@@ -87,3 +87,4 @@ int main(){
 //     delete datos;
     return 0;
 }
+*/
