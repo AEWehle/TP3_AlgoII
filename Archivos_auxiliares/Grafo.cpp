@@ -12,16 +12,6 @@ Grafo::Grafo(){
 
 }
 
-Grafo::Grafo(int dimension, int** matriz_de_costos){
-
-    matriz_de_adyacencia = nullptr;
-    algoritmo_camino_minimo = nullptr;
-    lista_vertices = new Lista<Vertice>();
-
-    crear_grafo_regular_orden2_con_pesos(dimension,matriz_de_costos);
-
-}
-
 void Grafo::mostrar_grafo(){
 
     mostrar_vertices();
@@ -29,7 +19,7 @@ void Grafo::mostrar_grafo(){
 
 }
 
-void Grafo::crear_grafo_regular_orden2_con_pesos(int dimension, int** matriz_de_costos_por_destino){
+void Grafo::mapa_a_grafo(int dimension, int** matriz_de_costos_por_destino){
 
     // Creo grafo de tamanio dimension*dimension
     for(int i=1; i<= dimension*dimension; i++){
@@ -194,7 +184,6 @@ int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
 
     int posicion_vertice = NO_SE_ENCUENTRA;
 
-
     while(contador<=lista_vertices->obtener_cantidad() && posicion_vertice == NO_SE_ENCUENTRA){
 
         if(lista_vertices->consulta(contador)->obtener_nombre() == vertice_a_buscar){
@@ -256,7 +245,6 @@ void Grafo::obtener_camino_minimo_por_coordenadas(int coord_fila_origen, int coo
     int pos_destino = convertir_coordenadas_a_celda(coord_fila_destino,coord_columna_destino, dimension);
     
     obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_camino);
-
 
 }
 

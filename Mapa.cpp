@@ -375,7 +375,8 @@ bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_res
 
         limpiar_visitados();
 
-        Grafo* grafo = new Grafo(8,matriz_de_costos_por_destino);
+        Grafo* grafo = new Grafo();
+        grafo->mapa_a_grafo(8,matriz_de_costos_por_destino);
         grafo->obtener_camino_minimo_por_coordenadas(coord_auto_num,coord_auto_letra,coord_num,coord_letra,lista_coordenadas_recorridas,combustible_gastado,8);
 
         if(combustible_gastado <= combustible){

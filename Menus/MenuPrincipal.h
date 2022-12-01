@@ -2,7 +2,7 @@
 #define _MENU_PRINCIPAL_H
 
 #include "Menu.h"
-#include "../Archivos_auxiliares/lista.h"
+#include "../Archivos_auxiliares/Lista.h"
 #include "../Opciones/Opcion.h"
 #include "../Opciones/OpcionListarAnimales.h"
 #include "../Opciones/OpcionRescatarAnimal.h"

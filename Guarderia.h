@@ -11,7 +11,7 @@
 #include "Especies/Erizo.h"
 #include "Especies/Lagartija.h"
 #include "Archivos_auxiliares/ArbolB3.h"
-#include "Archivos_auxiliares/lista.h"
+#include "Archivos_auxiliares/Lista.h"
 #include "Archivo.h"
 using namespace std; 
 

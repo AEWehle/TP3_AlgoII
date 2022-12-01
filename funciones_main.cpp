@@ -3,7 +3,6 @@
 #include <fstream>
 #include <limits>
 #include "Archivos_auxiliares/funciones_auxiliares.h" 
-#include "Archivos_auxiliares/nodo.h" 
 #include "funciones_main.h" 
 #include "Guarderia.h"
 using namespace std;  

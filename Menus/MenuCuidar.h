@@ -3,7 +3,7 @@
 
 #include "Menu.h"
 #include "../Opciones/Opcion.h"
-#include "../Archivos_auxiliares/lista.h"
+#include "../Archivos_auxiliares/Lista.h"
 #include "../Archivos_auxiliares/funciones_auxiliares.h"
 #include "../Opciones/OpcionElegirAnimal.h"
 #include "../Opciones/OpcionVolverAMenu.h"

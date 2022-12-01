@@ -1,7 +1,7 @@
 #ifndef FUNCIONES_MAIN_H_ 
 #define FUNCIONES_MAIN_H_ 
 #include <string> 
-#include "Archivos_auxiliares/nodo.h" 
+#include "Archivos_auxiliares/Nodo.h" 
 #include "Guarderia.h"
 using namespace std;  
  

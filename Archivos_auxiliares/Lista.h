@@ -1,7 +1,7 @@
 #ifndef LISTA_TEMPLATE
 #define LISTA_TEMPLATE
 
-#include "nodo.h"
+#include "Nodo.h"
 #include <iostream>
 
 //  EL ORDEN DE LOS ELEMENTOS SE EMPIEZA A CONTAR DESDE 1, NO DESDE 0

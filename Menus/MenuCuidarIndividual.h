@@ -3,7 +3,7 @@
 
 #include "Menu.h"
 #include "../Opciones/Opcion.h"
-#include "../Archivos_auxiliares/lista.h"
+#include "../Archivos_auxiliares/Lista.h"
 #include "../Archivos_auxiliares/funciones_auxiliares.h"
 #include "../funciones_main.h"
 #include "../Opciones/Opcion.h"

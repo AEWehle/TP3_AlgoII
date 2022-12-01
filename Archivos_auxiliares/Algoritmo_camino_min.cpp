@@ -5,3 +5,7 @@ AlgoritmoCaminoMinimo::AlgoritmoCaminoMinimo(Lista<Vertice>* lista_vertices, int
     this->matriz_de_adyacencia = matriz_de_adyacencia;
     this->cantidad_vertices_en_algoritmo = lista_vertices->obtener_cantidad();
 }
+
+AlgoritmoCaminoMinimo::~AlgoritmoCaminoMinimo(){
+    
+}
