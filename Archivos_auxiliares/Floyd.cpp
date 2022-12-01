@@ -100,18 +100,6 @@ void Floyd::mostrar_siguiente_vertice_en_coordenadas(int nuevo_origen){
 
 }
 
-// void Floyd::liberar_matriz(int** matriz){
-
-//     if(matriz != nullptr){
-//         for(int i=0; i<cantidad_vertices_en_algoritmo; i++){
-//             delete[] matriz[i];
-//         }
-
-//         delete[] matriz;
-//         matriz = nullptr;
-//     }
-
-// }
 
 void Floyd::crear_matriz_de_costos(int** matriz_de_adyacencia){
 

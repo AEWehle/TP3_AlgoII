@@ -8,11 +8,5 @@ AlgoritmoCaminoMinimo::AlgoritmoCaminoMinimo(Lista<Vertice>* lista_vertices, int
 }
 
 AlgoritmoCaminoMinimo::~AlgoritmoCaminoMinimo(){
-    liberar_matriz(matriz_de_adyacencia, cantidad_vertices_en_algoritmo);
-    matriz_de_adyacencia = nullptr;
-
-    lista_vertices->destruir_con_delete();
-    delete lista_vertices;
-    lista_vertices = nullptr;
 
 }

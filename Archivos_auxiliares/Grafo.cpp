@@ -269,12 +269,12 @@ int Grafo::convertir_coordenadas_a_celda(int coord_fila, int coord_columna, int 
 
 Grafo::~Grafo() {
 
-    // liberar_matriz_adyacencia(lista_vertices->obtener_cantidad());
-    // matriz_de_adyacencia = nullptr;
+    liberar_matriz_adyacencia(lista_vertices->obtener_cantidad());
+    matriz_de_adyacencia = nullptr;
 
-    // lista_vertices->destruir_con_delete();
-    // delete lista_vertices;
-    // lista_vertices = nullptr;
+    lista_vertices->destruir_con_delete();
+    delete lista_vertices;
+    lista_vertices = nullptr;
 
     delete algoritmo_camino_minimo;
     algoritmo_camino_minimo = nullptr;
