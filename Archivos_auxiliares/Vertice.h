@@ -12,9 +12,13 @@ class Vertice {
 
     // Métodos
     public:
+        //Constructor
+        // PRE: -
+        // POS: crea un Vertice con el entero recibido
         Vertice(int vertice);
 
-        //post: obtiene el nombre del vertice
+        // PRE: -
+        // POS: devuelve el nombre del vertice
         int obtener_nombre();
 
         ~Vertice();

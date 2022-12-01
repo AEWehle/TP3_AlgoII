@@ -1,6 +1,6 @@
 #ifndef ALGORITMO_CAMINO_MIN_H
 #define ALGORITMO_CAMINO_MIN_H
-#include "lista.h"
+#include "Lista.h"
 #include "Vertice.h"
 #include "Coordenada.h"
 #include <iostream>

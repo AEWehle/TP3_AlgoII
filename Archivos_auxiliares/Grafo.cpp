@@ -12,16 +12,6 @@ Grafo::Grafo(){
 
 }
 
-// Grafo::Grafo(int dimension, int** matriz_de_costos){
-
-//     matriz_de_adyacencia = nullptr;
-//     algoritmo_camino_minimo = nullptr;
-//     lista_vertices = new Lista<Vertice>();
-
-//     crear_grafo_regular_orden2_con_pesos(dimension,matriz_de_costos);
-
-// }
-
 void Grafo::mostrar_grafo(){
 
     mostrar_vertices();

@@ -1,6 +1,6 @@
 #ifndef GRAFO_H
 #define GRAFO_H
-#include "lista.h"
+#include "Lista.h"
 #include "Vertice.h"
 #include "Algoritmo_camino_min.h"
 #include "Floyd.h"
@@ -23,11 +23,6 @@ class Grafo{
         // PRE: -
         // POS: construye un grafo vacío
         Grafo();
-
-        // Constructor con parámetros
-        // PRE: recibe las dimensiones del grafo a crear y una matriz con los costos a aplicar a los caminos
-        // POS: crea un grafo regular de orden 2 dirigido con caminos ida y vuelta con pesos
-        // Grafo(int dimensiones, int** matriz_de_costos);
 
         // Destructor
         ~Grafo();
