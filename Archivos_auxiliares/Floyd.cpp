@@ -46,16 +46,15 @@ void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* li
         costo = matriz_de_costos[origen-1][destino-1];
         
         // *1*
-        cout << "** Para que no se imprima el camino descomentar líneas 49, 50, 57 y 68 Floyd.cpp (despues borrar este comentario)**" << endl;
-        cout << "El camino mínimo entre los puntos elegidos";
-        cout << " tiene un costo de $" << costo << " y es: ";
+        // cout << "El camino mínimo entre los puntos elegidos";
+        // cout << " tiene un costo de $" << costo << " y es: ";
 
         Coordenada* coordenada_origen = new Coordenada();
         coordenada_origen->convertir_celda_a_coordenadas(origen,dimension);
         lista_coordenadas_recorridas->alta(coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
         
         // *2*
-        cout << "[" << coordenada_origen->obtener_fila() << "," << coordenada_origen->obtener_columna() << "]";
+        // cout << "[" << coordenada_origen->obtener_fila() << "," << coordenada_origen->obtener_columna() << "]";
         
         while(origen != destino){
 
@@ -66,7 +65,7 @@ void Floyd::obtener_camino_minimo(int origen, int destino, Lista<Coordenada>* li
             lista_coordenadas_recorridas->alta(nueva_coordenada_origen,lista_coordenadas_recorridas->obtener_cantidad()+1);
 
             // *3* 
-            cout << " -> [" << nueva_coordenada_origen->obtener_fila() << "," << nueva_coordenada_origen->obtener_columna() << "]";
+            // cout << " -> [" << nueva_coordenada_origen->obtener_fila() << "," << nueva_coordenada_origen->obtener_columna() << "]";
         }
 
     }
