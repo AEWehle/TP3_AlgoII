@@ -194,7 +194,6 @@ int Grafo::obtener_vertice_en_grafo(int vertice_a_buscar){
 
     int posicion_vertice = NO_SE_ENCUENTRA;
 
-
     while(contador<=lista_vertices->obtener_cantidad() && posicion_vertice == NO_SE_ENCUENTRA){
 
         if(lista_vertices->consulta(contador)->obtener_nombre() == vertice_a_buscar){
@@ -256,7 +255,6 @@ void Grafo::obtener_camino_minimo_por_coordenadas(int coord_fila_origen, int coo
     int pos_destino = convertir_coordenadas_a_celda(coord_fila_destino,coord_columna_destino, dimension);
     
     obtener_camino_minimo(pos_origen,pos_destino,lista_coordenadas_recorridas,costo_camino);
-
 
 }
 
