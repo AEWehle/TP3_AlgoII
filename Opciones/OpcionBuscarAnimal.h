@@ -11,6 +11,9 @@ class OpcionBuscarAnimal: public Opcion {
 
     public:
         
+        //ejecutar(Guarderia * mi_guarderia)
+        //PRE: Guarderia creada correctamente
+        //POS: Ejecuta opcion de buscar animal por nombre
         void ejecutar(Guarderia * mi_guarderia) override;
 };
 

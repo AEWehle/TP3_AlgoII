@@ -31,59 +31,6 @@ Animal* crear_nuevo_animal( char especie, string nombre, int edad, string tamano
 } 
  
 
-void cargar_guarderia(Guarderia* mi_guarderia){
-
-    fstream archivo_guarderia(RUTA_ARCHIVO, ios::in);
-
-    if(!archivo_guarderia.is_open()){
-        cout << "      No se encontro un archivo con nombre \"" << RUTA_ARCHIVO << "\", se va a crear el archivo" << endl << endl;
-        archivo_guarderia.open(RUTA_ARCHIVO, ios::out);     //Si no existe el archivo lo creo
-        archivo_guarderia.close();
-        archivo_guarderia.open(RUTA_ARCHIVO, ios::in);
-    }
-
-    string nombre, edad, tamano, especie, personalidad;
-
-    while(getline(archivo_guarderia, nombre, ',')){    //Cuando ya no encuentra un nombre se terminó el archivo
-
-        getline(archivo_guarderia, edad, ',');
-        getline(archivo_guarderia, tamano, ',');
-        getline(archivo_guarderia, especie, ',');
-        getline(archivo_guarderia, personalidad);    //El último lo leo hasta encontrar un \n, no una coma.
-
-        Animal* nuevo_animal = crear_nuevo_animal(especie[0], nombre, stoi(edad), tamano, personalidad);
-
-        mi_guarderia -> agregar_animal(nuevo_animal);
-    }
-
-    archivo_guarderia.close();
-
-}
-
-
-/*________imprimir_menu()______________________________________________________ 
- PRE: 
- POST: Imprime en temrinal todas las opciones que pude elegir el usuario. 
-_______________________________________________________________________________*/ 
-void imprimir_menu(int cantidad_elecciones){ 
-
-    if(cantidad_elecciones == 7){ //Menú principal
-        cout << endl << "*****   MENU   *****" << endl << endl;
-        cout << "         1. Listar animales." << endl; 
-        cout << "         2. Rescatar un animal." << endl; 
-        cout << "         3. Buscar un animal." << endl;
-        cout << "         4. Cuidar animales." << endl;
-        cout << "         5. Adoptar un animal." << endl;
-        cout << "         6. Cargar Combustible." << endl;
-        cout << "         7. Guardar y salir." << endl << endl;
-
-    }else if (cantidad_elecciones == 2) { //Menú de cuidar animales
-        cout << endl << "*****   CUIDAR ANIMALES: MENU   *****" << endl << endl;
-        cout << "         1. Elegir Individualmente." << endl; 
-        cout << "         2. Regresar al Menu Principal." << endl << endl;
-    }
-
-}
 
 
 bool eleccion_valida(int eleccion, int cantidad_opciones){
@@ -154,11 +101,6 @@ bool es_cancelar(string nombre){
 }
 
 
-//void ejecutar_eleccion(Guarderia* mi_guarderia, int eleccion){ 
-
-//    funcion_elegida[ eleccion - 1 ]( mi_guarderia );
-
-//}
 
 bool validar_edad(string edad_st, int &edad){
 

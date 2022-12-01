@@ -13,14 +13,26 @@ class OpcionAdoptarAnimal: public Opcion {
 
     public:
         
+        //ejecutar(Guarderia * mi_guarderia)
+        //PRE: Guarderia creada correctamente
+        //POS: Ejecuta opcion de adoptar animal
         void ejecutar(Guarderia * mi_guarderia) override;
 
     private:
-
+        
+        //pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* lista_adoptables )
+        //PRE: Guarderias creadas correctamente
+        //POS: Pide el animal a adoptar, verifica que se encuentre en lista_adoptables, y lo saca de la guarderia
         string pedir_el_adoptado( Guarderia* mi_guarderia , Guarderia* lista_adoptables );
 
+        //crear_lista_adoptables(Guarderia* mi_guarderia, float espacio)
+        //PRE: Guarderias creadas correctamente, espacio es un valor válido
+        //POS: Crea guarderia de animales adoptables de acuerdo al espacio ingresado
         Guarderia* crear_lista_adoptables(Guarderia* mi_guarderia, float espacio);
 
+        //pedir_espacio()
+        //PRE: -
+        //POS: Pide el espacio que tiene disponible para adoptar, valida espacio
         float pedir_espacio();
 
 };

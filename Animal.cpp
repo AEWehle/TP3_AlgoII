@@ -36,7 +36,6 @@ void Animal::alimentar(){
 
 void Animal::mostrar(){
     
-    // cout << "      ____________________"<< especie << "______________________________" << endl;
     cout << "             - " << "Nombre: " << nombre << "." << endl;
     cout << "             - " << edad << " años." << endl;
     cout << "             - " << "Es " << tamano << endl;
