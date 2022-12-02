@@ -48,7 +48,6 @@ class Animal{
     _______________________________________________________________________________*/
         Animal( string nombre, int edad, string tamano, string personalidad );
 
-
        
     /*________destructor Animal_____________________________________________________
      PRE: -
@@ -163,8 +162,6 @@ class Animal{
         void setear_higiene(int higiene_int);
 
 };
-
-
 
         
 /*________es_primer_animal_mayor()_____________________________________________

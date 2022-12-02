@@ -4,12 +4,12 @@
 #include "Opcion.h"
 #include "../Archivo.h"
 #include <fstream>
-
-
 #include <string>
+
 using namespace std; 
 
 class OpcionGuardarSalir: public Opcion {
+
     //Atributos ---> No tiene atributos
   
     public:
@@ -19,6 +19,5 @@ class OpcionGuardarSalir: public Opcion {
         //POS: Ejecuta opcion de guardar y salir, guarda animales en archivo .csv
         void ejecutar(Guarderia * mi_guarderia) override;
 };
-
 
 #endif

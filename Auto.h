@@ -7,10 +7,13 @@ using namespace std;
 const int MAX_COMBUSTIBLE = 100;
 
 class Auto{
+
+
     //Atributos
     private: 
         int combustible;
     
+
     public:
         //Constructor
         //PRE: -
@@ -41,6 +44,7 @@ class Auto{
         //PRE: cantidad valor entre 0 y MAX_COMBUSTIBLE
         //POS: Resta cantidad a combustible. Si llega a combustible < 0 lo deja en 0
         void decrementar_combustible(int cantidad);
+        
 };
 
 #endif

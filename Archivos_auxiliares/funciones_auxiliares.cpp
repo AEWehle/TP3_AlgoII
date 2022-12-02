@@ -2,11 +2,10 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
+
 using namespace std; 
 
-
 const int DISTANCIA_aA_ASCII = (int) 'a' - (int) 'A';
-
 
 char char_a_mayuscula(char letra){
 
@@ -64,10 +63,12 @@ int string_a_entero( string texto ){
 
 
 bool es_csv( string nombre_archivo ){
+
     if (nombre_archivo.length() <= 4) {
         return false;
     }
     return (nombre_archivo.substr(nombre_archivo.length()-4, nombre_archivo.length()) == ".csv" ) ;
+
 }
 
 
@@ -88,7 +89,6 @@ int buscar_en_array_de_string( const string* array, string buscado, int largo ){
     return posicion;
 
 }
-
 
 
 void shiftear_a_derecha( int * array, int largo){
@@ -149,6 +149,7 @@ void llenar_con_int ( int* array_int, int entero, int largo ){
     }
 
 }
+
 
 bool es_numero(string st){ //Incluye enteros (positivos negativos y 0) y números con coma (se usa el punto .)
 

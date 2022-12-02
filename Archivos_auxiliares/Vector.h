@@ -5,13 +5,17 @@
 
 template<typename Dato>
 class Vector {
+
     //atributos
 private:
+
     int longitud;
     Dato* elementos;
 
+
     //metodos
 public:
+
     //Constructor sin parametros
     //PRE: -
     //POS: crea un objeto Vector vacío con longitud 0
@@ -47,23 +51,31 @@ public:
 
 };
 
+
 //Constructor sin parametro
 template<typename Dato>
 Vector<Dato>::Vector() {
+
     longitud = 0;
     elementos = 0;
+
 }
+
 
 //Constructor con parametro
 template<typename Dato>
 Vector<Dato>::Vector(int cantidad) {
+
     longitud = cantidad;
     elementos = new Dato[longitud];
+
 }
+
 
 //Constructor de copia
 template<typename Dato>
 Vector<Dato>::Vector(const Vector& v) {
+
     longitud = v.longitud;
     elementos = 0;
 
@@ -76,42 +88,52 @@ Vector<Dato>::Vector(const Vector& v) {
 }
 
 
-
 //Destructor
 template<typename Dato>
 Vector<Dato>::~Vector() {
+
     if (longitud > 0)
         delete[] elementos;
+
 }
 
 
 //cargar
 template<typename Dato>
 void Vector<Dato>::cargar(Dato elem, int pos) {
+
     elementos[pos] = elem;
+
 }
 
 
 //obtener
 template<typename Dato>
 Dato Vector<Dato>::Vector::obtener(int pos) {
+
     return elementos[pos];
+
 }
+
 
 //mostrar
 template<typename Dato>
 void Vector<Dato>::mostrar() {
+
     for(int i = 0; i < longitud; i++)
         std::cout << elementos[i] << " - ";
     std::cout << std::endl;
+
 }
+
 
 //obtener longitud
 template<typename Dato>
 int Vector<Dato>::Vector::obtener_longitud() {
-    return longitud;
-}
 
+    return longitud;
+
+}
 
 
 #endif // VECTOR_H_INCLUDED

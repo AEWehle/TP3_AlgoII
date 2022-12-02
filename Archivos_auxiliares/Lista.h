@@ -7,7 +7,6 @@
 //  EL ORDEN DE LOS ELEMENTOS SE EMPIEZA A CONTAR DESDE 1, NO DESDE 0
 using namespace std;  
 
-
 template <typename Dato>
 class Lista {
 
@@ -35,11 +34,9 @@ class Lista {
         // POS: Agrega d en la posicion POS (la primera es la 1)
         void alta(Dato* dato, int POS);
 
-
         // PRE: Se usa si se desea agregar al final
         // POS: Agrega dato al final
         void alta(Dato* dato);
-
 
         // PRE: 0 < POS <= cantidad
         // POS: devuelve el dato que esta en la posicion POS (empieza en 1)
@@ -59,11 +56,9 @@ class Lista {
         //haciendo delete de los datos (empieza en 1).
         void baja_con_delete(int POS);
 
-
         // PRE:
         // POS: da de baja todos los datos de la lista, haciendo delete de ellos.
         void destruir_con_delete();
-
 
         // PRE: -
         // POS: True si la Lista esta vacia, False si no
@@ -87,16 +82,13 @@ class Lista {
         // POS: pone el cursor al principio
         void iniciar();
 
-
         /* Pre: La lista entrante debe tener el mismo Tipo de Dato
            Post: Appendea al final de la lista this la lista ingresante
                 la lista this queda ->> this lista  +   lista_entrante*/
         void agregar_lista( Lista<Dato>* lista_entrante );
 
-
         /*Devuelve true si el datoe stá dentro de la lista*/
         bool dato_existente( Dato* dato_buscado );
-
 
         //PRE: -
         //POST: Devuelve la posición en la lista del dato, o -1 si no se encuentra
@@ -114,6 +106,7 @@ class Lista {
         Nodo<Dato>* obtener_nodo(int POS);
 };
 
+
 // Constructor sin parametros
 template <typename Dato>
 Lista<Dato>::Lista() {
@@ -124,6 +117,7 @@ Lista<Dato>::Lista() {
 
 }
 
+
 //Destructor
 template <typename Dato>
 Lista<Dato>::~Lista() {
@@ -131,14 +125,16 @@ Lista<Dato>::~Lista() {
     while (! vacia()){
         baja(1);
     }
+
 }
 
 
 template <typename Dato>
 Nodo<Dato>* Lista<Dato>::obtener_primero(){
-    return this -> primero;
-}
 
+    return this -> primero;
+
+}
 
 
 template <typename Dato>
@@ -165,6 +161,7 @@ template <typename Dato>
 void Lista<Dato>::alta(Dato* dato) {
 
     this -> alta( dato, cantidad+1); //+1
+
 }
 
 
@@ -174,6 +171,7 @@ Dato* Lista<Dato>::consulta(int POS) {
 
     Nodo<Dato>* nodo = obtener_nodo(POS);
     return (nodo -> obtener_dato());
+
 }
 
 
@@ -182,14 +180,16 @@ Dato* Lista<Dato>::consulta() {
 
     Nodo<Dato>* nodo = obtener_nodo( this -> cantidad );
     return (nodo->obtener_dato());
+
 }
 
 
 template <typename Dato>
 bool Lista<Dato>::dato_existente(Dato* dato_buscado) {
-    if( vacia() ){
+
+    if( vacia() )
         return false;
-    }
+
     Nodo<Dato>* nodo_actual = this->primero;
     while (( *nodo_actual -> obtener_dato() != *dato_buscado ) ){
         nodo_actual = nodo_actual -> obtener_siguiente();
@@ -197,18 +197,20 @@ bool Lista<Dato>::dato_existente(Dato* dato_buscado) {
             return false;
         }
     } 
-    return true;
-}
 
+    return true;
+
+}
 
 
 template <typename Dato>
 void Lista<Dato>::baja(int POS) {
 
     Nodo<Dato>* a_borrar = this->primero;
-    if (POS == 1) {
+    if (POS == 1) 
         this->primero = a_borrar->obtener_siguiente();
-    } else {
+    
+    else {
         Nodo<Dato>* anterior = obtener_nodo(POS - 1);
         a_borrar = anterior->obtener_siguiente();
         anterior->cambiar_siguiente(a_borrar->obtener_siguiente());
@@ -216,7 +218,9 @@ void Lista<Dato>::baja(int POS) {
 
     delete a_borrar;
     this -> cantidad--;
+
 }
+
 
 template <typename Dato>
 void Lista<Dato>::baja_con_delete(int POS) {
@@ -224,6 +228,7 @@ void Lista<Dato>::baja_con_delete(int POS) {
     Nodo<Dato>* a_borrar = this -> primero;
     if (POS == 1)
         this -> primero = a_borrar->obtener_siguiente();
+    
     else {
         Nodo<Dato>* anterior = obtener_nodo(POS - 1);
         a_borrar = anterior->obtener_siguiente();
@@ -239,13 +244,12 @@ void Lista<Dato>::baja_con_delete(int POS) {
 
 template <typename Dato>
 void Lista<Dato>:: destruir_con_delete() {
+
     while (! vacia()){
         baja_con_delete(1);
     }
+
 }
-
-
-
 
 
 template <typename Dato>
@@ -255,12 +259,14 @@ bool Lista<Dato>::vacia() {
 
 }
 
+
 template <typename Dato>
 int Lista<Dato>::obtener_cantidad() {
 
     return this -> cantidad;
 
 }
+
 
 template <typename Dato>
 Nodo<Dato>* Lista<Dato>::obtener_nodo(int POS) {
@@ -272,12 +278,14 @@ Nodo<Dato>* Lista<Dato>::obtener_nodo(int POS) {
 
 }
 
+
 template <typename Dato>
 bool Lista<Dato>::hay_siguiente() {
 
     return (this -> actual != nullptr);
 
 }
+
 
 template <typename Dato>
 Dato* Lista<Dato>::siguiente() {
@@ -287,6 +295,7 @@ Dato* Lista<Dato>::siguiente() {
     return dato;
 
 }
+
 
 template <typename Dato>
 void Lista<Dato>::iniciar() {
@@ -298,10 +307,12 @@ void Lista<Dato>::iniciar() {
 
 template <typename Dato>
 void Lista<Dato> :: agregar_lista( Lista<Dato>* lista_entrante ) {
+
     Nodo<Dato>* mas_reciente = this -> primero;
     for(int i = 1; i <= cantidad ; i++){
         mas_reciente = mas_reciente -> obtener_siguiente();}
     mas_reciente -> cambiar_siguiente( lista_entrante -> obtener_primero());
+
 }
 
 
@@ -320,7 +331,9 @@ int Lista<Dato> :: obtener_posicion(Dato* dato){
             posicion = 0;
 
     }
+
     return posicion;
+
 }
 
 #endif // LISTA_TEMPLATE

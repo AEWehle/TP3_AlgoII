@@ -312,6 +312,7 @@ void Mapa::explicacion(){
 
 }
 
+
 void Mapa::limpiar_visitados(){
 
     for(int i = 0; i < 8; i++){
@@ -321,6 +322,7 @@ void Mapa::limpiar_visitados(){
     }
     
 }
+
 
 bool Mapa::ejecutar(int combustible, int &combustible_gastado, char &especie_rescatada, bool &combustible_suficiente){
 

@@ -6,13 +6,16 @@
 using namespace std;
 
 class Coordenada {
+
     // Atributos
     private:
         int coordenada_fila;
         int coordenada_columna;
 
+
     // Métodos
     public:
+    
         // Constructor sin parámetros
         // PRE: -
         // POS: construye la Coordenada origen: [0,0]

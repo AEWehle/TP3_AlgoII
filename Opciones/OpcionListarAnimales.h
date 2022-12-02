@@ -2,11 +2,12 @@
 #define _OPCION_LISTAR_ANIMALES_H
 
 #include "Opcion.h"
-
 #include <string>
+
 using namespace std; 
 
 class OpcionListarAnimales: public Opcion {
+
     //Atributos ---> No tiene atributos
   
     public:
@@ -15,6 +16,5 @@ class OpcionListarAnimales: public Opcion {
         //POS: Ejecuta opcion de listar animales cargados en guarderia (muestra por terminal)
         void ejecutar(Guarderia * mi_guarderia) override;
 };
-
 
 #endif

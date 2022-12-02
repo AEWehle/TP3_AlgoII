@@ -6,12 +6,16 @@
 using namespace std;
 
 class Vertice {
+
     // Atributos
     private:
+
         int vertice;
+
 
     // Métodos
     public:
+
         //Constructor
         // PRE: -
         // POS: crea un Vertice con el entero recibido
@@ -22,6 +26,7 @@ class Vertice {
         int obtener_nombre();
 
         ~Vertice();
+
 };
 
 
